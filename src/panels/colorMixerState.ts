@@ -2,12 +2,14 @@
  * The Colors tab of the theme mixer: the color layers and keys of the settings, and a preview of a few workbench colors
  * and of a line of code in the result, in Cool Islands alone and in each theme mixed in.
  */
-import { ACCENT_PRESETS, DEFAULT_ACCENT } from 'src/themes/accent';
+import i18next from 'i18next';
+import { ACCENT_PRESETS, ACCENT_TARGETS, DEFAULT_ACCENT } from 'src/themes/accent';
 import { normalizeColorByKey, normalizeColorLayers, tokenStyleFor } from 'src/themes/colorLayers';
 import { kindOf } from 'src/themes/ColorThemeGenerator';
 import { COLOR_THEMES } from 'src/themes/colorThemes';
 import { readColorTheme } from 'src/themes/readColorTheme';
 
+import type { AccentTarget } from 'src/themes/accent';
 import type { ColorThemeData, ThemeKind } from 'src/themes/colorLayers';
 import type { ColorMix, ColorThemeGenerator } from 'src/themes/ColorThemeGenerator';
 import type { TokenColor } from 'src/themes/convertJetbrainsTheme';
@@ -96,6 +98,8 @@ const previewColumn = ({ colors, id, label, tokenColors }: Column): ColorPreview
 export const colorMixerState = (options: {
   /** the setting `accentColor`, already normalized */
   accent?: string;
+  /** the setting `accentTargets`, already normalized */
+  accentTargets?: AccentTarget[];
   byKey: unknown;
   generator: ColorThemeGenerator;
   installed: InstalledColorTheme[];
@@ -134,7 +138,10 @@ export const colorMixerState = (options: {
   return {
     accent: options.accent ?? '',
     accentDefault: DEFAULT_ACCENT,
-    accentPresets: [...ACCENT_PRESETS],
+    accentPresets: ACCENT_PRESETS.map((preset) => ({ color: preset.color, id: preset.id, name: i18next.t(`accent.preset.${preset.id}`) })),
+    /** the label of each target is a key of the strings of the page */
+    accentTargetChoices: ACCENT_TARGETS.map((id) => ({ id, label: `accentTarget${id[0].toUpperCase()}${id.slice(1)}` })),
+    accentTargets: options.accentTargets ?? [],
     byKey,
     kind,
     layers: layers.map((layer) => ({ ...layer, installed: Boolean(find(layer.theme)), kind: find(layer.theme)?.kind, label: label(layer.theme) })),

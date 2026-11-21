@@ -38,6 +38,29 @@ section {
   gap: 8px;
 }
 
+.accent-hex {
+  width: 6.5em;
+  font-family: var(--vscode-editor-font-family, monospace);
+}
+
+.accent-hex.invalid {
+  outline: 1px solid var(--vscode-inputValidation-errorBorder, red);
+}
+
+.accent-targets {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 16px;
+  margin-top: 10px;
+}
+
+.accent-target {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
 .accent-picker {
   width: 40px;
   height: 28px;

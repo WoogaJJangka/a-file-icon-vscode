@@ -30,8 +30,14 @@ export const testState: {
   opened: string[];
   /** the commands run with `commands.executeCommand`, with their arguments */
   executed: unknown[][];
+  /** what the user types in the next input boxes, in order (each value is given to `validateInput` first); none: Escape */
+  inputs: string[];
+  /** the quick picks created, last one last: a test drives it with `fireActive`, `accept` and `hide` */
+  quickPicks: TestQuickPick[];
 } = {
   answers: [],
+  inputs: [],
+  quickPicks: [],
   clipboard: '',
   config: {},
   executed: [],
@@ -98,6 +104,63 @@ export enum QuickPickItemKind {
 
 const disposable = { dispose: () => undefined };
 
+type Listener<T> = (value: T) => unknown;
+
+/** `window.createQuickPick`, driven by the test */
+export class TestQuickPick {
+  activeItems: unknown[] = [];
+  disposed = false;
+  items: unknown[] = [];
+  matchOnDescription = false;
+  placeholder = '';
+  selectedItems: unknown[] = [];
+  shown = false;
+  title = '';
+  private readonly listeners = { accept: [] as Listener<void>[], active: [] as Listener<unknown[]>[], hide: [] as Listener<void>[] };
+
+  onDidAccept(listener: Listener<void>) {
+    this.listeners.accept.push(listener);
+    return disposable;
+  }
+
+  onDidChangeActive(listener: Listener<unknown[]>) {
+    this.listeners.active.push(listener);
+    return disposable;
+  }
+
+  onDidHide(listener: Listener<void>) {
+    this.listeners.hide.push(listener);
+    return disposable;
+  }
+
+  show() {
+    this.shown = true;
+  }
+
+  hide() {
+    if (!this.shown) return;
+    this.shown = false;
+    for (const listener of this.listeners.hide) listener();
+  }
+
+  dispose() {
+    this.disposed = true;
+  }
+
+  /** The user moves to an item */
+  fireActive(item: unknown) {
+    this.activeItems = [item];
+    for (const listener of this.listeners.active) listener([item]);
+  }
+
+  /** The user presses Enter on the active item (or the given one) */
+  accept(item?: unknown) {
+    if (item) this.activeItems = [item];
+    this.selectedItems = [...this.activeItems];
+    for (const listener of this.listeners.accept) listener();
+  }
+}
+
 export const workspace = {
   getConfiguration: (section?: string) => ({
     get: <T>(key: string): T | undefined => (section ? testState.config[settingKey(section, key)] : undefined) as T | undefined,
@@ -138,7 +201,16 @@ export const window = {
   onDidChangeWindowState: () => disposable,
   showErrorMessage: show('error'),
   showInformationMessage: show('information'),
-  showInputBox: async () => undefined,
+  createQuickPick: () => {
+    const quickPick = new TestQuickPick();
+    testState.quickPicks.push(quickPick);
+    return quickPick;
+  },
+  showInputBox: async (options?: { validateInput?: (value: string) => unknown }) => {
+    const value = testState.inputs.shift();
+    if (value !== undefined) await options?.validateInput?.(value);
+    return value;
+  },
   showQuickPick: async () => undefined,
   showWarningMessage: show('warning'),
 };
@@ -180,5 +252,6 @@ export const env = {
 };
 
 export const Uri = {
+  file: (path: string) => ({ fsPath: path, scheme: 'file' }),
   parse: (value: string) => value,
 };

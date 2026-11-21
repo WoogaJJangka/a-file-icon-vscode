@@ -134,6 +134,13 @@
   (VS Code 1.147 기본 테마 id 는 "Dark Modern" 처럼 "Default" 없이). JSONC 는 `jsonc-parser` 대신 자체 `stripJsonComments`
   (jsonc-parser 의 UMD 빌드는 esbuild 번들에서 깨짐). 섞기 화면은 아이콘/색 탭(`openColorMixer` 명령은 색 탭으로 연다),
   색 탭 상태는 `panels/colorMixerState.ts`. 격리 확인에서 탭 전환은 클릭 대신 이 명령으로.
+- 강조색(`src/themes/accent.ts`): `ACCENT_PRESETS` = `{ id, color, source }`(이름은 locales `accent.preset.<id>`, `package.json` `examples` 와 같은
+  순서, 테스트가 지킴). `accentTargets`(`controls`·`tabs`·`folders`)의 색 키는 `ACCENT_TARGET_KEYS`(두 기본 테마에 있어야 함), 강조색이 없으면
+  Islands 파랑으로 칠한다. `folders` 는 아이콘 설정 경로: `ConfigService.getIconSettings()` 의 `folderColor` 가 `effectiveFolderColor`
+  (folders 켜짐 → 강조색 ?? Islands 파랑, 아니면 `folderColor`)라 해시·재생성이 그대로 따라온다(`ICON_SETTING_KEYS` 는 그대로).
+  **미리보기 예외**: `chooseAccentColor` 명령(`pickers/AccentColorPicker.ts`, `createQuickPick`, 아이콘은 `dist/accents/<rrggbb>.svg`)과
+  섞기 화면 색 선택기는 `services/AccentPreviewService` 로 `workbench.colorCustomizations` 의 `"[Cool Islands Dark/Light]"` 칸에
+  바뀌는 키만 잠깐 쓴다(사용자 결정 2026-11-21, 규칙은 `docs/MAINTENANCE.md` 2장 규칙 2). 다른 곳에서 `colorCustomizations` 를 쓰지 않는다.
 - 제품 아이콘(Cool Islands Icons, `src/productIcons/`): `jetbrainsMap.ts`(VS Code 아이콘 id → New UI SVG, 손으로 관리, 폴더 없는 경로는
   `platform/icons/src/expui/`, 플러그인 것은 전체 경로)로 `buildJetbrainsFont.ts` 가 고정 커밋(`themes/jetbrains-source.json`)의 SVG 를
   받아 흑백으로 바꾸고(진한 색 검정, 흰색·밝은 채움은 구멍) resvg 로 그린 뒤 potrace 로 따서 `webfont` 로 글꼴을 만든다

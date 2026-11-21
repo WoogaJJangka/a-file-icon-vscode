@@ -3,6 +3,7 @@ import { EXTENSION_KEY, ICON_THEME_KEY } from 'src/helpers/constants';
 import { ICON_SETTING_KEYS } from 'src/@types/config';
 import { isDeepEqual } from 'src/helpers/utils';
 import { getDefaultConfig } from 'src/icons/configUtils';
+import { DEFAULT_ACCENT, normalizeAccent, normalizeAccentTargets } from 'src/themes/accent';
 import { logger } from 'src/services/LoggingService';
 import { notificationsService } from 'src/services/NotificationsService';
 import { ConfigurationTarget, window, workspace } from 'vscode';
@@ -12,6 +13,7 @@ import type { WorkspaceConfiguration } from 'vscode';
 import type { IconConfiguration } from 'src/models/IconConfiguration';
 import type { FolderTheme, ArrowTheme, AtomConfig, IconPack, IconSettings, IconThemeLayer } from 'src/@types/config';
 import type { IconAssociations } from 'src/@types/associations';
+import type { AccentTarget } from 'src/themes/accent';
 import type { ColorThemeLayer } from 'src/themes/colorLayers';
 import type { ProductIconLayer } from 'src/productIcons/productIconLayers';
 
@@ -118,6 +120,24 @@ export class ConfigService implements AtomConfig {
 
   set accentColor(v: string | undefined) {
     this.setConfigValue('accentColor', v, ConfigurationTarget.Global);
+  }
+
+  get accentTargets(): AccentTarget[] {
+    return normalizeAccentTargets(this.getConfigValue<unknown>('accentTargets'));
+  }
+
+  set accentTargets(v: AccentTarget[]) {
+    this.setConfigValue('accentTargets', v, ConfigurationTarget.Global);
+  }
+
+  /**
+   * The color of the folder icons: the accent (the Islands blue without one) when `accentTargets` has `folders`, else
+   * `folderColor`. The icon settings carry it as their `folderColor`, so the icons are generated again, with a new
+   * hash, when the accent or the targets change.
+   */
+  get effectiveFolderColor(): string {
+    if (!this.accentTargets.includes('folders')) return this.folderColor;
+    return normalizeAccent(this.accentColor) ?? DEFAULT_ACCENT;
   }
 
   get colorThemeLayers(): ColorThemeLayer[] {
@@ -310,7 +330,7 @@ export class ConfigService implements AtomConfig {
     return {
       activeIconPacks: [...this.activeIconPacks],
       filesAssociations: this.filesAssociations ?? {},
-      folderColor: this.folderColor,
+      folderColor: this.effectiveFolderColor,
       folderTheme: this.folderTheme,
       foldersAssociations: this.foldersAssociations ?? {},
       hideFileIcons: this.hideFileIcons,
@@ -349,6 +369,7 @@ export class ConfigService implements AtomConfig {
   public resetConfig() {
     const defaultConfig = getDefaultConfig();
     this.accentColor = undefined;
+    this.accentTargets = defaultConfig.accentTargets;
     this.activeIconPacks = defaultConfig.activeIconPacks;
     this.arrowTheme = defaultConfig.arrowTheme;
     this.colorThemeLayers = defaultConfig.colorThemeLayers;
