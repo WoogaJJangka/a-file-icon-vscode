@@ -1,0 +1,22 @@
+{
+  "file": "cpp.cpp",
+  "scope": "source.cpp",
+  "tokens": [
+    { "line": 1, "text": "#include", "key": "DEFAULT_KEYWORD" },
+    { "line": 1, "text": "<string>", "key": "DEFAULT_STRING" },
+    { "line": 4, "text": "MAX_SIZE", "key": "DEFAULT_METADATA" },
+    { "line": 6, "text": "// 한글 주석", "key": "DEFAULT_LINE_COMMENT" },
+    { "line": 7, "text": "namespace", "key": "DEFAULT_KEYWORD" },
+    { "line": 9, "text": "/** Doc comment */", "key": "DEFAULT_DOC_COMMENT" },
+    { "line": 12, "text": "Greeter", "key": "DEFAULT_FUNCTION_DECLARATION" },
+    { "line": 12, "text": "string", "key": "DEFAULT_CLASS_REFERENCE" },
+    { "line": 12, "text": "name_", "key": "DEFAULT_INSTANCE_FIELD" },
+    { "line": 12, "text": "move", "key": "DEFAULT_FUNCTION_CALL" },
+    { "line": 14, "text": "greet", "key": "DEFAULT_FUNCTION_DECLARATION" },
+    { "line": 15, "text": "\\n", "key": "DEFAULT_VALID_STRING_ESCAPE" },
+    { "line": 27, "text": "MAX_SIZE", "key": "DEFAULT_METADATA", "todo": "the grammar gives a macro in code no scope (a language server marks it: semantic token macro)" },
+    { "line": 28, "text": "static_cast", "key": "DEFAULT_KEYWORD", "todo": "the grammar gives the cast keywords (static_cast…) no scope" },
+    { "line": 28, "text": "size", "key": "DEFAULT_FUNCTION_CALL" },
+    { "line": 28, "text": "nullptr", "key": "DEFAULT_KEYWORD" }
+  ]
+}

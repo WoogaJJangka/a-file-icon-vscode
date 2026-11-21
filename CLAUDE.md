@@ -129,6 +129,10 @@
   실패 아님)로 두고, 두 테마에서 다 맞게 되면 `FIXED` 로 실패해 todo 를 지우게 한다. 새 언어는 샘플 + 기대값 + 그 언어 키의 대체 키(`jetbrainsFallbacks.ts`)를 같이 넣는다.
   효과(밑줄·취소선)는 효과 색이 있을 때만 쓴다(Islands 의 PROPERTIES.KEY 는 밑줄 종류만 있고 색이 없어 화면에 선이 없다). 하이라이터가 키 밑에 다른 층을
   깔면(reST 인라인 리터럴 = 배경만 있는 REST.FIXED 밑에 문자열) 기대값에 `under` 로, 규칙에는 두 번째 `from` 키로 적는다.
+  닫힌 IDE(GoLand·CLion·RustRover·Rider)는 키·대체 키가 공개돼 있지 않다: 공개 구성표에 있는 키(밝은 쪽 GO_*)와 기본 키를 쓰고, 화면에서 본 색이
+  공개 키에 없으면 가장 가까운 공개 키를 주석과 함께 쓴다(Rust 수명 = 타입 매개변수 청록). Rust 키는 intellij-rust(MIT) `RsColors.kt`, 단 그 RustDarcula 색은
+  2024년 옛 색이라 쓰지 않는다. Rider 는 C# 를 자체 팔레트로 그려서 따르지 않는다(C# 은 Islands 기본 키). 다른 규칙을 덮는 규칙은 색이 없을 때
+  밑 규칙 색이 비치므로 `from` 끝에 'TEXT' 층을 둔다(밝은 테마 C++ 호출이 선언 색으로 남던 것).
   화면 확인: 사용자 PyCharm 을 데스크톱에서 띄운다(Bash·PowerShell 로 띄우면 창이 안 뜬다). 마지막 프로젝트가 열리니 그 폴더에 샘플을 복사해 트리에서 연다.
 - 색 테마 섞기(`src/themes/colorLayers.ts` 순수 엔진, `readColorTheme.ts` JSONC·`include`·`tokenColors` 경로 읽기,
   `services/ColorThemeService.ts` 설치된 테마 목록·섞기·다시 로드 알림): `colorThemeLayers`(테마 id 또는 `{theme, ui, syntax, applyTo}`,

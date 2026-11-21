@@ -204,6 +204,48 @@ const GROOVY_KEYS: Record<string, string> = {
   'Valid string escape': 'JAVA_VALID_STRING_ESCAPE',
 };
 
+/**
+ * GoLand (closed): the GO_* keys Islands Light defines. Their fallbacks are not public; these are the defaults the token
+ * rules fall back to, which match GoLand's dark screen (a call is text, a builtin type and constant a keyword).
+ */
+const GO_KEYS: Record<string, string> = {
+  GO_BUILTIN_CONSTANT: 'DEFAULT_KEYWORD',
+  GO_BUILTIN_FUNCTION_CALL: 'DEFAULT_FUNCTION_CALL',
+  GO_BUILTIN_TYPE_REFERENCE: 'DEFAULT_KEYWORD',
+  GO_EXPORTED_FUNCTION_CALL: 'DEFAULT_FUNCTION_CALL',
+};
+
+/** intellij-rust/intellij-rust (MIT), src/main/kotlin/org/rust/ide/colors/RsColors.kt: the keys RustRover still uses */
+const RUST_KEYS: Record<string, string> = {
+  'org.rust.ASSOC_FUNCTION': 'DEFAULT_STATIC_METHOD',
+  'org.rust.ASSOC_FUNCTION_CALL': 'DEFAULT_STATIC_METHOD',
+  'org.rust.ATTRIBUTE': 'DEFAULT_METADATA',
+  'org.rust.BLOCK_COMMENT': 'DEFAULT_BLOCK_COMMENT',
+  'org.rust.CHAR': 'DEFAULT_STRING',
+  'org.rust.CONSTANT': 'DEFAULT_CONSTANT',
+  'org.rust.DOC_COMMENT': 'DEFAULT_DOC_COMMENT',
+  'org.rust.ENUM': 'DEFAULT_CLASS_NAME',
+  'org.rust.EOL_COMMENT': 'DEFAULT_LINE_COMMENT',
+  'org.rust.FIELD': 'DEFAULT_INSTANCE_FIELD',
+  'org.rust.FUNCTION': 'DEFAULT_FUNCTION_DECLARATION',
+  'org.rust.FUNCTION_CALL': 'DEFAULT_FUNCTION_CALL',
+  'org.rust.KEYWORD': 'DEFAULT_KEYWORD',
+  'org.rust.LIFETIME': 'DEFAULT_IDENTIFIER',
+  'org.rust.MACRO': 'DEFAULT_IDENTIFIER',
+  'org.rust.METHOD': 'DEFAULT_INSTANCE_METHOD',
+  'org.rust.METHOD_CALL': 'DEFAULT_FUNCTION_CALL',
+  'org.rust.NUMBER': 'DEFAULT_NUMBER',
+  'org.rust.PARAMETER': 'DEFAULT_PARAMETER',
+  'org.rust.PRIMITIVE_TYPE': 'DEFAULT_KEYWORD',
+  'org.rust.SELF_PARAMETER': 'DEFAULT_KEYWORD',
+  'org.rust.STRING': 'DEFAULT_STRING',
+  'org.rust.STRUCT': 'DEFAULT_CLASS_NAME',
+  'org.rust.TRAIT': 'DEFAULT_INTERFACE_NAME',
+  'org.rust.TYPE_PARAMETER': 'DEFAULT_IDENTIFIER',
+  'org.rust.VALID_STRING_ESCAPE': 'DEFAULT_VALID_STRING_ESCAPE',
+  'org.rust.VARIABLE': 'DEFAULT_IDENTIFIER',
+};
+
 /** plugins/sh/core/src/com/intellij/sh/highlighter/ShHighlighterColors.java */
 const SHELL_KEYS: Record<string, string> = {
   'BASH.BACKQUOTE': 'BASH.EXTERNAL_COMMAND',
@@ -282,6 +324,8 @@ export const KEY_FALLBACKS: Record<string, string> = {
   ...YAML_KEYS,
   ...MARKDOWN_KEYS,
   ...GROOVY_KEYS,
+  ...GO_KEYS,
+  ...RUST_KEYS,
   ...SHELL_KEYS,
   ...PROPERTIES_KEYS,
   ...REST_KEYS,

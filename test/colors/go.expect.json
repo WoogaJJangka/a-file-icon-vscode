@@ -1,0 +1,19 @@
+{
+  "file": "go.go",
+  "scope": "source.go",
+  "tokens": [
+    { "line": 1, "text": "package", "key": "DEFAULT_KEYWORD" },
+    { "line": 4, "text": "\"fmt\"", "key": "DEFAULT_STRING" },
+    { "line": 8, "text": "// MaxSize 한글 주석", "key": "DEFAULT_LINE_COMMENT" },
+    { "line": 9, "text": "const", "key": "DEFAULT_KEYWORD" },
+    { "line": 9, "text": "10", "key": "DEFAULT_NUMBER" },
+    { "line": 15, "text": "func", "key": "DEFAULT_KEYWORD" },
+    { "line": 15, "text": "Greet", "key": "DEFAULT_FUNCTION_DECLARATION", "nth": 2 },
+    { "line": 15, "text": "int", "key": "GO_BUILTIN_TYPE_REFERENCE" },
+    { "line": 16, "text": "Sprintf", "key": "GO_EXPORTED_FUNCTION_CALL" },
+    { "line": 17, "text": "return", "key": "DEFAULT_KEYWORD" },
+    { "line": 22, "text": "len", "key": "GO_BUILTIN_FUNCTION_CALL" },
+    { "line": 22, "text": "Greet", "key": "GO_EXPORTED_FUNCTION_CALL" },
+    { "line": 22, "text": "nil", "key": "GO_BUILTIN_CONSTANT" }
+  ]
+}

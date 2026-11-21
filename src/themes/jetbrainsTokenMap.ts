@@ -83,6 +83,35 @@ export const TOKEN_RULES: TokenRule[] = [
   { from: ['CLASS_NAME_ATTRIBUTES'], name: 'Java class name', scope: ['storage.type.java', 'storage.type.generic.java', 'storage.type.object.array.java'] },
   { from: ['DEFAULT_IDENTIFIER'], name: 'Java package', scope: ['storage.modifier.package.java', 'storage.modifier.import.java'] },
 
+  // C and C++ (CLion, seen on screen 2026-11-21; its keys are closed): a call is text, not a declaration; the member
+  // initializer of a constructor is a field; a macro has the color of an annotation; the type of a parameter is a class
+  // reference (the grammar names it like a type parameter)
+  { from: ['DEFAULT_FUNCTION_CALL', 'TEXT'], name: 'C++ call', scope: ['entity.name.function.call.cpp', 'entity.name.function.member.cpp', 'entity.name.function.member.c'] },
+  { from: ['DEFAULT_INSTANCE_FIELD'], name: 'C++ member initializer', scope: ['entity.name.function.call.initializer.cpp'] },
+  { from: ['DEFAULT_METADATA'], name: 'C++ macro', scope: ['entity.name.function.preprocessor.cpp', 'entity.name.function.preprocessor.c'] },
+  { from: ['DEFAULT_CLASS_REFERENCE'], name: 'C++ parameter type', scope: ['entity.name.type.parameter.cpp'] },
+
+  // Rust (keys of intellij-rust, RsColors.kt; RustRover's Islands colors seen on screen 2026-11-21): doc comments, primitive
+  // types are keywords, attributes are metadata, a call is text (not intellij-rust's old yellow: RustRover draws it plain),
+  // a macro stays blue like a declaration, a lifetime takes the teal of a type parameter (RustRover: teal, italic)
+  { from: ['org.rust.DOC_COMMENT'], name: 'Rust doc comment', scope: ['comment.line.documentation.rust', 'comment.block.documentation.rust', 'comment.line.documentation.rust punctuation.definition.comment', 'comment.block.documentation.rust punctuation.definition.comment'] },
+  { from: ['org.rust.PRIMITIVE_TYPE'], name: 'Rust primitive type', scope: ['entity.name.type.numeric.rust', 'entity.name.type.primitive.rust'] },
+  { from: ['org.rust.SELF_PARAMETER'], name: 'Rust self', scope: ['variable.language.self.rust'] },
+  { from: ['org.rust.ATTRIBUTE'], name: 'Rust attribute', scope: ['meta.attribute.rust', 'meta.attribute.rust entity.name.type.rust', 'meta.attribute.rust punctuation'] },
+  { from: ['org.rust.FUNCTION_CALL', 'TEXT'], name: 'Rust call', scope: ['meta.function.call.rust entity.name.function.rust'] },
+  { from: ['TYPE_PARAMETER_NAME_ATTRIBUTES'], name: 'Rust lifetime', scope: ['entity.name.type.lifetime.rust', 'punctuation.definition.lifetime.rust'] },
+
+  // C# (Rider draws C# with its own palette, not the Islands one: C# follows the defaults like the other languages). The
+  // XML tags of a doc comment are doc markup, like the HTML of a Javadoc, not HTML tags
+  { from: ['DEFAULT_DOC_MARKUP', 'DEFAULT_DOC_COMMENT'], name: 'C# doc comment tag', scope: ['comment.block.documentation.cs meta.tag', 'comment.block.documentation.cs punctuation.definition.tag', 'comment.block.documentation.cs entity.name.tag'] },
+
+  // Go (GoLand's colors are closed: only the GO_* keys the bundled schemes have, Islands Light's, then the defaults): a call
+  // is text, not a declaration; builtins and their constants have their key where a scheme gives one
+  { from: ['GO_EXPORTED_FUNCTION_CALL', 'TEXT'], name: 'Go call', scope: ['entity.name.function.support.go'] },
+  { from: ['GO_BUILTIN_FUNCTION_CALL', 'TEXT'], name: 'Go builtin call', scope: ['entity.name.function.support.builtin.go'] },
+  { from: ['GO_BUILTIN_TYPE_REFERENCE'], name: 'Go builtin type', scope: ['storage.type.numeric.go', 'storage.type.string.go', 'storage.type.boolean.go', 'storage.type.byte.go', 'storage.type.rune.go', 'storage.type.error.go', 'storage.type.uintptr.go'] },
+  { from: ['GO_BUILTIN_CONSTANT'], name: 'Go builtin constant', scope: ['constant.language.null.go', 'constant.language.boolean.go', 'constant.language.iota.go'] },
+
   // Data and markup
   { from: ['JSON.PROPERTY_KEY', 'DEFAULT_INSTANCE_FIELD'], name: 'JSON key', scope: ['support.type.property-name.json', 'meta.object-literal.key'] },
   // TOML (TomlColors.kt; the grammar of the Even Better TOML extension): a key is a keyword, not a field like in JSON
@@ -212,6 +241,10 @@ export const TOKEN_RULES: TokenRule[] = [
 // Not `variable.readonly`: TypeScript gives it to every `const`, which the IDE does not color as a constant
 export const SEMANTIC_RULES: Record<string, string[]> = {
   '*.deprecated': ['DEPRECATED_ATTRIBUTES'],
+  // Rust (rust-analyzer), as RustRover draws it: calls are text, declarations blue, macros blue, lifetimes teal
+  'attribute:rust': ['org.rust.ATTRIBUTE'],
+  'attributeBracket:rust': ['org.rust.ATTRIBUTE'],
+  'builtinType:rust': ['org.rust.PRIMITIVE_TYPE'],
   class: ['DEFAULT_CLASS_NAME', 'DEFAULT_CLASS_REFERENCE', 'TEXT'],
   'class.builtin': ['PY.BUILTIN_NAME', 'DEFAULT_PREDEFINED_SYMBOL', 'DEFAULT_CLASS_REFERENCE', 'TEXT'],
   clsParameter: ['PY.SELF_PARAMETER', 'DEFAULT_KEYWORD'],
@@ -220,17 +253,23 @@ export const SEMANTIC_RULES: Record<string, string[]> = {
   function: ['DEFAULT_FUNCTION_CALL', 'TEXT'],
   'function.builtin': ['PY.BUILTIN_NAME', 'DEFAULT_PREDEFINED_SYMBOL', 'DEFAULT_FUNCTION_CALL', 'TEXT'],
   'function.declaration': ['DEFAULT_FUNCTION_DECLARATION'],
+  'function.declaration:rust': ['org.rust.FUNCTION'],
+  'function:rust': ['org.rust.FUNCTION_CALL', 'TEXT'],
   interface: ['DEFAULT_INTERFACE_NAME', 'DEFAULT_CLASS_NAME', 'TEXT'],
+  'lifetime:rust': ['TYPE_PARAMETER_NAME_ATTRIBUTES'],
   macro: ['DEFAULT_METADATA'],
+  'macro:rust': ['DEFAULT_FUNCTION_DECLARATION'],
   method: ['DEFAULT_INSTANCE_METHOD', 'DEFAULT_FUNCTION_CALL', 'TEXT'],
   'method.declaration': ['DEFAULT_FUNCTION_DECLARATION'],
   'method.declaration:python': ['PY.FUNC_DEFINITION', 'DEFAULT_FUNCTION_DECLARATION'],
+  'method.declaration:rust': ['org.rust.METHOD'],
   'method.static': ['DEFAULT_STATIC_METHOD', 'DEFAULT_INSTANCE_METHOD', 'TEXT'],
   // JavaScript and TypeScript (keys of the JavaScript plugin that the Islands scheme colors): members, and the globals
   // of the standard and DOM libraries (console, window, Math…), which the language server marks `defaultLibrary`
   'method:javascript': JS_MEMBER_FUNCTION,
   'method:javascriptreact': JS_MEMBER_FUNCTION,
   'method:python': ['PY.METHOD_CALL', 'PY.FUNCTION_CALL', 'DEFAULT_FUNCTION_CALL', 'TEXT'],
+  'method:rust': ['org.rust.METHOD_CALL', 'TEXT'],
   'method:typescript': JS_MEMBER_FUNCTION,
   'method:typescriptreact': JS_MEMBER_FUNCTION,
   namespace: ['DEFAULT_IDENTIFIER', 'TEXT'],
@@ -239,6 +278,7 @@ export const SEMANTIC_RULES: Record<string, string[]> = {
   'property.readonly': ['DEFAULT_INSTANCE_FIELD'],
   'property.static': ['DEFAULT_STATIC_FIELD', 'DEFAULT_INSTANCE_FIELD'],
   'property:python': ['DEFAULT_IDENTIFIER', 'TEXT'],
+  'selfKeyword:rust': ['org.rust.SELF_PARAMETER'],
   selfParameter: ['PY.SELF_PARAMETER', 'DEFAULT_KEYWORD'],
   typeParameter: ['TYPE_PARAMETER_NAME_ATTRIBUTES'],
   'variable.defaultLibrary:javascript': JS_GLOBAL_VARIABLE,

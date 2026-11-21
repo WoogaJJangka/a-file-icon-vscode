@@ -21,6 +21,12 @@ All notable changes to this project will be documented in this file. Dates are d
 - feat: `accentTargets` paints more with the accent: `controls` (scrollbars, checkbox borders, badges, active search
   options), `tabs` (the line of the active tab, panel title and activity bar item) and `folders` (the folder icons,
   instead of `folderColor`). Empty by default; checkboxes on the Colors tab of the Mix Themes page.
+- feat: syntax colors of the JetBrains IDE for C/C++, Go, Rust and C#, checked against CLion, GoLand and RustRover:
+  function and method calls are text instead of the declaration blue (C++, Go, Rust), C++ member initializers are
+  fields, macros have the annotation color and parameter types are class references; Go builtins use the `GO_*`
+  colors of Islands Light; Rust doc comments, primitive types, attributes, `self` and lifetimes, and the semantic
+  tokens of rust-analyzer; the XML tags of C# doc comments are doc markup. (Rider draws C# with its own palette: C#
+  keeps the Islands defaults of the other languages.)
 - feat: syntax colors of the JetBrains IDE for more languages, checked against PyCharm: Groovy (class names, package
   paths, map keys), reStructuredText (section headers, inline literals, references, directives), shell (builtins,
   function names, variables in strings take the string color, unquoted words and options are text, the shebang), TOML
