@@ -11,8 +11,9 @@
  */
 import { compareCodeUnits } from 'src/helpers/utils';
 
-import { accentColors } from './accent';
+import { accentColors, DEFAULT_ACCENT } from './accent';
 
+import type { AccentTarget } from './accent';
 import type { SemanticStyle, TokenColor, VsCodeColorTheme } from './convertJetbrainsTheme';
 
 const MODES = new Set<unknown>(['fill', 'off', 'override']);
@@ -166,6 +167,7 @@ export const mixColorTheme = (
   layers: MixedTheme[],
   byKey: MixedKey[],
   accent?: string,
+  accentTargets: readonly AccentTarget[] = [],
 ): VsCodeColorTheme => {
   const active = layers.filter(({ data, layer }) => appliesTo(layer, data, kind));
   const part = (name: 'syntax' | 'ui', value: ColorLayerMode) => active.filter(({ layer }) => layer[name] === value).map(({ data }) => data);
@@ -197,7 +199,7 @@ export const mixColorTheme = (
   }
 
   // The accent color wins over the layers: it is a choice of the user for the blue of Islands, measured from the Islands colors
-  if (accent) Object.assign(colors, accentColors(base.colors, accent));
+  if (accent || accentTargets.length > 0) Object.assign(colors, accentColors(base.colors, accent ?? DEFAULT_ACCENT, accentTargets));
 
   // Single keys win over everything, a later key over an earlier one
   for (const { data, target } of byKey) {

@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. Dates are displayed in UTC.
 
+#### Unreleased
+
+- feat: **Choose the Accent Color (with Preview)** lists named accents (the Islands blue and one accent per hue from
+  the Material themes), a custom `#rrggbb` and the way back to the Islands blue. Each accent is shown at once while
+  you move through the list or type, and Escape goes back. The Colors tab of the Mix Themes page shows it the same
+  way, with named swatches and a `#rrggbb` field. The preview writes the changed colors for the moment into the
+  `"[Cool Islands Dark]"`/`"[Cool Islands Light]"` blocks of `workbench.colorCustomizations` and takes them away again
+  (on Escape, or on the next start once the theme files have the accent); your own values there are kept.
+- feat: `accentTargets` paints more with the accent: `controls` (scrollbars, checkbox borders, badges, active search
+  options), `tabs` (the line of the active tab, panel title and activity bar item) and `folders` (the folder icons,
+  instead of `folderColor`). Empty by default; checkboxes on the Colors tab of the Mix Themes page.
+
 #### 0.1.1 (2026-11-21)
 
 No change in the extension: the same as 0.1.0.

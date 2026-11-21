@@ -308,6 +308,11 @@
       },
       {
         "category": "Cool Theme Kit",
+        "command": "a-file-icon-vscode.chooseAccentColor",
+        "title": "%command.chooseAccentColor%"
+      },
+      {
+        "category": "Cool Theme Kit",
         "command": "a-file-icon-vscode.useJetBrainsFonts",
         "title": "%command.useJetBrainsFonts%"
       },
@@ -530,10 +535,44 @@
         "properties": {
           "a-file-icon-vscode.accentColor": {
             "default": "",
+            "examples": [
+              "#3871e1",
+              "#79cb60",
+              "#009688",
+              "#00bcd4",
+              "#84ffff",
+              "#2979ff",
+              "#7e57c2",
+              "#ab47bc",
+              "#d33682",
+              "#ff79c5",
+              "#f9826c",
+              "#ff9800",
+              "#ffd866"
+            ],
             "markdownDescription": "%configuration.accentColor%",
             "pattern": "^(#[0-9a-fA-F]{6})?$",
             "patternErrorMessage": "%configuration.accentColor.pattern%",
             "type": "string"
+          },
+          "a-file-icon-vscode.accentTargets": {
+            "default": [],
+            "items": {
+              "enum": [
+                "controls",
+                "tabs",
+                "folders"
+              ],
+              "markdownEnumDescriptions": [
+                "%configuration.accentTargets.controls%",
+                "%configuration.accentTargets.tabs%",
+                "%configuration.accentTargets.folders%"
+              ],
+              "type": "string"
+            },
+            "markdownDescription": "%configuration.accentTargets%",
+            "type": "array",
+            "uniqueItems": true
           },
           "a-file-icon-vscode.colorThemeLayers": {
             "default": [],

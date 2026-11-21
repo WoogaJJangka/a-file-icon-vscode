@@ -1,15 +1,22 @@
 import { strict as assert } from 'node:assert';
 import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
+import { getFileConfigHash, withDefaults } from 'src/icons/configUtils';
+import { configService } from 'src/services/ConfigService';
 import {
+  ACCENT_PRESETS,
   ACCENT_SOLID,
+  ACCENT_TARGET_KEYS,
+  ACCENT_TARGETS,
   ACCENT_TEXT,
   ACCENT_TINT,
   accentColors,
+  changedColors,
   contrastRatio,
   DEFAULT_ACCENT,
   isDefaultAccent,
   normalizeAccent,
+  normalizeAccentTargets,
 } from 'src/themes/accent';
 import { mixColorTheme } from 'src/themes/colorLayers';
 import { ColorThemeGenerator } from 'src/themes/ColorThemeGenerator';
@@ -17,6 +24,8 @@ import { COLOR_THEMES, THEMES_FOLDER } from 'src/themes/colorThemes';
 
 import type { ColorThemeData, MixedKey } from 'src/themes/colorLayers';
 import type { VsCodeColorTheme } from 'src/themes/convertJetbrainsTheme';
+
+import { testState } from '../mocks/vscode';
 
 const root = join(__dirname, '..', '..');
 const readBase = (file: string) => JSON.parse(readFileSync(join(root, THEMES_FOLDER, file), 'utf8')) as VsCodeColorTheme;
@@ -214,6 +223,111 @@ describe('accent color', () => {
 
     it('does not change the syntax colors', () => {
       assert.deepEqual(mixColorTheme(dark, 'dark', [], [], GREEN).tokenColors, dark.tokenColors);
+    });
+  });
+
+  describe('the named accents', () => {
+    const english = JSON.parse(readFileSync(join(root, 'src', 'i18n', 'locales', 'en.json'), 'utf8')) as { accent: { preset: Record<string, string> } };
+
+    it('start with the Islands blue, each color and name once, each named in the locales', () => {
+      assert.equal(ACCENT_PRESETS[0].color, DEFAULT_ACCENT);
+      assert.equal(new Set(ACCENT_PRESETS.map((preset) => preset.color)).size, ACCENT_PRESETS.length);
+      assert.equal(new Set(ACCENT_PRESETS.map((preset) => preset.id)).size, ACCENT_PRESETS.length);
+      for (const preset of ACCENT_PRESETS) {
+        assert.equal(normalizeAccent(preset.color), preset.color, preset.id);
+        assert.ok(english.accent.preset[preset.id], preset.id);
+      }
+      assert.deepEqual(Object.keys(english.accent.preset).sort(), ACCENT_PRESETS.map((preset) => preset.id).sort());
+    });
+
+    it('are the examples of the setting', () => {
+      const manifest = JSON.parse(readFileSync(join(root, 'package.json'), 'utf8'));
+      const properties = Object.assign({}, ...manifest.contributes.configuration.map((group: { properties: object }) => group.properties));
+      assert.deepEqual(properties['a-file-icon-vscode.accentColor'].examples, ACCENT_PRESETS.map((preset) => preset.color));
+      assert.deepEqual(properties['a-file-icon-vscode.accentTargets'].items.enum, [...ACCENT_TARGETS]);
+    });
+  });
+
+  describe('accentTargets', () => {
+    it('keeps the known targets, each once, in their order', () => {
+      assert.deepEqual(normalizeAccentTargets(['folders', 'tabs', 'tabs', 'nonsense', 3]), ['tabs', 'folders']);
+      assert.deepEqual(normalizeAccentTargets('tabs'), []);
+      assert.deepEqual(normalizeAccentTargets(undefined), []);
+    });
+
+    for (const { info, theme } of bases) {
+      it(`has keys that are all in ${info.label}, and not already painted by the accent`, () => {
+        for (const { key } of Object.values(ACCENT_TARGET_KEYS).flat()) {
+          assert.ok(theme.colors[key] !== undefined, key);
+          assert.ok(!(ACCENT_SOLID as readonly string[]).includes(key), key);
+        }
+      });
+
+      it(`paints the keys of the targets with the accent in ${info.label}, keeping the opacity they are listed with`, () => {
+        const patch = accentColors(theme.colors, GREEN, ['controls', 'tabs']);
+        for (const { alpha, key } of Object.values(ACCENT_TARGET_KEYS).flat()) {
+          const expected = alpha ?? hsl(theme.colors[key]).alpha;
+          assert.equal(patch[key], `${GREEN}${expected}`, key);
+        }
+        // without the targets they keep their Islands color, or their tint
+        const alone = accentColors(theme.colors, GREEN);
+        assert.equal(alone['scrollbarSlider.background'], undefined);
+        assert.notEqual(alone['tab.activeBorder'], GREEN);
+      });
+
+      it(`paints the targets with the Islands blue when there is no accent in ${info.label}`, () => {
+        const patch = accentColors(theme.colors, DEFAULT_ACCENT, ['tabs']);
+        assert.equal(patch['tab.activeBorder'], DEFAULT_ACCENT);
+        assert.equal(patch.focusBorder, undefined);
+        assert.deepEqual(accentColors(theme.colors, DEFAULT_ACCENT, ['folders']), {});
+      });
+
+      it(`keeps the text of the badges readable in ${info.label}`, () => {
+        for (const accent of ['#000000', '#ffffff', '#ffeb3b', '#1a237e', GREEN]) {
+          const merged = { ...theme.colors, ...accentColors(theme.colors, accent, ['controls']) };
+          const ratio = contrastRatio(channels(merged['badge.foreground']), channels(merged['badge.background']));
+          assert.ok(ratio >= 4.5, `${accent}: ${ratio.toFixed(2)}`);
+        }
+      });
+    }
+
+    it('goes into the generated themes', () => {
+      const generator = new ColorThemeGenerator({ dist: join(root, 'dist'), themes: join(root, THEMES_FOLDER) });
+      const theme = generator.createTheme(COLOR_THEMES[0], { accentTargets: ['tabs'], byKey: [], layers: [] });
+      assert.equal(theme.colors['tab.activeBorder'], DEFAULT_ACCENT);
+      assert.equal(mixColorTheme(bases[0].theme, 'dark', [], [], GREEN, ['controls']).colors['scrollbarSlider.background'], `${GREEN}59`);
+    });
+
+    describe('folders', () => {
+      afterEach(() => {
+        testState.config = {};
+      });
+
+      it('gives the folder icons the accent, else the Islands blue, else the folder color', () => {
+        testState.config = { accentColor: GREEN, accentTargets: ['folders'], folderColor: '#ff0000' };
+        assert.equal(configService.getIconSettings().folderColor, GREEN);
+        testState.config = { accentTargets: ['folders'], folderColor: '#ff0000' };
+        assert.equal(configService.getIconSettings().folderColor, DEFAULT_ACCENT);
+        testState.config = { accentColor: GREEN, accentTargets: ['tabs'], folderColor: '#ff0000' };
+        assert.equal(configService.getIconSettings().folderColor, '#ff0000');
+      });
+
+      it('names the icons after the accent, so VS Code loads them again when it changes', () => {
+        testState.config = { accentColor: GREEN, accentTargets: ['folders'] };
+        const green = getFileConfigHash(withDefaults(configService.getIconSettings()));
+        testState.config = { accentColor: '#ff9800', accentTargets: ['folders'] };
+        const orange = getFileConfigHash(withDefaults(configService.getIconSettings()));
+        assert.ok(green && orange && green !== orange);
+      });
+    });
+  });
+
+  describe('changedColors', () => {
+    it('gives the colors that differ, whatever their case, and not the ones taken away', () => {
+      assert.deepEqual(changedColors({ a: '#ABCDEF', b: '#111111', c: '#222222' }, { a: '#abcdef', b: '#333333', d: '#444444' }), {
+        b: '#333333',
+        d: '#444444',
+      });
     });
   });
 

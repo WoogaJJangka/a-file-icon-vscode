@@ -1,4 +1,29 @@
 {
+  "accent": {
+    "current": "current",
+    "custom": "Custom…",
+    "customDetail": "Any #rrggbb color, shown while you type",
+    "inactive": "Cool Islands is not the current color theme: the accent is seen once Cool Islands Dark or Light is selected.",
+    "placeholder": "Each accent is shown as you move to it. Enter keeps it, Escape goes back.",
+    "preset": {
+      "aqua": "Aqua",
+      "blue": "Blue",
+      "coral": "Coral",
+      "cyan": "Cyan",
+      "green": "Green",
+      "islandsBlue": "Islands Blue",
+      "magenta": "Magenta",
+      "orange": "Orange",
+      "pink": "Pink",
+      "purple": "Purple",
+      "teal": "Teal",
+      "violet": "Violet",
+      "yellow": "Yellow"
+    },
+    "presets": "Accents",
+    "reset": "Back to the Islands blue",
+    "title": "Accent color of Cool Islands"
+  },
   "activate": "Activate",
   "activated": "Cool Theme Kit is active.",
   "arrowThemes": {
@@ -106,8 +131,13 @@
   "specific": "Specific",
   "themeMixer": {
     "accent": "Accent color",
-    "accentHint": "Replaces the blue of Cool Islands (focus ring, buttons, links, active tab, selection). It wins over the layers, and a key below wins over it. Reload the window to see it.",
+    "accentHex": "#rrggbb",
+    "accentHint": "Replaces the blue of Cool Islands (focus ring, buttons, links, active tab, selection). It wins over the layers, and a key below wins over it. It is shown at once while you pick it; the theme files follow, and a reload of the window makes it final.",
     "accentReset": "Islands blue",
+    "accentTargetControls": "Scrollbars, checkboxes, badges",
+    "accentTargetFolders": "Folder icons",
+    "accentTargetTabs": "Tab and panel lines",
+    "accentTargets": "Also paint",
     "add": "Add",
     "addLayer": "Add layer",
     "applyAuto": "Same kind",

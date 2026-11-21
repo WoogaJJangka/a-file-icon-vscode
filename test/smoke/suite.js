@@ -151,6 +151,41 @@ exports.run = async () => {
     await waitFor('the default icon theme', () => iconTheme().atomConfig?.opacity === 1, REGENERATE_TIMEOUT);
   });
 
+  // The accent picker shows each accent at once through the user settings `workbench.colorCustomizations`
+  const workbench = () => vscode.workspace.getConfiguration('workbench');
+  const customizations = () => workbench().inspect('colorCustomizations')?.globalValue;
+  const userCustomizations = { '[Cool Islands Dark]': { 'editor.background': '#101010' }, 'statusBar.background': '#202020' };
+  /** Open the accent picker and move from the current accent (the Islands blue) to the next one (Green) */
+  const pickNextAccent = async () => {
+    const picking = vscode.commands.executeCommand(`${KEY}.chooseAccentColor`);
+    await sleep(1500);
+    await vscode.commands.executeCommand('workbench.action.quickOpenSelectNext');
+    await waitFor('the preview of Green', () => customizations()?.['[Cool Islands Dark]']?.['button.background'] === '#79cb60');
+    assert.equal(customizations()?.['[Cool Islands Dark]']?.['editor.background'], '#101010');
+    assert.equal(customizations()?.['[Cool Islands Light]']?.focusBorder, '#79cb60');
+    return picking;
+  };
+
+  await step('previews an accent in the picker, and Escape puts the user settings back', async () => {
+    await workbench().update('colorCustomizations', userCustomizations, vscode.ConfigurationTarget.Global);
+    const picking = await pickNextAccent();
+    await vscode.commands.executeCommand('workbench.action.closeQuickOpen');
+    await picking;
+    await waitFor('the user settings as they were', () => JSON.stringify(customizations()) === JSON.stringify(userCustomizations));
+    assert.equal(settings().get('accentColor'), '');
+  });
+
+  await step('keeps the accent chosen in the picker in the theme files', async () => {
+    const picking = await pickNextAccent();
+    await vscode.commands.executeCommand('workbench.action.acceptSelectedQuickOpenItem');
+    await picking;
+    await waitFor('the accent setting', () => settings().get('accentColor') === '#79cb60');
+    await waitFor('the accent in Cool Islands Dark', () => darkTheme().colors?.['button.background']?.toLowerCase() === '#79cb60');
+    await settings().update('accentColor', undefined, vscode.ConfigurationTarget.Global);
+    await workbench().update('colorCustomizations', undefined, vscode.ConfigurationTarget.Global);
+    await waitFor('the Islands blue in Cool Islands Dark', () => darkTheme().colors?.['button.background']?.toLowerCase() === '#3871e1');
+  });
+
   const others = (process.env.SMOKE_EXTENSIONS ?? '').split(',').filter(Boolean);
   if (others.length > 0) await compatibility(others, { darkTheme, iconTheme, productTheme, report, settings });
 

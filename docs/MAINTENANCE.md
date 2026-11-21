@@ -124,6 +124,12 @@ Cool Theme Kit 을 고칠 때 지키는 규칙과, 그 규칙을 지키는지 �
 2. **남의 설정은 쓰지 않는다**: `workbench.colorTheme`·`workbench.iconTheme`·`workbench.productIconTheme` 은 읽기만 한다.
    `configurationDefaults` 는 `editor.fontFamily`·`markdown.preview.fontFamily` 뿐이다(사용자가 정하지 않았을 때만 적용).
    늘리려면 다른 확장·사용자 설정과 겹치는지 적고 이 문서를 고친다.
+   **예외 하나(사용자 결정 2026-11-21)**: 강조색 미리보기(`services/AccentPreviewService`)는 `workbench.colorCustomizations` 의
+   사용자(Global) 값 중 `"[Cool Islands Dark]"`·`"[Cool Islands Light]"` 칸에만, 테마 파일과 색이 다른 키만 잠깐 쓴다.
+   그 키에 있던 사용자 값은 globalState(`accentPreview`)에 두고 취소하면 되돌린다. 확정하면 `accentColor` 를 쓰고(테마 파일이
+   따라 바뀜) 미리보기 값은 다음 활성화까지 둔 뒤, 다음 활성화 때 **아직 우리 값인 키만** 지우거나 원래 값으로 되돌린다.
+   사용자가 그 사이 바꾼 키, 다른 칸, 워크스페이스 값은 건드리지 않는다(`test/unit/accentPreview.test.ts`). 이 밖의 목적으로
+   `colorCustomizations` 에 쓰지 않는다.
 3. **남의 파일은 읽기만**: 다른 확장의 폴더에 쓰지 않는다. 필요한 것은 `dist/layers/` 로 복사한다.
 4. **섞기가 실패해도 기본 테마는 남는다**: 테마 하나를 못 읽으면 그 테마만 빠지고 출력 채널에 한 줄 남는다
    (`ColorThemeService`·`ProductIconService` 의 테마별 `try`). 사용자에게는 `reportThemeFailure` 로만 알린다.

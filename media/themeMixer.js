@@ -39,7 +39,7 @@
   let pendingTimer = 0;
 
   const send = (/** @type {any} */ message) => {
-    if (['accentColor', 'byName', 'colorByKey', 'colorLayers', 'layers', 'productByName', 'productLayers'].includes(message.type)) {
+    if (['accentColor', 'accentTargets', 'byName', 'colorByKey', 'colorLayers', 'layers', 'productByName', 'productLayers'].includes(message.type)) {
       document.body.classList.add('pending');
       clearTimeout(pendingTimer);
       pendingTimer = setTimeout(() => document.body.classList.remove('pending'), 30_000);
@@ -354,36 +354,90 @@
     ]);
   };
 
-  /** The accent color: a picker (it fires `change` once, when the picker closes), swatches, and a way back to the Islands blue */
+  const HEX_COLOR = /^#[dA-Fa-f]{6}$/;
+  /** The accent shown by the last preview message, and the timer that limits them while the color picker is dragged */
+  let previewed = '';
+  let previewTimer = 0;
+
+  /** Show the accent at once (the extension writes its colors for the moment), at most every 150 ms */
+  const previewAccent = (/** @type {string} */ value) => {
+    clearTimeout(previewTimer);
+    previewTimer = setTimeout(() => {
+      if (value === previewed) return;
+      previewed = value;
+      vscode.postMessage({ accent: value, type: 'accentPreview' });
+    }, 150);
+  };
+
+  /**
+   * The accent color: a picker (`input` while it is dragged shows the color, `change` when it closes keeps it), named
+   * swatches, a text field for #rrggbb, a way back to the Islands blue, and the parts `accentTargets` also paints
+   */
   const accentSection = () => {
     const colors = state.colors;
-    const sendAccent = (/** @type {string} */ value) => {
-      colors.accent = value === colors.accentDefault ? '' : value;
+    const value = colors.accent || colors.accentDefault;
+    const sendAccent = (/** @type {string} */ accent) => {
+      clearTimeout(previewTimer);
+      previewed = '';
+      colors.accent = accent.toLowerCase() === colors.accentDefault ? '' : accent.toLowerCase();
       render();
       send({ accent: colors.accent, type: 'accentColor' });
     };
-    const picker = /** @type {HTMLInputElement} */ (h('input', { className: 'accent-picker', type: 'color' }));
-    picker.value = colors.accent || colors.accentDefault;
+    const picker = /** @type {HTMLInputElement} */ (h('input', { className: 'accent-picker', title: t('accent'), type: 'color' }));
+    picker.value = value;
+    picker.addEventListener('input', () => previewAccent(picker.value));
     picker.addEventListener('change', () => sendAccent(picker.value));
 
-    const swatches = colors.accentPresets.map((/** @type {string} */ preset) =>
+    const hex = /** @type {HTMLInputElement} */ (h('input', {
+      'aria-label': t('accentHex'),
+      className: 'accent-hex',
+      maxLength: 7,
+      placeholder: t('accentHex'),
+      spellcheck: false,
+      type: 'text',
+      value,
+    }));
+    hex.addEventListener('input', () => {
+      const valid = HEX_COLOR.test(hex.value.trim());
+      hex.classList.toggle('invalid', !valid);
+      if (valid) previewAccent(hex.value.trim().toLowerCase());
+    });
+    hex.addEventListener('change', () => {
+      if (HEX_COLOR.test(hex.value.trim())) sendAccent(hex.value.trim());
+    });
+
+    const swatches = colors.accentPresets.map((/** @type {any} */ preset) =>
       h('button', {
-        className: `swatch${(colors.accent || colors.accentDefault) === preset ? ' selected' : ''}`,
-        onclick: () => sendAccent(preset),
-        style: `background:${preset}`,
-        title: preset,
+        'aria-label': `${preset.name} ${preset.color}`,
+        className: `swatch${value === preset.color ? ' selected' : ''}`,
+        onclick: () => sendAccent(preset.color),
+        style: `background:${preset.color}`,
+        title: `${preset.name} ${preset.color}`,
         type: 'button',
       }),
     );
+
+    const targets = colors.accentTargetChoices.map((/** @type {any} */ choice) => {
+      const box = /** @type {HTMLInputElement} */ (h('input', { checked: colors.accentTargets.includes(choice.id), type: 'checkbox' }));
+      box.addEventListener('change', () => {
+        colors.accentTargets = colors.accentTargetChoices
+          .map((/** @type {any} */ item) => item.id)
+          .filter((/** @type {string} */ id) => (id === choice.id ? box.checked : colors.accentTargets.includes(id)));
+        send({ targets: colors.accentTargets, type: 'accentTargets' });
+      });
+      return h('label', { className: 'accent-target' }, [box, t(choice.label)]);
+    });
+
     return h('section', {}, [
       h('h2', { text: t('accent') }),
       h('p', { className: 'hint', text: t('accentHint') }),
       h('div', { className: 'accent' }, [
         picker,
-        h('code', { text: colors.accent || colors.accentDefault }),
+        hex,
         ...swatches,
         colors.accent ? button(t('accentReset'), () => sendAccent(colors.accentDefault)) : undefined,
       ]),
+      h('div', { className: 'accent-targets' }, [h('span', { text: t('accentTargets') }), ...targets]),
     ]);
   };
 

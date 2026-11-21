@@ -8,6 +8,9 @@
  *     dark navy of the selection of the dark one, links) -> the same lightness and opacity, the hue moved by the same
  *     angle as the accent and the saturation scaled by the same ratio, so each part keeps reading well in its theme.
  *
+ * The setting `accentTargets` also paints, with the accent itself, the parts listed in `ACCENT_TARGET_KEYS` (and the
+ * folder icons), which Islands leaves gray.
+ *
  * Not touched, on purpose: the colors that only happen to be blue but mean something else — the git decorations and
  * gutter marks of modified files, the terminal ANSI blues, the debugger stack frame, the find match, the merge headers.
  */
@@ -15,8 +18,61 @@
 /** The accent of the Islands themes (`focusBorder`, `button.background`), which the tints are measured from */
 const DEFAULT_ACCENT = '#3871e1';
 
-/** The swatches of the theme mixer: the Islands blue, then accents of the Material themes (`helpers/themes.ts`) */
-const ACCENT_PRESETS = [DEFAULT_ACCENT, '#79cb60', '#009688', '#ff9800', '#f9826c', '#ff79c5', '#ab47bc'] as const;
+/**
+ * The named accents of the picker and of the theme mixer: the Islands blue, then the accents of the Material themes
+ * (`helpers/themes.ts`), one per hue, around the color wheel. The names are `accent.preset.<id>` in the locales, the
+ * source is the theme the color comes from.
+ */
+const ACCENT_PRESETS: ReadonlyArray<{ color: string; id: string; source?: string }> = [
+  { color: DEFAULT_ACCENT, id: 'islandsBlue' },
+  { color: '#79cb60', id: 'green', source: 'GitHub' },
+  { color: '#009688', id: 'teal', source: 'Material Oceanic' },
+  { color: '#00bcd4', id: 'cyan', source: 'Material Lighter' },
+  { color: '#84ffff', id: 'aqua', source: 'Material Deep Ocean' },
+  { color: '#2979ff', id: 'blue', source: 'Atom One Dark' },
+  { color: '#7e57c2', id: 'violet', source: 'Night Owl' },
+  { color: '#ab47bc', id: 'purple', source: 'Material Palenight' },
+  { color: '#d33682', id: 'magenta', source: 'Solarized Dark' },
+  { color: '#ff79c5', id: 'pink', source: 'Dracula' },
+  { color: '#f9826c', id: 'coral', source: 'GitHub Dark' },
+  { color: '#ff9800', id: 'orange', source: 'Material Darker' },
+  { color: '#ffd866', id: 'yellow', source: 'Monokai Pro' },
+];
+
+type AccentPreset = (typeof ACCENT_PRESETS)[number];
+
+/** The parts the setting `accentTargets` also paints with the accent */
+const ACCENT_TARGETS = ['controls', 'tabs', 'folders'] as const;
+
+type AccentTarget = (typeof ACCENT_TARGETS)[number];
+
+/**
+ * The workbench colors of each target of `accentTargets` (`folders` is the folder icons: `ConfigService.getIconSettings`).
+ * `alpha` is the opacity given to the accent: none keeps the one of Islands (the scrollbar is see-through), '' makes it
+ * opaque (Islands hides the line of the active activity bar item with #00000000). Checked against both base themes by a
+ * unit test. VS Code has no setting for the thickness of these lines: only their color changes.
+ */
+const ACCENT_TARGET_KEYS: Record<Exclude<AccentTarget, 'folders'>, ReadonlyArray<{ alpha?: string; key: string }>> = {
+  controls: [
+    { key: 'badge.background' },
+    { key: 'checkbox.border' },
+    { key: 'inputOption.activeBackground' },
+    { key: 'scrollbarSlider.activeBackground' },
+    { key: 'scrollbarSlider.background' },
+    { key: 'scrollbarSlider.hoverBackground' },
+  ],
+  tabs: [
+    { alpha: '', key: 'activityBar.activeBorder' },
+    { alpha: '', key: 'panelTitle.activeBorder' },
+    { alpha: '', key: 'tab.activeBorder' },
+    { alpha: '80', key: 'tab.unfocusedActiveBorder' },
+  ],
+};
+
+/** The text drawn on a key of a target, kept readable like the text on the accent */
+const TARGET_FOREGROUNDS: Partial<Record<AccentTarget, Array<{ foreground: string; on: string }>>> = {
+  controls: [{ foreground: 'badge.foreground', on: 'badge.background' }],
+};
 
 /** Painted with the accent itself */
 const ACCENT_SOLID = [
@@ -147,6 +203,34 @@ const readable = (color: Hsl, background: Rgb, contrast: number): Hsl => {
   return result;
 };
 
+/** Pure black or white, whichever reads better on the color (the best of the two always reaches 4.5:1) */
+const readableText = (background: Rgb) =>
+  contrastRatio(parseColor(DARK_TEXT)!.rgb, background) >= contrastRatio(parseColor(LIGHT_TEXT)!.rgb, background) ? DARK_TEXT : LIGHT_TEXT;
+
+/** The colors of the targets of `accentTargets` painted with the accent, and the text on them kept readable */
+const targetColors = (colors: Record<string, string>, accent: Rgb, targets: readonly AccentTarget[]) => {
+  const result: Record<string, string> = {};
+  for (const target of targets) {
+    if (target === 'folders') continue;
+    for (const { alpha, key } of ACCENT_TARGET_KEYS[target]) {
+      const color = colors[key] === undefined ? undefined : parseColor(colors[key]);
+      if (color) result[key] = toHex(accent, alpha ?? color.alpha);
+    }
+    for (const { foreground, on } of TARGET_FOREGROUNDS[target] ?? []) {
+      const background = result[on] === undefined ? undefined : parseColor(result[on]);
+      if (!background || background.alpha) continue;
+      const text = colors[foreground] === undefined ? undefined : parseColor(colors[foreground]);
+      if (text && contrastRatio(text.rgb, background.rgb) >= MIN_CONTRAST) continue;
+      result[foreground] = readableText(background.rgb);
+    }
+  }
+  return result;
+};
+
+/** The setting `accentTargets`: the known targets, each once, in the order of {@link ACCENT_TARGETS} */
+export const normalizeAccentTargets = (value: unknown): AccentTarget[] =>
+  Array.isArray(value) ? ACCENT_TARGETS.filter((target) => value.includes(target)) : [];
+
 /**
  * The accent of the setting as `#rrggbb` in lower case, or `undefined` when there is none or it is not a color.
  * The settings schema only takes `#rrggbb`; here `#rgb`, capitals and spaces around are tolerated, and an opacity is dropped.
@@ -165,10 +249,17 @@ export const isDefaultAccent = (accent: string | undefined) => accent === undefi
  * The tints are measured from the colors of the base theme, never from the ones of a mixed-in theme.
  * @param base the workbench colors of a Cool Islands base theme
  * @param accent a value of `normalizeAccent`
+ * @param targets the setting `accentTargets`, normalized
  */
-export const accentColors = (base: Record<string, string>, accent: string): Record<string, string> => {
+export const accentColors = (
+  base: Record<string, string>,
+  accent: string,
+  targets: readonly AccentTarget[] = [],
+): Record<string, string> => {
   const chosen = parseColor(accent);
-  if (!chosen || isDefaultAccent(accent)) return {};
+  if (!chosen) return {};
+  // the Islands blue leaves the theme as it is, but the targets the user asked for still take it
+  if (isDefaultAccent(accent)) return targetColors(base, chosen.rgb, targets);
   const reference = toHsl(parseColor(DEFAULT_ACCENT)!.rgb);
   const target = toHsl(chosen.rgb);
   const turn = target.h - reference.h;
@@ -193,6 +284,9 @@ export const accentColors = (base: Record<string, string>, accent: string): Reco
     result[key] = toHex(toRgb(tinted), color.alpha);
   }
 
+  // The targets take the accent itself, over its tint (the active tab line is a tint without them)
+  Object.assign(result, targetColors({ ...base, ...result }, chosen.rgb, targets));
+
   // The text on the accent stays readable whatever the accent
   const colors = { ...base, ...result };
   for (const { foreground, on } of ACCENT_FOREGROUNDS) {
@@ -200,11 +294,26 @@ export const accentColors = (base: Record<string, string>, accent: string): Reco
     const text = colors[foreground] === undefined ? undefined : parseColor(colors[foreground]);
     if (!background) continue;
     if (text && contrastRatio(text.rgb, background.rgb) >= MIN_CONTRAST) continue;
-    const dark = parseColor(DARK_TEXT)!.rgb;
-    const light = parseColor(LIGHT_TEXT)!.rgb;
-    result[foreground] = contrastRatio(dark, background.rgb) >= contrastRatio(light, background.rgb) ? DARK_TEXT : LIGHT_TEXT;
+    result[foreground] = readableText(background.rgb);
   }
   return result;
 };
 
-export { ACCENT_PRESETS, ACCENT_SOLID, ACCENT_TEXT, ACCENT_TINT, contrastRatio, DEFAULT_ACCENT };
+/**
+ * The colors of `next` that differ from `current`: what a preview writes over the theme file. A color only `current`
+ * has is left out: `workbench.colorCustomizations` cannot take a color away.
+ */
+export const changedColors = (current: Record<string, string>, next: Record<string, string>): Record<string, string> =>
+  Object.fromEntries(Object.entries(next).filter(([key, value]) => current[key]?.toLowerCase() !== value.toLowerCase()));
+
+export {
+  ACCENT_PRESETS,
+  ACCENT_SOLID,
+  ACCENT_TARGET_KEYS,
+  ACCENT_TARGETS,
+  ACCENT_TEXT,
+  ACCENT_TINT,
+  contrastRatio,
+  DEFAULT_ACCENT,
+};
+export type { AccentPreset, AccentTarget };
