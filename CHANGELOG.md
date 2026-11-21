@@ -4,6 +4,14 @@ All notable changes to this project will be documented in this file. Dates are d
 
 #### Unreleased
 
+- feat: **Choose a Theme Combination (with Preview)** applies one of eight ready-made combinations (JetBrains Dark and
+  Light, Material green, One Dark Pro / Dracula / Catppuccin Mocha syntax on the Islands frame, the GitHub Dark frame
+  with the JetBrains syntax, vscode-icons for the other files), chosen in `docs/THEME_COMBINATIONS.md` by the contrast
+  of the mixed syntax colors and the names an icon layer adds. Each one is shown as you move to it; the extensions a
+  combination needs are installed only after you agree; **Undo the Last Theme Combination** puts the settings back.
+  Also the first step of the walkthrough and a button of the Mix Themes page. Nothing is applied by installing.
+- docs: `bun run screenshots -- --preset <id>|all` captures the combinations with their extensions installed into the
+  temporary profile only; `bun run analyze:presets` prints the numbers of the research.
 - feat: **Choose the Accent Color (with Preview)** lists named accents (the Islands blue and one accent per hue from
   the Material themes), a custom `#rrggbb` and the way back to the Islands blue. Each accent is shown at once while
   you move through the list or type, and Escape goes back. The Colors tab of the Mix Themes page shows it the same

@@ -19,7 +19,7 @@ import { normalizeAccent, normalizeAccentTargets } from 'src/themes/accent';
 import { normalizeColorLayers, parseColorKey, serializeColorLayers } from 'src/themes/colorLayers';
 import { ColorThemeGenerator, kindOf } from 'src/themes/ColorThemeGenerator';
 import { COLOR_THEMES, THEMES_FOLDER } from 'src/themes/colorThemes';
-import { ColorThemeKind, ConfigurationTarget, FileType, Uri, ViewColumn, window, workspace } from 'vscode';
+import { ColorThemeKind, commands, ConfigurationTarget, FileType, Uri, ViewColumn, window, workspace } from 'vscode';
 
 import type { LayerMode } from 'src/@types/config';
 import type { PreviewFont, PreviewIcon } from 'src/helpers/themePreview';
@@ -65,7 +65,14 @@ type ViewIcon =
 
 /** Messages of the webview */
 type ViewMessage =
-  { accent: unknown; type: 'accentColor' | 'accentPreview' } | { byKey: unknown; type: 'colorByKey' } | { byName: unknown; type: 'byName' } | { byName: unknown; type: 'productByName' } | { layers: unknown; type: 'colorLayers' | 'layers' | 'productLayers' } | { samples: unknown; type: 'samples' } | { targets: unknown; type: 'accentTargets' } | { type: 'defaultSamples' | 'ready' | 'workspaceSamples' };
+  | { accent: unknown; type: 'accentColor' | 'accentPreview' }
+  | { byKey: unknown; type: 'colorByKey' }
+  | { byName: unknown; type: 'byName' }
+  | { byName: unknown; type: 'productByName' }
+  | { layers: unknown; type: 'colorLayers' | 'layers' | 'productLayers' }
+  | { samples: unknown; type: 'samples' }
+  | { targets: unknown; type: 'accentTargets' }
+  | { type: 'choosePreset' | 'defaultSamples' | 'ready' | 'workspaceSamples' };
 
 const TRANSLATED = [
   'accent',
@@ -136,6 +143,8 @@ const TRANSLATED = [
   'notInstalled',
   'pin',
   'preview',
+  'presets',
+  'presetsHint',
   'previewHint',
   'remove',
   'result',
@@ -284,6 +293,10 @@ export class ThemeMixerPanel {
           }
           const valid = normalizeProductByName(byName).map((entry) => [entry.key, entry.theme]);
           configService.setConfigValueWhereDefined('productIconByName', valid.length > 0 ? Object.fromEntries(valid) : undefined, ConfigurationTarget.Global);
+          break;
+        }
+        case 'choosePreset': {
+          await commands.executeCommand(`${EXTENSION_KEY}.choosePreset`);
           break;
         }
         case 'accentPreview': {

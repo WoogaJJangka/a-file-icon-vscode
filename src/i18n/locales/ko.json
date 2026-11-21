@@ -45,6 +45,10 @@
   "customOpacity": "불투명도 값 직접 입력",
   "customSaturation": "채도 값 직접 입력",
   "desaturated": "채도 낮춤",
+  "diagnostics": {
+    "copied": "Cool Theme Kit 진단 정보를 클립보드에 복사했습니다. 버그 신고에 붙여 넣으세요. 설정에 파일·폴더 이름이 들어 있을 수 있으니 먼저 읽어 보세요.",
+    "openIssue": "버그 신고 열기"
+  },
   "explorerArrows": {
     "disable": "폴더 화살표 숨기기",
     "enable": "폴더 화살표 표시",
@@ -64,10 +68,6 @@
     },
     "toggleIcons": "폴더 테마 선택",
     "wrongHexCode": "올바른 HEX 색 코드가 아닙니다!"
-  },
-  "diagnostics": {
-    "copied": "Cool Theme Kit 진단 정보를 클립보드에 복사했습니다. 버그 신고에 붙여 넣으세요. 설정에 파일·폴더 이름이 들어 있을 수 있으니 먼저 읽어 보세요.",
-    "openIssue": "버그 신고 열기"
   },
   "fonts": {
     "get": "{{font}} 받기",
@@ -110,6 +110,55 @@
   "opaque": "불투명",
   "outdatedVersion": "이 명령을 쓰려면 VS Code를 업데이트해야 합니다.",
   "plusMinus": "더하기/빼기",
+  "preset": {
+    "applied": "테마 조합 {{name}}을(를) 적용했습니다. 섞은 색과 아이콘은 창을 다시 로드하면 보입니다.",
+    "catppuccinMocha": {
+      "description": "Cool Islands 에 Catppuccin Mocha 문법 색과 Catppuccin Icons 폴더 아이콘",
+      "name": "Catppuccin Mocha 문법"
+    },
+    "draculaSyntax": {
+      "description": "Cool Islands 틀에 Dracula 문법 색",
+      "name": "Dracula 문법"
+    },
+    "githubDarkFrame": {
+      "description": "GitHub Dark Default 의 화면 색에 JetBrains 문법 색",
+      "name": "GitHub Dark 틀"
+    },
+    "group": {
+      "frame": "다른 틀, JetBrains 문법",
+      "icons": "파일 아이콘만",
+      "jetbrains": "JetBrains 모양",
+      "syntax": "JetBrains 틀, 다른 문법 색"
+    },
+    "install": "설치하고 적용",
+    "installQuestion": "{{name}}은(는) 다른 확장의 테마를 씁니다: {{extensions}}. Marketplace 에서 설치하고 조합을 적용할까요?",
+    "jetbrainsDark": {
+      "description": "Cool Islands Dark, Cool Icons, Cool Islands Icons, Islands 파랑",
+      "name": "JetBrains Dark"
+    },
+    "jetbrainsLight": {
+      "description": "Cool Islands Light, Cool Icons, Cool Islands Icons, Islands 파랑",
+      "name": "JetBrains Light"
+    },
+    "materialGreen": {
+      "description": "Cool Islands Dark 에 Material Theme UI 의 연두 강조색을 컨트롤·탭 강조선·폴더 아이콘까지",
+      "name": "Material 연두"
+    },
+    "needsInstall": "{{extensions}} 필요",
+    "nothingToUndo": "되돌릴 테마 조합이 없습니다.",
+    "oneDarkSyntax": {
+      "description": "Cool Islands 틀에 One Dark Pro 문법 색",
+      "name": "One Dark Pro 문법"
+    },
+    "placeholder": "항목으로 옮기면 그 조합을 바로 보여 줍니다(섞는 테마는 고른 뒤). Enter 는 고르기, Esc 는 되돌리기.",
+    "title": "테마 조합",
+    "undo": "되돌리기",
+    "undone": "{{name}} 이전 설정으로 되돌렸습니다.",
+    "vscodeIconsFill": {
+      "description": "Cool Icons 에 아이콘이 없는 이름은 Material Icon Theme 대신 vscode-icons 아이콘, 색은 그대로",
+      "name": "나머지 파일은 vscode-icons"
+    }
+  },
   "productIcons": {
     "reload": "섞은 제품 아이콘 테마 때문에 Cool Islands Icons가 바뀌었습니다. 창을 다시 로드하면 보입니다."
   },
@@ -129,6 +178,7 @@
   "selectSaturation": "채도 선택",
   "semiTransparent": "반투명",
   "specific": "폴더별",
+  "themeInstalled": "Cool Theme Kit이 설치되었습니다.",
   "themeMixer": {
     "accent": "강조색",
     "accentHex": "#rrggbb",
@@ -138,7 +188,7 @@
     "accentTargetFolders": "폴더 아이콘",
     "accentTargetTabs": "탭·패널 강조선",
     "accentTargets": "더 칠할 곳",
-    "add":"추가",
+    "add": "추가",
     "addLayer": "층 추가",
     "applyAuto": "같은 종류",
     "applyBoth": "어두운·밝은 둘 다",
@@ -183,6 +233,8 @@
     "noThemes": "설치된 다른 파일 아이콘 테마가 없습니다.",
     "notInstalled": "설치 안 됨",
     "pin": "이 아이콘 쓰기",
+    "presets": "테마 조합…",
+    "presetsHint": "아래 설정을 미리 짜 둔 조합, 미리보기 포함.",
     "preview": "미리보기",
     "previewHint": "결과: 탐색기에 보이는 아이콘. 다른 열: 설치된 테마별 아이콘. 누르면 그 이름에 그 아이콘을 쓰고, 다시 누르면 해제합니다.",
     "productByName": "아이콘별 지정",
@@ -208,7 +260,6 @@
     "vscodeIcon": "VS Code 아이콘",
     "workspaceSamples": "이 작업 영역의 이름"
   },
-  "themeInstalled": "Cool Theme Kit이 설치되었습니다.",
   "themeUpdated": "Cool Theme Kit이 업데이트되었습니다.",
   "toggleSwitch": {
     "off": "끔",

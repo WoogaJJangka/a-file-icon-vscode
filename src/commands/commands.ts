@@ -13,6 +13,7 @@ import { ISLANDS_PRODUCT_THEME_ID } from 'src/productIcons/islandsProductTheme';
 import { logger, configService } from 'src/services';
 import { copyDiagnostics } from 'src/services/DiagnosticsService';
 import { fontCheckService } from 'src/services/FontCheckService';
+import { presetService } from 'src/services/PresetService';
 import { COLOR_THEMES } from 'src/themes/colorThemes';
 import { commands, ConfigurationTarget, window, workspace } from 'vscode';
 
@@ -86,6 +87,16 @@ const chooseAccentColor = async () => {
   await accentColorPicker.open();
 };
 
+const choosePreset = async () => {
+  logger.info('Open the theme combinations');
+  await presetService.choose();
+};
+
+const undoPreset = async () => {
+  logger.info('Undo the last theme combination');
+  await presetService.undo();
+};
+
 const useJetBrainsFonts = async () => {
   logger.info('Use the JetBrains fonts');
   await fontCheckService.use();
@@ -125,6 +136,7 @@ const extensionCommands: Record<string, (...parameters: unknown[]) => Promise<vo
   changeOpacity,
   changeSaturation,
   chooseAccentColor,
+  choosePreset,
   copyDiagnostics,
   openColorMixer,
   openThemeMixer,
@@ -132,6 +144,7 @@ const extensionCommands: Record<string, (...parameters: unknown[]) => Promise<vo
   restoreDefaultConfig,
   toggleIconPacks,
   toggleMonochrome,
+  undoPreset,
   useJetBrainsFonts,
   useTheme,
 };

@@ -1,7 +1,7 @@
 import { join } from 'node:path';
 import i18next from 'i18next';
 import { writeFileAtomic } from 'src/helpers/fsUtils';
-import { isValidHexColorCode } from 'src/helpers/utils';
+import { isCancellation, isValidHexColorCode } from 'src/helpers/utils';
 import { getExtensionPath } from 'src/helpers/vscodeUtils';
 import { accentPreviewService } from 'src/services/AccentPreviewService';
 import { configService } from 'src/services/ConfigService';
@@ -62,7 +62,11 @@ export class AccentColorPicker {
   async open(): Promise<void> {
     const current = normalizeAccent(configService.accentColor) ?? DEFAULT_ACCENT;
     const selected = workspace.getConfiguration('workbench').get<string>('colorTheme');
-    if (!COLOR_THEMES.some((info) => info.label === selected)) window.showInformationMessage(i18next.t('accent.inactive'));
+    if (!COLOR_THEMES.some((info) => info.label === selected)) {
+      window.showInformationMessage(i18next.t('accent.inactive')).then(undefined, (error: unknown) => {
+        if (!isCancellation(error)) logger.error(String(error));
+      });
+    }
 
     const distributionFolder = join(getExtensionPath(), 'dist');
     const icon = (color: string) => {
