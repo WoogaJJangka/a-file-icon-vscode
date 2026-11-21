@@ -93,6 +93,105 @@
           "XML_CUSTOM_TAG_NAME": {
             "foreground": "#26bda4"
           }
+        },
+        {
+          "Closure braces": {
+            "fontType": 1
+          },
+          "Groovy method declaration": {},
+          "List/map to object conversion": {
+            "foreground": "#e8bf6a",
+            "fontType": 1
+          },
+          "Static property reference ID": {
+            "foreground": "#9876aa",
+            "fontType": 2
+          },
+          "Unresolved reference access": {
+            "foreground": "#808080",
+            "effectColor": "#808080",
+            "effectType": 5
+          }
+        },
+        {
+          "REST.BOLD": {
+            "fontType": 1
+          },
+          "REST.FIXED": {
+            "background": "#0a3a08"
+          },
+          "REST.INLINE": {
+            "background": "#236423"
+          },
+          "REST.INTERPRETED": {
+            "background": "#15463c"
+          },
+          "REST.ITALIC": {
+            "fontType": 2
+          }
+        },
+        {
+          "KOTLIN_BACKING_FIELD_VARIABLE": {
+            "fontType": 1
+          },
+          "KOTLIN_CLOSURE_DEFAULT_PARAMETER": {
+            "fontType": 1
+          },
+          "KOTLIN_CONTEXT_ARGUMENT": {
+            "foreground": "#46467c"
+          },
+          "KOTLIN_COROUTINE_DEBUGGER_VALUE": {
+            "foreground": "#ff8c8b"
+          },
+          "KOTLIN_DEBUG_INFO": {
+            "effectColor": "#ffffff",
+            "effectType": 0,
+            "errorStripe": "#ffffff"
+          },
+          "KOTLIN_DYNAMIC_FUNCTION_CALL": {
+            "fontType": 3,
+            "effectType": 0
+          },
+          "KOTLIN_DYNAMIC_PROPERTY_CALL": {
+            "fontType": 3,
+            "effectType": 0
+          },
+          "KOTLIN_FUNCTION_LITERAL_BRACES_AND_ARROW": {
+            "fontType": 1
+          },
+          "KOTLIN_LABEL": {
+            "foreground": "#467cda"
+          },
+          "KOTLIN_MUTABLE_VARIABLE": {
+            "effectColor": "#bca5c4",
+            "effectType": 1
+          },
+          "KOTLIN_NAMED_ARGUMENT": {
+            "foreground": "#467cda"
+          },
+          "KOTLIN_PACKAGE_FUNCTION_CALL": {
+            "fontType": 2
+          },
+          "KOTLIN_PROPERTY_WITH_BACKING_FIELD": {
+            "background": "#3f3045"
+          },
+          "KOTLIN_RESOLVED_TO_ERROR": {
+            "effectColor": "#ff0000",
+            "effectType": 0,
+            "errorStripe": "#ff0000"
+          },
+          "KOTLIN_SMART_CAST_RECEIVER": {
+            "background": "#223c23"
+          },
+          "KOTLIN_SMART_CAST_VALUE": {
+            "background": "#223c23"
+          },
+          "KOTLIN_SMART_CONSTANT": {
+            "background": "#223c23"
+          },
+          "KOTLIN_TYPE_PARAMETER": {
+            "foreground": "#20999d"
+          }
         }
       ],
       "Default": [
@@ -184,6 +283,104 @@
           },
           "BASH.SHEBANG": {
             "fontType": 1
+          }
+        },
+        {
+          "Closure braces": {
+            "fontType": 1
+          },
+          "GROOVY_KEYWORD": {
+            "foreground": "#000043",
+            "fontType": 1
+          },
+          "Instance property reference ID": {
+            "fontType": 0
+          },
+          "List/map to object conversion": {
+            "foreground": "#0000ff",
+            "fontType": 1
+          },
+          "Static property reference ID": {
+            "fontType": 2
+          },
+          "Unresolved reference access": {
+            "foreground": "#000000",
+            "effectType": 5,
+            "effectColor": "#808080"
+          }
+        },
+        {
+          "REST.BOLD": {
+            "fontType": 1
+          },
+          "REST.FIXED": {
+            "background": "#d9d9f0"
+          },
+          "REST.INLINE": {
+            "background": "#edfced"
+          },
+          "REST.INTERPRETED": {
+            "background": "#cadaba"
+          },
+          "REST.ITALIC": {
+            "fontType": 2
+          }
+        },
+        {
+          "KOTLIN_BACKING_FIELD_VARIABLE": {
+            "fontType": 1
+          },
+          "KOTLIN_CLOSURE_DEFAULT_PARAMETER": {
+            "fontType": 1
+          },
+          "KOTLIN_CONTEXT_ARGUMENT": {
+            "foreground": "#4a4a86"
+          },
+          "KOTLIN_COROUTINE_DEBUGGER_VALUE": {
+            "foreground": "#840000"
+          },
+          "KOTLIN_DEBUG_INFO": {
+            "effectColor": "#000000",
+            "effectType": 0,
+            "errorStripe": "#000000"
+          },
+          "KOTLIN_DYNAMIC_FUNCTION_CALL": {
+            "fontType": 3,
+            "effectType": 0
+          },
+          "KOTLIN_DYNAMIC_PROPERTY_CALL": {
+            "fontType": 3,
+            "effectType": 0
+          },
+          "KOTLIN_FUNCTION_LITERAL_BRACES_AND_ARROW": {
+            "fontType": 1
+          },
+          "KOTLIN_LABEL": {
+            "foreground": "#4a86e8"
+          },
+          "KOTLIN_MUTABLE_VARIABLE": {
+            "effectColor": "#000000",
+            "effectType": 1
+          },
+          "KOTLIN_NAMED_ARGUMENT": {
+            "foreground": "#4a86e8"
+          },
+          "KOTLIN_PROPERTY_WITH_BACKING_FIELD": {
+            "background": "#f5d7ef"
+          },
+          "KOTLIN_RESOLVED_TO_ERROR": {
+            "effectColor": "#ff0000",
+            "effectType": 0,
+            "errorStripe": "#ff0000"
+          },
+          "KOTLIN_SMART_CAST_RECEIVER": {
+            "background": "#dbffdb"
+          },
+          "KOTLIN_SMART_CAST_VALUE": {
+            "background": "#dbffdb"
+          },
+          "KOTLIN_SMART_CONSTANT": {
+            "background": "#dbffdb"
           }
         }
       ]
@@ -2500,6 +2697,104 @@
           },
           "BASH.SHEBANG": {
             "fontType": 1
+          }
+        },
+        {
+          "Closure braces": {
+            "fontType": 1
+          },
+          "GROOVY_KEYWORD": {
+            "foreground": "#000043",
+            "fontType": 1
+          },
+          "Instance property reference ID": {
+            "fontType": 0
+          },
+          "List/map to object conversion": {
+            "foreground": "#0000ff",
+            "fontType": 1
+          },
+          "Static property reference ID": {
+            "fontType": 2
+          },
+          "Unresolved reference access": {
+            "foreground": "#000000",
+            "effectType": 5,
+            "effectColor": "#808080"
+          }
+        },
+        {
+          "REST.BOLD": {
+            "fontType": 1
+          },
+          "REST.FIXED": {
+            "background": "#d9d9f0"
+          },
+          "REST.INLINE": {
+            "background": "#edfced"
+          },
+          "REST.INTERPRETED": {
+            "background": "#cadaba"
+          },
+          "REST.ITALIC": {
+            "fontType": 2
+          }
+        },
+        {
+          "KOTLIN_BACKING_FIELD_VARIABLE": {
+            "fontType": 1
+          },
+          "KOTLIN_CLOSURE_DEFAULT_PARAMETER": {
+            "fontType": 1
+          },
+          "KOTLIN_CONTEXT_ARGUMENT": {
+            "foreground": "#4a4a86"
+          },
+          "KOTLIN_COROUTINE_DEBUGGER_VALUE": {
+            "foreground": "#840000"
+          },
+          "KOTLIN_DEBUG_INFO": {
+            "effectColor": "#000000",
+            "effectType": 0,
+            "errorStripe": "#000000"
+          },
+          "KOTLIN_DYNAMIC_FUNCTION_CALL": {
+            "fontType": 3,
+            "effectType": 0
+          },
+          "KOTLIN_DYNAMIC_PROPERTY_CALL": {
+            "fontType": 3,
+            "effectType": 0
+          },
+          "KOTLIN_FUNCTION_LITERAL_BRACES_AND_ARROW": {
+            "fontType": 1
+          },
+          "KOTLIN_LABEL": {
+            "foreground": "#4a86e8"
+          },
+          "KOTLIN_MUTABLE_VARIABLE": {
+            "effectColor": "#000000",
+            "effectType": 1
+          },
+          "KOTLIN_NAMED_ARGUMENT": {
+            "foreground": "#4a86e8"
+          },
+          "KOTLIN_PROPERTY_WITH_BACKING_FIELD": {
+            "background": "#f5d7ef"
+          },
+          "KOTLIN_RESOLVED_TO_ERROR": {
+            "effectColor": "#ff0000",
+            "effectType": 0,
+            "errorStripe": "#ff0000"
+          },
+          "KOTLIN_SMART_CAST_RECEIVER": {
+            "background": "#dbffdb"
+          },
+          "KOTLIN_SMART_CAST_VALUE": {
+            "background": "#dbffdb"
+          },
+          "KOTLIN_SMART_CONSTANT": {
+            "background": "#dbffdb"
           }
         }
       ]

@@ -24,8 +24,9 @@ const STRIKEOUT = 3;
 const styleOf = (attributes: TextAttributes): SemanticStyle => ({
   bold: Boolean((attributes.fontType ?? 0) & 1),
   italic: Boolean((attributes.fontType ?? 0) & 2),
-  strikethrough: attributes.effectType === STRIKEOUT,
-  underline: attributes.effectType !== undefined && UNDERLINED.has(attributes.effectType),
+  // The IDE draws an effect only with its color: Islands gives PROPERTIES.KEY an underline type and no color (no line on screen)
+  strikethrough: attributes.effectType === STRIKEOUT && attributes.effectColor !== undefined,
+  underline: attributes.effectType !== undefined && UNDERLINED.has(attributes.effectType) && attributes.effectColor !== undefined,
 });
 
 /**

@@ -84,7 +84,9 @@ export const TOKEN_RULES: TokenRule[] = [
   { from: ['DEFAULT_IDENTIFIER'], name: 'Java package', scope: ['storage.modifier.package.java', 'storage.modifier.import.java'] },
 
   // Data and markup
-  { from: ['JSON.PROPERTY_KEY', 'DEFAULT_INSTANCE_FIELD'], name: 'JSON key', scope: ['support.type.property-name.json', 'meta.object-literal.key', 'support.type.property-name.toml', 'support.type.property-name.table.toml'] },
+  { from: ['JSON.PROPERTY_KEY', 'DEFAULT_INSTANCE_FIELD'], name: 'JSON key', scope: ['support.type.property-name.json', 'meta.object-literal.key'] },
+  // TOML (TomlColors.kt; the grammar of the Even Better TOML extension): a key is a keyword, not a field like in JSON
+  { from: ['org.toml.KEY'], name: 'TOML key', scope: ['support.type.property-name.toml', 'support.type.property-name.table.toml'] },
   { from: ['YAML_SCALAR_KEY', 'DEFAULT_KEYWORD'], name: 'YAML key', scope: ['entity.name.tag.yaml'] },
   { from: ['YAML_ANCHOR'], name: 'YAML anchor', scope: ['variable.other.anchor.yaml', 'variable.other.alias.yaml', 'punctuation.definition.anchor.yaml', 'punctuation.definition.alias.yaml'] },
   // A comment of YAML falls back to the doc comment (YAMLHighlighter); a plain value is text, numbers and booleans too
@@ -94,8 +96,8 @@ export const TOKEN_RULES: TokenRule[] = [
     name: 'YAML value',
     scope: ['constant.language.boolean.yaml', 'constant.language.null.yaml', 'constant.numeric.float.yaml', 'constant.numeric.float.inf.yaml', 'constant.numeric.float.nan.yaml', 'constant.numeric.integer.decimal.yaml', 'constant.numeric.integer.hexadecimal.yaml', 'constant.numeric.integer.octal.yaml'],
   },
-  { from: ['PROPERTIES.KEY', 'DEFAULT_KEYWORD'], name: 'Properties key', scope: ['support.type.property-name.properties', 'keyword.other.definition.ini', 'entity.name.section.group-title.ini'] },
-  { from: ['PROPERTIES.KEY_VALUE_SEPARATOR', 'DEFAULT_OPERATION_SIGN', 'TEXT'], name: 'Properties separator', scope: ['punctuation.separator.key-value.ini'] },
+  { from: ['PROPERTIES.KEY'], name: 'Properties key', scope: ['support.type.property-name.properties', 'keyword.other.definition.ini', 'entity.name.section.group-title.ini'] },
+  { from: ['PROPERTIES.KEY_VALUE_SEPARATOR'], name: 'Properties separator', scope: ['punctuation.separator.key-value.ini'] },
   { from: ['CSS.PROPERTY_NAME', 'DEFAULT_INSTANCE_FIELD'], name: 'CSS property', scope: ['support.type.property-name.css', 'support.type.vendored.property-name.css', 'support.type.property-name.scss', 'support.type.property-name.less'] },
   { from: ['CSS.PROPERTY_VALUE', 'DEFAULT_IDENTIFIER', 'TEXT'], name: 'CSS value', scope: ['support.constant.property-value.css', 'meta.property-value.css'] },
   { from: ['CSS.TAG_NAME', 'DEFAULT_KEYWORD'], name: 'CSS selector', scope: ['entity.name.tag.css', 'entity.other.attribute-name.class.css', 'entity.other.attribute-name.id.css'] },
@@ -165,8 +167,42 @@ export const TOKEN_RULES: TokenRule[] = [
   },
 
   // Shell
-  { from: ['BASH.EXTERNAL_COMMAND', 'DEFAULT_FUNCTION_CALL', 'TEXT'], name: 'Shell command', scope: ['support.function.builtin.shell', 'entity.name.command.shell'] },
-  { from: ['BASH.VAR_USE', 'DEFAULT_INSTANCE_FIELD'], name: 'Shell variable', scope: ['variable.other.normal.shell', 'variable.other.positional.shell', 'variable.other.special.shell', 'punctuation.definition.variable.shell'] },
+  // Shell (ShHighlighterColors.java): an unquoted word (an argument, an option) is text, only quoted strings are strings
+  { from: ['BASH.EXTERNAL_COMMAND'], name: 'Shell command', scope: ['entity.name.command.shell'] },
+  { from: ['BASH.INTERNAL_COMMAND'], name: 'Shell builtin', scope: ['support.function.builtin.shell'] },
+  { from: ['BASH.FUNCTION_DEF_NAME'], name: 'Shell function', scope: ['entity.name.function.shell'] },
+  {
+    from: ['BASH.VAR_USE'],
+    name: 'Shell variable',
+    scope: ['variable.other.normal.shell', 'variable.parameter.positional.shell', 'variable.parameter.positional.all.shell', 'variable.language.special.shell', 'punctuation.definition.variable.shell'],
+  },
+  { from: ['BASH.VAR_DEF'], name: 'Shell variable definition', scope: ['variable.other.assignment.shell'] },
+  // A variable inside double quotes is part of the string; the shebang is text, bold (seen in PyCharm 2026-11-21)
+  {
+    from: ['BASH.STRING'],
+    name: 'Shell variable in a string',
+    scope: ['string.quoted.double.shell variable.other.normal.shell', 'string.quoted.double.shell variable.parameter.positional.shell', 'string.quoted.double.shell punctuation.definition.variable.shell'],
+  },
+  { from: ['BASH.SHEBANG', 'TEXT'], name: 'Shell shebang', scope: ['meta.shebang.shell', 'punctuation.definition.comment.shebang.shell'] },
+  { from: ['TEXT'], name: 'Shell word', scope: ['string.unquoted.argument.shell', 'constant.other.option.dash.shell', 'meta.statement.command.shell constant.other.option'] },
+
+  // Groovy (GroovySyntaxHighlighter.java, keys named like their settings): like Java, class names are not keywords and the
+  // package paths are identifiers; a map key is a string
+  { from: ['Class'], name: 'Groovy class name', scope: ['storage.type.groovy'] },
+  { from: ['DEFAULT_IDENTIFIER'], name: 'Groovy package', scope: ['storage.modifier.package.groovy', 'storage.modifier.import.groovy'] },
+  { from: ['Map key'], name: 'Groovy map key', scope: ['constant.other.key.groovy'] },
+  // GroovyDarcula sets the method declaration to nothing: text (the grammar names it like Java's)
+  { from: ['Groovy method declaration', 'TEXT'], name: 'Groovy method declaration', scope: ['meta.definition.method.groovy entity.name.function'] },
+
+  // reStructuredText (RestSyntaxHighlighter.java): a section header is a number, emphasis is text (bold, italic), an inline
+  // literal a string on a background (seen in PyCharm 2026-11-21), a reference is a string, a directive is a keyword
+  { from: ['REST.SECTION.HEADER'], name: 'reST section header', scope: ['source.rst markup.heading'] },
+  { from: ['REST.BOLD', 'TEXT'], name: 'reST bold', scope: ['source.rst markup.bold'] },
+  { from: ['REST.ITALIC', 'TEXT'], name: 'reST italic', scope: ['source.rst markup.italic'] },
+  { from: ['REST.FIXED', 'DEFAULT_STRING'], name: 'reST literal', scope: ['source.rst string.interpolated'] },
+  { from: ['REST.REF.NAME'], name: 'reST reference', scope: ['source.rst entity.name.tag'] },
+  { from: ['REST.EXPLICIT'], name: 'reST directive', scope: ['source.rst keyword.control'] },
+  { from: ['REST.LINE_COMMENT'], name: 'reST comment', scope: ['source.rst comment.block'] },
 ];
 
 /**

@@ -1,0 +1,23 @@
+{
+  "file": "shell.sh",
+  "scope": "source.shell",
+  "tokens": [
+    { "line": 1, "text": "#!/usr/bin/env bash", "key": "BASH.SHEBANG" },
+    { "line": 2, "text": "# 한글 주석", "key": "BASH.LINE_COMMENT" },
+    { "line": 3, "text": "set", "key": "BASH.INTERNAL_COMMAND" },
+    { "line": 3, "text": "-euo", "key": "TEXT" },
+    { "line": 3, "text": "pipefail", "key": "TEXT" },
+    { "line": 5, "text": "NAME", "key": "BASH.VAR_DEF" },
+    { "line": 5, "text": "\"world\"", "key": "BASH.STRING" },
+    { "line": 8, "text": "greet", "key": "BASH.FUNCTION_DEF_NAME" },
+    { "line": 9, "text": "local", "key": "BASH.KEYWORD" },
+    { "line": 9, "text": "$1", "key": "BASH.STRING" },
+    { "line": 10, "text": "echo", "key": "BASH.INTERNAL_COMMAND" },
+    { "line": 10, "text": "${who}", "key": "BASH.VAR_USE", "todo": "the IDE draws the braces of ${…} apart from the name, the grammar gives them one scope" },
+    { "line": 13, "text": "for", "key": "BASH.KEYWORD" },
+    { "line": 13, "text": "$count", "key": "BASH.STRING" },
+    { "line": 15, "text": "done", "key": "BASH.KEYWORD" },
+    { "line": 6, "text": "3", "key": "BASH.NUMBER", "todo": "the grammar gives a value of an assignment the scope of an unquoted string, a number too" },
+    { "line": 16, "text": "$NAME", "key": "BASH.VAR_USE" }
+  ]
+}

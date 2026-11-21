@@ -1,0 +1,21 @@
+{
+  "file": "groovy.groovy",
+  "scope": "source.groovy",
+  "tokens": [
+    { "line": 1, "text": "package", "key": "GROOVY_KEYWORD" },
+    { "line": 1, "text": "demo", "key": "DEFAULT_IDENTIFIER" },
+    { "line": 3, "text": "groovy.transform.CompileStatic", "key": "DEFAULT_IDENTIFIER" },
+    { "line": 5, "text": "/** Groovydoc comment */", "key": "Groovydoc comment", "todo": "the grammar gives a Groovydoc comment the scope of a block comment" },
+    { "line": 6, "text": "@CompileStatic", "key": "Annotation" },
+    { "line": 7, "text": "class", "key": "GROOVY_KEYWORD" },
+    { "line": 8, "text": "int", "key": "GROOVY_KEYWORD" },
+    { "line": 8, "text": "10", "key": "Number" },
+    { "line": 9, "text": "String", "key": "Class" },
+    { "line": 11, "text": "def", "key": "GROOVY_KEYWORD" },
+    { "line": 11, "text": "greet", "key": "Groovy method declaration" },
+    { "line": 12, "text": "// 한글 주석", "key": "Line comment" },
+    { "line": 13, "text": "\"Hello ", "key": "GString" },
+    { "line": 14, "text": "return", "key": "GROOVY_KEYWORD" },
+    { "line": 14, "text": "key", "key": "Map key" }
+  ]
+}

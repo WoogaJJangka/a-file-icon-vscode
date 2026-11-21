@@ -180,13 +180,113 @@ const MARKDOWN_KEYS: Record<string, string> = {
   MARKDOWN_TEXT: 'TEXT',
 };
 
+/** plugins/groovy/groovy-psi/src/org/jetbrains/plugins/groovy/highlighter/GroovySyntaxHighlighter.java (keys named like their settings) */
+const GROOVY_KEYS: Record<string, string> = {
+  Annotation: 'ANNOTATION_NAME_ATTRIBUTES',
+  'Block comment': 'JAVA_BLOCK_COMMENT',
+  Class: 'CLASS_NAME_ATTRIBUTES',
+  GROOVY_KEYWORD: 'JAVA_KEYWORD',
+  GString: 'JAVA_STRING',
+  'Groovy method declaration': 'METHOD_DECLARATION_ATTRIBUTES',
+  'Groovy parameter': 'PARAMETER_ATTRIBUTES',
+  'Groovy var': 'LOCAL_VARIABLE_ATTRIBUTES',
+  'Groovydoc comment': 'JAVA_DOC_COMMENT',
+  'Instance field': 'INSTANCE_FIELD_ATTRIBUTES',
+  'Interface name': 'INTERFACE_NAME_ATTRIBUTES',
+  Label: 'DEFAULT_LABEL',
+  'Line comment': 'DEFAULT_LINE_COMMENT',
+  'Map key': 'JAVA_STRING',
+  'Method call': 'METHOD_CALL_ATTRIBUTES',
+  'Number': 'JAVA_NUMBER',
+  'Static field': 'STATIC_FINAL_FIELD_ATTRIBUTES',
+  'String': 'JAVA_STRING',
+  'Type parameter': 'TYPE_PARAMETER_NAME_ATTRIBUTES',
+  'Valid string escape': 'JAVA_VALID_STRING_ESCAPE',
+};
+
+/** plugins/sh/core/src/com/intellij/sh/highlighter/ShHighlighterColors.java */
+const SHELL_KEYS: Record<string, string> = {
+  'BASH.BACKQUOTE': 'BASH.EXTERNAL_COMMAND',
+  'BASH.BRACE': 'DEFAULT_BRACES',
+  'BASH.BRACKET': 'DEFAULT_BRACKETS',
+  'BASH.CONDITIONAL': 'DEFAULT_KEYWORD',
+  'BASH.EXTERNAL_COMMAND': 'DEFAULT_IDENTIFIER',
+  'BASH.FUNCTION_CALL': 'DEFAULT_FUNCTION_CALL',
+  'BASH.FUNCTION_DEF_NAME': 'DEFAULT_FUNCTION_DECLARATION',
+  'BASH.HERE_DOC': 'DEFAULT_TEMPLATE_LANGUAGE_COLOR',
+  'BASH.HERE_DOC_END': 'DEFAULT_KEYWORD',
+  'BASH.HERE_DOC_START': 'DEFAULT_KEYWORD',
+  'BASH.INTERNAL_COMMAND': 'BASH.EXTERNAL_COMMAND',
+  'BASH.KEYWORD': 'DEFAULT_KEYWORD',
+  'BASH.LINE_COMMENT': 'DEFAULT_LINE_COMMENT',
+  'BASH.NUMBER': 'DEFAULT_NUMBER',
+  'BASH.PAREN': 'DEFAULT_PARENTHS',
+  'BASH.RAW_STRING': 'DEFAULT_STRING',
+  'BASH.REDIRECTION': 'DEFAULT_OPERATION_SIGN',
+  'BASH.SHEBANG': 'BASH.LINE_COMMENT',
+  'BASH.STRING': 'DEFAULT_STRING',
+  'BASH.SUBSHELL_COMMAND': 'BASH.EXTERNAL_COMMAND',
+  'BASH.VAR_DEF': 'BASH.VAR_USE',
+  'BASH.VAR_USE': 'DEFAULT_GLOBAL_VARIABLE',
+  'BASH.VAR_USE_BUILTIN': 'BASH.VAR_USE',
+  'BASH.VAR_USE_COMPOSED': 'BASH.VAR_USE',
+};
+
+/** plugins/properties/properties-psi-api/src/com/intellij/lang/properties/PropertiesHighlighter.java */
+const PROPERTIES_KEYS: Record<string, string> = {
+  'PROPERTIES.INVALID_STRING_ESCAPE': 'DEFAULT_INVALID_STRING_ESCAPE',
+  'PROPERTIES.KEY': 'DEFAULT_KEYWORD',
+  'PROPERTIES.KEY_VALUE_SEPARATOR': 'DEFAULT_OPERATION_SIGN',
+  'PROPERTIES.LINE_COMMENT': 'DEFAULT_LINE_COMMENT',
+  'PROPERTIES.VALID_STRING_ESCAPE': 'DEFAULT_VALID_STRING_ESCAPE',
+  'PROPERTIES.VALUE': 'DEFAULT_STRING',
+};
+
+/** plugins/restructuredtext/src/com/intellij/restructuredtext/RestSyntaxHighlighter.java (a section header is a number) */
+const REST_KEYS: Record<string, string> = {
+  'REST.BOLD': 'DEFAULT_IDENTIFIER',
+  'REST.EXPLICIT': 'DEFAULT_KEYWORD',
+  'REST.FIELD': 'DEFAULT_KEYWORD',
+  'REST.FIXED': 'DEFAULT_IDENTIFIER',
+  'REST.INLINE': 'DEFAULT_IDENTIFIER',
+  'REST.INTERPRETED': 'DEFAULT_IDENTIFIER',
+  'REST.ITALIC': 'DEFAULT_IDENTIFIER',
+  'REST.LINE_COMMENT': 'DEFAULT_LINE_COMMENT',
+  'REST.REF.NAME': 'DEFAULT_STRING',
+  'REST.SECTION.HEADER': 'DEFAULT_NUMBER',
+};
+
+/** plugins/toml/frontend/src/org/toml/ide/colors/TomlColors.kt (a key is a keyword) */
+const TOML_KEYS: Record<string, string> = {
+  'org.toml.BOOLEAN': 'DEFAULT_PREDEFINED_SYMBOL',
+  'org.toml.COMMENT': 'DEFAULT_LINE_COMMENT',
+  'org.toml.DATE': 'DEFAULT_PREDEFINED_SYMBOL',
+  'org.toml.INVALID_STRING_ESCAPE': 'DEFAULT_INVALID_STRING_ESCAPE',
+  'org.toml.KEY': 'DEFAULT_KEYWORD',
+  'org.toml.NUMBER': 'DEFAULT_NUMBER',
+  'org.toml.STRING': 'DEFAULT_STRING',
+  'org.toml.VALID_STRING_ESCAPE': 'DEFAULT_VALID_STRING_ESCAPE',
+};
+
 /**
  * The fallback of each attribute key, as the IDE code creates it (`TextAttributesKey.createTextAttributesKey(name,
  * fallback)`): a key the color scheme does not define is drawn with its fallback. Hand kept, from JetBrains/intellij-community
  * (Apache 2.0) at the commit of themes/jetbrains-source.json; add a language with the file its keys come from.
  * Used by `bun run check:colors` (src/themes/colorCheck.ts), which draws each key the way the IDE does.
  */
-export const KEY_FALLBACKS: Record<string, string> = { ...DEFAULT_KEYS, ...JAVA_KEYS, ...PYTHON_KEYS, ...JSON_KEYS, ...YAML_KEYS, ...MARKDOWN_KEYS };
+export const KEY_FALLBACKS: Record<string, string> = {
+  ...DEFAULT_KEYS,
+  ...JAVA_KEYS,
+  ...PYTHON_KEYS,
+  ...JSON_KEYS,
+  ...YAML_KEYS,
+  ...MARKDOWN_KEYS,
+  ...GROOVY_KEYS,
+  ...SHELL_KEYS,
+  ...PROPERTIES_KEYS,
+  ...REST_KEYS,
+  ...TOML_KEYS,
+};
 
 /** A key and its fallbacks, in the order the IDE tries them (stops on a loop) */
 export const fallbackChain = (key: string, fallbacks: Record<string, string> = KEY_FALLBACKS): string[] => {

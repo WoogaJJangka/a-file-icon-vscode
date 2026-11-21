@@ -52,6 +52,12 @@ const ADDITIONAL_FILES: Array<{ path: string; scheme: string }> = [
   { path: 'plugins/sh/core/resources/colors/ShDefault.xml', scheme: 'Default' },
   { path: 'plugins/sh/core/resources/colors/ShDarcula.xml', scheme: 'Darcula' },
   { path: 'xml/xml-ui-common/resources/colorSchemes/XmlDarcula.xml', scheme: 'Darcula' },
+  { path: 'plugins/groovy/groovy-psi/resources/colorSchemes/GroovyDefault.xml', scheme: 'Default' },
+  { path: 'plugins/groovy/groovy-psi/resources/colorSchemes/GroovyDarcula.xml', scheme: 'Darcula' },
+  { path: 'plugins/restructuredtext/resources/colorSchemes/RestDefault.xml', scheme: 'Default' },
+  { path: 'plugins/restructuredtext/resources/colorSchemes/RestDarcula.xml', scheme: 'Darcula' },
+  { path: 'plugins/kotlin/base/resources/resources/colorScheme/Default_Kotlin.xml', scheme: 'Default' },
+  { path: 'plugins/kotlin/base/resources/resources/colorScheme/Darcula_Kotlin.xml', scheme: 'Darcula' },
 ];
 
 const root = extensionRoot(__dirname);
