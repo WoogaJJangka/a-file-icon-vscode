@@ -1,0 +1,11 @@
+{
+  "file": "json.json",
+  "scope": "source.json",
+  "tokens": [
+    { "line": 2, "text": "\"name\"", "key": "JSON.PROPERTY_KEY" },
+    { "line": 2, "text": "\"cool-theme-kit\"", "key": "JSON.STRING" },
+    { "line": 3, "text": "2", "key": "JSON.NUMBER" },
+    { "line": 4, "text": "true", "key": "JSON.KEYWORD" },
+    { "line": 5, "text": "null", "key": "JSON.KEYWORD" }
+  ]
+}

@@ -1,0 +1,10 @@
+# 한글 주석
+name: build
+on:
+  push:
+    branches: [main]
+defaults: &defaults
+  retries: 3
+job:
+  <<: *defaults
+  enabled: true

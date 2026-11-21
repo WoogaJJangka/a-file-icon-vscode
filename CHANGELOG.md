@@ -13,6 +13,9 @@ All notable changes to this project will be documented in this file. Dates are d
 - feat: `accentTargets` paints more with the accent: `controls` (scrollbars, checkbox borders, badges, active search
   options), `tabs` (the line of the active tab, panel title and activity bar item) and `folders` (the folder icons,
   instead of `folderColor`). Empty by default; checkboxes on the Colors tab of the Mix Themes page.
+- test: `bun run check:colors` compares the syntax colors with the JetBrains IDE, in CI: code samples are split into
+  tokens with the grammars of a real VS Code, and each token must get the color the IDE gives its key (the scheme chain
+  and the fallbacks of the IDE code). The differences still open are listed as known ones.
 
 #### 0.1.1 (2026-11-21)
 

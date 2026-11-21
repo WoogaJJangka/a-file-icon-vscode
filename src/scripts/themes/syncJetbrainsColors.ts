@@ -11,10 +11,12 @@
 import { readFileSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { checkedCommit, checkedDate } from 'src/scripts/jetbrainsSource';
+import { ATTRIBUTES_FILE } from 'src/themes/colorCheck';
 import { COLOR_THEMES, extensionRoot, THEMES_FOLDER } from 'src/themes/colorThemes';
 import { convertJetbrainsTheme } from 'src/themes/convertJetbrainsTheme';
-import { parseAdditionalAttributes, parseSchemes, resolveScheme, resolveUiTheme } from 'src/themes/jetbrainsTheme';
+import { parseAdditionalAttributes, parseSchemes, resolveScheme, resolveUiTheme, schemeChainData } from 'src/themes/jetbrainsTheme';
 
+import type { SchemeChain } from 'src/themes/colorCheck';
 import type { SchemeData, UiThemeJson } from 'src/themes/jetbrainsTheme';
 
 type Source = { commit: string; date?: string; license: string; repository: string };
@@ -80,7 +82,9 @@ const generate = async (commit: string) => {
     (additional[scheme] ??= []).push(parseAdditionalAttributes(await download(commit, path)));
   }
 
+  /** Path from the extension root -> content */
   const outputs = new Map<string, string>();
+  const attributes: Record<string, SchemeChain> = {};
   for (const info of COLOR_THEMES) {
     const ui = resolveUiTheme(uiThemes, info.jetbrains);
     if (!ui.editorScheme) throw new Error(`${info.jetbrains} has no editor scheme`);
@@ -89,8 +93,11 @@ const generate = async (commit: string) => {
     console.log(`${info.label}: UI ${ui.chain.join(' > ')}, editor ${scheme.chain.join(' > ')}`);
     console.log(`  ${Object.keys(theme.colors).length} colors, ${theme.tokenColors.length} token rules, ${Object.keys(theme.semanticTokenColors).length} semantic rules`);
     if (unresolved.length > 0) console.log(`  left to the VS Code defaults: ${unresolved.join(', ')}`);
-    outputs.set(info.base, `${JSON.stringify(theme, undefined, 2)}\n`);
+    outputs.set(`${THEMES_FOLDER}/${info.base}`, `${JSON.stringify(theme, undefined, 2)}\n`);
+    attributes[info.label] = { scheme: ui.editorScheme, schemes: schemeChainData(schemes, ui.editorScheme, additional) };
   }
+  // The schemes the IDE draws each key from, for `bun run check:colors` (not shipped: test/ is left out of the VSIX)
+  outputs.set(ATTRIBUTES_FILE, `${JSON.stringify(attributes, undefined, 2)}\n`);
   return outputs;
 };
 
@@ -113,11 +120,11 @@ const main = async () => {
   const outputs = await generate(commit);
   let changed = false;
   for (const [file, content] of outputs) {
-    const path = join(themesPath, file);
+    const path = join(root, file);
     if (readIfExists(path) === content) continue;
     writeFileSync(path, content);
     changed = true;
-    console.log(`wrote ${THEMES_FOLDER}/${file}`);
+    console.log(`wrote ${file}`);
   }
   // Pin the new commit only when it changed a theme: master moves every hour
   if (latest && changed) {

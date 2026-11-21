@@ -1,0 +1,23 @@
+{
+  "file": "python.py",
+  "scope": "source.python",
+  "tokens": [
+    { "line": 1, "text": "import", "key": "PY.KEYWORD" },
+    { "line": 4, "text": "10", "key": "PY.NUMBER" },
+    { "line": 4, "text": "# 한글 주석", "key": "PY.LINE_COMMENT" },
+    { "line": 7, "text": "@", "key": "PY.DECORATOR" },
+    { "line": 7, "text": "dataclass", "key": "PY.DECORATOR" },
+    { "line": 8, "text": "class", "key": "PY.KEYWORD" },
+    { "line": 8, "text": "Greeter", "key": "PY.CLASS_DEFINITION" },
+    { "line": 9, "text": "\"\"\"인사하는 클래스.\"\"\"", "key": "PY.DOC_COMMENT", "todo": "the quotes of a docstring take the string color (A2)" },
+    { "line": 11, "text": "def", "key": "PY.KEYWORD" },
+    { "line": 11, "text": "greet", "key": "PY.FUNC_DEFINITION" },
+    { "line": 11, "text": "self", "key": "PY.SELF_PARAMETER", "todo": "IDE order (EditorColorsSchemeImpl) gives the default key of Islands, the theme keeps the color the plugin adds to Darcula: confirm on a PyCharm screen (A2)" },
+    { "line": 11, "text": "str", "key": "PY.BUILTIN_NAME", "todo": "IDE order (EditorColorsSchemeImpl) gives the default key of Islands, the theme keeps the color the plugin adds to Darcula: confirm on a PyCharm screen (A2)" },
+    { "line": 12, "text": "\"Hello ", "key": "PY.STRING.U" },
+    { "line": 12, "text": "\\n", "key": "PY.VALID_STRING_ESCAPE" },
+    { "line": 13, "text": "print", "key": "PY.BUILTIN_NAME", "todo": "IDE order (EditorColorsSchemeImpl) gives the default key of Islands, the theme keeps the color the plugin adds to Darcula: confirm on a PyCharm screen (A2)" },
+    { "line": 13, "text": "sep", "key": "PY.KEYWORD_ARGUMENT", "todo": "IDE order (EditorColorsSchemeImpl) gives the default key of Islands, the theme keeps the color the plugin adds to Darcula: confirm on a PyCharm screen (A2)" },
+    { "line": 14, "text": "return", "key": "PY.KEYWORD" }
+  ]
+}

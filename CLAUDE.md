@@ -45,6 +45,7 @@
 | lint (`vsce package` 가 먼저 돌림, 0 errors 유지) | `bun run lint` |
 | JetBrains 연결 규칙 동기화 | `bun run sync:upstream` |
 | JetBrains 색 테마 동기화 (고정 커밋 / 최신) | `bun run sync:colors` / `bun run sync:colors -- --latest` |
+| 문법 색을 JetBrains 와 비교 (실제 VS Code 문법으로 `test/colors` 샘플을 토큰으로 나눔, `.vscode-test` 에 받음) | `bun run check:colors` (`-- --report` 토큰마다 scope·색·규칙, 색 없는 scope) |
 | New UI 제품 아이콘 글꼴 만들기 (확인용 그림 포함) | `bun run build:product-icons` (`-- --sheet <png>`) |
 | VSIX 만들기 | `npx --yes @vscode/vsce@3.6.0 package --no-dependencies --allow-missing-repository --skip-license -o <경로>.vsix` |
 
@@ -116,6 +117,13 @@
   Sass·Less·Kotlin·JSX 컴포넌트 키는 VS Code 쪽 scope 를 확정할 수 없거나(VS Code 에 Kotlin 문법 없음) 쓰임을 공개 소스로 확인할 수 없어 넣지 않았다.
   scope 이름은 VS Code 에 들어 있는 문법(`resources/app/extensions/*/syntaxes`)에서 확인한다. 화면 확인은 격리 VS Code(아래 "확인 방법"의 세 옵션)를
   `--remote-debugging-port` 로 띄워 CDP `Page.captureScreenshot` 으로 캡처(창을 앞으로 가져오지 않아 사용자 작업을 방해하지 않음).
+- 문법 색 검사(`bun run check:colors`, `src/themes/colorCheck.ts` 순수 함수 + `src/scripts/themes/checkColors.ts`): `test/colors/<이름>.<확장자>` 샘플을
+  VS Code(`VSCODE_VERSION`, `.vscode-test` 에 받음) 내장 문법 + `vscode-textmate` 로 나누고, `<이름>.expect.json` 의 토큰마다(`key` = IDE 하이라이터가 주는 키 하나)
+  `themes/*.base.json` 의 색이 IDE 의 색과 같은지 두 테마 다 본다. IDE 색은 `sync:colors` 가 함께 쓰는 `test/colors/jetbrains-attributes.json`(scheme 체인)과
+  `jetbrainsFallbacks.ts`(코드의 대체 키, 출처 파일별)로 `ResolvedScheme.lookup` 이 IDE 순서(`EditorColorsSchemeImpl.getAttributes`: 한 scheme 에서
+  키와 그 대체 키 전부 → 그다음 부모)로 찾는다. **생성기는 아직 그 순서가 아니다**: `TOKEN_RULES` 의 `from` 은 손으로 고른 키라 키마다 체인 전체에서 찾는다
+  (`attributes`). 그래서 Islands 가 직접 정한 기본 키(DEFAULT_IDENTIFIER 등)가 Darcula 에 붙는 플러그인 색(PY.SELF_PARAMETER 등)보다 앞서는 경우가 갈린다 →
+  PyCharm 화면으로 확인할 때까지 기대값에 `todo`(실패 아님, 이유 적음)로 둔다. 새 언어는 샘플 + 기대값 + 그 언어 키의 대체 키를 같이 넣는다.
 - 색 테마 섞기(`src/themes/colorLayers.ts` 순수 엔진, `readColorTheme.ts` JSONC·`include`·`tokenColors` 경로 읽기,
   `services/ColorThemeService.ts` 설치된 테마 목록·섞기·다시 로드 알림): `colorThemeLayers`(테마 id 또는 `{theme, ui, syntax, applyTo}`,
   `fill`/`override`/`off`, 같은 종류의 Islands 에만 — `applyTo` 로 바꿈)·`colorThemeByKey`(색 id glob, `scope:`, `semantic:`).
