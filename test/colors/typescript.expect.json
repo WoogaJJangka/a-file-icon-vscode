@@ -1,0 +1,17 @@
+{
+  "file": "typescript.ts",
+  "scope": "source.ts",
+  "tokens": [
+    { "line": 1, "text": "// 한글 주석", "key": "DEFAULT_LINE_COMMENT" },
+    { "line": 2, "text": "import", "key": "DEFAULT_KEYWORD" },
+    { "line": 2, "text": "'node:path'", "key": "DEFAULT_STRING" },
+    { "line": 4, "text": "interface", "key": "DEFAULT_KEYWORD" },
+    { "line": 5, "text": "string", "key": "DEFAULT_KEYWORD", "todo": "support.type.primitive takes the class reference rule; a primitive type is a keyword in the IDE (A2)" },
+    { "line": 9, "text": "/** Doc comment */", "key": "DEFAULT_DOC_COMMENT", "todo": "the delimiters of a doc comment take the line comment color (A2)" },
+    { "line": 10, "text": "class", "key": "DEFAULT_KEYWORD" },
+    { "line": 11, "text": "3", "key": "DEFAULT_NUMBER" },
+    { "line": 16, "text": "const", "key": "DEFAULT_KEYWORD" },
+    { "line": 16, "text": "/", "key": "JS.REGEXP" },
+    { "line": 17, "text": "this", "key": "DEFAULT_KEYWORD" }
+  ]
+}

@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. Dates are displayed in UTC.
 
+#### Unreleased
+
+- test: `bun run check:colors` compares the syntax colors with the JetBrains IDE, in CI: code samples are split into
+  tokens with the grammars of a real VS Code, and each token must get the color the IDE gives its key (the scheme chain
+  and the fallbacks of the IDE code). The differences still open are listed as known ones.
+
 #### 0.1.1 (2026-11-21)
 
 No change in the extension: the same as 0.1.0.

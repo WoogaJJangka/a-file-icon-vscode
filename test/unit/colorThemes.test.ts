@@ -167,7 +167,7 @@ describe('JetBrains themes', () => {
       TEXT: { foreground: '#00000a' },
       XML_TAG: { foreground: '#000003' },
     };
-    const scheme = { attributes: (key: string) => attributes[key], chain: ['Test'], color: () => undefined };
+    const scheme = resolveScheme([{ attributes, colors: {}, name: 'Test' }], 'Test');
     const { theme } = convertJetbrainsTheme('Test', resolved().ui, scheme);
     const token = (name: string) => theme.tokenColors.find((rule) => rule.name === name)?.settings;
 

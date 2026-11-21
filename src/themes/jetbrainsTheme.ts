@@ -8,6 +8,7 @@
  * Pure functions: the sync script downloads the files, the tests give fixtures.
  */
 import { XMLParser } from 'fast-xml-parser';
+import { compareCodeUnits } from 'src/helpers/utils';
 
 type XmlOption = { baseAttributes?: string; name: string; value?: XmlValue | string };
 type XmlValue = { option?: XmlOption[] };
@@ -119,6 +120,11 @@ export type ResolvedScheme = {
   attributes: (key: string) => TextAttributes | undefined;
   chain: string[];
   color: (key: string) => string | undefined;
+  /**
+   * The attributes the IDE finds for a key and its fallbacks (the whole chain of the code, `fallbackChain`), best
+   * first: each scheme of the chain in turn, and in it each key in turn. The first one is what the IDE draws.
+   */
+  lookup: (keys: string[]) => TextAttributes[];
 };
 
 /**
@@ -220,6 +226,7 @@ export const resolveScheme = (
   const missingParent = chain.at(-1)!.parent;
   if (missingParent) throw new Error(`Unknown parent scheme of ${chain.at(-1)!.name}: ${missingParent}`);
 
+  /** The first scheme of the chain that has the key (its `baseAttributes` followed from the start of the chain) */
   const attributes = (key: string, depth = 0): TextAttributes | undefined => {
     if (depth > 16) return undefined;
     for (const scheme of chain) {
@@ -232,6 +239,35 @@ export const resolveScheme = (
     return undefined;
   };
 
+  // Like EditorColorsSchemeImpl.getAttributes: a scheme first, all the keys in it (the key, then its fallbacks), and
+  // only then its parent. A key that only the parent defines loses to a fallback the scheme defines: Darcula draws a
+  // static final field with its own DEFAULT_STATIC_FIELD, not with the STATIC_FINAL_FIELD_ATTRIBUTES of Default.
+  // `baseAttributes` (inherited) is not a value of the scheme: it names the fallback the code gives the key, which every
+  // scheme tries right after the key.
+  const bases = new Map<string, string>();
+  for (const source of chain.flatMap((scheme) => [scheme.attributes, ...(additional[scheme.name] ?? [])])) {
+    for (const [key, entry] of Object.entries(source)) {
+      if ('base' in entry && !bases.has(key)) bases.set(key, entry.base);
+    }
+  }
+  const lookup = (keys: string[]): TextAttributes[] => {
+    const order: string[] = [];
+    for (const key of keys) {
+      for (let current: string | undefined = key; current !== undefined && !order.includes(current); current = bases.get(current)) {
+        order.push(current);
+      }
+    }
+    const found: TextAttributes[] = [];
+    for (const scheme of chain) {
+      const sources = [scheme.attributes, ...(additional[scheme.name] ?? [])];
+      for (const key of order) {
+        const entry = sources.map((source) => source[key]).find((value) => value !== undefined);
+        if (entry && !('base' in entry)) found.push(entry);
+      }
+    }
+    return found;
+  };
+
   return {
     attributes: (key) => attributes(key),
     chain: chain.map((scheme) => scheme.name),
@@ -240,5 +276,24 @@ export const resolveScheme = (
       const scheme = chain.find((candidate) => key in candidate.colors);
       return scheme?.colors[key];
     },
+    lookup,
   };
+};
+
+/**
+ * The attributes of the schemes of a chain, the ones plugins add merged in (the scheme's own win): what `resolveScheme`
+ * needs to resolve keys the same way without the files (`bun run check:colors`). The colors are left out.
+ */
+export const schemeChainData = (
+  schemes: SchemeData[],
+  name: string,
+  additional: Record<string, Array<Record<string, AttributeEntry>>> = {},
+): SchemeData[] => {
+  const byName = new Map(schemes.map((scheme) => [scheme.name, scheme]));
+  return resolveScheme(schemes, name, additional).chain.map((schemeName) => {
+    const scheme = byName.get(schemeName)!;
+    const merged = Object.assign({}, ...[...(additional[schemeName] ?? [])].reverse(), scheme.attributes) as Record<string, AttributeEntry>;
+    const attributes = Object.fromEntries(Object.keys(merged).sort(compareCodeUnits).map((key) => [key, merged[key]]));
+    return { attributes, colors: {}, name: scheme.name, ...(scheme.parent ? { parent: scheme.parent } : {}) };
+  });
 };

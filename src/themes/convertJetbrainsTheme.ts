@@ -27,6 +27,18 @@ const styleOf = (attributes: TextAttributes): SemanticStyle => ({
   underline: attributes.effectType !== undefined && UNDERLINED.has(attributes.effectType),
 });
 
+/**
+ * Syntax: the font style of the first attributes found for the keys, the color of the first ones with a color (a key
+ * without one shows the layer under it). `undefined` when the scheme defines none of the keys.
+ */
+const textStyle = (lookup: (keys: string[]) => TextAttributes[], keys: string[]): SemanticStyle | undefined => {
+  const defined = lookup(keys);
+  if (defined.length === 0) return undefined;
+  const style = styleOf(defined[0]);
+  const foreground = defined.find((value) => value.foreground)?.foreground;
+  return foreground ? { ...style, foreground } : style;
+};
+
 const fontStyle = (style: SemanticStyle) =>
   (['italic', 'bold', 'underline', 'strikethrough'] as const).filter((key) => style[key]).join(' ');
 
@@ -98,18 +110,14 @@ export const convertJetbrainsTheme = (
     if (!resolveId(id)) unresolved.push(id);
   }
 
-  // Syntax: the font style of the first defined key, the color of the first key with one
-  const textStyle = (keys: string[]): SemanticStyle | undefined => {
-    const defined = keys.map((key) => scheme.attributes(key)).filter((value): value is TextAttributes => value !== undefined);
-    if (defined.length === 0) return undefined;
-    const style = styleOf(defined[0]);
-    const foreground = defined.find((value) => value.foreground)?.foreground;
-    return foreground ? { ...style, foreground } : style;
-  };
+  // The keys of a rule one after the other, each looked up in the whole scheme chain. Not `scheme.lookup` (the order of
+  // the IDE) yet: the `from` lists are hand-picked keys, not the fallback chains of the code, which that order needs
+  // (`bun run check:colors` compares with the IDE order)
+  const byKey = (keys: string[]) => keys.flatMap((key) => scheme.attributes(key) ?? []);
 
   const tokenColors: TokenColor[] = [];
   for (const rule of maps.tokens ?? TOKEN_RULES) {
-    const style = textStyle(rule.from);
+    const style = textStyle(byKey, rule.from);
     if (!style) {
       unresolved.push(`token: ${rule.name}`);
       continue;
@@ -121,7 +129,7 @@ export const convertJetbrainsTheme = (
 
   const semanticTokenColors: Record<string, SemanticStyle> = {};
   for (const [selector, keys] of Object.entries(maps.semantic ?? SEMANTIC_RULES)) {
-    const style = textStyle(keys);
+    const style = textStyle(byKey, keys);
     if (!style) {
       unresolved.push(`semantic: ${selector}`);
       continue;
@@ -142,3 +150,5 @@ export const convertJetbrainsTheme = (
     unresolved,
   };
 };
+
+export { fontStyle, styleOf };
