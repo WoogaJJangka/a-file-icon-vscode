@@ -80,7 +80,8 @@ Cool Theme Kit 을 고칠 때 지키는 규칙과, 그 규칙을 지키는지 �
    - `uses:` 는 커밋 SHA + 버전 주석(`@<sha> # v4.4.0`). Dependabot 이 SHA 와 주석을 함께 올린다.
    - git 으로 push 하지 않는 job 의 checkout 은 `persist-credentials: false`.
    - 입력·PR 제목 같은 값은 `run:` 안에 `${{ }}` 로 넣지 않고 `env:` 로 넘긴다(`release.yml` 의 버전 입력처럼). `pull_request_target` 은 쓰지 않는다.
-   - 비밀값은 저장소 secret 만: `VS_MARKETPLACE_TOKEN`(만료됨, 401/403 이면 새로 발급), `OPEN_VSX_TOKEN`, `SONAR_TOKEN`.
+   - 비밀값은 저장소 secret 만: `OPEN_VSX_TOKEN`, `SONAR_TOKEN`. Marketplace 는 토큰 없이 OIDC 로 배포한다(아래 "Marketplace 배포").
+     예전 `VS_MARKETPLACE_TOKEN` 은 2026-11-21 에 OIDC 로 바꾸며 지웠다. 다시 만들지 않는다.
 
 ### 취약점이 나오면
 
@@ -100,6 +101,23 @@ Cool Theme Kit 을 고칠 때 지키는 규칙과, 그 규칙을 지키는지 �
 - main 브랜치 보호(classic)의 필수 검사, 2026-11-21 현재: `ubuntu-latest`·`windows-latest`(Build + Test), `Analysis + quality gate`
   (Sonar, 아래 4장). 더 둘 만한 것: `Dependencies and actions`, `CodeQL (javascript-typescript)`, `CodeQL (actions)`, 스모크 job 들.
   확인: `gh api repos/WoogaJJangka/cool-theme-kit/branches/main/protection/required_status_checks`.
+
+### Marketplace 배포 (OIDC, 한 번)
+
+`release.yml` 은 GitHub OIDC 토큰을 Microsoft Entra ID 로그인으로 바꿔 `vsce publish --azure-credential` 로 올린다. 저장해 두는
+토큰이 없어 만료·유출될 것이 없다. 저장소 변수 `AZURE_CLIENT_ID`·`AZURE_TENANT_ID` 가 없으면 Marketplace 배포는 건너뛴다.
+
+1. Azure Portal → Microsoft Entra ID → App registrations → New registration(이름 예: `cool-theme-kit-publish`, 단일 테넌트).
+   Overview 의 Application (client) ID·Directory (tenant) ID 를 적어 둔다. 구독·역할 할당은 필요 없다.
+2. 그 앱 → Certificates & secrets → Federated credentials → Add → "GitHub Actions deploying Azure resources":
+   Organization `WoogaJJangka`, Repository `cool-theme-kit`, Entity type **Environment**, Environment `marketplace`
+   (subject `repo:WoogaJJangka/cool-theme-kit:environment:marketplace`). client secret 은 만들지 않는다.
+3. GitHub → Settings → Environments → `marketplace`(없으면 만든다) → Deployment branches 를 `main` 만으로.
+   Settings → Secrets and variables → Actions → **Variables** 에 `AZURE_CLIENT_ID`, `AZURE_TENANT_ID`(비밀값 아님).
+4. 서비스 주체를 게시자 멤버로: `release.yml` 을 한 번 돌리면 "Publish to Visual Studio Marketplace" 로그에
+   `Marketplace identity of the service principal: <id>` 가 찍히고 처음엔 401/403 으로 실패한다(배포 전 단계라 태그·릴리스는 안 남는다).
+   https://marketplace.visualstudio.com/manage/publishers/woogajjangka → Members → Add 에 그 id 를 넣고 **Contributor** 로 준 뒤 다시 돌린다.
+5. 성공하면 예전 `VS_MARKETPLACE_TOKEN` secret 과 Azure DevOps 의 그 PAT 를 지운다(`gh secret delete VS_MARKETPLACE_TOKEN`).
 
 ## 2. 다른 확장과의 호환
 

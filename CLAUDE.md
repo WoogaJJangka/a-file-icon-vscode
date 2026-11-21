@@ -162,7 +162,7 @@
 - CI(`.github/workflows`): `build.yml`(lint·build·test·VSIX·크기 예산), `security.yml`(배포 의존성 감사·Actions 고정 검사·CodeQL,
   매주 화), `smoke.yml`(실제 VS Code 1.95.0·stable, Linux·Windows, 다른 테마 확장과 함께, 재생성 반복 뒤 힙 증가 예산, 매주 수),
   `sonar.yml`(SonarQube Cloud CI 분석 + 커버리지 + 품질 게이트, `SONAR_TOKEN` 이 있을 때만), `sync-upstream.yml`(매주 iconGenerator 최신화 → PR,
-  저장소 설정 "Allow GitHub Actions to create … pull requests" 필요), `release.yml`(수동, 토큰 시크릿 있을 때만 배포). main 이 보호돼 있어 커밋하지 않는다: 다음 버전은 이 저장소의
+  저장소 설정 "Allow GitHub Actions to create … pull requests" 필요), `release.yml`(수동, Marketplace 는 OIDC·저장소 변수 `AZURE_CLIENT_ID`·`AZURE_TENANT_ID` 가 있을 때, Open VSX 는 토큰 시크릿이 있을 때만 배포, `docs/MAINTENANCE.md` "Marketplace 배포"). main 이 보호돼 있어 커밋하지 않는다: 다음 버전은 이 저장소의
   마지막 GitHub Release 태그(없으면 package.json)에서 계산해 VSIX 안에만 넣고, package.json 버전은 그대로 둔다
   (원본의 v5.x 태그는 릴리스가 아니라서 무시).
 - 테스트: `test/run-unit.js` 가 esbuild 로 묶으며 `vscode` 를 `test/mocks/vscode.ts` 로 바꿔 mocha 실행.
