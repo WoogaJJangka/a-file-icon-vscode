@@ -41,6 +41,7 @@
 | 단위 테스트 + 커버리지 (`coverage/lcov.info`, Sonar CI 분석용) | `bun run test:coverage` |
 | 배포 의존성 감사 (번들에 든 패키지의 high/critical 만 실패) | `bun run audit:shipped` |
 | 크기 예산 (번들·테마 json·VSIX, `vsce package` 뒤) | `bun run check:size <경로>.vsix` |
+| 프리셋 조사 수치(대비·아이콘 fill 수, 확장은 `.vscode-test/preset-extensions` 에 격리 설치) / 프리셋 화면 | `bun run analyze:presets` / `bun run screenshots -- --preset <id>` (`all` 은 전부) |
 | 유지보수 점검 보고서 (GitHub·SonarQube MCP, 읽기 전용, 설정은 `docs/MAINTENANCE.md` 7장) | Claude Code 에서 `/maintenance-check [PR 번호] [--local]` |
 | lint (`vsce package` 가 먼저 돌림, 0 errors 유지) | `bun run lint` |
 | JetBrains 연결 규칙 동기화 | `bun run sync:upstream` |
@@ -146,6 +147,11 @@
   **미리보기 예외**: `chooseAccentColor` 명령(`pickers/AccentColorPicker.ts`, `createQuickPick`, 아이콘은 `dist/accents/<rrggbb>.svg`)과
   섞기 화면 색 선택기는 `services/AccentPreviewService` 로 `workbench.colorCustomizations` 의 `"[Cool Islands Dark/Light]"` 칸에
   바뀌는 키만 잠깐 쓴다(사용자 결정 2026-11-21, 규칙은 `docs/MAINTENANCE.md` 2장 규칙 2). 다른 곳에서 `colorCustomizations` 를 쓰지 않는다.
+- 테마 조합(프리셋, `src/presets/presets.ts` 데이터 + `services/PresetService.ts` + 명령 `choosePreset`·`undoPreset`): 고른 근거는 `docs/THEME_COMBINATIONS.md`.
+  프리셋은 나열한 설정만 사용자(Global) 설정에 쓰고 `null` 은 사용자 값을 지운다. 머무르는 동안 `workbench.colorTheme/iconTheme/productIconTheme`
+  는 바로 바꾸고 강조색은 `AccentPreviewService`, 층 섞기는 고른 뒤. Esc 는 열 때의 값으로 되돌린다. 다른 확장이 필요하면 모달로 묻고
+  `workbench.extensions.installExtension`. 바꾸기 전 값은 globalState `presetUndo`. 설치만으로는 아무것도 적용하지 않는다(`presets.test.ts`).
+  프리셋을 고치면 locales `preset.<id>.name/description`(영어·한국어)와 조사 문서를 같이 고친다.
 - 제품 아이콘(Cool Islands Icons, `src/productIcons/`): `jetbrainsMap.ts`(VS Code 아이콘 id → New UI SVG, 손으로 관리, 폴더 없는 경로는
   `platform/icons/src/expui/`, 플러그인 것은 전체 경로)로 `buildJetbrainsFont.ts` 가 고정 커밋(`themes/jetbrains-source.json`)의 SVG 를
   받아 흑백으로 바꾸고(진한 색 검정, 흰색·밝은 채움은 구멍) resvg 로 그린 뒤 potrace 로 따서 `webfont` 로 글꼴을 만든다

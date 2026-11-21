@@ -44,7 +44,8 @@
     "sync:colors": "ts-node ./src/scripts/themes/syncJetbrainsColors.ts",
     "check:colors": "ts-node ./src/scripts/themes/checkColors.ts",
     "build:product-icons": "ts-node ./src/scripts/productIcons/buildJetbrainsFont.ts",
-    "build:logo": "ts-node ./src/scripts/buildLogo.ts"
+    "build:logo": "ts-node ./src/scripts/buildLogo.ts",
+    "analyze:presets": "ts-node ./src/scripts/presets/analyzePresets.ts"
   },
   "dependencies": {
     "@eslint/compat": "^1.4.1",
@@ -313,6 +314,16 @@
         "category": "Cool Theme Kit",
         "command": "a-file-icon-vscode.chooseAccentColor",
         "title": "%command.chooseAccentColor%"
+      },
+      {
+        "category": "Cool Theme Kit",
+        "command": "a-file-icon-vscode.choosePreset",
+        "title": "%command.choosePreset%"
+      },
+      {
+        "category": "Cool Theme Kit",
+        "command": "a-file-icon-vscode.undoPreset",
+        "title": "%command.undoPreset%"
       },
       {
         "category": "Cool Theme Kit",
@@ -784,6 +795,18 @@
         "title": "%walkthrough.title%",
         "description": "%walkthrough.description%",
         "steps": [
+          {
+            "id": "presets",
+            "title": "%walkthrough.presets.title%",
+            "description": "%walkthrough.presets.description%",
+            "media": {
+              "image": "logo.png",
+              "altText": "%walkthrough.presets.title%"
+            },
+            "completionEvents": [
+              "onCommand:a-file-icon-vscode.choosePreset"
+            ]
+          },
           {
             "id": "icons",
             "title": "%walkthrough.icons.title%",

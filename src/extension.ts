@@ -13,6 +13,7 @@ import { fontCheckService } from 'src/services/FontCheckService';
 import { logger } from 'src/services/LoggingService';
 import { forgetInstalledProductThemes, productIconService } from 'src/services/ProductIconService';
 import { ThemeMixerPanel } from 'src/panels/ThemeMixerPanel';
+import { presetService } from 'src/services/PresetService';
 import { notificationsService } from 'src/services/NotificationsService';
 import { offerToUninstallOldExtension } from 'src/services/OldExtensionService';
 import { initThemeFailure, reportThemeFailure } from 'src/services/themeFailure';
@@ -135,6 +136,7 @@ export const activate = async (context: ExtensionContext) => {
     // An accent shown in a preview of the last session is in the theme files now (or was cancelled): its colors leave
     // the user settings
     accentPreviewService.init(context.globalState);
+    presetService.init(context.globalState);
     accentPreviewService.cleanUp().catch((error: unknown) => logger.error(String(error)));
 
     // Subscribe to the extension commands

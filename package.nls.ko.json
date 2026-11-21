@@ -7,6 +7,8 @@
   "command.changeMonochromeColor": "단색 아이콘 색 변경",
   "command.openColorMixer": "색 테마 섞기(미리보기)",
   "command.chooseAccentColor": "강조색 고르기(미리보기)",
+  "command.choosePreset": "테마 조합 고르기(미리보기)",
+  "command.undoPreset": "마지막 테마 조합 되돌리기",
   "command.openThemeMixer": "테마 섞기(미리보기)",
   "command.changeOpacity": "불투명도 변경",
   "command.changeSaturation": "채도 변경",
@@ -98,6 +100,8 @@
   "walkthrough.icons.title": "파일 아이콘: Cool Icons",
   "walkthrough.mix.description": "VS Code는 종류마다 테마를 하나만 씁니다. 설치된 다른 테마를 우선순위에 따라 키트에 섞을 수 있고, JSON을 고치지 않고 미리보기로 정합니다.\n[테마 섞기](command:a-file-icon-vscode.openThemeMixer)",
   "walkthrough.mix.title": "다른 테마 섞기",
+  "walkthrough.presets.description": "미리 짜 둔 조합: JetBrains 모양 그대로, Material 연두 강조색, 또는 인기 테마의 문법 색·틀·아이콘을 얹은 것. 항목으로 옮기면 바로 보여 주고, 조합에 필요한 확장은 고를 때만 설치합니다.\n[테마 조합 고르기](command:a-file-icon-vscode.choosePreset)",
+  "walkthrough.presets.title": "빠른 시작: 테마 조합",
   "walkthrough.product.description": "작업 막대·보기·에디터 동작에 JetBrains New UI 아이콘을 씁니다.\n[Cool Islands Icons 쓰기](command:a-file-icon-vscode.useTheme?%5B%22product%22%5D)",
   "walkthrough.product.title": "제품 아이콘: Cool Islands Icons",
   "walkthrough.title": "Cool Theme Kit 시작하기"
