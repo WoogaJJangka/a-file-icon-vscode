@@ -21,10 +21,18 @@ export const TOKEN_RULES: TokenRule[] = [
   {
     from: ['DEFAULT_DOC_COMMENT'],
     name: 'Doc comment',
-    scope: ['comment.block.documentation', 'comment.block.javadoc', 'string.quoted.docstring'],
+    // the delimiters (`/** */`, the quotes of a docstring) too, as the IDE draws them (seen in PyCharm 2026-11-21)
+    scope: [
+      'comment.block.documentation',
+      'comment.block.javadoc',
+      'string.quoted.docstring',
+      'comment.block.documentation punctuation.definition.comment',
+      'comment.block.javadoc punctuation.definition.comment',
+      'string.quoted.docstring punctuation.definition.string',
+    ],
   },
   { from: ['DEFAULT_DOC_COMMENT_TAG'], name: 'Doc comment tag', scope: ['comment.block.documentation storage.type', 'comment.block.documentation keyword', 'storage.type.class.jsdoc'] },
-  { from: ['DEFAULT_KEYWORD'], name: 'Keyword', scope: ['keyword', 'storage.type', 'storage.modifier', 'keyword.control', 'constant.language', 'variable.language.this', 'variable.language.super'] },
+  { from: ['DEFAULT_KEYWORD'], name: 'Keyword', scope: ['keyword', 'storage.type', 'storage.modifier', 'keyword.control', 'constant.language', 'variable.language.this', 'variable.language.super', 'support.type.primitive'] },
   { from: ['DEFAULT_OPERATION_SIGN', 'TEXT'], name: 'Operator', scope: ['keyword.operator', 'punctuation.separator.key-value', 'punctuation.accessor'] },
   // Word operators are keywords in the IDE (and, or, not, in, is, new, typeof…)
   { from: ['DEFAULT_KEYWORD'], name: 'Word operator', scope: ['keyword.operator.logical.python', 'keyword.operator.new', 'keyword.operator.expression', 'keyword.operator.word', 'keyword.operator.instanceof', 'keyword.operator.typeof'] },
@@ -42,7 +50,7 @@ export const TOKEN_RULES: TokenRule[] = [
   { from: ['DEFAULT_INTERFACE_NAME', 'DEFAULT_CLASS_NAME', 'DEFAULT_IDENTIFIER', 'TEXT'], name: 'Interface name', scope: ['entity.name.type.interface'] },
   { from: ['TYPE_PARAMETER_NAME_ATTRIBUTES'], name: 'Type parameter', scope: ['entity.name.type.parameter', 'meta.type.parameters entity.name.type'] },
   { from: ['DEFAULT_PARAMETER', 'DEFAULT_IDENTIFIER', 'TEXT'], name: 'Parameter', scope: ['variable.parameter'] },
-  { from: ['DEFAULT_METADATA'], name: 'Annotation', scope: ['meta.decorator', 'entity.name.function.decorator', 'punctuation.definition.decorator', 'storage.type.annotation', 'meta.annotation'] },
+  { from: ['DEFAULT_METADATA'], name: 'Annotation', scope: ['meta.decorator', 'entity.name.function.decorator', 'punctuation.definition.decorator', 'storage.type.annotation', 'punctuation.definition.annotation'] },
   { from: ['DEFAULT_LABEL', 'DEFAULT_IDENTIFIER'], name: 'Label', scope: ['entity.name.label'] },
   // The tag key colors the whole tag, its brackets too (XmlHighlighterColors: HTML_TAG -> DEFAULT_TAG)
   { from: ['HTML_TAG', 'DEFAULT_TAG', 'TEXT'], name: 'Tag punctuation', scope: ['punctuation.definition.tag', 'meta.tag punctuation'] },
@@ -64,15 +72,28 @@ export const TOKEN_RULES: TokenRule[] = [
   { from: ['PY.PREDEFINED_USAGE', 'DEFAULT_PREDEFINED_SYMBOL'], name: 'Python special name', scope: ['support.variable.magic.python', 'support.function.magic.python', 'entity.name.function.magic.python'] },
   { from: ['PY.PREDEFINED_DEFINITION', 'PY.PREDEFINED_USAGE'], name: 'Python special method', scope: ['meta.function.python support.function.magic.python'] },
   { from: ['PY.DECORATOR', 'DEFAULT_METADATA'], name: 'Python decorator', scope: ['meta.function.decorator.python', 'entity.name.function.decorator.python', 'punctuation.definition.decorator.python'] },
-  { from: ['PY.DOC_COMMENT', 'DEFAULT_DOC_COMMENT'], name: 'Python docstring', scope: ['string.quoted.docstring.multi.python', 'string.quoted.docstring.single.python'] },
+  { from: ['PY.DOC_COMMENT', 'DEFAULT_DOC_COMMENT'], name: 'Python docstring', scope: ['string.quoted.docstring.multi.python', 'string.quoted.docstring.single.python', 'string.quoted.docstring punctuation.definition.string.begin.python', 'string.quoted.docstring punctuation.definition.string.end.python'] },
   { from: ['PY.STRING.B', 'DEFAULT_STRING'], name: 'Python bytes', scope: ['string.quoted.binary.single.python', 'string.quoted.binary.multi.python'] },
   { from: ['PY.FUNC_DEFINITION', 'DEFAULT_FUNCTION_DECLARATION'], name: 'Python function', scope: ['meta.function.python entity.name.function.python'] },
   { from: ['PY.CLASS_DEFINITION', 'DEFAULT_CLASS_NAME', 'TEXT'], name: 'Python class', scope: ['entity.name.type.class.python'] },
 
+  // Java (JavaHighlightingColors.java): the grammar gives class names `storage.type`, which the IDE draws as class names,
+  // not keywords; the package and import paths are plain identifiers. A static final field needs the language server
+  // (semantic tokens), the grammar cannot tell it.
+  { from: ['CLASS_NAME_ATTRIBUTES'], name: 'Java class name', scope: ['storage.type.java', 'storage.type.generic.java', 'storage.type.object.array.java'] },
+  { from: ['DEFAULT_IDENTIFIER'], name: 'Java package', scope: ['storage.modifier.package.java', 'storage.modifier.import.java'] },
+
   // Data and markup
   { from: ['JSON.PROPERTY_KEY', 'DEFAULT_INSTANCE_FIELD'], name: 'JSON key', scope: ['support.type.property-name.json', 'meta.object-literal.key', 'support.type.property-name.toml', 'support.type.property-name.table.toml'] },
   { from: ['YAML_SCALAR_KEY', 'DEFAULT_KEYWORD'], name: 'YAML key', scope: ['entity.name.tag.yaml'] },
-  { from: ['YAML_ANCHOR', 'DEFAULT_IDENTIFIER'], name: 'YAML anchor', scope: ['entity.name.type.anchor.yaml', 'variable.other.alias.yaml', 'punctuation.definition.anchor.yaml', 'punctuation.definition.alias.yaml'] },
+  { from: ['YAML_ANCHOR'], name: 'YAML anchor', scope: ['variable.other.anchor.yaml', 'variable.other.alias.yaml', 'punctuation.definition.anchor.yaml', 'punctuation.definition.alias.yaml'] },
+  // A comment of YAML falls back to the doc comment (YAMLHighlighter); a plain value is text, numbers and booleans too
+  { from: ['YAML_COMMENT'], name: 'YAML comment', scope: ['comment.line.number-sign.yaml', 'punctuation.definition.comment.yaml'] },
+  {
+    from: ['YAML_SCALAR_VALUE'],
+    name: 'YAML value',
+    scope: ['constant.language.boolean.yaml', 'constant.language.null.yaml', 'constant.numeric.float.yaml', 'constant.numeric.float.inf.yaml', 'constant.numeric.float.nan.yaml', 'constant.numeric.integer.decimal.yaml', 'constant.numeric.integer.hexadecimal.yaml', 'constant.numeric.integer.octal.yaml'],
+  },
   { from: ['PROPERTIES.KEY', 'DEFAULT_KEYWORD'], name: 'Properties key', scope: ['support.type.property-name.properties', 'keyword.other.definition.ini', 'entity.name.section.group-title.ini'] },
   { from: ['PROPERTIES.KEY_VALUE_SEPARATOR', 'DEFAULT_OPERATION_SIGN', 'TEXT'], name: 'Properties separator', scope: ['punctuation.separator.key-value.ini'] },
   { from: ['CSS.PROPERTY_NAME', 'DEFAULT_INSTANCE_FIELD'], name: 'CSS property', scope: ['support.type.property-name.css', 'support.type.vendored.property-name.css', 'support.type.property-name.scss', 'support.type.property-name.less'] },
@@ -81,7 +102,13 @@ export const TOKEN_RULES: TokenRule[] = [
   { from: ['CSS.COLOR', 'DEFAULT_NUMBER'], name: 'CSS color', scope: ['constant.other.color.rgb-value.hex.css', 'support.constant.color'] },
   { from: ['CSS.URL', 'DEFAULT_STRING'], name: 'CSS url', scope: ['variable.parameter.url.css'] },
   { from: ['CSS.IMPORTANT', 'DEFAULT_KEYWORD'], name: 'CSS important', scope: ['keyword.other.important.css'] },
-  { from: ['MARKDOWN_HEADER', 'DEFAULT_KEYWORD'], name: 'Markdown header', scope: ['markup.heading', 'entity.name.section.markdown', 'punctuation.definition.heading.markdown'] },
+  // A header, its `#` too, has the key of its level (MarkdownHighlighterColors); a setext header (underlined) is level 1 or 2
+  { from: ['MARKDOWN_HEADER_LEVEL_1'], name: 'Markdown header', scope: ['markup.heading', 'entity.name.section.markdown', 'punctuation.definition.heading.markdown'] },
+  ...[1, 2, 3, 4, 5, 6].map((level) => ({
+    from: [`MARKDOWN_HEADER_LEVEL_${level}`],
+    name: `Markdown header ${level}`,
+    scope: [`heading.${level}.markdown`, `heading.${level}.markdown entity.name.section.markdown`, `heading.${level}.markdown punctuation.definition.heading.markdown`, ...(level <= 2 ? [`markup.heading.setext.${level}.markdown`] : [])],
+  })),
   { from: ['MARKDOWN_BOLD'], name: 'Markdown bold', scope: ['markup.bold'] },
   { from: ['MARKDOWN_ITALIC'], name: 'Markdown italic', scope: ['markup.italic'] },
   { from: ['MARKDOWN_CODE_SPAN', 'DEFAULT_STRING'], name: 'Markdown code span', scope: ['markup.inline.raw', 'markup.inline.raw.string.markdown'] },
@@ -91,7 +118,8 @@ export const TOKEN_RULES: TokenRule[] = [
   { from: ['MARKDOWN_BLOCK_QUOTE_MARKER', 'DEFAULT_KEYWORD'], name: 'Markdown quote marker', scope: ['punctuation.definition.quote.begin.markdown'] },
   { from: ['MARKDOWN_LIST_MARKER', 'DEFAULT_KEYWORD'], name: 'Markdown list marker', scope: ['punctuation.definition.list.begin.markdown', 'beginning.punctuation.definition.list.markdown'] },
   { from: ['MARKDOWN_LINK_TEXT', 'HYPERLINK_ATTRIBUTES'], name: 'Markdown link text', scope: ['string.other.link.title.markdown', 'string.other.link.description.markdown'] },
-  { from: ['MARKDOWN_LINK_DESTINATION', 'MARKDOWN_AUTO_LINK', 'HYPERLINK_ATTRIBUTES'], name: 'Markdown link', scope: ['markup.underline.link', 'markup.underline.link.markdown'] },
+  // The IDE draws the address as a hyperlink, on top of MARKDOWN_LINK_DESTINATION (seen in PyCharm 2026-11-21)
+  { from: ['HYPERLINK_ATTRIBUTES'], name: 'Markdown link', scope: ['markup.underline.link', 'markup.underline.link.markdown'] },
   { from: ['DEFAULT_KEYWORD'], name: 'Markdown separator', scope: ['meta.separator.markdown'] },
   { from: ['DIFF_INSERTED', 'CONSOLE_GREEN_OUTPUT'], name: 'Inserted', scope: ['markup.inserted'] },
   { from: ['DIFF_DELETED', 'CONSOLE_RED_OUTPUT'], name: 'Deleted', scope: ['markup.deleted'] },

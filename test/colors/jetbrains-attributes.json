@@ -1,5 +1,193 @@
 {
   "Cool Islands Dark": {
+    "additional": {
+      "Darcula": [
+        {
+          "PY.BUILTIN_NAME": {
+            "foreground": "#8888c6"
+          },
+          "PY.KEYWORD_ARGUMENT": {
+            "foreground": "#aa4926"
+          },
+          "PY.PREDEFINED_DEFINITION": {
+            "foreground": "#b200b2"
+          },
+          "PY.PREDEFINED_USAGE": {
+            "foreground": "#b200b2"
+          },
+          "PY.SELF_PARAMETER": {
+            "foreground": "#94558d"
+          },
+          "PY.STRING.B": {
+            "foreground": "#a5c261"
+          }
+        },
+        {
+          "MARKDOWN_BLOCK_QUOTE": {
+            "background": "#3c3d3d"
+          },
+          "MARKDOWN_BLOCK_QUOTE_MARKER": {
+            "foreground": "#808080"
+          },
+          "MARKDOWN_BOLD": {
+            "fontType": 1
+          },
+          "MARKDOWN_CODE_BLOCK": {
+            "foreground": "#a9b7c6",
+            "background": "#3c3d3d",
+            "fontType": 0
+          },
+          "MARKDOWN_CODE_FENCE": {
+            "foreground": "#a9b7c6",
+            "background": "#3c3d3d",
+            "fontType": 0
+          },
+          "MARKDOWN_CODE_SPAN": {
+            "foreground": "#a9b7c6",
+            "background": "#3c3d3d",
+            "fontType": 0
+          },
+          "MARKDOWN_HEADER": {
+            "foreground": "#bbbbbb",
+            "background": "#3c3f41"
+          },
+          "MARKDOWN_HEADER_BOLD": {
+            "fontType": 1
+          },
+          "MARKDOWN_HIGHLIGHT": {
+            "background": "#5a4a14"
+          },
+          "MARKDOWN_ITALIC": {
+            "fontType": 2
+          },
+          "MARKDOWN_LIST_MARKER": {
+            "foreground": "#808080"
+          }
+        },
+        {
+          "YAML_ANCHOR": {
+            "foreground": "#e8bf6a"
+          }
+        },
+        {
+          "BASH.BINARY_DATA": {
+            "background": "#cfe7ff"
+          },
+          "BASH.EXTERNAL_COMMAND": {
+            "foreground": "#c57633"
+          },
+          "BASH.HERE_DOC_END": {
+            "fontType": 1
+          },
+          "BASH.HERE_DOC_START": {
+            "fontType": 1
+          },
+          "BASH.SHEBANG": {
+            "fontType": 1
+          }
+        },
+        {
+          "HTML_CUSTOM_TAG_NAME": {
+            "foreground": "#26bda4"
+          },
+          "XML_CUSTOM_TAG_NAME": {
+            "foreground": "#26bda4"
+          }
+        }
+      ],
+      "Default": [
+        {
+          "PY.BUILTIN_NAME": {
+            "foreground": "#000080"
+          },
+          "PY.KEYWORD_ARGUMENT": {
+            "foreground": "#660099"
+          },
+          "PY.PREDEFINED_DEFINITION": {
+            "foreground": "#b200b2"
+          },
+          "PY.PREDEFINED_USAGE": {
+            "foreground": "#b200b2"
+          },
+          "PY.SELF_PARAMETER": {
+            "foreground": "#94558d"
+          },
+          "PY.STRING.B": {
+            "foreground": "#8a822d"
+          }
+        },
+        {
+          "MARKDOWN_BLOCK_QUOTE": {
+            "background": "#f4f7f9"
+          },
+          "MARKDOWN_BLOCK_QUOTE_MARKER": {
+            "foreground": "#8c8c8c"
+          },
+          "MARKDOWN_BOLD": {
+            "fontType": 1
+          },
+          "MARKDOWN_CODE_BLOCK": {
+            "foreground": "#080808",
+            "background": "#f4f7f9",
+            "fontType": 0
+          },
+          "MARKDOWN_CODE_FENCE": {
+            "foreground": "#080808",
+            "background": "#f4f7f9",
+            "fontType": 0
+          },
+          "MARKDOWN_CODE_SPAN": {
+            "foreground": "#080808",
+            "background": "#f4f7f9",
+            "fontType": 0
+          },
+          "MARKDOWN_HEADER": {
+            "foreground": "#000000",
+            "background": "#cccccc"
+          },
+          "MARKDOWN_HEADER_BOLD": {
+            "fontType": 1
+          },
+          "MARKDOWN_HIGHLIGHT": {
+            "background": "#fff3a6"
+          },
+          "MARKDOWN_ITALIC": {
+            "fontType": 2
+          },
+          "MARKDOWN_LIST_MARKER": {
+            "foreground": "#8c8c8c"
+          },
+          "MARKDOWN_REFERENCE_LINK": {
+            "fontType": 1
+          }
+        },
+        {
+          "YAML_ANCHOR": {
+            "foreground": "#0000ff"
+          }
+        },
+        {
+          "BASH.BINARY_DATA": {
+            "background": "#cfe7ff"
+          },
+          "BASH.EXTERNAL_COMMAND": {
+            "foreground": "#0073bf"
+          },
+          "BASH.FUNCTION_CALL": {
+            "foreground": "#c57633"
+          },
+          "BASH.FUNCTION_DEF_NAME": {
+            "foreground": "#c57633"
+          },
+          "BASH.INTERNAL_COMMAND": {
+            "foreground": "#0b0c95"
+          },
+          "BASH.SHEBANG": {
+            "fontType": 1
+          }
+        }
+      ]
+    },
     "scheme": "Islands Dark",
     "schemes": [
       {
@@ -590,21 +778,6 @@
             "effectColor": "#ff0000",
             "effectType": 2
           },
-          "BASH.BINARY_DATA": {
-            "background": "#cfe7ff"
-          },
-          "BASH.EXTERNAL_COMMAND": {
-            "foreground": "#c57633"
-          },
-          "BASH.HERE_DOC_END": {
-            "fontType": 1
-          },
-          "BASH.HERE_DOC_START": {
-            "fontType": 1
-          },
-          "BASH.SHEBANG": {
-            "fontType": 1
-          },
           "BEAN.ACTIVE": {
             "fontType": 0
           },
@@ -1054,9 +1227,6 @@
           "HTML_ATTRIBUTE_VALUE": {
             "foreground": "#a5c261"
           },
-          "HTML_CUSTOM_TAG_NAME": {
-            "foreground": "#26bda4"
-          },
           "HTML_ENTITY_REFERENCE": {
             "foreground": "#6d9cbe"
           },
@@ -1185,46 +1355,6 @@
             "foreground": "#5394ec"
           },
           "LOG_WARNING_OUTPUT": {},
-          "MARKDOWN_BLOCK_QUOTE": {
-            "background": "#3c3d3d"
-          },
-          "MARKDOWN_BLOCK_QUOTE_MARKER": {
-            "foreground": "#808080"
-          },
-          "MARKDOWN_BOLD": {
-            "fontType": 1
-          },
-          "MARKDOWN_CODE_BLOCK": {
-            "foreground": "#a9b7c6",
-            "background": "#3c3d3d",
-            "fontType": 0
-          },
-          "MARKDOWN_CODE_FENCE": {
-            "foreground": "#a9b7c6",
-            "background": "#3c3d3d",
-            "fontType": 0
-          },
-          "MARKDOWN_CODE_SPAN": {
-            "foreground": "#a9b7c6",
-            "background": "#3c3d3d",
-            "fontType": 0
-          },
-          "MARKDOWN_HEADER": {
-            "foreground": "#bbbbbb",
-            "background": "#3c3f41"
-          },
-          "MARKDOWN_HEADER_BOLD": {
-            "fontType": 1
-          },
-          "MARKDOWN_HIGHLIGHT": {
-            "background": "#5a4a14"
-          },
-          "MARKDOWN_ITALIC": {
-            "fontType": 2
-          },
-          "MARKDOWN_LIST_MARKER": {
-            "foreground": "#808080"
-          },
           "MARKED_FOR_REMOVAL_ATTRIBUTES": {
             "effectColor": "#bc3f3c",
             "effectType": 3
@@ -1258,24 +1388,6 @@
             "foreground": "#808080"
           },
           "PROPERTIES.VALID_STRING_ESCAPE": {},
-          "PY.BUILTIN_NAME": {
-            "foreground": "#8888c6"
-          },
-          "PY.KEYWORD_ARGUMENT": {
-            "foreground": "#aa4926"
-          },
-          "PY.PREDEFINED_DEFINITION": {
-            "foreground": "#b200b2"
-          },
-          "PY.PREDEFINED_USAGE": {
-            "foreground": "#b200b2"
-          },
-          "PY.SELF_PARAMETER": {
-            "foreground": "#94558d"
-          },
-          "PY.STRING.B": {
-            "foreground": "#a5c261"
-          },
           "RAINBOW_COLOR0": {
             "foreground": "#529d52"
           },
@@ -1460,9 +1572,6 @@
           "XML_ATTRIBUTE_NAME": {
             "foreground": "#bababa"
           },
-          "XML_CUSTOM_TAG_NAME": {
-            "foreground": "#26bda4"
-          },
           "XML_ENTITY_REFERENCE": {
             "foreground": "#6d9cbe"
           },
@@ -1488,9 +1597,6 @@
           "XPATH.XPATH_VARIABLE": {
             "foreground": "#d0d0ff",
             "fontType": 1
-          },
-          "YAML_ANCHOR": {
-            "foreground": "#e8bf6a"
           }
         },
         "colors": {},
@@ -1518,24 +1624,6 @@
           },
           "BAD_CHARACTER": {
             "background": "#ffcccc"
-          },
-          "BASH.BINARY_DATA": {
-            "background": "#cfe7ff"
-          },
-          "BASH.EXTERNAL_COMMAND": {
-            "foreground": "#0073bf"
-          },
-          "BASH.FUNCTION_CALL": {
-            "foreground": "#c57633"
-          },
-          "BASH.FUNCTION_DEF_NAME": {
-            "foreground": "#c57633"
-          },
-          "BASH.INTERNAL_COMMAND": {
-            "foreground": "#0b0c95"
-          },
-          "BASH.SHEBANG": {
-            "fontType": 1
           },
           "BEAN.ACTIVE": {
             "fontType": 0
@@ -2169,49 +2257,6 @@
           "LOG_WARNING_OUTPUT": {
             "foreground": "#a66f00"
           },
-          "MARKDOWN_BLOCK_QUOTE": {
-            "background": "#f4f7f9"
-          },
-          "MARKDOWN_BLOCK_QUOTE_MARKER": {
-            "foreground": "#8c8c8c"
-          },
-          "MARKDOWN_BOLD": {
-            "fontType": 1
-          },
-          "MARKDOWN_CODE_BLOCK": {
-            "foreground": "#080808",
-            "background": "#f4f7f9",
-            "fontType": 0
-          },
-          "MARKDOWN_CODE_FENCE": {
-            "foreground": "#080808",
-            "background": "#f4f7f9",
-            "fontType": 0
-          },
-          "MARKDOWN_CODE_SPAN": {
-            "foreground": "#080808",
-            "background": "#f4f7f9",
-            "fontType": 0
-          },
-          "MARKDOWN_HEADER": {
-            "foreground": "#000000",
-            "background": "#cccccc"
-          },
-          "MARKDOWN_HEADER_BOLD": {
-            "fontType": 1
-          },
-          "MARKDOWN_HIGHLIGHT": {
-            "background": "#fff3a6"
-          },
-          "MARKDOWN_ITALIC": {
-            "fontType": 2
-          },
-          "MARKDOWN_LIST_MARKER": {
-            "foreground": "#8c8c8c"
-          },
-          "MARKDOWN_REFERENCE_LINK": {
-            "fontType": 1
-          },
           "MARKED_FOR_REMOVAL_ATTRIBUTES": {
             "effectColor": "#ff0000",
             "effectType": 3
@@ -2228,24 +2273,6 @@
           },
           "NO_ANALYSIS": {
             "errorStripe": "#d3d3d3"
-          },
-          "PY.BUILTIN_NAME": {
-            "foreground": "#000080"
-          },
-          "PY.KEYWORD_ARGUMENT": {
-            "foreground": "#660099"
-          },
-          "PY.PREDEFINED_DEFINITION": {
-            "foreground": "#b200b2"
-          },
-          "PY.PREDEFINED_USAGE": {
-            "foreground": "#b200b2"
-          },
-          "PY.SELF_PARAMETER": {
-            "foreground": "#94558d"
-          },
-          "PY.STRING.B": {
-            "foreground": "#8a822d"
           },
           "RAINBOW_COLOR0": {
             "foreground": "#9b3b6a"
@@ -2375,9 +2402,6 @@
           "XPATH.XPATH_NAME": {
             "foreground": "#000080",
             "fontType": 1
-          },
-          "YAML_ANCHOR": {
-            "foreground": "#0000ff"
           }
         },
         "colors": {},
@@ -2386,6 +2410,100 @@
     ]
   },
   "Cool Islands Light": {
+    "additional": {
+      "Default": [
+        {
+          "PY.BUILTIN_NAME": {
+            "foreground": "#000080"
+          },
+          "PY.KEYWORD_ARGUMENT": {
+            "foreground": "#660099"
+          },
+          "PY.PREDEFINED_DEFINITION": {
+            "foreground": "#b200b2"
+          },
+          "PY.PREDEFINED_USAGE": {
+            "foreground": "#b200b2"
+          },
+          "PY.SELF_PARAMETER": {
+            "foreground": "#94558d"
+          },
+          "PY.STRING.B": {
+            "foreground": "#8a822d"
+          }
+        },
+        {
+          "MARKDOWN_BLOCK_QUOTE": {
+            "background": "#f4f7f9"
+          },
+          "MARKDOWN_BLOCK_QUOTE_MARKER": {
+            "foreground": "#8c8c8c"
+          },
+          "MARKDOWN_BOLD": {
+            "fontType": 1
+          },
+          "MARKDOWN_CODE_BLOCK": {
+            "foreground": "#080808",
+            "background": "#f4f7f9",
+            "fontType": 0
+          },
+          "MARKDOWN_CODE_FENCE": {
+            "foreground": "#080808",
+            "background": "#f4f7f9",
+            "fontType": 0
+          },
+          "MARKDOWN_CODE_SPAN": {
+            "foreground": "#080808",
+            "background": "#f4f7f9",
+            "fontType": 0
+          },
+          "MARKDOWN_HEADER": {
+            "foreground": "#000000",
+            "background": "#cccccc"
+          },
+          "MARKDOWN_HEADER_BOLD": {
+            "fontType": 1
+          },
+          "MARKDOWN_HIGHLIGHT": {
+            "background": "#fff3a6"
+          },
+          "MARKDOWN_ITALIC": {
+            "fontType": 2
+          },
+          "MARKDOWN_LIST_MARKER": {
+            "foreground": "#8c8c8c"
+          },
+          "MARKDOWN_REFERENCE_LINK": {
+            "fontType": 1
+          }
+        },
+        {
+          "YAML_ANCHOR": {
+            "foreground": "#0000ff"
+          }
+        },
+        {
+          "BASH.BINARY_DATA": {
+            "background": "#cfe7ff"
+          },
+          "BASH.EXTERNAL_COMMAND": {
+            "foreground": "#0073bf"
+          },
+          "BASH.FUNCTION_CALL": {
+            "foreground": "#c57633"
+          },
+          "BASH.FUNCTION_DEF_NAME": {
+            "foreground": "#c57633"
+          },
+          "BASH.INTERNAL_COMMAND": {
+            "foreground": "#0b0c95"
+          },
+          "BASH.SHEBANG": {
+            "fontType": 1
+          }
+        }
+      ]
+    },
     "scheme": "Light",
     "schemes": [
       {
@@ -2727,24 +2845,6 @@
           "BAD_CHARACTER": {
             "background": "#ffcccc"
           },
-          "BASH.BINARY_DATA": {
-            "background": "#cfe7ff"
-          },
-          "BASH.EXTERNAL_COMMAND": {
-            "foreground": "#0073bf"
-          },
-          "BASH.FUNCTION_CALL": {
-            "foreground": "#c57633"
-          },
-          "BASH.FUNCTION_DEF_NAME": {
-            "foreground": "#c57633"
-          },
-          "BASH.INTERNAL_COMMAND": {
-            "foreground": "#0b0c95"
-          },
-          "BASH.SHEBANG": {
-            "fontType": 1
-          },
           "BEAN.ACTIVE": {
             "fontType": 0
           },
@@ -3377,49 +3477,6 @@
           "LOG_WARNING_OUTPUT": {
             "foreground": "#a66f00"
           },
-          "MARKDOWN_BLOCK_QUOTE": {
-            "background": "#f4f7f9"
-          },
-          "MARKDOWN_BLOCK_QUOTE_MARKER": {
-            "foreground": "#8c8c8c"
-          },
-          "MARKDOWN_BOLD": {
-            "fontType": 1
-          },
-          "MARKDOWN_CODE_BLOCK": {
-            "foreground": "#080808",
-            "background": "#f4f7f9",
-            "fontType": 0
-          },
-          "MARKDOWN_CODE_FENCE": {
-            "foreground": "#080808",
-            "background": "#f4f7f9",
-            "fontType": 0
-          },
-          "MARKDOWN_CODE_SPAN": {
-            "foreground": "#080808",
-            "background": "#f4f7f9",
-            "fontType": 0
-          },
-          "MARKDOWN_HEADER": {
-            "foreground": "#000000",
-            "background": "#cccccc"
-          },
-          "MARKDOWN_HEADER_BOLD": {
-            "fontType": 1
-          },
-          "MARKDOWN_HIGHLIGHT": {
-            "background": "#fff3a6"
-          },
-          "MARKDOWN_ITALIC": {
-            "fontType": 2
-          },
-          "MARKDOWN_LIST_MARKER": {
-            "foreground": "#8c8c8c"
-          },
-          "MARKDOWN_REFERENCE_LINK": {
-            "fontType": 1
-          },
           "MARKED_FOR_REMOVAL_ATTRIBUTES": {
             "effectColor": "#ff0000",
             "effectType": 3
@@ -3436,24 +3493,6 @@
           },
           "NO_ANALYSIS": {
             "errorStripe": "#d3d3d3"
-          },
-          "PY.BUILTIN_NAME": {
-            "foreground": "#000080"
-          },
-          "PY.KEYWORD_ARGUMENT": {
-            "foreground": "#660099"
-          },
-          "PY.PREDEFINED_DEFINITION": {
-            "foreground": "#b200b2"
-          },
-          "PY.PREDEFINED_USAGE": {
-            "foreground": "#b200b2"
-          },
-          "PY.SELF_PARAMETER": {
-            "foreground": "#94558d"
-          },
-          "PY.STRING.B": {
-            "foreground": "#8a822d"
           },
           "RAINBOW_COLOR0": {
             "foreground": "#9b3b6a"
@@ -3583,9 +3622,6 @@
           "XPATH.XPATH_NAME": {
             "foreground": "#000080",
             "fontType": 1
-          },
-          "YAML_ANCHOR": {
-            "foreground": "#0000ff"
           }
         },
         "colors": {},

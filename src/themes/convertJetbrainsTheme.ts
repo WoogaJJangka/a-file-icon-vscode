@@ -1,6 +1,7 @@
 /**
  * Build a VS Code color theme from a resolved JetBrains UI theme and editor color scheme, with the hand-kept maps.
  */
+import { fallbackChain } from './jetbrainsFallbacks';
 import { SEMANTIC_RULES, TOKEN_RULES } from './jetbrainsTokenMap';
 import { UI_MAP } from './jetbrainsUiMap';
 
@@ -110,10 +111,10 @@ export const convertJetbrainsTheme = (
     if (!resolveId(id)) unresolved.push(id);
   }
 
-  // The keys of a rule one after the other, each looked up in the whole scheme chain. Not `scheme.lookup` (the order of
-  // the IDE) yet: the `from` lists are hand-picked keys, not the fallback chains of the code, which that order needs
-  // (`bun run check:colors` compares with the IDE order)
-  const byKey = (keys: string[]) => keys.flatMap((key) => scheme.attributes(key) ?? []);
+  // Each key of a rule drawn as the IDE draws it: the first attributes of the key and its fallbacks in the order of the
+  // IDE (KEY_FALLBACKS, `ResolvedScheme.lookup`), the way `bun run check:colors` checks. The next keys of the rule are the
+  // layers under it, which show when those attributes have no color (a Markdown quote: text, not its STRING fallback)
+  const byKey = (keys: string[]) => keys.flatMap((key) => scheme.lookup(fallbackChain(key)).slice(0, 1));
 
   const tokenColors: TokenColor[] = [];
   for (const rule of maps.tokens ?? TOKEN_RULES) {

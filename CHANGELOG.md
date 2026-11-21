@@ -21,6 +21,12 @@ All notable changes to this project will be documented in this file. Dates are d
 - feat: `accentTargets` paints more with the accent: `controls` (scrollbars, checkbox borders, badges, active search
   options), `tabs` (the line of the active tab, panel title and activity bar item) and `folders` (the folder icons,
   instead of `folderColor`). Empty by default; checkboxes on the Colors tab of the Mix Themes page.
+- fix: syntax colors closer to the JetBrains IDE (Cool Islands Dark and Light), checked against PyCharm: the
+  delimiters of doc comments and the quotes of docstrings take the doc comment color, Java class names are no longer
+  keyword-colored and the `@` of a Java annotation has the annotation color, TypeScript primitive types (`string`,
+  `number`) are keywords, Markdown headers have the color of their level, YAML comments are doc comments and plain YAML
+  values (numbers, `true`) are text, the name of a YAML anchor has the anchor color. The colors are looked up in the
+  order of the IDE, with the fallbacks of its code (a few small changes in the light theme: method calls, labels).
 - test: `bun run check:colors` compares the syntax colors with the JetBrains IDE, in CI: code samples are split into
   tokens with the grammars of a real VS Code, and each token must get the color the IDE gives its key (the scheme chain
   and the fallbacks of the IDE code). The differences still open are listed as known ones.

@@ -534,7 +534,10 @@
       "scope": [
         "comment.block.documentation",
         "comment.block.javadoc",
-        "string.quoted.docstring"
+        "string.quoted.docstring",
+        "comment.block.documentation punctuation.definition.comment",
+        "comment.block.javadoc punctuation.definition.comment",
+        "string.quoted.docstring punctuation.definition.string"
       ],
       "settings": {
         "fontStyle": "italic",
@@ -562,7 +565,8 @@
         "keyword.control",
         "constant.language",
         "variable.language.this",
-        "variable.language.super"
+        "variable.language.super",
+        "support.type.primitive"
       ],
       "settings": {
         "fontStyle": "",
@@ -765,7 +769,7 @@
         "entity.name.function.decorator",
         "punctuation.definition.decorator",
         "storage.type.annotation",
-        "meta.annotation"
+        "punctuation.definition.annotation"
       ],
       "settings": {
         "fontStyle": "",
@@ -778,7 +782,7 @@
         "entity.name.label"
       ],
       "settings": {
-        "fontStyle": "bold underline",
+        "fontStyle": "",
         "foreground": "#bcbec4"
       }
     },
@@ -965,7 +969,9 @@
       "name": "Python docstring",
       "scope": [
         "string.quoted.docstring.multi.python",
-        "string.quoted.docstring.single.python"
+        "string.quoted.docstring.single.python",
+        "string.quoted.docstring punctuation.definition.string.begin.python",
+        "string.quoted.docstring punctuation.definition.string.end.python"
       ],
       "settings": {
         "fontStyle": "italic",
@@ -1004,6 +1010,29 @@
       }
     },
     {
+      "name": "Java class name",
+      "scope": [
+        "storage.type.java",
+        "storage.type.generic.java",
+        "storage.type.object.array.java"
+      ],
+      "settings": {
+        "fontStyle": "",
+        "foreground": "#bcbec4"
+      }
+    },
+    {
+      "name": "Java package",
+      "scope": [
+        "storage.modifier.package.java",
+        "storage.modifier.import.java"
+      ],
+      "settings": {
+        "fontStyle": "",
+        "foreground": "#bcbec4"
+      }
+    },
+    {
       "name": "JSON key",
       "scope": [
         "support.type.property-name.json",
@@ -1029,7 +1058,7 @@
     {
       "name": "YAML anchor",
       "scope": [
-        "entity.name.type.anchor.yaml",
+        "variable.other.anchor.yaml",
         "variable.other.alias.yaml",
         "punctuation.definition.anchor.yaml",
         "punctuation.definition.alias.yaml"
@@ -1037,6 +1066,34 @@
       "settings": {
         "fontStyle": "",
         "foreground": "#e8bf6a"
+      }
+    },
+    {
+      "name": "YAML comment",
+      "scope": [
+        "comment.line.number-sign.yaml",
+        "punctuation.definition.comment.yaml"
+      ],
+      "settings": {
+        "fontStyle": "italic",
+        "foreground": "#5f826b"
+      }
+    },
+    {
+      "name": "YAML value",
+      "scope": [
+        "constant.language.boolean.yaml",
+        "constant.language.null.yaml",
+        "constant.numeric.float.yaml",
+        "constant.numeric.float.inf.yaml",
+        "constant.numeric.float.nan.yaml",
+        "constant.numeric.integer.decimal.yaml",
+        "constant.numeric.integer.hexadecimal.yaml",
+        "constant.numeric.integer.octal.yaml"
+      ],
+      "settings": {
+        "fontStyle": "",
+        "foreground": "#bcbec4"
       }
     },
     {
@@ -1136,8 +1193,82 @@
         "punctuation.definition.heading.markdown"
       ],
       "settings": {
-        "fontStyle": "",
-        "foreground": "#bbbbbb"
+        "fontStyle": "italic",
+        "foreground": "#c77dbb"
+      }
+    },
+    {
+      "name": "Markdown header 1",
+      "scope": [
+        "heading.1.markdown",
+        "heading.1.markdown entity.name.section.markdown",
+        "heading.1.markdown punctuation.definition.heading.markdown",
+        "markup.heading.setext.1.markdown"
+      ],
+      "settings": {
+        "fontStyle": "italic",
+        "foreground": "#c77dbb"
+      }
+    },
+    {
+      "name": "Markdown header 2",
+      "scope": [
+        "heading.2.markdown",
+        "heading.2.markdown entity.name.section.markdown",
+        "heading.2.markdown punctuation.definition.heading.markdown",
+        "markup.heading.setext.2.markdown"
+      ],
+      "settings": {
+        "fontStyle": "italic",
+        "foreground": "#c77dbb"
+      }
+    },
+    {
+      "name": "Markdown header 3",
+      "scope": [
+        "heading.3.markdown",
+        "heading.3.markdown entity.name.section.markdown",
+        "heading.3.markdown punctuation.definition.heading.markdown"
+      ],
+      "settings": {
+        "fontStyle": "italic",
+        "foreground": "#c77dbb"
+      }
+    },
+    {
+      "name": "Markdown header 4",
+      "scope": [
+        "heading.4.markdown",
+        "heading.4.markdown entity.name.section.markdown",
+        "heading.4.markdown punctuation.definition.heading.markdown"
+      ],
+      "settings": {
+        "fontStyle": "italic",
+        "foreground": "#c77dbb"
+      }
+    },
+    {
+      "name": "Markdown header 5",
+      "scope": [
+        "heading.5.markdown",
+        "heading.5.markdown entity.name.section.markdown",
+        "heading.5.markdown punctuation.definition.heading.markdown"
+      ],
+      "settings": {
+        "fontStyle": "italic",
+        "foreground": "#c77dbb"
+      }
+    },
+    {
+      "name": "Markdown header 6",
+      "scope": [
+        "heading.6.markdown",
+        "heading.6.markdown entity.name.section.markdown",
+        "heading.6.markdown punctuation.definition.heading.markdown"
+      ],
+      "settings": {
+        "fontStyle": "italic",
+        "foreground": "#c77dbb"
       }
     },
     {
@@ -1240,7 +1371,7 @@
       ],
       "settings": {
         "fontStyle": "underline",
-        "foreground": "#56a8f5"
+        "foreground": "#548af7"
       }
     },
     {
@@ -1461,7 +1592,8 @@
         "storage.modifier.flag.regexp"
       ],
       "settings": {
-        "fontStyle": "italic"
+        "fontStyle": "",
+        "foreground": "#bcbec4"
       }
     },
     {
