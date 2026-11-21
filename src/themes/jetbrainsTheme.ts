@@ -270,7 +270,9 @@ export const resolveScheme = (
       // What a plugin adds to a bundled scheme counts as the scheme's own in the schemes based on it too: PyCharm draws
       // `self` in Islands Dark with the PY.SELF_PARAMETER of Darcula, not with the DEFAULT_IDENTIFIER of Islands
       // (a fallback of it), seen on screen 2026-11-21
-      const sources = [scheme.attributes, ...chain.slice(index).flatMap((ancestor) => additional[ancestor.name] ?? [])];
+      // Only from the nearest scheme with added attributes: what Default gets (light colors) stops at Darcula
+      const base = chain.slice(index).find((ancestor) => additional[ancestor.name]);
+      const sources = [scheme.attributes, ...(base ? additional[base.name] : [])];
       for (const key of order) {
         const entry = sources.map((source) => source[key]).find((value) => value !== undefined);
         if (entry && !('base' in entry)) found.push(entry);

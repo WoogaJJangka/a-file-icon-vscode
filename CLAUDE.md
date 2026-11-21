@@ -107,7 +107,7 @@
   - 쓰는 테마들의 지문(`layerThemes`, 확장 버전 + json 수정 시각)을 테마 json 에 저장해 바뀌면 다시 만든다
     (`extension.ts` 가 각 json 을 watchFile). 스크립트·parity 테스트는 다른 테마 없이 돈다.
 - 색 테마(Cool Islands Dark/Light, `src/themes/`): `syncJetbrainsColors.ts` 가 `JetBrains/intellij-community` 의 고정 커밋
-  (`themes/jetbrains-source.json`)에서 UI 테마 json·에디터 scheme xml·플러그인 추가 속성(Python·Markdown·YAML·sh·XML)을 받아
+  (`themes/jetbrains-source.json`)에서 UI 테마 json·에디터 scheme xml·플러그인 추가 속성(Python·Markdown·YAML·sh·XML·Groovy·reST·Kotlin)을 받아
   `jetbrainsTheme.ts` 로 IDE 와 같게 푼다: UI 는 parent 체인 + 팔레트 이름 + `*` 와일드카드(부모 키 뒤에 자식 키가 붙고
   **뒤에 적용된 값이 이김** → 자식의 `*` 가 부모 명시 키를 덮음), scheme 은 parent 체인 + `baseAttributes`(값이 같이 있으면 자기 값)
   + 추가 속성(그 scheme 을 부모로 둔 scheme 이 물려받음). `jetbrainsUiMap.ts`(VS Code 색 id ← `ui:`/`color:`/`fg:`·`bg:`… 후보)와
@@ -127,6 +127,8 @@
   `TOKEN_RULES` 의 `from` 은 키마다 대체 키까지 IDE 처럼 찾고(첫 속성), 뒤 키는 그 속성에 색이 없을 때 밑에 깔리는 층(Markdown 인용 = 글자색).
   주석(annotator)이 위에 덧칠하는 것(Markdown 링크 주소 = HYPERLINK_ATTRIBUTES)은 그 키를 `from` 에 바로 쓴다. 아직 다른 것은 기대값에 `todo`(이유 적음,
   실패 아님)로 두고, 두 테마에서 다 맞게 되면 `FIXED` 로 실패해 todo 를 지우게 한다. 새 언어는 샘플 + 기대값 + 그 언어 키의 대체 키(`jetbrainsFallbacks.ts`)를 같이 넣는다.
+  효과(밑줄·취소선)는 효과 색이 있을 때만 쓴다(Islands 의 PROPERTIES.KEY 는 밑줄 종류만 있고 색이 없어 화면에 선이 없다). 하이라이터가 키 밑에 다른 층을
+  깔면(reST 인라인 리터럴 = 배경만 있는 REST.FIXED 밑에 문자열) 기대값에 `under` 로, 규칙에는 두 번째 `from` 키로 적는다.
   화면 확인: 사용자 PyCharm 을 데스크톱에서 띄운다(Bash·PowerShell 로 띄우면 창이 안 뜬다). 마지막 프로젝트가 열리니 그 폴더에 샘플을 복사해 트리에서 연다.
 - 색 테마 섞기(`src/themes/colorLayers.ts` 순수 엔진, `readColorTheme.ts` JSONC·`include`·`tokenColors` 경로 읽기,
   `services/ColorThemeService.ts` 설치된 테마 목록·섞기·다시 로드 알림): `colorThemeLayers`(테마 id 또는 `{theme, ui, syntax, applyTo}`,

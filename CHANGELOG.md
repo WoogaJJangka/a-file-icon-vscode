@@ -21,6 +21,11 @@ All notable changes to this project will be documented in this file. Dates are d
 - feat: `accentTargets` paints more with the accent: `controls` (scrollbars, checkbox borders, badges, active search
   options), `tabs` (the line of the active tab, panel title and activity bar item) and `folders` (the folder icons,
   instead of `folderColor`). Empty by default; checkboxes on the Colors tab of the Mix Themes page.
+- feat: syntax colors of the JetBrains IDE for more languages, checked against PyCharm: Groovy (class names, package
+  paths, map keys), reStructuredText (section headers, inline literals, references, directives), shell (builtins,
+  function names, variables in strings take the string color, unquoted words and options are text, the shebang), TOML
+  keys are keywords (with the TOML extension), the properties separator is text. An effect (underline, strikethrough)
+  is drawn only with its color, like the IDE: no underline under properties keys and doc comment tags.
 - fix: syntax colors closer to the JetBrains IDE (Cool Islands Dark and Light), checked against PyCharm: the
   delimiters of doc comments and the quotes of docstrings take the doc comment color, Java class names are no longer
   keyword-colored and the `@` of a Java annotation has the annotation color, TypeScript primitive types (`string`,

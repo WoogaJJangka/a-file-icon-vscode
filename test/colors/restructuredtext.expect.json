@@ -1,0 +1,15 @@
+{
+  "file": "restructuredtext.rst",
+  "scope": "source.rst",
+  "tokens": [
+    { "line": 2, "text": "=========", "key": "REST.SECTION.HEADER" },
+    { "line": 1, "text": "제목 하나", "key": "REST.SECTION.HEADER", "todo": "the grammar gives only the underline of a section header a scope" },
+    { "line": 4, "text": "**bold**", "key": "REST.BOLD" },
+    { "line": 4, "text": "*italic*", "key": "REST.ITALIC" },
+    { "line": 4, "text": "``code``", "key": "REST.FIXED", "under": "DEFAULT_STRING" },
+    { "line": 4, "text": "`link <https://example.com>`_", "key": "REST.REF.NAME" },
+    { "line": 6, "text": "note::", "key": "REST.EXPLICIT" },
+    { "line": 6, "text": "..", "key": "TEXT", "todo": "the IDE draws the dots of a directive as text, the grammar gives the directive one scope" },
+    { "line": 12, "text": ".. 한글 주석", "key": "REST.LINE_COMMENT" }
+  ]
+}

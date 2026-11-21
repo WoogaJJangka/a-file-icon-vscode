@@ -105,8 +105,12 @@ describe('Color check', () => {
     );
     assert.deepEqual(expectedStyle(scheme, 'DEFAULT_KEYWORD'), { fontStyle: '', foreground: '#cf8e6d' });
     assert.deepEqual(expectedStyle(scheme, 'BOLD_ONLY'), { fontStyle: 'bold', foreground: '#bcbec4' });
-    assert.deepEqual(expectedStyle(scheme, 'CHILD', { CHILD: 'DEFAULT_KEYWORD' }), { fontStyle: '', foreground: '#cf8e6d' });
+    assert.deepEqual(expectedStyle(scheme, 'CHILD', undefined, { CHILD: 'DEFAULT_KEYWORD' }), { fontStyle: '', foreground: '#cf8e6d' });
     assert.equal(expectedStyle(scheme, 'NOPE'), undefined);
+    // a layer under a key without a color gives the color
+    assert.deepEqual(expectedStyle(scheme, 'BOLD_ONLY', 'DEFAULT_KEYWORD'), { fontStyle: 'bold', foreground: '#cf8e6d' });
+    // a key of the IDE code that the scheme does not define is text
+    assert.deepEqual(expectedStyle(scheme, 'DEFAULT_LABEL'), { fontStyle: '', foreground: '#bcbec4' });
     const noText = resolveScheme([{ attributes: { BOLD_ONLY: { fontType: 1 } }, colors: {}, name: 'S' }], 'S');
     assert.equal(expectedStyle(noText, 'BOLD_ONLY'), undefined);
   });

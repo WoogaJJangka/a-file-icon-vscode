@@ -7,7 +7,7 @@
 import { compareCodeUnits } from 'src/helpers/utils';
 
 import { fontStyle, styleOf } from './convertJetbrainsTheme';
-import { fallbackChain } from './jetbrainsFallbacks';
+import { fallbackChain, KEY_FALLBACKS } from './jetbrainsFallbacks';
 
 import type { ResolvedScheme, SchemeChainData } from './jetbrainsTheme';
 
@@ -56,6 +56,8 @@ export type Expectation = {
   text: string;
   /** A known difference, still to be fixed: reported, not a failure */
   todo?: string;
+  /** The key of the layer the highlighter puts under it, which shows when `key` has no color (a reST literal: a string) */
+  under?: string;
 };
 
 export type SampleExpectations = {
@@ -77,9 +79,16 @@ export type LineToken = { end: number; metadata: number; scopes: string[]; start
  * (`ResolvedScheme.lookup`). Attributes without a color are drawn in the text color (`TEXT`), as the editor does.
  * @returns undefined when the scheme defines neither the key nor a fallback of it (a key the IDE does not have)
  */
-export const expectedStyle = (scheme: ResolvedScheme, key: string, fallbacks?: Record<string, string>): TokenStyle | undefined => {
-  const [attributes] = scheme.lookup(fallbackChain(key, fallbacks));
-  const foreground = attributes?.foreground ?? scheme.attributes('TEXT')?.foreground;
+export const expectedStyle = (
+  scheme: ResolvedScheme,
+  key: string,
+  under?: string,
+  fallbacks: Record<string, string> = KEY_FALLBACKS,
+): TokenStyle | undefined => {
+  // A key of the IDE code that no scheme defines (nor its fallbacks) is drawn with the default attributes: text
+  const drawn = (name: string) => [...scheme.lookup(fallbackChain(name, fallbacks)), ...(name in fallbacks ? scheme.lookup(['TEXT']) : [])][0];
+  const attributes = drawn(key);
+  const foreground = attributes?.foreground ?? (under ? drawn(under)?.foreground : undefined) ?? scheme.attributes('TEXT')?.foreground;
   if (!attributes || !foreground) return undefined;
   return { fontStyle: fontStyle(styleOf(attributes)), foreground: foreground.toLowerCase().slice(0, 7) };
 };

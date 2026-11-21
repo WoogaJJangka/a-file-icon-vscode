@@ -552,7 +552,7 @@
         "storage.type.class.jsdoc"
       ],
       "settings": {
-        "fontStyle": "underline",
+        "fontStyle": "",
         "foreground": "#67a37c"
       }
     },
@@ -1036,13 +1036,22 @@
       "name": "JSON key",
       "scope": [
         "support.type.property-name.json",
-        "meta.object-literal.key",
+        "meta.object-literal.key"
+      ],
+      "settings": {
+        "fontStyle": "",
+        "foreground": "#c77dbb"
+      }
+    },
+    {
+      "name": "TOML key",
+      "scope": [
         "support.type.property-name.toml",
         "support.type.property-name.table.toml"
       ],
       "settings": {
         "fontStyle": "",
-        "foreground": "#c77dbb"
+        "foreground": "#cf8e6d"
       }
     },
     {
@@ -1104,7 +1113,7 @@
         "entity.name.section.group-title.ini"
       ],
       "settings": {
-        "fontStyle": "underline",
+        "fontStyle": "",
         "foreground": "#cf8e6d"
       }
     },
@@ -1115,7 +1124,7 @@
       ],
       "settings": {
         "fontStyle": "",
-        "foreground": "#808080"
+        "foreground": "#bcbec4"
       }
     },
     {
@@ -1623,7 +1632,6 @@
     {
       "name": "Shell command",
       "scope": [
-        "support.function.builtin.shell",
         "entity.name.command.shell"
       ],
       "settings": {
@@ -1632,16 +1640,193 @@
       }
     },
     {
+      "name": "Shell builtin",
+      "scope": [
+        "support.function.builtin.shell"
+      ],
+      "settings": {
+        "fontStyle": "",
+        "foreground": "#c57633"
+      }
+    },
+    {
+      "name": "Shell function",
+      "scope": [
+        "entity.name.function.shell"
+      ],
+      "settings": {
+        "fontStyle": "",
+        "foreground": "#56a8f5"
+      }
+    },
+    {
       "name": "Shell variable",
       "scope": [
         "variable.other.normal.shell",
-        "variable.other.positional.shell",
-        "variable.other.special.shell",
+        "variable.parameter.positional.shell",
+        "variable.parameter.positional.all.shell",
+        "variable.language.special.shell",
         "punctuation.definition.variable.shell"
       ],
       "settings": {
         "fontStyle": "",
-        "foreground": "#c77dbb"
+        "foreground": "#bcbec4"
+      }
+    },
+    {
+      "name": "Shell variable definition",
+      "scope": [
+        "variable.other.assignment.shell"
+      ],
+      "settings": {
+        "fontStyle": "",
+        "foreground": "#bcbec4"
+      }
+    },
+    {
+      "name": "Shell variable in a string",
+      "scope": [
+        "string.quoted.double.shell variable.other.normal.shell",
+        "string.quoted.double.shell variable.parameter.positional.shell",
+        "string.quoted.double.shell punctuation.definition.variable.shell"
+      ],
+      "settings": {
+        "fontStyle": "",
+        "foreground": "#6aab73"
+      }
+    },
+    {
+      "name": "Shell shebang",
+      "scope": [
+        "meta.shebang.shell",
+        "punctuation.definition.comment.shebang.shell"
+      ],
+      "settings": {
+        "fontStyle": "bold",
+        "foreground": "#bcbec4"
+      }
+    },
+    {
+      "name": "Shell word",
+      "scope": [
+        "string.unquoted.argument.shell",
+        "constant.other.option.dash.shell",
+        "meta.statement.command.shell constant.other.option"
+      ],
+      "settings": {
+        "fontStyle": "",
+        "foreground": "#bcbec4"
+      }
+    },
+    {
+      "name": "Groovy class name",
+      "scope": [
+        "storage.type.groovy"
+      ],
+      "settings": {
+        "fontStyle": "",
+        "foreground": "#bcbec4"
+      }
+    },
+    {
+      "name": "Groovy package",
+      "scope": [
+        "storage.modifier.package.groovy",
+        "storage.modifier.import.groovy"
+      ],
+      "settings": {
+        "fontStyle": "",
+        "foreground": "#bcbec4"
+      }
+    },
+    {
+      "name": "Groovy map key",
+      "scope": [
+        "constant.other.key.groovy"
+      ],
+      "settings": {
+        "fontStyle": "",
+        "foreground": "#6aab73"
+      }
+    },
+    {
+      "name": "Groovy method declaration",
+      "scope": [
+        "meta.definition.method.groovy entity.name.function"
+      ],
+      "settings": {
+        "fontStyle": "",
+        "foreground": "#bcbec4"
+      }
+    },
+    {
+      "name": "reST section header",
+      "scope": [
+        "source.rst markup.heading"
+      ],
+      "settings": {
+        "fontStyle": "",
+        "foreground": "#2aacb8"
+      }
+    },
+    {
+      "name": "reST bold",
+      "scope": [
+        "source.rst markup.bold"
+      ],
+      "settings": {
+        "fontStyle": "bold",
+        "foreground": "#bcbec4"
+      }
+    },
+    {
+      "name": "reST italic",
+      "scope": [
+        "source.rst markup.italic"
+      ],
+      "settings": {
+        "fontStyle": "italic",
+        "foreground": "#bcbec4"
+      }
+    },
+    {
+      "name": "reST literal",
+      "scope": [
+        "source.rst string.interpolated"
+      ],
+      "settings": {
+        "fontStyle": "",
+        "foreground": "#6aab73"
+      }
+    },
+    {
+      "name": "reST reference",
+      "scope": [
+        "source.rst entity.name.tag"
+      ],
+      "settings": {
+        "fontStyle": "",
+        "foreground": "#6aab73"
+      }
+    },
+    {
+      "name": "reST directive",
+      "scope": [
+        "source.rst keyword.control"
+      ],
+      "settings": {
+        "fontStyle": "",
+        "foreground": "#cf8e6d"
+      }
+    },
+    {
+      "name": "reST comment",
+      "scope": [
+        "source.rst comment.block"
+      ],
+      "settings": {
+        "fontStyle": "",
+        "foreground": "#7a7e85"
       }
     }
   ],

@@ -145,7 +145,7 @@ const main = async () => {
         const where = `${sample.file}:${expectation.line} "${expectation.text}"`;
         const line = lines[expectation.line - 1];
         const tokens = line ? tokensOf(line.line, line.tokens, expectation.text, expectation.nth) : undefined;
-        const expected = expectedStyle(scheme, expectation.key);
+        const expected = expectedStyle(scheme, expectation.key, expectation.under);
         if (!tokens || tokens.length === 0) throw new Error(`${where}: not on that line`);
         if (!expected) throw new Error(`${where}: the scheme has neither ${expectation.key} nor a fallback of it (KEY_FALLBACKS)`);
         checked++;

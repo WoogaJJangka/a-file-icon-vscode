@@ -1,0 +1,10 @@
+{
+  "file": "properties.properties",
+  "scope": "source.ini",
+  "tokens": [
+    { "line": 1, "text": "# 한글 주석", "key": "PROPERTIES.LINE_COMMENT" },
+    { "line": 2, "text": "app.name", "key": "PROPERTIES.KEY" },
+    { "line": 2, "text": "=", "key": "PROPERTIES.KEY_VALUE_SEPARATOR" },
+    { "line": 2, "text": "Cool Theme Kit", "key": "PROPERTIES.VALUE", "todo": "the ini grammar VS Code uses for .properties gives a value no scope" }
+  ]
+}
