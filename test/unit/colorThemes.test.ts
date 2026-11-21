@@ -125,7 +125,8 @@ describe('JetBrains themes', () => {
       semantic: { '*.deprecated': ['DEPRECATED_ATTRIBUTES'], selfParameter: ['PY.SELF_PARAMETER'], unknown: ['NOPE'] },
       tokens: [
         { from: ['DEFAULT_KEYWORD'], name: 'Keyword', scope: ['keyword'] },
-        { from: ['DEFAULT_PREDEFINED_SYMBOL', 'TEXT'], name: 'Builtin', scope: ['support.function'] },
+        { from: ['PY.BOLD', 'TEXT'], name: 'Bold', scope: ['markup.bold'] },
+        { from: ['DEFAULT_PREDEFINED_SYMBOL'], name: 'Builtin', scope: ['support.function'] },
         { from: ['NOPE'], name: 'Missing', scope: ['nope'] },
       ],
       ui: {
@@ -145,8 +146,10 @@ describe('JetBrains themes', () => {
     });
     assert.deepEqual(theme.tokenColors, [
       { name: 'Keyword', scope: ['keyword'], settings: { fontStyle: 'bold', foreground: '#000080' } },
-      // the font style of the first key, the color of the next one that has one
-      { name: 'Builtin', scope: ['support.function'], settings: { fontStyle: 'italic', foreground: '#bcbec4' } },
+      // the font style of the first key (added to Darcula: Islands' own), the color of the next key, the layer under it
+      { name: 'Bold', scope: ['markup.bold'], settings: { fontStyle: 'bold', foreground: '#bcbec4' } },
+      // the order of the IDE: Islands' own TEXT, the end of the fallbacks of the key, before the italic of Default
+      { name: 'Builtin', scope: ['support.function'], settings: { fontStyle: '', foreground: '#bcbec4' } },
     ]);
     assert.deepEqual(theme.semanticTokenColors['*.deprecated'], { bold: false, italic: false, strikethrough: true, underline: false });
     assert.equal(theme.semanticTokenColors.selfParameter.foreground, '#94558d');

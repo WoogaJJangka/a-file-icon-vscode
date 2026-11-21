@@ -9,7 +9,7 @@ import { compareCodeUnits } from 'src/helpers/utils';
 import { fontStyle, styleOf } from './convertJetbrainsTheme';
 import { fallbackChain } from './jetbrainsFallbacks';
 
-import type { ResolvedScheme, SchemeData } from './jetbrainsTheme';
+import type { ResolvedScheme, SchemeChainData } from './jetbrainsTheme';
 
 // The metadata of a token of vscode-textmate (`EncodedTokenAttributes`, not exported by the package):
 // bits 11-14 the font style, bits 15-23 the index of the foreground in the color map
@@ -41,7 +41,7 @@ export const ATTRIBUTES_FILE = 'test/colors/jetbrains-attributes.json';
 export const SAMPLES_FOLDER = 'test/colors';
 
 /** An editor scheme and its parents, as `schemeChainData` gives them */
-export type SchemeChain = { scheme: string; schemes: SchemeData[] };
+export type SchemeChain = SchemeChainData;
 
 /**
  * A token of a sample and the key the highlighter of the IDE gives it (`JAVA_STRING`); its fallbacks come from

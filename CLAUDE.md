@@ -121,9 +121,12 @@
   VS Code(`VSCODE_VERSION`, `.vscode-test` 에 받음) 내장 문법 + `vscode-textmate` 로 나누고, `<이름>.expect.json` 의 토큰마다(`key` = IDE 하이라이터가 주는 키 하나)
   `themes/*.base.json` 의 색이 IDE 의 색과 같은지 두 테마 다 본다. IDE 색은 `sync:colors` 가 함께 쓰는 `test/colors/jetbrains-attributes.json`(scheme 체인)과
   `jetbrainsFallbacks.ts`(코드의 대체 키, 출처 파일별)로 `ResolvedScheme.lookup` 이 IDE 순서(`EditorColorsSchemeImpl.getAttributes`: 한 scheme 에서
-  키와 그 대체 키 전부 → 그다음 부모)로 찾는다. **생성기는 아직 그 순서가 아니다**: `TOKEN_RULES` 의 `from` 은 손으로 고른 키라 키마다 체인 전체에서 찾는다
-  (`attributes`). 그래서 Islands 가 직접 정한 기본 키(DEFAULT_IDENTIFIER 등)가 Darcula 에 붙는 플러그인 색(PY.SELF_PARAMETER 등)보다 앞서는 경우가 갈린다 →
-  PyCharm 화면으로 확인할 때까지 기대값에 `todo`(실패 아님, 이유 적음)로 둔다. 새 언어는 샘플 + 기대값 + 그 언어 키의 대체 키를 같이 넣는다.
+  키와 그 대체 키 전부 → 그다음 부모)로 찾는다. 단 플러그인이 Darcula/Default 에 붙이는 속성은 그 scheme 을 부모로 둔 scheme(Islands)의 자기 값으로
+  친다(2026-11-21 PyCharm 화면: Islands Dark 의 `self` 는 Darcula 에 붙은 PY.SELF_PARAMETER 보라, Islands 의 DEFAULT_IDENTIFIER 아님). 생성기도 같은 순서다:
+  `TOKEN_RULES` 의 `from` 은 키마다 대체 키까지 IDE 처럼 찾고(첫 속성), 뒤 키는 그 속성에 색이 없을 때 밑에 깔리는 층(Markdown 인용 = 글자색).
+  주석(annotator)이 위에 덧칠하는 것(Markdown 링크 주소 = HYPERLINK_ATTRIBUTES)은 그 키를 `from` 에 바로 쓴다. 아직 다른 것은 기대값에 `todo`(이유 적음,
+  실패 아님)로 두고, 두 테마에서 다 맞게 되면 `FIXED` 로 실패해 todo 를 지우게 한다. 새 언어는 샘플 + 기대값 + 그 언어 키의 대체 키(`jetbrainsFallbacks.ts`)를 같이 넣는다.
+  화면 확인: 사용자 PyCharm 을 데스크톱에서 띄운다(Bash·PowerShell 로 띄우면 창이 안 뜬다). 마지막 프로젝트가 열리니 그 폴더에 샘플을 복사해 트리에서 연다.
 - 색 테마 섞기(`src/themes/colorLayers.ts` 순수 엔진, `readColorTheme.ts` JSONC·`include`·`tokenColors` 경로 읽기,
   `services/ColorThemeService.ts` 설치된 테마 목록·섞기·다시 로드 알림): `colorThemeLayers`(테마 id 또는 `{theme, ui, syntax, applyTo}`,
   `fill`/`override`/`off`, 같은 종류의 Islands 에만 — `applyTo` 로 바꿈)·`colorThemeByKey`(색 id glob, `scope:`, `semantic:`).

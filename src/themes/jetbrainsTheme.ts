@@ -22,6 +22,9 @@ const THEME_IDS: Record<string, string> = {
   ExperimentalLightWithLightHeader: 'Light with Light Header',
 };
 
+const sortedKeys = <T>(record: Record<string, T>): Record<string, T> =>
+  Object.fromEntries(Object.keys(record).sort(compareCodeUnits).map((key) => [key, record[key]]));
+
 const HEX = /^#?([\da-f]{1,8})$/i;
 
 const FIELDS: Record<string, keyof TextAttributes> = {
@@ -79,6 +82,11 @@ const findSchemes = (node: unknown, out: XmlScheme[] = []): XmlScheme[] => {
   }
   return out;
 };
+
+/** Attributes plugins add to a bundled scheme (`additionalTextAttributes`), by scheme name */
+export type AdditionalAttributes = Record<string, Array<Record<string, AttributeEntry>>>;
+/** A scheme chain as `schemeChainData` gives it */
+export type SchemeChainData = { additional: AdditionalAttributes; scheme: string; schemes: SchemeData[] };
 
 export type UiThemeJson = {
   colors?: Record<string, string>;
@@ -214,7 +222,7 @@ export const parseAdditionalAttributes = (xml: string): Record<string, Attribute
 export const resolveScheme = (
   schemes: SchemeData[],
   name: string,
-  additional: Record<string, Array<Record<string, AttributeEntry>>> = {},
+  additional: AdditionalAttributes = {},
 ): ResolvedScheme => {
   const byName = new Map(schemes.map((scheme) => [scheme.name, scheme]));
   const chain: SchemeData[] = [];
@@ -258,8 +266,11 @@ export const resolveScheme = (
       }
     }
     const found: TextAttributes[] = [];
-    for (const scheme of chain) {
-      const sources = [scheme.attributes, ...(additional[scheme.name] ?? [])];
+    for (const [index, scheme] of chain.entries()) {
+      // What a plugin adds to a bundled scheme counts as the scheme's own in the schemes based on it too: PyCharm draws
+      // `self` in Islands Dark with the PY.SELF_PARAMETER of Darcula, not with the DEFAULT_IDENTIFIER of Islands
+      // (a fallback of it), seen on screen 2026-11-21
+      const sources = [scheme.attributes, ...chain.slice(index).flatMap((ancestor) => additional[ancestor.name] ?? [])];
       for (const key of order) {
         const entry = sources.map((source) => source[key]).find((value) => value !== undefined);
         if (entry && !('base' in entry)) found.push(entry);
@@ -281,19 +292,18 @@ export const resolveScheme = (
 };
 
 /**
- * The attributes of the schemes of a chain, the ones plugins add merged in (the scheme's own win): what `resolveScheme`
- * needs to resolve keys the same way without the files (`bun run check:colors`). The colors are left out.
+ * The schemes of a chain (without their colors) and the attributes plugins add to them: what `resolveScheme` needs to
+ * resolve keys the same way without the files (`bun run check:colors`).
  */
-export const schemeChainData = (
-  schemes: SchemeData[],
-  name: string,
-  additional: Record<string, Array<Record<string, AttributeEntry>>> = {},
-): SchemeData[] => {
+export const schemeChainData = (schemes: SchemeData[], name: string, additional: AdditionalAttributes = {}): SchemeChainData => {
   const byName = new Map(schemes.map((scheme) => [scheme.name, scheme]));
-  return resolveScheme(schemes, name, additional).chain.map((schemeName) => {
-    const scheme = byName.get(schemeName)!;
-    const merged = Object.assign({}, ...[...(additional[schemeName] ?? [])].reverse(), scheme.attributes) as Record<string, AttributeEntry>;
-    const attributes = Object.fromEntries(Object.keys(merged).sort(compareCodeUnits).map((key) => [key, merged[key]]));
-    return { attributes, colors: {}, name: scheme.name, ...(scheme.parent ? { parent: scheme.parent } : {}) };
-  });
+  const chain = resolveScheme(schemes, name, additional).chain;
+  return {
+    additional: Object.fromEntries(chain.filter((schemeName) => additional[schemeName]).map((schemeName) => [schemeName, additional[schemeName].map((source) => sortedKeys(source))])),
+    scheme: name,
+    schemes: chain.map((schemeName) => {
+      const scheme = byName.get(schemeName)!;
+      return { attributes: sortedKeys(scheme.attributes), colors: {}, name: scheme.name, ...(scheme.parent ? { parent: scheme.parent } : {}) };
+    }),
+  };
 };

@@ -72,21 +72,26 @@ describe('Color check', () => {
     assert.deepEqual(scheme.lookup(fallbackChain('STATIC_FINAL_FIELD_ATTRIBUTES'))[0], { foreground: '#bcbec4' });
     // the key alone, looked up in the whole chain: Default has it
     assert.deepEqual(scheme.attributes('STATIC_FINAL_FIELD_ATTRIBUTES'), { fontType: 3, foreground: '#660e7a' });
-    // Islands defines a fallback of the plugin key (DEFAULT_IDENTIFIER): it comes before the plugin color of Darcula
-    assert.deepEqual(scheme.lookup(fallbackChain('PY.SELF_PARAMETER'))[0], { foreground: '#bcbec4' });
+    // what a plugin adds to Darcula counts as Islands' own: it comes before the fallback Islands defines (DEFAULT_IDENTIFIER)
+    assert.deepEqual(scheme.lookup(fallbackChain('PY.SELF_PARAMETER'))[0], { foreground: '#94558d' });
+    // the scheme's own value wins over the added one
+    const own = resolveScheme(schemes, 'Islands Dark', { Darcula: [{ DEFAULT_KEYWORD: { foreground: '#000002' } }] });
+    assert.deepEqual(own.lookup(['DEFAULT_KEYWORD'])[0], { foreground: '#cf8e6d' });
     // an inherited key (baseAttributes) is not a value: its base is tried in the same scheme first
     assert.deepEqual(scheme.lookup(['INHERITED'])[0], { foreground: '#cf8e6d' });
     assert.deepEqual(scheme.lookup(['NOPE']), []);
   });
 
-  it('keeps the attributes of a scheme chain, the added ones merged in, to resolve it again without the files', () => {
-    const data = schemeChainData(schemes, 'Islands Dark', additional);
+  it('keeps the schemes of a chain and the attributes added to them, to resolve it again without the files', () => {
+    const data = schemeChainData(schemes, 'Islands Dark', { ...additional, Other: [{ X: { foreground: '#000001' } }] });
+    assert.equal(data.scheme, 'Islands Dark');
     assert.deepEqual(
-      data.map((scheme) => scheme.name),
+      data.schemes.map((scheme) => scheme.name),
       ['Islands Dark', 'Darcula', 'Default'],
     );
-    assert.deepEqual(data[1].attributes['PY.SELF_PARAMETER'], { foreground: '#94558d' });
-    const again = resolveScheme(data, 'Islands Dark');
+    assert.deepEqual(data.additional, additional);
+    assert.deepEqual(data.schemes[2].colors, {});
+    const again = resolveScheme(data.schemes, data.scheme, data.additional);
     const original = resolveScheme(schemes, 'Islands Dark', additional);
     for (const key of ['PY.SELF_PARAMETER', 'STATIC_FINAL_FIELD_ATTRIBUTES', 'INHERITED', 'TEXT']) {
       assert.deepEqual(again.lookup(fallbackChain(key)), original.lookup(fallbackChain(key)), key);

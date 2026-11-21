@@ -2,12 +2,13 @@
   "file": "markdown.md",
   "scope": "text.html.markdown",
   "tokens": [
-    { "line": 1, "text": "제목 하나", "key": "MARKDOWN_HEADER_LEVEL_1", "todo": "the theme uses MARKDOWN_HEADER, which the Markdown plugin no longer has; the IDE draws MARKDOWN_HEADER_LEVEL_n (A2, confirm on screen)" },
-    { "line": 3, "text": "Second level", "key": "MARKDOWN_HEADER_LEVEL_2", "todo": "the theme uses MARKDOWN_HEADER, which the Markdown plugin no longer has; the IDE draws MARKDOWN_HEADER_LEVEL_n (A2, confirm on screen)" },
+    { "line": 1, "text": "제목 하나", "key": "MARKDOWN_HEADER_LEVEL_1" },
+    { "line": 3, "text": "Second level", "key": "MARKDOWN_HEADER_LEVEL_2" },
     { "line": 5, "text": "bold", "key": "MARKDOWN_BOLD" },
     { "line": 5, "text": "italic", "key": "MARKDOWN_ITALIC" },
-    { "line": 5, "text": "code", "key": "MARKDOWN_CODE_SPAN", "todo": "IDE order (EditorColorsSchemeImpl) gives the default key of Islands, the theme keeps the color the plugin adds to Darcula: confirm on a PyCharm screen (A2)" },
+    { "line": 5, "text": "code", "key": "MARKDOWN_CODE_SPAN" },
     { "line": 5, "text": "link", "key": "MARKDOWN_LINK_TEXT" },
-    { "line": 7, "text": "-", "key": "MARKDOWN_LIST_MARKER", "todo": "IDE order (EditorColorsSchemeImpl) gives the default key of Islands, the theme keeps the color the plugin adds to Darcula: confirm on a PyCharm screen (A2)" }
+    { "line": 7, "text": "-", "key": "MARKDOWN_LIST_MARKER" },
+    { "line": 5, "text": "https://example.com", "key": "HYPERLINK_ATTRIBUTES" }
   ]
 }

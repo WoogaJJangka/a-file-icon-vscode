@@ -94,7 +94,7 @@ const generate = async (commit: string) => {
     console.log(`  ${Object.keys(theme.colors).length} colors, ${theme.tokenColors.length} token rules, ${Object.keys(theme.semanticTokenColors).length} semantic rules`);
     if (unresolved.length > 0) console.log(`  left to the VS Code defaults: ${unresolved.join(', ')}`);
     outputs.set(`${THEMES_FOLDER}/${info.base}`, `${JSON.stringify(theme, undefined, 2)}\n`);
-    attributes[info.label] = { scheme: ui.editorScheme, schemes: schemeChainData(schemes, ui.editorScheme, additional) };
+    attributes[info.label] = schemeChainData(schemes, ui.editorScheme, additional);
   }
   // The schemes the IDE draws each key from, for `bun run check:colors` (not shipped: test/ is left out of the VSIX)
   outputs.set(ATTRIBUTES_FILE, `${JSON.stringify(attributes, undefined, 2)}\n`);

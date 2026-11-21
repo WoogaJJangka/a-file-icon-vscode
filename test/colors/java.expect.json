@@ -3,17 +3,18 @@
   "scope": "source.java",
   "tokens": [
     { "line": 1, "text": "package", "key": "JAVA_KEYWORD" },
-    { "line": 5, "text": "/** Doc comment */", "key": "JAVA_DOC_COMMENT", "todo": "the delimiters of a doc comment take the line comment color (A2)" },
-    { "line": 6, "text": "@SuppressWarnings", "key": "ANNOTATION_NAME_ATTRIBUTES", "todo": "the @ of an annotation is text (A2)" },
+    { "line": 5, "text": "/** Doc comment */", "key": "JAVA_DOC_COMMENT" },
+    { "line": 6, "text": "@SuppressWarnings", "key": "ANNOTATION_NAME_ATTRIBUTES" },
     { "line": 6, "text": "\"unused\"", "key": "JAVA_STRING" },
     { "line": 7, "text": "public", "key": "JAVA_KEYWORD" },
-    { "line": 7, "text": "Greeter", "key": "CLASS_NAME_ATTRIBUTES", "todo": "IDE order (EditorColorsSchemeImpl) gives the default key of Islands, the theme keeps the color the plugin adds to Darcula: confirm on a PyCharm screen (A2)" },
+    { "line": 7, "text": "Greeter", "key": "CLASS_NAME_ATTRIBUTES" },
     { "line": 8, "text": "int", "key": "JAVA_KEYWORD" },
     { "line": 8, "text": "MAX_SIZE", "key": "STATIC_FINAL_FIELD_ATTRIBUTES", "todo": "only semantic tokens (a Java language server) know a static final field" },
     { "line": 8, "text": "10", "key": "JAVA_NUMBER" },
-    { "line": 9, "text": "String", "key": "CLASS_NAME_ATTRIBUTES", "todo": "storage.type.java (class names) falls into the keyword rule (A2)" },
-    { "line": 15, "text": "List", "key": "CLASS_NAME_ATTRIBUTES", "todo": "storage.type.java (class names) falls into the keyword rule (A2)" },
+    { "line": 9, "text": "String", "key": "CLASS_NAME_ATTRIBUTES" },
+    { "line": 15, "text": "List", "key": "CLASS_NAME_ATTRIBUTES" },
     { "line": 15, "text": "greet", "key": "METHOD_DECLARATION_ATTRIBUTES" },
-    { "line": 16, "text": "return", "key": "JAVA_KEYWORD" }
+    { "line": 16, "text": "return", "key": "JAVA_KEYWORD" },
+    { "line": 3, "text": "java.util.List", "key": "DEFAULT_IDENTIFIER" }
   ]
 }

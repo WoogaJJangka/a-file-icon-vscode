@@ -2,10 +2,11 @@
   "file": "yaml.yaml",
   "scope": "source.yaml",
   "tokens": [
-    { "line": 1, "text": "# 한글 주석", "key": "YAML_COMMENT", "todo": "IDE order (EditorColorsSchemeImpl) gives the default key of Islands, the theme keeps the color the plugin adds to Darcula: confirm on a PyCharm screen (A2)" },
+    { "line": 1, "text": "# 한글 주석", "key": "YAML_COMMENT" },
     { "line": 2, "text": "name", "key": "YAML_SCALAR_KEY" },
     { "line": 5, "text": "branches", "key": "YAML_SCALAR_KEY" },
-    { "line": 6, "text": "&defaults", "key": "YAML_ANCHOR", "todo": "the & of an anchor takes the keyword color (A2); the anchor name: IDE order (EditorColorsSchemeImpl) gives the default key of Islands, the theme keeps the color the plugin adds to Darcula: confirm on a PyCharm screen (A2)" },
-    { "line": 7, "text": "3", "key": "YAML_SCALAR_VALUE", "todo": "the IDE has no number key for YAML (a plain value is text), the grammar gives constant.numeric (A2)" }
+    { "line": 6, "text": "&defaults", "key": "YAML_ANCHOR" },
+    { "line": 7, "text": "3", "key": "YAML_SCALAR_VALUE" },
+    { "line": 10, "text": "true", "key": "YAML_SCALAR_VALUE" }
   ]
 }

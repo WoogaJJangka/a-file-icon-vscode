@@ -123,12 +123,15 @@ const main = async () => {
 
   let failures = 0;
   let todos = 0;
+  /** Expectations marked todo, and the ones of them that still differ in a theme: a todo that differs in none is stale */
+  const todoChecked = new Set<string>();
+  const todoFailed = new Set<string>();
   let checked = 0;
   for (const info of COLOR_THEMES) {
     const theme = loadTheme(info.base);
     const chain = allAttributes[info.label];
     if (!chain) throw new Error(`${ATTRIBUTES_FILE} has no ${info.label}: run bun run sync:colors`);
-    const scheme = resolveScheme(chain.schemes, chain.scheme);
+    const scheme = resolveScheme(chain.schemes, chain.scheme, chain.additional);
     registry.setTheme(textMateTheme(theme));
     const colorMap = registry.getColorMap();
     console.log(`\n${info.label}`);
@@ -147,10 +150,12 @@ const main = async () => {
         if (!expected) throw new Error(`${where}: the scheme has neither ${expectation.key} nor a fallback of it (KEY_FALLBACKS)`);
         checked++;
         const problem = compareStyles(expected, tokens.map((token) => decodeStyle(token.metadata, colorMap)));
+        if (expectation.todo) todoChecked.add(where);
         if (!problem) continue;
         const scopes = tokens.map((token) => token.scopes.at(-1)).join(' + ');
         if (expectation.todo) {
           todos++;
+          todoFailed.add(where);
           console.log(`  todo  ${where} (${expectation.key}): ${problem} [${scopes}] — ${expectation.todo}`);
         } else {
           failures++;
@@ -186,6 +191,9 @@ const main = async () => {
     }
   }
 
+  const stale = [...todoChecked].filter((where) => !todoFailed.has(where));
+  for (const where of stale) console.log(`  FIXED ${where}: matches the IDE in both themes, remove its todo`);
+  failures += stale.length;
   console.log(`\n${checked} checks, ${failures} differences, ${todos} known differences (todo)`);
   if (failures > 0) process.exitCode = 1;
 };
