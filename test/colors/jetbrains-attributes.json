@@ -192,6 +192,61 @@
           "KOTLIN_TYPE_PARAMETER": {
             "foreground": "#20999d"
           }
+        },
+        {
+          "IDE.PHP.CONSTANT": {
+            "fontType": 2,
+            "foreground": "#9876aa"
+          },
+          "IDE.PHP.FUNCTION_CALL": {
+            "foreground": "#57aaf7"
+          },
+          "IDE.PHP.STRING_BRACES": {
+            "foreground": "#6f737a"
+          },
+          "IDE.PHP.VARIABLE": {
+            "foreground": "#9876aa"
+          },
+          "IDE.RUBY.COMMENT": {
+            "fontType": 2,
+            "foreground": "#808080"
+          },
+          "IDE.RUBY.CONSTANT": {
+            "foreground": "#fefff9"
+          },
+          "IDE.RUBY.CONSTANT_DECLARATION": {
+            "fontType": 2,
+            "foreground": "#ffc66d"
+          },
+          "IDE.RUBY.ESCAPE": {
+            "foreground": "#cc7832"
+          },
+          "IDE.RUBY.LOCAL_VARIABLE": {
+            "fontType": 2,
+            "foreground": "#d4b01d"
+          },
+          "IDE.RUBY.METHOD_DECLARATION": {
+            "foreground": "#ffc66d"
+          },
+          "IDE.RUBY.NUMBER": {
+            "foreground": "#74a4c8"
+          },
+          "IDE.RUBY.PARAMETER": {
+            "fontType": 2,
+            "foreground": "#d4b01d"
+          },
+          "IDE.RUBY.SPECIFIC_CALL": {
+            "foreground": "#fc9800"
+          },
+          "IDE.RUBY.SYMBOL": {
+            "foreground": "#89a6af"
+          },
+          "IDE.TS.TYPE_PARAMETER": {
+            "foreground": "#507874"
+          },
+          "JS.LOCAL_VARIABLE": {
+            "foreground": "#a9b7c6"
+          }
         }
       ],
       "Default": [
@@ -381,6 +436,45 @@
           },
           "KOTLIN_SMART_CONSTANT": {
             "background": "#dbffdb"
+          }
+        },
+        {
+          "CSS.COLOR": {
+            "foreground": "#0033b3"
+          },
+          "IDE.PHP.FUNCTION_CALL": {
+            "foreground": "#00627a"
+          },
+          "IDE.PHP.STRING_BRACES": {
+            "foreground": "#808080"
+          },
+          "IDE.PHP.VARIABLE": {
+            "foreground": "#660000"
+          },
+          "IDE.RUBY.LOCAL_VARIABLE": {
+            "fontType": 2,
+            "foreground": "#003c5a"
+          },
+          "IDE.RUBY.METHOD_DECLARATION": {
+            "fontType": 2,
+            "foreground": "#0000ff"
+          },
+          "IDE.RUBY.PARAMETER": {
+            "fontType": 2,
+            "foreground": "#c37522"
+          },
+          "IDE.RUBY.SPECIFIC_CALL": {
+            "fontType": 2,
+            "foreground": "#00627a"
+          },
+          "IDE.RUBY.SYMBOL": {
+            "foreground": "#871094"
+          },
+          "IDE.TS.TYPE_PARAMETER": {
+            "foreground": "#20999d"
+          },
+          "JS.INSTANCE_MEMBER_FUNCTION": {
+            "foreground": "#914c07"
           }
         }
       ]
@@ -2795,6 +2889,45 @@
           },
           "KOTLIN_SMART_CONSTANT": {
             "background": "#dbffdb"
+          }
+        },
+        {
+          "CSS.COLOR": {
+            "foreground": "#0033b3"
+          },
+          "IDE.PHP.FUNCTION_CALL": {
+            "foreground": "#00627a"
+          },
+          "IDE.PHP.STRING_BRACES": {
+            "foreground": "#808080"
+          },
+          "IDE.PHP.VARIABLE": {
+            "foreground": "#660000"
+          },
+          "IDE.RUBY.LOCAL_VARIABLE": {
+            "fontType": 2,
+            "foreground": "#003c5a"
+          },
+          "IDE.RUBY.METHOD_DECLARATION": {
+            "fontType": 2,
+            "foreground": "#0000ff"
+          },
+          "IDE.RUBY.PARAMETER": {
+            "fontType": 2,
+            "foreground": "#c37522"
+          },
+          "IDE.RUBY.SPECIFIC_CALL": {
+            "fontType": 2,
+            "foreground": "#00627a"
+          },
+          "IDE.RUBY.SYMBOL": {
+            "foreground": "#871094"
+          },
+          "IDE.TS.TYPE_PARAMETER": {
+            "foreground": "#20999d"
+          },
+          "JS.INSTANCE_MEMBER_FUNCTION": {
+            "foreground": "#914c07"
           }
         }
       ]

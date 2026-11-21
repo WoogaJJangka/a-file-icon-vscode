@@ -27,6 +27,9 @@ const sortedKeys = <T>(record: Record<string, T>): Record<string, T> =>
 
 const HEX = /^#?([\da-f]{1,8})$/i;
 
+/** The bundled base schemes, loaded as DefaultColorsScheme: no parent at run time (see `resolveScheme`) */
+const BASE_SCHEMES = new Set(['Darcula', 'Default']);
+
 const FIELDS: Record<string, keyof TextAttributes> = {
   BACKGROUND: 'background',
   EFFECT_COLOR: 'effectColor',
@@ -247,11 +250,18 @@ export const resolveScheme = (
     return undefined;
   };
 
-  // Like EditorColorsSchemeImpl.getAttributes: a scheme first, all the keys in it (the key, then its fallbacks), and
-  // only then its parent. A key that only the parent defines loses to a fallback the scheme defines: Darcula draws a
-  // static final field with its own DEFAULT_STATIC_FIELD, not with the STATIC_FINAL_FIELD_ATTRIBUTES of Default.
-  // `baseAttributes` (inherited) is not a value of the scheme: it names the fallback the code gives the key, which every
-  // scheme tries right after the key.
+  // Like EditorColorsSchemeImpl.getAttributes (Islands Dark, Light: a scheme with a parent): the key in the scheme and its
+  // parents (getDirectlyDefinedAttributes), then each fallback the same way (getFallbackAttributes). The parents end at
+  // the first bundled base scheme (Darcula, Default): a DefaultColorsScheme, which has no parent at run time, so what
+  // Default defines (light colors) only comes last, as the key defaults. The attributes a plugin adds to a base scheme are
+  // part of it. Seen in the rich text the IDEs copy (test/colors/ide, 2026-11-22): Islands Dark draws an HTML attribute
+  // name with the HTML_ATTRIBUTE_NAME of Darcula, not the XML_ATTRIBUTE_NAME (a fallback) of Islands; Light draws a class
+  // name with the DEFAULT_IDENTIFIER of Default, not the TEXT of Light; PyCharm draws a properties separator with the
+  // PROPERTIES.KEY_VALUE_SEPARATOR of Darcula.
+  // `baseAttributes` (inherited) is not a value of the scheme: it names the fallback the code gives the key; the nearest
+  // scheme that names the key decides, and an inherited key goes on with its fallback.
+  const base = chain.findIndex((scheme) => BASE_SCHEMES.has(scheme.name));
+  const direct = base === -1 ? chain : chain.slice(0, base + 1);
   const bases = new Map<string, string>();
   for (const source of chain.flatMap((scheme) => [scheme.attributes, ...(additional[scheme.name] ?? [])])) {
     for (const [key, entry] of Object.entries(source)) {
@@ -266,16 +276,15 @@ export const resolveScheme = (
       }
     }
     const found: TextAttributes[] = [];
-    for (const [index, scheme] of chain.entries()) {
-      // What a plugin adds to a bundled scheme counts as the scheme's own in the schemes based on it too: PyCharm draws
-      // `self` in Islands Dark with the PY.SELF_PARAMETER of Darcula, not with the DEFAULT_IDENTIFIER of Islands
-      // (a fallback of it), seen on screen 2026-11-21
-      // Only from the nearest scheme with added attributes: what Default gets (light colors) stops at Darcula
-      const base = chain.slice(index).find((ancestor) => additional[ancestor.name]);
-      const sources = [scheme.attributes, ...(base ? additional[base.name] : [])];
+    // Then, when none of them has the key or a fallback, the key defaults: the parents of the base scheme (Default)
+    for (const schemes of [direct, chain.slice(direct.length)]) {
       for (const key of order) {
-        const entry = sources.map((source) => source[key]).find((value) => value !== undefined);
-        if (entry && !('base' in entry)) found.push(entry);
+        for (const scheme of schemes) {
+          const entry = [scheme.attributes, ...(additional[scheme.name] ?? [])].map((source) => source[key]).find((value) => value !== undefined);
+          if (!entry) continue;
+          if (!('base' in entry)) found.push(entry);
+          break;
+        }
       }
     }
     return found;

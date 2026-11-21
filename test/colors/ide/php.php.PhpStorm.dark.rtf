@@ -1,0 +1,182 @@
+{\rtf1\ansi\deff0{\colortbl;\red188\green190\blue196;\red25\green26\blue28;\red207\green142\blue109;\red111\green115\blue122;\red95\green130\blue107;\red152\green118\blue170;\red42\green172\blue184;\red199\green125\blue187;\red106\green171\blue115;\red86\green168\blue245;\red122\green126\blue133;\red87\green170\blue247;}
+{\fonttbl{\f1\fmodern JetBrains Mono;}{\f2\fmodern Courier New;}}
+
+\s0\box\cbpat2\cb2\cf1\fs20
+\cf3
+\f1
+\i0\b0
+
+<?php\line
+
+\line
+
+namespace \cf1
+
+Demo;\line
+
+\line
+\cf3
+
+use \cf4
+
+InvalidArgumentException\cf1
+
+;\line
+
+\line
+\cf5
+\i\b0
+
+/** Doc comment */\line
+\cf3
+\i0\b0
+
+class \cf1
+
+Greeter\line
+
+\{\line
+
+    \cf3
+
+const \cf6
+\i\b0
+
+MAX_SIZE \cf1
+\i0\b0
+
+= \cf7
+
+10\cf1
+
+;\line
+
+    \cf3
+
+private string \cf8
+
+$name \cf1
+
+= \cf9
+
+'world'\cf1
+
+;\line
+
+\line
+
+    \cf3
+
+public function \cf10
+
+greet\cf1
+
+(\cf3
+
+int \cf6
+
+$times\cf1
+
+): \cf3
+
+string\line
+
+    \cf1
+
+\{\line
+
+        \cf11
+
+// \f2
+
+\u54620?\u44544? \u51452?\u49437?\line
+
+        \cf6
+\f1
+
+$message \cf1
+
+= \cf9
+
+"Hello \cf4
+
+\{\cf6
+
+$this\cf1
+
+->\cf8
+
+name\cf4
+
+\}\cf3
+
+\\n\cf9
+
+"\cf1
+
+;\line
+
+        \cf3
+
+return \cf12
+
+str_repeat\cf1
+
+(\cf6
+
+$message\cf1
+
+, \cf6
+
+$times\cf1
+
+) . \cf3
+
+self\cf1
+
+::\cf6
+\i\b0
+
+MAX_SIZE\cf1
+\i0\b0
+
+;\line
+
+    \}\line
+
+\}\line
+
+\line
+\cf6
+
+$greeter \cf1
+
+= \cf3
+
+new \cf1
+
+Greeter();\line
+\cf3
+
+echo \cf6
+
+$greeter\cf1
+
+->\cf12
+
+greet\cf1
+
+(\cf7
+
+2\cf1
+
+), \cf3
+
+null\cf1
+
+, \cf3
+
+true\cf1
+
+;\line
+\par}

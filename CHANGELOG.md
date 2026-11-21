@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. Dates are displayed in UTC.
 
+#### Unreleased
+
+- feat: Ruby and PHP look like RubyMine and PhpStorm (they followed the TextMate colors of PyCharm): constants and
+  their declarations, symbols, parameters, local and instance variables, specific calls like `require`, method
+  declarations; PHP variables, constants, calls, `{$…}` braces and keywords like `echo` and `null`.
+- fix: colors compared character by character with WebStorm, PhpStorm, RubyMine and PyCharm 2026.3, from the rich
+  text they copy (`bun run compare:ide`, captures in `test/colors/ide`). The schemes are now read in the order of the
+  IDE (a key in the scheme and its base scheme, then its fallbacks): HTML attribute names, CSS property names and the
+  properties separator have their gray, class names in Islands Light are black. CSS: the `.` of a class and the `:`
+  of a pseudo-class are text, a unit is a string, `url()` and `var()` take the selector color. HTML and XML: the
+  `=` of an attribute has the value color, a namespace prefix is purple, the CDATA markers are text. TypeScript and
+  JavaScript: a property declaration is a field, a property access and a parameter are text, a local variable, a
+  method declaration and a type parameter have the WebStorm colors, a regex literal has one color, `${…}` is code.
+
 #### 0.2.0 (2026-11-21)
 
 Syntax colors of the JetBrains IDE for many more languages, checked token by token against the IDE; named accent
