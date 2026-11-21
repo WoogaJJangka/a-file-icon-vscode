@@ -12,6 +12,7 @@ import { existsSync, mkdtempSync, readdirSync, readFileSync, rmSync } from 'node
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { JSON_FILE_NAME } from 'src/helpers/constants';
+import { compareCodeUnits } from 'src/helpers/utils';
 import { PRESETS } from 'src/presets/presets';
 import { contrastRatio } from 'src/themes/accent';
 import { normalizeColorLayers, tokenStyleFor } from 'src/themes/colorLayers';
@@ -48,7 +49,7 @@ const CANDIDATES: Array<{ extension: string; theme: string }> = [
 const vscodeCli = (): string => {
   const folders = [join(root, '.vscode-test'), join(root, '..', '..', '..', '.vscode-test')].filter((folder) => existsSync(folder));
   for (const folder of folders) {
-    for (const entry of readdirSync(folder).filter((name) => name.startsWith('vscode-')).sort().reverse()) {
+    for (const entry of readdirSync(folder).filter((name) => name.startsWith('vscode-')).sort(compareCodeUnits).reverse()) {
       const cli = join(folder, entry, 'bin', process.platform === 'win32' ? 'code.cmd' : 'code');
       if (existsSync(cli)) return cli;
     }

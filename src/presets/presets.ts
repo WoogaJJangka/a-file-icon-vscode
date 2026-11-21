@@ -6,6 +6,7 @@
  * The names and descriptions are `preset.<id>.name` / `preset.<id>.description` in the locales.
  */
 import { EXTENSION_KEY } from 'src/helpers/constants';
+import { compareCodeUnits } from 'src/helpers/utils';
 import { ISLANDS_PRODUCT_THEME_ID } from 'src/productIcons/islandsProductTheme';
 import { COLOR_THEMES } from 'src/themes/colorThemes';
 
@@ -118,7 +119,7 @@ const PRESETS: Preset[] = [
 ];
 
 /** The settings any preset writes: what `undoPreset` restores */
-const PRESET_SETTING_IDS = [...new Set(PRESETS.flatMap((preset) => Object.keys(preset.settings)))].sort();
+const PRESET_SETTING_IDS = [...new Set(PRESETS.flatMap((preset) => Object.keys(preset.settings)))].sort(compareCodeUnits);
 
 export { PRESET_GROUPS, PRESET_SETTING_IDS, PRESETS };
 export type { Preset, PresetGroup };
