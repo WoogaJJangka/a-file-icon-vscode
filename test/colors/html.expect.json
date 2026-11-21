@@ -1,0 +1,14 @@
+{
+  "file": "html.html",
+  "scope": "text.html.derivative",
+  "tokens": [
+    { "line": 2, "text": "html", "key": "HTML_TAG_NAME" },
+    { "line": 2, "text": "lang", "key": "HTML_ATTRIBUTE_NAME" },
+    { "line": 2, "text": "\"ko\"", "key": "HTML_ATTRIBUTE_VALUE" },
+    { "line": 5, "text": "&amp;", "key": "HTML_ENTITY_REFERENCE" },
+    { "line": 8, "text": "<!-- 한글 주석 -->", "key": "HTML_COMMENT" },
+    { "line": 9, "text": "<", "key": "HTML_TAG" },
+    { "line": 9, "text": "div", "key": "HTML_TAG_NAME" },
+    { "line": 9, "text": "hidden", "key": "HTML_ATTRIBUTE_NAME" }
+  ]
+}

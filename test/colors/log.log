@@ -1,0 +1,4 @@
+2026-11-21 10:15:02.123 INFO  [main] Greeter started on port 8080
+2026-11-21 10:15:03.456 WARN  [worker-1] Slow response: 1200 ms
+2026-11-21 10:15:04.789 ERROR [worker-2] java.lang.IllegalStateException: failed
+2026-11-21 10:15:05.000 DEBUG [main] user="world" id=0x1F

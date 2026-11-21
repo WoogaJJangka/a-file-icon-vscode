@@ -21,6 +21,13 @@ All notable changes to this project will be documented in this file. Dates are d
 - feat: `accentTargets` paints more with the accent: `controls` (scrollbars, checkbox borders, badges, active search
   options), `tabs` (the line of the active tab, panel title and activity bar item) and `folders` (the folder icons,
   instead of `folderColor`). Empty by default; checkboxes on the Colors tab of the Mix Themes page.
+- feat: syntax colors for the languages PyCharm draws with TextMate grammars (Ruby, PHP, Lua, Swift, PowerShell, Dart,
+  Perl, R, Julia, Clojure, Objective-C, batch files, Makefiles, log files): the colors its TextMate plugin gives the
+  scopes, layered like the IDE (a number is teal italic, a symbol or `nil` a purple italic constant, a variable text).
+  Checked against PyCharm, with CSS (whole selectors in the tag color, property names as text, keyword values as
+  strings, units as numbers), XML (namespace prefixes in the color of their name, CDATA), SQL (built-in functions
+  italic, table names as text) and `.env` files (keys as keywords, values as strings, `export` as a comment).
+- test: `bun run check:colors` checks 13 more samples (618 checks); an expectation can list the TextMate `layers` of a token.
 - feat: syntax colors of the JetBrains IDE for C/C++, Go, Rust and C#, checked against CLion, GoLand and RustRover:
   function and method calls are text instead of the declaration blue (C++, Go, Rust), C++ member initializers are
   fields, macros have the annotation color and parameter types are class references; Go builtins use the `GO_*`

@@ -127,9 +127,33 @@ export const TOKEN_RULES: TokenRule[] = [
   },
   { from: ['PROPERTIES.KEY'], name: 'Properties key', scope: ['support.type.property-name.properties', 'keyword.other.definition.ini', 'entity.name.section.group-title.ini'] },
   { from: ['PROPERTIES.KEY_VALUE_SEPARATOR'], name: 'Properties separator', scope: ['punctuation.separator.key-value.ini'] },
-  { from: ['CSS.PROPERTY_NAME', 'DEFAULT_INSTANCE_FIELD'], name: 'CSS property', scope: ['support.type.property-name.css', 'support.type.vendored.property-name.css', 'support.type.property-name.scss', 'support.type.property-name.less'] },
-  { from: ['CSS.PROPERTY_VALUE', 'DEFAULT_IDENTIFIER', 'TEXT'], name: 'CSS value', scope: ['support.constant.property-value.css', 'meta.property-value.css'] },
-  { from: ['CSS.TAG_NAME', 'DEFAULT_KEYWORD'], name: 'CSS selector', scope: ['entity.name.tag.css', 'entity.other.attribute-name.class.css', 'entity.other.attribute-name.id.css'] },
+  // .env (DotEnvSyntaxHighlighter): a key is a keyword, a value a string with its quotes and `${…}`, `export` a comment
+  { from: ['DOTENV_KEY'], name: '.env key', scope: ['variable.key.dotenv'] },
+  { from: ['DOTENV_VALUE'], name: '.env value', scope: ['property.value.dotenv', 'property.value.dotenv keyword', 'property.value.dotenv variable'] },
+  { from: ['DOTENV_COMMENT'], name: '.env export', scope: ['keyword.key.export.dotenv'] },
+  // SQL (Database Tools, closed). Seen in PyCharm 2026-11-21: the table of a CREATE, an alias and the column after it are
+  // text (a column the IDE resolves can be purple: semantic), a built-in function italic like a static method
+  { from: ['DEFAULT_IDENTIFIER'], name: 'SQL name', scope: ['entity.name.function.sql', 'constant.other.database-name.sql', 'constant.other.table-name.sql'] },
+  { from: ['DEFAULT_STATIC_METHOD'], name: 'SQL function', scope: ['source.sql support.function'] },
+  // CSS (the CSS plugin is closed: its keys fall back in code we cannot read). Seen in PyCharm 2026-11-21: a property name
+  // is text, a keyword value (`auto`, `none`, a font name) a string, a unit a number, a whole selector the color of an HTML
+  // tag name (its `.` `#` `:` too)
+  { from: ['CSS.PROPERTY_NAME', 'DEFAULT_IDENTIFIER'], name: 'CSS property', scope: ['support.type.property-name.css', 'support.type.vendored.property-name.css', 'support.type.property-name.scss', 'support.type.property-name.less', 'support.type.property-name.media.css'] },
+  { from: ['CSS.PROPERTY_VALUE', 'DEFAULT_IDENTIFIER', 'TEXT'], name: 'CSS value', scope: ['meta.property-value.css'] },
+  { from: ['CSS.PROPERTY_VALUE', 'DEFAULT_STRING'], name: 'CSS value keyword', scope: ['support.constant.property-value.css', 'support.constant.font-name.css'] },
+  { from: ['CSS.NUMBER', 'DEFAULT_NUMBER'], name: 'CSS unit', scope: ['keyword.other.unit'] },
+  {
+    from: ['CSS.TAG_NAME', 'HTML_TAG_NAME'],
+    name: 'CSS selector',
+    scope: [
+      'entity.name.tag.css',
+      'entity.other.attribute-name.class.css',
+      'entity.other.attribute-name.id.css',
+      'entity.other.attribute-name.pseudo-class.css',
+      'entity.other.attribute-name.pseudo-element.css',
+      'meta.attribute-selector.css entity.other.attribute-name',
+    ],
+  },
   { from: ['CSS.COLOR', 'DEFAULT_NUMBER'], name: 'CSS color', scope: ['constant.other.color.rgb-value.hex.css', 'support.constant.color'] },
   { from: ['CSS.URL', 'DEFAULT_STRING'], name: 'CSS url', scope: ['variable.parameter.url.css'] },
   { from: ['CSS.IMPORTANT', 'DEFAULT_KEYWORD'], name: 'CSS important', scope: ['keyword.other.important.css'] },
@@ -160,7 +184,12 @@ export const TOKEN_RULES: TokenRule[] = [
   { from: ['XML_TAG', 'DEFAULT_TAG', 'TEXT'], name: 'XML tag', scope: ['punctuation.definition.tag.xml'] },
   { from: ['XML_TAG_NAME', 'DEFAULT_KEYWORD'], name: 'XML tag name', scope: ['entity.name.tag.xml', 'entity.name.tag.localname.xml'] },
   { from: ['XML_ATTRIBUTE_NAME', 'DEFAULT_ATTRIBUTE', 'DEFAULT_INSTANCE_FIELD'], name: 'XML attribute name', scope: ['entity.other.attribute-name.xml', 'entity.other.attribute-name.localname.xml'] },
-  { from: ['XML_NS_PREFIX', 'DEFAULT_INSTANCE_FIELD'], name: 'XML namespace prefix', scope: ['entity.name.tag.namespace.xml', 'entity.other.attribute-name.namespace.xml'] },
+  // A namespace prefix has the color of its name: PyCharm (2026-11-21) does not draw XML_NS_PREFIX on `xmlns:demo` or `demo:greeter`
+  { from: ['XML_TAG_NAME'], name: 'XML namespace prefix', scope: ['entity.name.tag.namespace.xml'] },
+  { from: ['XML_ATTRIBUTE_NAME'], name: 'XML attribute prefix', scope: ['entity.other.attribute-name.namespace.xml', 'entity.other.attribute-name.xml punctuation.separator.namespace.xml'] },
+  // CDATA: the markers like a tag, the text like tag data (PyCharm 2026-11-21)
+  { from: ['XML_TAG_DATA', 'TEXT'], name: 'XML CDATA', scope: ['string.unquoted.cdata.xml'] },
+  { from: ['XML_TAG', 'TEXT'], name: 'XML CDATA marker', scope: ['string.unquoted.cdata.xml punctuation.definition.string'] },
   { from: ['XML_PROLOGUE', 'TEXT'], name: 'XML prologue', scope: ['meta.tag.preprocessor.xml punctuation.definition.tag.xml', 'meta.tag.preprocessor.xml entity.name.tag.xml'] },
   { from: ['HTML_CUSTOM_TAG_NAME', 'HTML_TAG_NAME', 'DEFAULT_KEYWORD'], name: 'HTML custom element', scope: ['meta.tag.custom entity.name.tag'] },
 

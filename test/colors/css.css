@@ -1,0 +1,17 @@
+/* 한글 주석 */
+@import url("base.css");
+
+:root {
+  --accent: #3574f0;
+}
+
+.greeter > h1#title:hover,
+a[href^="http"] {
+  color: var(--accent);
+  margin: 0 auto 10px;
+  font-family: "JetBrains Mono", monospace !important;
+}
+
+@media (max-width: 600px) {
+  .greeter { display: none; }
+}

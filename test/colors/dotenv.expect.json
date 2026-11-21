@@ -1,0 +1,13 @@
+{
+  "file": "dotenv.env",
+  "scope": "source.dotenv",
+  "tokens": [
+    { "line": 1, "text": "# 한글 주석", "key": "DOTENV_COMMENT" },
+    { "line": 2, "text": "APP_NAME", "key": "DOTENV_KEY" },
+    { "line": 2, "text": "=", "key": "DOTENV_SEPARATOR" },
+    { "line": 2, "text": "greeter", "key": "DOTENV_VALUE" },
+    { "line": 3, "text": "export", "key": "DOTENV_COMMENT" },
+    { "line": 3, "text": "10", "key": "DOTENV_VALUE" },
+    { "line": 4, "text": "\"Hello ${APP_NAME}\"", "key": "DOTENV_VALUE" }
+  ]
+}

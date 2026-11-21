@@ -1,9 +1,16 @@
-/** platform/core-api/src/com/intellij/openapi/editor/DefaultLanguageHighlighterColors.java */
+/**
+ * platform/core-api/src/com/intellij/openapi/editor/DefaultLanguageHighlighterColors.java. The punctuation keys have no
+ * fallback in code: a scheme without them draws them with the default attributes, written here as TEXT.
+ */
 const DEFAULT_KEYS: Record<string, string> = {
   DEFAULT_ATTRIBUTE: 'DEFAULT_IDENTIFIER',
+  DEFAULT_BRACES: 'TEXT',
+  DEFAULT_BRACKETS: 'TEXT',
   DEFAULT_CLASS_NAME: 'DEFAULT_IDENTIFIER',
   DEFAULT_CLASS_REFERENCE: 'DEFAULT_IDENTIFIER',
+  DEFAULT_COMMA: 'TEXT',
   DEFAULT_CONSTANT: 'DEFAULT_IDENTIFIER',
+  DEFAULT_DOT: 'TEXT',
   DEFAULT_ENTITY: 'DEFAULT_IDENTIFIER',
   DEFAULT_FUNCTION_CALL: 'DEFAULT_IDENTIFIER',
   DEFAULT_FUNCTION_DECLARATION: 'DEFAULT_IDENTIFIER',
@@ -16,10 +23,13 @@ const DEFAULT_KEYS: Record<string, string> = {
   DEFAULT_LABEL: 'DEFAULT_IDENTIFIER',
   DEFAULT_LOCAL_VARIABLE: 'DEFAULT_IDENTIFIER',
   DEFAULT_METADATA: 'TEXT',
+  DEFAULT_OPERATION_SIGN: 'TEXT',
   DEFAULT_PARAMETER: 'DEFAULT_IDENTIFIER',
+  DEFAULT_PARENTHS: 'TEXT',
   DEFAULT_PREDEFINED_SYMBOL: 'DEFAULT_IDENTIFIER',
   DEFAULT_REASSIGNED_LOCAL_VARIABLE: 'DEFAULT_LOCAL_VARIABLE',
   DEFAULT_REASSIGNED_PARAMETER: 'DEFAULT_PARAMETER',
+  DEFAULT_SEMICOLON: 'TEXT',
   DEFAULT_STATIC_FIELD: 'DEFAULT_IDENTIFIER',
   DEFAULT_STATIC_METHOD: 'DEFAULT_FUNCTION_DECLARATION',
   DEFAULT_TAG: 'TEXT',
@@ -310,6 +320,36 @@ const TOML_KEYS: Record<string, string> = {
   'org.toml.VALID_STRING_ESCAPE': 'DEFAULT_VALID_STRING_ESCAPE',
 };
 
+/** plugins/env-files-support/src/main/java/ru/adelf/idea/dotenv/DotEnvSyntaxHighlighter.java (`export` is a comment) */
+const DOTENV_KEYS: Record<string, string> = {
+  DOTENV_COMMENT: 'DEFAULT_LINE_COMMENT',
+  DOTENV_KEY: 'DEFAULT_KEYWORD',
+  DOTENV_SEPARATOR: 'DEFAULT_OPERATION_SIGN',
+  DOTENV_VALUE: 'DEFAULT_STRING',
+};
+
+/** xml/xml-psi-impl/src/com/intellij/openapi/editor/XmlHighlighterColors.java */
+const XML_KEYS: Record<string, string> = {
+  HTML_ATTRIBUTE_NAME: 'DEFAULT_ATTRIBUTE',
+  HTML_ATTRIBUTE_VALUE: 'DEFAULT_STRING',
+  HTML_CODE: 'TEXT',
+  HTML_COMMENT: 'DEFAULT_LINE_COMMENT',
+  HTML_CUSTOM_TAG_NAME: 'HTML_TAG_NAME',
+  HTML_ENTITY_REFERENCE: 'DEFAULT_ENTITY',
+  HTML_TAG: 'DEFAULT_TAG',
+  HTML_TAG_NAME: 'DEFAULT_KEYWORD',
+  XML_ATTRIBUTE_NAME: 'DEFAULT_ATTRIBUTE',
+  XML_ATTRIBUTE_VALUE: 'DEFAULT_STRING',
+  XML_COMMENT: 'DEFAULT_LINE_COMMENT',
+  XML_CUSTOM_TAG_NAME: 'XML_TAG_NAME',
+  XML_ENTITY_REFERENCE: 'DEFAULT_ENTITY',
+  XML_NS_PREFIX: 'DEFAULT_INSTANCE_FIELD',
+  XML_PROLOGUE: 'TEXT',
+  XML_TAG: 'DEFAULT_TAG',
+  XML_TAG_DATA: 'TEXT',
+  XML_TAG_NAME: 'DEFAULT_KEYWORD',
+};
+
 /**
  * The fallback of each attribute key, as the IDE code creates it (`TextAttributesKey.createTextAttributesKey(name,
  * fallback)`): a key the color scheme does not define is drawn with its fallback. Hand kept, from JetBrains/intellij-community
@@ -330,6 +370,8 @@ export const KEY_FALLBACKS: Record<string, string> = {
   ...PROPERTIES_KEYS,
   ...REST_KEYS,
   ...TOML_KEYS,
+  ...DOTENV_KEYS,
+  ...XML_KEYS,
 };
 
 /** A key and its fallbacks, in the order the IDE tries them (stops on a loop) */

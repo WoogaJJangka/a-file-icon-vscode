@@ -20,8 +20,8 @@ const FILE_BUDGETS = [
   { budget: 900 * KB, file: 'dist/a-file-icon-vscode-icon-theme.json', what: 'icon theme json (parsed by VS Code)' },
   { budget: 230 * KB, file: 'dist/a-file-icon-vscode-product-icon-theme.json', what: 'Material product icon theme json' },
   { budget: 32 * KB, file: 'dist/cool-islands-product-icon-theme.json', what: 'Islands product icon theme json' },
-  { budget: 64 * KB, file: 'dist/cool-islands-dark-color-theme.json', what: 'Cool Islands Dark' },
-  { budget: 64 * KB, file: 'dist/cool-islands-light-color-theme.json', what: 'Cool Islands Light' },
+  { budget: 128 * KB, file: 'dist/cool-islands-dark-color-theme.json', what: 'Cool Islands Dark' },
+  { budget: 128 * KB, file: 'dist/cool-islands-light-color-theme.json', what: 'Cool Islands Light' },
 ];
 const VSIX_BUDGET = { bytes: 14 * MB, files: 6500 };
 
