@@ -133,6 +133,13 @@
   공개 키에 없으면 가장 가까운 공개 키를 주석과 함께 쓴다(Rust 수명 = 타입 매개변수 청록). Rust 키는 intellij-rust(MIT) `RsColors.kt`, 단 그 RustDarcula 색은
   2024년 옛 색이라 쓰지 않는다. Rider 는 C# 를 자체 팔레트로 그려서 따르지 않는다(C# 은 Islands 기본 키). 다른 규칙을 덮는 규칙은 색이 없을 때
   밑 규칙 색이 비치므로 `from` 끝에 'TEXT' 층을 둔다(밝은 테마 C++ 호출이 선언 색으로 남던 것).
+  PyCharm 에 플러그인이 없는 언어(Ruby·PHP·Lua·Swift·PowerShell·Dart·Makefile·log 등, `textMateTheme.ts` `TEXTMATE_LANGUAGES`)는 IDE 가 VS Code 와 같은
+  TextMate 문법으로 칠한다: `TEXTMATE_RULES` = intellij-community `TextMateDefaultColorsProvider` + `TextMateTheme`(선택자 → 키). 맞는 선택자가 전부 층이 되고
+  (구체적인 것이 위) 색은 위 층, 글꼴 모양은 모두 합친다(`TextAttributes.merge`: Ruby 숫자 = 상수 기울임 + 숫자 청록). 생성기는 언어 루트마다
+  `source.ruby constant.numeric` 처럼 합친 스타일을 쓰고, 색이 없으면 글자색을 명시한다(부모 scope 규칙은 같은 scope 일반 규칙의 빈 값을 물려받음).
+  기대값은 `layers`(밑 층 키, 가까운 것부터). 구두점 층(DEFAULT_DOT)은 따라 하지 않는다: 화면에서 문자열 따옴표는 문자열 색인데 `/**`·Makefile `$(` 는
+  글자색이라 공개 소스의 가중치로 설명되지 않음(todo). .env 는 intellij-community `env-files-support`(키 = 키워드, 값 = 문자열, `export` = 주석),
+  CSS·SQL(닫힌 플러그인)은 PyCharm 화면 색에 가장 가까운 공개 키(선택자 = HTML 태그 이름, 속성 이름 = 글자, 값 키워드 = 문자열, SQL 함수 = 정적 메서드).
   화면 확인: 사용자 PyCharm 을 데스크톱에서 띄운다(Bash·PowerShell 로 띄우면 창이 안 뜬다). 마지막 프로젝트가 열리니 그 폴더에 샘플을 복사해 트리에서 연다.
 - 색 테마 섞기(`src/themes/colorLayers.ts` 순수 엔진, `readColorTheme.ts` JSONC·`include`·`tokenColors` 경로 읽기,
   `services/ColorThemeService.ts` 설치된 테마 목록·섞기·다시 로드 알림): `colorThemeLayers`(테마 id 또는 `{theme, ui, syntax, applyTo}`,

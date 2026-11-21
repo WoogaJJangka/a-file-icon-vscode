@@ -6,13 +6,13 @@ import {
   expectedStyle,
   grammarScopes,
   missingRuleScopes,
-  selectorScore,
   tokensOf,
   uncoloredScopes,
   winningRule,
 } from 'src/themes/colorCheck';
 import { fallbackChain, KEY_FALLBACKS } from 'src/themes/jetbrainsFallbacks';
 import { resolveScheme, schemeChainData } from 'src/themes/jetbrainsTheme';
+import { selectorScore } from 'src/themes/textMateTheme';
 
 import type { SchemeData } from 'src/themes/jetbrainsTheme';
 
@@ -111,6 +111,9 @@ describe('Color check', () => {
     assert.deepEqual(expectedStyle(scheme, 'BOLD_ONLY', 'DEFAULT_KEYWORD'), { fontStyle: 'bold', foreground: '#cf8e6d' });
     // a key of the IDE code that the scheme does not define is text
     assert.deepEqual(expectedStyle(scheme, 'DEFAULT_LABEL'), { fontStyle: '', foreground: '#bcbec4' });
+    // TextMate layers: the color of the top one that has one, the font styles of all of them
+    assert.deepEqual(expectedStyle(scheme, 'BOLD_ONLY', undefined, undefined, ['DEFAULT_KEYWORD']), { fontStyle: 'bold', foreground: '#cf8e6d' });
+    assert.deepEqual(expectedStyle(scheme, 'DEFAULT_KEYWORD', undefined, undefined, ['BOLD_ONLY', 'NOPE']), { fontStyle: 'bold', foreground: '#cf8e6d' });
     const noText = resolveScheme([{ attributes: { BOLD_ONLY: { fontType: 1 } }, colors: {}, name: 'S' }], 'S');
     assert.equal(expectedStyle(noText, 'BOLD_ONLY'), undefined);
   });

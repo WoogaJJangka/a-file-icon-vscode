@@ -1,0 +1,17 @@
+{
+  "file": "sql.sql",
+  "scope": "source.sql",
+  "tokens": [
+    { "line": 1, "text": "-- 한글 주석", "key": "DEFAULT_LINE_COMMENT" },
+    { "line": 2, "text": "CREATE", "key": "DEFAULT_KEYWORD" },
+    { "line": 2, "text": "greeter", "key": "DEFAULT_IDENTIFIER" },
+    { "line": 3, "text": "INTEGER", "key": "DEFAULT_KEYWORD" },
+    { "line": 4, "text": "name", "key": "DEFAULT_IDENTIFIER", "todo": "the grammar has `name` among its keywords; the IDE parses it as a column" },
+    { "line": 4, "text": "100", "key": "DEFAULT_NUMBER" },
+    { "line": 4, "text": "'world'", "key": "DEFAULT_STRING" },
+    { "line": 7, "text": "g", "key": "DEFAULT_IDENTIFIER" },
+    { "line": 7, "text": "name", "key": "DEFAULT_INSTANCE_FIELD", "todo": "a column the IDE resolves is purple (semantic: `g.id` stays text)" },
+    { "line": 7, "text": "COUNT", "key": "DEFAULT_STATIC_METHOD" },
+    { "line": 9, "text": "id", "key": "DEFAULT_IDENTIFIER" }
+  ]
+}

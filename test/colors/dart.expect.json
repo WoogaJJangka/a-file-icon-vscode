@@ -1,0 +1,16 @@
+{
+  "file": "dart.dart",
+  "scope": "source.dart",
+  "tokens": [
+    { "line": 1, "text": "import", "key": "DEFAULT_KEYWORD" },
+    { "line": 3, "text": "/// Doc comment", "key": "DEFAULT_BLOCK_COMMENT", "layers": ["DEFAULT_LINE_COMMENT"] },
+    { "line": 4, "text": "const", "key": "DEFAULT_KEYWORD" },
+    { "line": 4, "text": "10", "key": "DEFAULT_NUMBER", "layers": ["DEFAULT_CONSTANT"] },
+    { "line": 11, "text": "greet", "key": "DEFAULT_FUNCTION_DECLARATION", "layers": ["DEFAULT_CLASS_NAME","DEFAULT_IDENTIFIER"] },
+    { "line": 13, "text": "var", "key": "DEFAULT_KEYWORD" },
+    { "line": 13, "text": "name", "key": "DEFAULT_PARAMETER", "layers": ["DEFAULT_LOCAL_VARIABLE"] },
+    { "line": 13, "text": "\\n", "key": "DEFAULT_VALID_STRING_ESCAPE", "layers": ["DEFAULT_CONSTANT"] },
+    { "line": 20, "text": "print", "key": "DEFAULT_FUNCTION_DECLARATION", "layers": ["DEFAULT_CLASS_NAME","DEFAULT_IDENTIFIER"] },
+    { "line": 20, "text": "null", "key": "DEFAULT_CONSTANT" }
+  ]
+}

@@ -169,7 +169,7 @@ Cool Theme Kit 을 고칠 때 지키는 규칙과, 그 규칙을 지키는지 �
 | `dist/extension.js` (production, 활성화 때 파싱) | 520 KB | 700 KB | `check:size` |
 | 아이콘 테마 json (VS Code 가 파싱해 가짐) | 718 KB | 900 KB | `check:size` |
 | Material 제품 아이콘 json | 176 KB | 230 KB | `check:size` |
-| Islands 제품 아이콘 json / 색 테마 json | 9 KB / 40 KB | 32 KB / 64 KB | `check:size` |
+| Islands 제품 아이콘 json / 색 테마 json | 9 KB / 106 KB (0.2.0 의 TextMate 언어 규칙, 전에는 40 KB) | 32 KB / 128 KB | `check:size` |
 | VSIX 크기 / 파일 수 | 11.1 MB / 5,602 | 14 MB / 6,500 | `check:size` |
 | 재생성 4회 반복(불투명도·강조색) + 섞기 화면 3회 뒤 힙 증가 | 0.2~0.8 MB (Linux·Windows, 1.95.0·stable, 다른 확장 유무) | 3 MB | `smoke.yml` |
 

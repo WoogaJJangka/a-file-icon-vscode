@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 한글 주석 -->
+<project xmlns:demo="http://example.com/demo">
+  <demo:greeter name="world" times="2">
+    Hello &amp; welcome
+    <![CDATA[ raw <text> ]]>
+  </demo:greeter>
+</project>

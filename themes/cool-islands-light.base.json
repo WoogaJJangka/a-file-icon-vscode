@@ -883,7 +883,7 @@
       ],
       "settings": {
         "fontStyle": "",
-        "foreground": "#871094"
+        "foreground": "#174ad4"
       }
     },
     {
@@ -904,7 +904,7 @@
       ],
       "settings": {
         "fontStyle": "",
-        "foreground": "#0037a6"
+        "foreground": "#174be6"
       }
     },
     {
@@ -1357,22 +1357,86 @@
       }
     },
     {
+      "name": "Properties separator",
+      "scope": [
+        "punctuation.separator.key-value.ini"
+      ],
+      "settings": {
+        "fontStyle": "",
+        "foreground": "#080808"
+      }
+    },
+    {
+      "name": ".env key",
+      "scope": [
+        "variable.key.dotenv"
+      ],
+      "settings": {
+        "fontStyle": "",
+        "foreground": "#0033b3"
+      }
+    },
+    {
+      "name": ".env value",
+      "scope": [
+        "property.value.dotenv",
+        "property.value.dotenv keyword",
+        "property.value.dotenv variable"
+      ],
+      "settings": {
+        "fontStyle": "",
+        "foreground": "#067d17"
+      }
+    },
+    {
+      "name": ".env export",
+      "scope": [
+        "keyword.key.export.dotenv"
+      ],
+      "settings": {
+        "fontStyle": "italic",
+        "foreground": "#8c8c8c"
+      }
+    },
+    {
+      "name": "SQL name",
+      "scope": [
+        "entity.name.function.sql",
+        "constant.other.database-name.sql",
+        "constant.other.table-name.sql"
+      ],
+      "settings": {
+        "fontStyle": "",
+        "foreground": "#080808"
+      }
+    },
+    {
+      "name": "SQL function",
+      "scope": [
+        "source.sql support.function"
+      ],
+      "settings": {
+        "fontStyle": "italic",
+        "foreground": "#00627a"
+      }
+    },
+    {
       "name": "CSS property",
       "scope": [
         "support.type.property-name.css",
         "support.type.vendored.property-name.css",
         "support.type.property-name.scss",
-        "support.type.property-name.less"
+        "support.type.property-name.less",
+        "support.type.property-name.media.css"
       ],
       "settings": {
         "fontStyle": "",
-        "foreground": "#871094"
+        "foreground": "#080808"
       }
     },
     {
       "name": "CSS value",
       "scope": [
-        "support.constant.property-value.css",
         "meta.property-value.css"
       ],
       "settings": {
@@ -1381,11 +1445,35 @@
       }
     },
     {
+      "name": "CSS value keyword",
+      "scope": [
+        "support.constant.property-value.css",
+        "support.constant.font-name.css"
+      ],
+      "settings": {
+        "fontStyle": "",
+        "foreground": "#067d17"
+      }
+    },
+    {
+      "name": "CSS unit",
+      "scope": [
+        "keyword.other.unit"
+      ],
+      "settings": {
+        "fontStyle": "",
+        "foreground": "#1750eb"
+      }
+    },
+    {
       "name": "CSS selector",
       "scope": [
         "entity.name.tag.css",
         "entity.other.attribute-name.class.css",
-        "entity.other.attribute-name.id.css"
+        "entity.other.attribute-name.id.css",
+        "entity.other.attribute-name.pseudo-class.css",
+        "entity.other.attribute-name.pseudo-element.css",
+        "meta.attribute-selector.css entity.other.attribute-name"
       ],
       "settings": {
         "fontStyle": "",
@@ -1687,12 +1775,42 @@
     {
       "name": "XML namespace prefix",
       "scope": [
-        "entity.name.tag.namespace.xml",
-        "entity.other.attribute-name.namespace.xml"
+        "entity.name.tag.namespace.xml"
       ],
       "settings": {
         "fontStyle": "",
-        "foreground": "#871094"
+        "foreground": "#0033b3"
+      }
+    },
+    {
+      "name": "XML attribute prefix",
+      "scope": [
+        "entity.other.attribute-name.namespace.xml",
+        "entity.other.attribute-name.xml punctuation.separator.namespace.xml"
+      ],
+      "settings": {
+        "fontStyle": "",
+        "foreground": "#174ad4"
+      }
+    },
+    {
+      "name": "XML CDATA",
+      "scope": [
+        "string.unquoted.cdata.xml"
+      ],
+      "settings": {
+        "fontStyle": "",
+        "foreground": "#080808"
+      }
+    },
+    {
+      "name": "XML CDATA marker",
+      "scope": [
+        "string.unquoted.cdata.xml punctuation.definition.string"
+      ],
+      "settings": {
+        "fontStyle": "",
+        "foreground": "#080808"
       }
     },
     {
@@ -1702,7 +1820,7 @@
         "meta.tag.preprocessor.xml entity.name.tag.xml"
       ],
       "settings": {
-        "fontStyle": "italic",
+        "fontStyle": "",
         "foreground": "#080808"
       }
     },
@@ -2056,6 +2174,1230 @@
       "settings": {
         "fontStyle": "italic",
         "foreground": "#8c8c8c"
+      }
+    },
+    {
+      "name": "TextMate comment.block.documentation keyword",
+      "scope": [
+        "source.batchfile comment.block.documentation keyword",
+        "source.clojure comment.block.documentation keyword",
+        "source.dart comment.block.documentation keyword",
+        "source.julia comment.block.documentation keyword",
+        "source.lua comment.block.documentation keyword",
+        "source.makefile comment.block.documentation keyword",
+        "source.objc comment.block.documentation keyword",
+        "source.objcpp comment.block.documentation keyword",
+        "source.perl comment.block.documentation keyword",
+        "source.powershell comment.block.documentation keyword",
+        "source.r comment.block.documentation keyword",
+        "source.ruby comment.block.documentation keyword",
+        "source.swift comment.block.documentation keyword",
+        "text.html.php comment.block.documentation keyword",
+        "text.log comment.block.documentation keyword"
+      ],
+      "settings": {
+        "fontStyle": "italic",
+        "foreground": "#0033b3"
+      }
+    },
+    {
+      "name": "TextMate comment.block.documentation storage.type",
+      "scope": [
+        "source.batchfile comment.block.documentation storage.type",
+        "source.clojure comment.block.documentation storage.type",
+        "source.dart comment.block.documentation storage.type",
+        "source.julia comment.block.documentation storage.type",
+        "source.lua comment.block.documentation storage.type",
+        "source.makefile comment.block.documentation storage.type",
+        "source.objc comment.block.documentation storage.type",
+        "source.objcpp comment.block.documentation storage.type",
+        "source.perl comment.block.documentation storage.type",
+        "source.powershell comment.block.documentation storage.type",
+        "source.r comment.block.documentation storage.type",
+        "source.ruby comment.block.documentation storage.type",
+        "source.swift comment.block.documentation storage.type",
+        "text.html.php comment.block.documentation storage.type",
+        "text.log comment.block.documentation storage.type"
+      ],
+      "settings": {
+        "fontStyle": "italic",
+        "foreground": "#0033b3"
+      }
+    },
+    {
+      "name": "TextMate constant",
+      "scope": [
+        "source.batchfile constant",
+        "source.clojure constant",
+        "source.dart constant",
+        "source.julia constant",
+        "source.lua constant",
+        "source.makefile constant",
+        "source.objc constant",
+        "source.objcpp constant",
+        "source.perl constant",
+        "source.powershell constant",
+        "source.r constant",
+        "source.ruby constant",
+        "source.swift constant",
+        "text.html.php constant",
+        "text.log constant"
+      ],
+      "settings": {
+        "fontStyle": "italic",
+        "foreground": "#871094"
+      }
+    },
+    {
+      "name": "TextMate constant.character.entity",
+      "scope": [
+        "source.batchfile constant.character.entity",
+        "source.clojure constant.character.entity",
+        "source.dart constant.character.entity",
+        "source.julia constant.character.entity",
+        "source.lua constant.character.entity",
+        "source.makefile constant.character.entity",
+        "source.objc constant.character.entity",
+        "source.objcpp constant.character.entity",
+        "source.perl constant.character.entity",
+        "source.powershell constant.character.entity",
+        "source.r constant.character.entity",
+        "source.ruby constant.character.entity",
+        "source.swift constant.character.entity",
+        "text.html.php constant.character.entity",
+        "text.log constant.character.entity"
+      ],
+      "settings": {
+        "fontStyle": "italic",
+        "foreground": "#174be6"
+      }
+    },
+    {
+      "name": "TextMate constant.character.escape",
+      "scope": [
+        "source.batchfile constant.character.escape",
+        "source.clojure constant.character.escape",
+        "source.dart constant.character.escape",
+        "source.julia constant.character.escape",
+        "source.lua constant.character.escape",
+        "source.makefile constant.character.escape",
+        "source.objc constant.character.escape",
+        "source.objcpp constant.character.escape",
+        "source.perl constant.character.escape",
+        "source.powershell constant.character.escape",
+        "source.r constant.character.escape",
+        "source.ruby constant.character.escape",
+        "source.swift constant.character.escape",
+        "text.html.php constant.character.escape",
+        "text.log constant.character.escape"
+      ],
+      "settings": {
+        "fontStyle": "italic",
+        "foreground": "#0037a6"
+      }
+    },
+    {
+      "name": "TextMate constant.character.format.placeholder",
+      "scope": [
+        "source.batchfile constant.character.format.placeholder",
+        "source.clojure constant.character.format.placeholder",
+        "source.dart constant.character.format.placeholder",
+        "source.julia constant.character.format.placeholder",
+        "source.lua constant.character.format.placeholder",
+        "source.makefile constant.character.format.placeholder",
+        "source.objc constant.character.format.placeholder",
+        "source.objcpp constant.character.format.placeholder",
+        "source.perl constant.character.format.placeholder",
+        "source.powershell constant.character.format.placeholder",
+        "source.r constant.character.format.placeholder",
+        "source.ruby constant.character.format.placeholder",
+        "source.swift constant.character.format.placeholder",
+        "text.html.php constant.character.format.placeholder",
+        "text.log constant.character.format.placeholder"
+      ],
+      "settings": {
+        "fontStyle": "italic",
+        "foreground": "#871094"
+      }
+    },
+    {
+      "name": "TextMate constant.language",
+      "scope": [
+        "source.batchfile constant.language",
+        "source.clojure constant.language",
+        "source.dart constant.language",
+        "source.julia constant.language",
+        "source.lua constant.language",
+        "source.makefile constant.language",
+        "source.objc constant.language",
+        "source.objcpp constant.language",
+        "source.perl constant.language",
+        "source.powershell constant.language",
+        "source.r constant.language",
+        "source.ruby constant.language",
+        "source.swift constant.language",
+        "text.html.php constant.language",
+        "text.log constant.language"
+      ],
+      "settings": {
+        "fontStyle": "italic",
+        "foreground": "#871094"
+      }
+    },
+    {
+      "name": "TextMate constant.number",
+      "scope": [
+        "source.batchfile constant.number",
+        "source.clojure constant.number",
+        "source.dart constant.number",
+        "source.julia constant.number",
+        "source.lua constant.number",
+        "source.makefile constant.number",
+        "source.objc constant.number",
+        "source.objcpp constant.number",
+        "source.perl constant.number",
+        "source.powershell constant.number",
+        "source.r constant.number",
+        "source.ruby constant.number",
+        "source.swift constant.number",
+        "text.html.php constant.number",
+        "text.log constant.number"
+      ],
+      "settings": {
+        "fontStyle": "italic",
+        "foreground": "#1750eb"
+      }
+    },
+    {
+      "name": "TextMate constant.numeric",
+      "scope": [
+        "source.batchfile constant.numeric",
+        "source.clojure constant.numeric",
+        "source.dart constant.numeric",
+        "source.julia constant.numeric",
+        "source.lua constant.numeric",
+        "source.makefile constant.numeric",
+        "source.objc constant.numeric",
+        "source.objcpp constant.numeric",
+        "source.perl constant.numeric",
+        "source.powershell constant.numeric",
+        "source.r constant.numeric",
+        "source.ruby constant.numeric",
+        "source.swift constant.numeric",
+        "text.html.php constant.numeric",
+        "text.log constant.numeric"
+      ],
+      "settings": {
+        "fontStyle": "italic",
+        "foreground": "#1750eb"
+      }
+    },
+    {
+      "name": "TextMate constant.other.placeholder",
+      "scope": [
+        "source.batchfile constant.other.placeholder",
+        "source.clojure constant.other.placeholder",
+        "source.dart constant.other.placeholder",
+        "source.julia constant.other.placeholder",
+        "source.lua constant.other.placeholder",
+        "source.makefile constant.other.placeholder",
+        "source.objc constant.other.placeholder",
+        "source.objcpp constant.other.placeholder",
+        "source.perl constant.other.placeholder",
+        "source.powershell constant.other.placeholder",
+        "source.r constant.other.placeholder",
+        "source.ruby constant.other.placeholder",
+        "source.swift constant.other.placeholder",
+        "text.html.php constant.other.placeholder",
+        "text.log constant.other.placeholder"
+      ],
+      "settings": {
+        "fontStyle": "italic",
+        "foreground": "#871094"
+      }
+    },
+    {
+      "name": "TextMate entity",
+      "scope": [
+        "source.batchfile entity",
+        "source.clojure entity",
+        "source.dart entity",
+        "source.julia entity",
+        "source.lua entity",
+        "source.makefile entity",
+        "source.objc entity",
+        "source.objcpp entity",
+        "source.perl entity",
+        "source.powershell entity",
+        "source.r entity",
+        "source.ruby entity",
+        "source.swift entity",
+        "text.html.php entity",
+        "text.log entity"
+      ],
+      "settings": {
+        "fontStyle": "",
+        "foreground": "#080808"
+      }
+    },
+    {
+      "name": "TextMate entity.name",
+      "scope": [
+        "source.batchfile entity.name",
+        "source.clojure entity.name",
+        "source.dart entity.name",
+        "source.julia entity.name",
+        "source.lua entity.name",
+        "source.makefile entity.name",
+        "source.objc entity.name",
+        "source.objcpp entity.name",
+        "source.perl entity.name",
+        "source.powershell entity.name",
+        "source.r entity.name",
+        "source.ruby entity.name",
+        "source.swift entity.name",
+        "text.html.php entity.name",
+        "text.log entity.name"
+      ],
+      "settings": {
+        "fontStyle": "",
+        "foreground": "#080808"
+      }
+    },
+    {
+      "name": "TextMate entity.name.constant",
+      "scope": [
+        "source.batchfile entity.name.constant",
+        "source.clojure entity.name.constant",
+        "source.dart entity.name.constant",
+        "source.julia entity.name.constant",
+        "source.lua entity.name.constant",
+        "source.makefile entity.name.constant",
+        "source.objc entity.name.constant",
+        "source.objcpp entity.name.constant",
+        "source.perl entity.name.constant",
+        "source.powershell entity.name.constant",
+        "source.r entity.name.constant",
+        "source.ruby entity.name.constant",
+        "source.swift entity.name.constant",
+        "text.html.php entity.name.constant",
+        "text.log entity.name.constant"
+      ],
+      "settings": {
+        "fontStyle": "",
+        "foreground": "#080808"
+      }
+    },
+    {
+      "name": "TextMate entity.name.label",
+      "scope": [
+        "source.batchfile entity.name.label",
+        "source.clojure entity.name.label",
+        "source.dart entity.name.label",
+        "source.julia entity.name.label",
+        "source.lua entity.name.label",
+        "source.makefile entity.name.label",
+        "source.objc entity.name.label",
+        "source.objcpp entity.name.label",
+        "source.perl entity.name.label",
+        "source.powershell entity.name.label",
+        "source.r entity.name.label",
+        "source.ruby entity.name.label",
+        "source.swift entity.name.label",
+        "text.html.php entity.name.label",
+        "text.log entity.name.label"
+      ],
+      "settings": {
+        "fontStyle": "",
+        "foreground": "#080808"
+      }
+    },
+    {
+      "name": "TextMate entity.name.type.parameter",
+      "scope": [
+        "source.batchfile entity.name.type.parameter",
+        "source.clojure entity.name.type.parameter",
+        "source.dart entity.name.type.parameter",
+        "source.julia entity.name.type.parameter",
+        "source.lua entity.name.type.parameter",
+        "source.makefile entity.name.type.parameter",
+        "source.objc entity.name.type.parameter",
+        "source.objcpp entity.name.type.parameter",
+        "source.perl entity.name.type.parameter",
+        "source.powershell entity.name.type.parameter",
+        "source.r entity.name.type.parameter",
+        "source.ruby entity.name.type.parameter",
+        "source.swift entity.name.type.parameter",
+        "text.html.php entity.name.type.parameter",
+        "text.log entity.name.type.parameter"
+      ],
+      "settings": {
+        "fontStyle": "",
+        "foreground": "#080808"
+      }
+    },
+    {
+      "name": "TextMate entity.name.variable.field",
+      "scope": [
+        "source.batchfile entity.name.variable.field",
+        "source.clojure entity.name.variable.field",
+        "source.dart entity.name.variable.field",
+        "source.julia entity.name.variable.field",
+        "source.lua entity.name.variable.field",
+        "source.makefile entity.name.variable.field",
+        "source.objc entity.name.variable.field",
+        "source.objcpp entity.name.variable.field",
+        "source.perl entity.name.variable.field",
+        "source.powershell entity.name.variable.field",
+        "source.r entity.name.variable.field",
+        "source.ruby entity.name.variable.field",
+        "source.swift entity.name.variable.field",
+        "text.html.php entity.name.variable.field",
+        "text.log entity.name.variable.field"
+      ],
+      "settings": {
+        "fontStyle": "",
+        "foreground": "#080808"
+      }
+    },
+    {
+      "name": "TextMate invalid",
+      "scope": [
+        "source.batchfile invalid",
+        "source.clojure invalid",
+        "source.dart invalid",
+        "source.julia invalid",
+        "source.lua invalid",
+        "source.makefile invalid",
+        "source.objc invalid",
+        "source.objcpp invalid",
+        "source.perl invalid",
+        "source.powershell invalid",
+        "source.r invalid",
+        "source.ruby invalid",
+        "source.swift invalid",
+        "text.html.php invalid",
+        "text.log invalid"
+      ],
+      "settings": {
+        "fontStyle": "",
+        "foreground": "#080808"
+      }
+    },
+    {
+      "name": "TextMate invalid.deprecated",
+      "scope": [
+        "source.batchfile invalid.deprecated",
+        "source.clojure invalid.deprecated",
+        "source.dart invalid.deprecated",
+        "source.julia invalid.deprecated",
+        "source.lua invalid.deprecated",
+        "source.makefile invalid.deprecated",
+        "source.objc invalid.deprecated",
+        "source.objcpp invalid.deprecated",
+        "source.perl invalid.deprecated",
+        "source.powershell invalid.deprecated",
+        "source.r invalid.deprecated",
+        "source.ruby invalid.deprecated",
+        "source.swift invalid.deprecated",
+        "text.html.php invalid.deprecated",
+        "text.log invalid.deprecated"
+      ],
+      "settings": {
+        "fontStyle": "strikethrough",
+        "foreground": "#080808"
+      }
+    },
+    {
+      "name": "TextMate invalid.illegal",
+      "scope": [
+        "source.batchfile invalid.illegal",
+        "source.clojure invalid.illegal",
+        "source.dart invalid.illegal",
+        "source.julia invalid.illegal",
+        "source.lua invalid.illegal",
+        "source.makefile invalid.illegal",
+        "source.objc invalid.illegal",
+        "source.objcpp invalid.illegal",
+        "source.perl invalid.illegal",
+        "source.powershell invalid.illegal",
+        "source.r invalid.illegal",
+        "source.ruby invalid.illegal",
+        "source.swift invalid.illegal",
+        "text.html.php invalid.illegal",
+        "text.log invalid.illegal"
+      ],
+      "settings": {
+        "fontStyle": "",
+        "foreground": "#080808"
+      }
+    },
+    {
+      "name": "TextMate invalid.illegal.character.escape",
+      "scope": [
+        "source.batchfile invalid.illegal.character.escape",
+        "source.clojure invalid.illegal.character.escape",
+        "source.dart invalid.illegal.character.escape",
+        "source.julia invalid.illegal.character.escape",
+        "source.lua invalid.illegal.character.escape",
+        "source.makefile invalid.illegal.character.escape",
+        "source.objc invalid.illegal.character.escape",
+        "source.objcpp invalid.illegal.character.escape",
+        "source.perl invalid.illegal.character.escape",
+        "source.powershell invalid.illegal.character.escape",
+        "source.r invalid.illegal.character.escape",
+        "source.ruby invalid.illegal.character.escape",
+        "source.swift invalid.illegal.character.escape",
+        "text.html.php invalid.illegal.character.escape",
+        "text.log invalid.illegal.character.escape"
+      ],
+      "settings": {
+        "fontStyle": "",
+        "foreground": "#080808"
+      }
+    },
+    {
+      "name": "TextMate invalid.illegal.unrecognized-string-escape",
+      "scope": [
+        "source.batchfile invalid.illegal.unrecognized-string-escape",
+        "source.clojure invalid.illegal.unrecognized-string-escape",
+        "source.dart invalid.illegal.unrecognized-string-escape",
+        "source.julia invalid.illegal.unrecognized-string-escape",
+        "source.lua invalid.illegal.unrecognized-string-escape",
+        "source.makefile invalid.illegal.unrecognized-string-escape",
+        "source.objc invalid.illegal.unrecognized-string-escape",
+        "source.objcpp invalid.illegal.unrecognized-string-escape",
+        "source.perl invalid.illegal.unrecognized-string-escape",
+        "source.powershell invalid.illegal.unrecognized-string-escape",
+        "source.r invalid.illegal.unrecognized-string-escape",
+        "source.ruby invalid.illegal.unrecognized-string-escape",
+        "source.swift invalid.illegal.unrecognized-string-escape",
+        "text.html.php invalid.illegal.unrecognized-string-escape",
+        "text.log invalid.illegal.unrecognized-string-escape"
+      ],
+      "settings": {
+        "fontStyle": "",
+        "foreground": "#080808"
+      }
+    },
+    {
+      "name": "TextMate keyword.operator.expression",
+      "scope": [
+        "source.batchfile keyword.operator.expression",
+        "source.clojure keyword.operator.expression",
+        "source.dart keyword.operator.expression",
+        "source.julia keyword.operator.expression",
+        "source.lua keyword.operator.expression",
+        "source.makefile keyword.operator.expression",
+        "source.objc keyword.operator.expression",
+        "source.objcpp keyword.operator.expression",
+        "source.perl keyword.operator.expression",
+        "source.powershell keyword.operator.expression",
+        "source.r keyword.operator.expression",
+        "source.ruby keyword.operator.expression",
+        "source.swift keyword.operator.expression",
+        "text.html.php keyword.operator.expression",
+        "text.log keyword.operator.expression"
+      ],
+      "settings": {
+        "fontStyle": "",
+        "foreground": "#080808"
+      }
+    },
+    {
+      "name": "TextMate keyword.operator.instanceof",
+      "scope": [
+        "source.batchfile keyword.operator.instanceof",
+        "source.clojure keyword.operator.instanceof",
+        "source.dart keyword.operator.instanceof",
+        "source.julia keyword.operator.instanceof",
+        "source.lua keyword.operator.instanceof",
+        "source.makefile keyword.operator.instanceof",
+        "source.objc keyword.operator.instanceof",
+        "source.objcpp keyword.operator.instanceof",
+        "source.perl keyword.operator.instanceof",
+        "source.powershell keyword.operator.instanceof",
+        "source.r keyword.operator.instanceof",
+        "source.ruby keyword.operator.instanceof",
+        "source.swift keyword.operator.instanceof",
+        "text.html.php keyword.operator.instanceof",
+        "text.log keyword.operator.instanceof"
+      ],
+      "settings": {
+        "fontStyle": "",
+        "foreground": "#080808"
+      }
+    },
+    {
+      "name": "TextMate keyword.operator.new",
+      "scope": [
+        "source.batchfile keyword.operator.new",
+        "source.clojure keyword.operator.new",
+        "source.dart keyword.operator.new",
+        "source.julia keyword.operator.new",
+        "source.lua keyword.operator.new",
+        "source.makefile keyword.operator.new",
+        "source.objc keyword.operator.new",
+        "source.objcpp keyword.operator.new",
+        "source.perl keyword.operator.new",
+        "source.powershell keyword.operator.new",
+        "source.r keyword.operator.new",
+        "source.ruby keyword.operator.new",
+        "source.swift keyword.operator.new",
+        "text.html.php keyword.operator.new",
+        "text.log keyword.operator.new"
+      ],
+      "settings": {
+        "fontStyle": "",
+        "foreground": "#080808"
+      }
+    },
+    {
+      "name": "TextMate keyword.operator.typeof",
+      "scope": [
+        "source.batchfile keyword.operator.typeof",
+        "source.clojure keyword.operator.typeof",
+        "source.dart keyword.operator.typeof",
+        "source.julia keyword.operator.typeof",
+        "source.lua keyword.operator.typeof",
+        "source.makefile keyword.operator.typeof",
+        "source.objc keyword.operator.typeof",
+        "source.objcpp keyword.operator.typeof",
+        "source.perl keyword.operator.typeof",
+        "source.powershell keyword.operator.typeof",
+        "source.r keyword.operator.typeof",
+        "source.ruby keyword.operator.typeof",
+        "source.swift keyword.operator.typeof",
+        "text.html.php keyword.operator.typeof",
+        "text.log keyword.operator.typeof"
+      ],
+      "settings": {
+        "fontStyle": "",
+        "foreground": "#080808"
+      }
+    },
+    {
+      "name": "TextMate keyword.operator.word",
+      "scope": [
+        "source.batchfile keyword.operator.word",
+        "source.clojure keyword.operator.word",
+        "source.dart keyword.operator.word",
+        "source.julia keyword.operator.word",
+        "source.lua keyword.operator.word",
+        "source.makefile keyword.operator.word",
+        "source.objc keyword.operator.word",
+        "source.objcpp keyword.operator.word",
+        "source.perl keyword.operator.word",
+        "source.powershell keyword.operator.word",
+        "source.r keyword.operator.word",
+        "source.ruby keyword.operator.word",
+        "source.swift keyword.operator.word",
+        "text.html.php keyword.operator.word",
+        "text.log keyword.operator.word"
+      ],
+      "settings": {
+        "fontStyle": "",
+        "foreground": "#080808"
+      }
+    },
+    {
+      "name": "TextMate keyword.other.unit",
+      "scope": [
+        "source.batchfile keyword.other.unit",
+        "source.clojure keyword.other.unit",
+        "source.dart keyword.other.unit",
+        "source.julia keyword.other.unit",
+        "source.lua keyword.other.unit",
+        "source.makefile keyword.other.unit",
+        "source.objc keyword.other.unit",
+        "source.objcpp keyword.other.unit",
+        "source.perl keyword.other.unit",
+        "source.powershell keyword.other.unit",
+        "source.r keyword.other.unit",
+        "source.ruby keyword.other.unit",
+        "source.swift keyword.other.unit",
+        "text.html.php keyword.other.unit",
+        "text.log keyword.other.unit"
+      ],
+      "settings": {
+        "fontStyle": "",
+        "foreground": "#0033b3"
+      }
+    },
+    {
+      "name": "TextMate markup.bold",
+      "scope": [
+        "source.batchfile markup.bold",
+        "source.clojure markup.bold",
+        "source.dart markup.bold",
+        "source.julia markup.bold",
+        "source.lua markup.bold",
+        "source.makefile markup.bold",
+        "source.objc markup.bold",
+        "source.objcpp markup.bold",
+        "source.perl markup.bold",
+        "source.powershell markup.bold",
+        "source.r markup.bold",
+        "source.ruby markup.bold",
+        "source.swift markup.bold",
+        "text.html.php markup.bold",
+        "text.log markup.bold"
+      ],
+      "settings": {
+        "fontStyle": "bold",
+        "foreground": "#080808"
+      }
+    },
+    {
+      "name": "TextMate markup.changed",
+      "scope": [
+        "source.batchfile markup.changed",
+        "source.clojure markup.changed",
+        "source.dart markup.changed",
+        "source.julia markup.changed",
+        "source.lua markup.changed",
+        "source.makefile markup.changed",
+        "source.objc markup.changed",
+        "source.objcpp markup.changed",
+        "source.perl markup.changed",
+        "source.powershell markup.changed",
+        "source.r markup.changed",
+        "source.ruby markup.changed",
+        "source.swift markup.changed",
+        "text.html.php markup.changed",
+        "text.log markup.changed"
+      ],
+      "settings": {
+        "fontStyle": "",
+        "foreground": "#080808"
+      }
+    },
+    {
+      "name": "TextMate markup.deleted",
+      "scope": [
+        "source.batchfile markup.deleted",
+        "source.clojure markup.deleted",
+        "source.dart markup.deleted",
+        "source.julia markup.deleted",
+        "source.lua markup.deleted",
+        "source.makefile markup.deleted",
+        "source.objc markup.deleted",
+        "source.objcpp markup.deleted",
+        "source.perl markup.deleted",
+        "source.powershell markup.deleted",
+        "source.r markup.deleted",
+        "source.ruby markup.deleted",
+        "source.swift markup.deleted",
+        "text.html.php markup.deleted",
+        "text.log markup.deleted"
+      ],
+      "settings": {
+        "fontStyle": "",
+        "foreground": "#080808"
+      }
+    },
+    {
+      "name": "TextMate markup.inserted",
+      "scope": [
+        "source.batchfile markup.inserted",
+        "source.clojure markup.inserted",
+        "source.dart markup.inserted",
+        "source.julia markup.inserted",
+        "source.lua markup.inserted",
+        "source.makefile markup.inserted",
+        "source.objc markup.inserted",
+        "source.objcpp markup.inserted",
+        "source.perl markup.inserted",
+        "source.powershell markup.inserted",
+        "source.r markup.inserted",
+        "source.ruby markup.inserted",
+        "source.swift markup.inserted",
+        "text.html.php markup.inserted",
+        "text.log markup.inserted"
+      ],
+      "settings": {
+        "fontStyle": "",
+        "foreground": "#080808"
+      }
+    },
+    {
+      "name": "TextMate markup.italic",
+      "scope": [
+        "source.batchfile markup.italic",
+        "source.clojure markup.italic",
+        "source.dart markup.italic",
+        "source.julia markup.italic",
+        "source.lua markup.italic",
+        "source.makefile markup.italic",
+        "source.objc markup.italic",
+        "source.objcpp markup.italic",
+        "source.perl markup.italic",
+        "source.powershell markup.italic",
+        "source.r markup.italic",
+        "source.ruby markup.italic",
+        "source.swift markup.italic",
+        "text.html.php markup.italic",
+        "text.log markup.italic"
+      ],
+      "settings": {
+        "fontStyle": "italic",
+        "foreground": "#080808"
+      }
+    },
+    {
+      "name": "TextMate meta.function-call entity.name.function",
+      "scope": [
+        "source.batchfile meta.function-call entity.name.function",
+        "source.clojure meta.function-call entity.name.function",
+        "source.dart meta.function-call entity.name.function",
+        "source.julia meta.function-call entity.name.function",
+        "source.lua meta.function-call entity.name.function",
+        "source.makefile meta.function-call entity.name.function",
+        "source.objc meta.function-call entity.name.function",
+        "source.objcpp meta.function-call entity.name.function",
+        "source.perl meta.function-call entity.name.function",
+        "source.powershell meta.function-call entity.name.function",
+        "source.r meta.function-call entity.name.function",
+        "source.ruby meta.function-call entity.name.function",
+        "source.swift meta.function-call entity.name.function",
+        "text.html.php meta.function-call entity.name.function",
+        "text.log meta.function-call entity.name.function"
+      ],
+      "settings": {
+        "fontStyle": "",
+        "foreground": "#00627a"
+      }
+    },
+    {
+      "name": "TextMate meta.tag",
+      "scope": [
+        "source.batchfile meta.tag",
+        "source.clojure meta.tag",
+        "source.dart meta.tag",
+        "source.julia meta.tag",
+        "source.lua meta.tag",
+        "source.makefile meta.tag",
+        "source.objc meta.tag",
+        "source.objcpp meta.tag",
+        "source.perl meta.tag",
+        "source.powershell meta.tag",
+        "source.r meta.tag",
+        "source.ruby meta.tag",
+        "source.swift meta.tag",
+        "text.html.php meta.tag",
+        "text.log meta.tag"
+      ],
+      "settings": {
+        "fontStyle": "",
+        "foreground": "#9e880d"
+      }
+    },
+    {
+      "name": "TextMate meta.tag punctuation",
+      "scope": [
+        "source.batchfile meta.tag punctuation",
+        "source.clojure meta.tag punctuation",
+        "source.dart meta.tag punctuation",
+        "source.julia meta.tag punctuation",
+        "source.lua meta.tag punctuation",
+        "source.makefile meta.tag punctuation",
+        "source.objc meta.tag punctuation",
+        "source.objcpp meta.tag punctuation",
+        "source.perl meta.tag punctuation",
+        "source.powershell meta.tag punctuation",
+        "source.r meta.tag punctuation",
+        "source.ruby meta.tag punctuation",
+        "source.swift meta.tag punctuation",
+        "text.html.php meta.tag punctuation",
+        "text.log meta.tag punctuation"
+      ],
+      "settings": {
+        "fontStyle": "",
+        "foreground": "#9e880d"
+      }
+    },
+    {
+      "name": "TextMate meta.type.parameters entity.name.type",
+      "scope": [
+        "source.batchfile meta.type.parameters entity.name.type",
+        "source.clojure meta.type.parameters entity.name.type",
+        "source.dart meta.type.parameters entity.name.type",
+        "source.julia meta.type.parameters entity.name.type",
+        "source.lua meta.type.parameters entity.name.type",
+        "source.makefile meta.type.parameters entity.name.type",
+        "source.objc meta.type.parameters entity.name.type",
+        "source.objcpp meta.type.parameters entity.name.type",
+        "source.perl meta.type.parameters entity.name.type",
+        "source.powershell meta.type.parameters entity.name.type",
+        "source.r meta.type.parameters entity.name.type",
+        "source.ruby meta.type.parameters entity.name.type",
+        "source.swift meta.type.parameters entity.name.type",
+        "text.html.php meta.type.parameters entity.name.type",
+        "text.log meta.type.parameters entity.name.type"
+      ],
+      "settings": {
+        "fontStyle": "",
+        "foreground": "#080808"
+      }
+    },
+    {
+      "name": "TextMate storage",
+      "scope": [
+        "source.batchfile storage",
+        "source.clojure storage",
+        "source.dart storage",
+        "source.julia storage",
+        "source.lua storage",
+        "source.makefile storage",
+        "source.objc storage",
+        "source.objcpp storage",
+        "source.perl storage",
+        "source.powershell storage",
+        "source.r storage",
+        "source.ruby storage",
+        "source.swift storage",
+        "text.html.php storage",
+        "text.log storage"
+      ],
+      "settings": {
+        "fontStyle": "",
+        "foreground": "#0033b3"
+      }
+    },
+    {
+      "name": "TextMate storage.type.annotation",
+      "scope": [
+        "source.batchfile storage.type.annotation",
+        "source.clojure storage.type.annotation",
+        "source.dart storage.type.annotation",
+        "source.julia storage.type.annotation",
+        "source.lua storage.type.annotation",
+        "source.makefile storage.type.annotation",
+        "source.objc storage.type.annotation",
+        "source.objcpp storage.type.annotation",
+        "source.perl storage.type.annotation",
+        "source.powershell storage.type.annotation",
+        "source.r storage.type.annotation",
+        "source.ruby storage.type.annotation",
+        "source.swift storage.type.annotation",
+        "text.html.php storage.type.annotation",
+        "text.log storage.type.annotation"
+      ],
+      "settings": {
+        "fontStyle": "",
+        "foreground": "#0033b3"
+      }
+    },
+    {
+      "name": "TextMate string.quoted.docstring",
+      "scope": [
+        "source.batchfile string.quoted.docstring",
+        "source.clojure string.quoted.docstring",
+        "source.dart string.quoted.docstring",
+        "source.julia string.quoted.docstring",
+        "source.lua string.quoted.docstring",
+        "source.makefile string.quoted.docstring",
+        "source.objc string.quoted.docstring",
+        "source.objcpp string.quoted.docstring",
+        "source.perl string.quoted.docstring",
+        "source.powershell string.quoted.docstring",
+        "source.r string.quoted.docstring",
+        "source.ruby string.quoted.docstring",
+        "source.swift string.quoted.docstring",
+        "text.html.php string.quoted.docstring",
+        "text.log string.quoted.docstring"
+      ],
+      "settings": {
+        "fontStyle": "",
+        "foreground": "#067d17"
+      }
+    },
+    {
+      "name": "TextMate string.quoted.docstring punctuation.definition.string",
+      "scope": [
+        "source.batchfile string.quoted.docstring punctuation.definition.string",
+        "source.clojure string.quoted.docstring punctuation.definition.string",
+        "source.dart string.quoted.docstring punctuation.definition.string",
+        "source.julia string.quoted.docstring punctuation.definition.string",
+        "source.lua string.quoted.docstring punctuation.definition.string",
+        "source.makefile string.quoted.docstring punctuation.definition.string",
+        "source.objc string.quoted.docstring punctuation.definition.string",
+        "source.objcpp string.quoted.docstring punctuation.definition.string",
+        "source.perl string.quoted.docstring punctuation.definition.string",
+        "source.powershell string.quoted.docstring punctuation.definition.string",
+        "source.r string.quoted.docstring punctuation.definition.string",
+        "source.ruby string.quoted.docstring punctuation.definition.string",
+        "source.swift string.quoted.docstring punctuation.definition.string",
+        "text.html.php string.quoted.docstring punctuation.definition.string",
+        "text.log string.quoted.docstring punctuation.definition.string"
+      ],
+      "settings": {
+        "fontStyle": "",
+        "foreground": "#067d17"
+      }
+    },
+    {
+      "name": "TextMate string.regexp",
+      "scope": [
+        "source.batchfile string.regexp",
+        "source.clojure string.regexp",
+        "source.dart string.regexp",
+        "source.julia string.regexp",
+        "source.lua string.regexp",
+        "source.makefile string.regexp",
+        "source.objc string.regexp",
+        "source.objcpp string.regexp",
+        "source.perl string.regexp",
+        "source.powershell string.regexp",
+        "source.r string.regexp",
+        "source.ruby string.regexp",
+        "source.swift string.regexp",
+        "text.html.php string.regexp",
+        "text.log string.regexp"
+      ],
+      "settings": {
+        "fontStyle": "",
+        "foreground": "#264eff"
+      }
+    },
+    {
+      "name": "TextMate support.function.builtin",
+      "scope": [
+        "source.batchfile support.function.builtin",
+        "source.clojure support.function.builtin",
+        "source.dart support.function.builtin",
+        "source.julia support.function.builtin",
+        "source.lua support.function.builtin",
+        "source.makefile support.function.builtin",
+        "source.objc support.function.builtin",
+        "source.objcpp support.function.builtin",
+        "source.perl support.function.builtin",
+        "source.powershell support.function.builtin",
+        "source.r support.function.builtin",
+        "source.ruby support.function.builtin",
+        "source.swift support.function.builtin",
+        "text.html.php support.function.builtin",
+        "text.log support.function.builtin"
+      ],
+      "settings": {
+        "fontStyle": "",
+        "foreground": "#080808"
+      }
+    },
+    {
+      "name": "TextMate support.type.primitive",
+      "scope": [
+        "source.batchfile support.type.primitive",
+        "source.clojure support.type.primitive",
+        "source.dart support.type.primitive",
+        "source.julia support.type.primitive",
+        "source.lua support.type.primitive",
+        "source.makefile support.type.primitive",
+        "source.objc support.type.primitive",
+        "source.objcpp support.type.primitive",
+        "source.perl support.type.primitive",
+        "source.powershell support.type.primitive",
+        "source.r support.type.primitive",
+        "source.ruby support.type.primitive",
+        "source.swift support.type.primitive",
+        "text.html.php support.type.primitive",
+        "text.log support.type.primitive"
+      ],
+      "settings": {
+        "fontStyle": "",
+        "foreground": "#080808"
+      }
+    },
+    {
+      "name": "TextMate variable",
+      "scope": [
+        "source.batchfile variable",
+        "source.clojure variable",
+        "source.dart variable",
+        "source.julia variable",
+        "source.lua variable",
+        "source.makefile variable",
+        "source.objc variable",
+        "source.objcpp variable",
+        "source.perl variable",
+        "source.powershell variable",
+        "source.r variable",
+        "source.ruby variable",
+        "source.swift variable",
+        "text.html.php variable",
+        "text.log variable"
+      ],
+      "settings": {
+        "fontStyle": "",
+        "foreground": "#080808"
+      }
+    },
+    {
+      "name": "TextMate variable.language.super",
+      "scope": [
+        "source.batchfile variable.language.super",
+        "source.clojure variable.language.super",
+        "source.dart variable.language.super",
+        "source.julia variable.language.super",
+        "source.lua variable.language.super",
+        "source.makefile variable.language.super",
+        "source.objc variable.language.super",
+        "source.objcpp variable.language.super",
+        "source.perl variable.language.super",
+        "source.powershell variable.language.super",
+        "source.r variable.language.super",
+        "source.ruby variable.language.super",
+        "source.swift variable.language.super",
+        "text.html.php variable.language.super",
+        "text.log variable.language.super"
+      ],
+      "settings": {
+        "fontStyle": "",
+        "foreground": "#080808"
+      }
+    },
+    {
+      "name": "TextMate variable.language.this",
+      "scope": [
+        "source.batchfile variable.language.this",
+        "source.clojure variable.language.this",
+        "source.dart variable.language.this",
+        "source.julia variable.language.this",
+        "source.lua variable.language.this",
+        "source.makefile variable.language.this",
+        "source.objc variable.language.this",
+        "source.objcpp variable.language.this",
+        "source.perl variable.language.this",
+        "source.powershell variable.language.this",
+        "source.r variable.language.this",
+        "source.ruby variable.language.this",
+        "source.swift variable.language.this",
+        "text.html.php variable.language.this",
+        "text.log variable.language.this"
+      ],
+      "settings": {
+        "fontStyle": "",
+        "foreground": "#080808"
+      }
+    },
+    {
+      "name": "TextMate variable.other.constant",
+      "scope": [
+        "source.batchfile variable.other.constant",
+        "source.clojure variable.other.constant",
+        "source.dart variable.other.constant",
+        "source.julia variable.other.constant",
+        "source.lua variable.other.constant",
+        "source.makefile variable.other.constant",
+        "source.objc variable.other.constant",
+        "source.objcpp variable.other.constant",
+        "source.perl variable.other.constant",
+        "source.powershell variable.other.constant",
+        "source.r variable.other.constant",
+        "source.ruby variable.other.constant",
+        "source.swift variable.other.constant",
+        "text.html.php variable.other.constant",
+        "text.log variable.other.constant"
+      ],
+      "settings": {
+        "fontStyle": "",
+        "foreground": "#080808"
+      }
+    },
+    {
+      "name": "TextMate variable.other.enummember",
+      "scope": [
+        "source.batchfile variable.other.enummember",
+        "source.clojure variable.other.enummember",
+        "source.dart variable.other.enummember",
+        "source.julia variable.other.enummember",
+        "source.lua variable.other.enummember",
+        "source.makefile variable.other.enummember",
+        "source.objc variable.other.enummember",
+        "source.objcpp variable.other.enummember",
+        "source.perl variable.other.enummember",
+        "source.powershell variable.other.enummember",
+        "source.r variable.other.enummember",
+        "source.ruby variable.other.enummember",
+        "source.swift variable.other.enummember",
+        "text.html.php variable.other.enummember",
+        "text.log variable.other.enummember"
+      ],
+      "settings": {
+        "fontStyle": "",
+        "foreground": "#080808"
+      }
+    },
+    {
+      "name": "TextMate variable.other.member",
+      "scope": [
+        "source.batchfile variable.other.member",
+        "source.clojure variable.other.member",
+        "source.dart variable.other.member",
+        "source.julia variable.other.member",
+        "source.lua variable.other.member",
+        "source.makefile variable.other.member",
+        "source.objc variable.other.member",
+        "source.objcpp variable.other.member",
+        "source.perl variable.other.member",
+        "source.powershell variable.other.member",
+        "source.r variable.other.member",
+        "source.ruby variable.other.member",
+        "source.swift variable.other.member",
+        "text.html.php variable.other.member",
+        "text.log variable.other.member"
+      ],
+      "settings": {
+        "fontStyle": "",
+        "foreground": "#080808"
+      }
+    },
+    {
+      "name": "TextMate variable.other.object.property",
+      "scope": [
+        "source.batchfile variable.other.object.property",
+        "source.clojure variable.other.object.property",
+        "source.dart variable.other.object.property",
+        "source.julia variable.other.object.property",
+        "source.lua variable.other.object.property",
+        "source.makefile variable.other.object.property",
+        "source.objc variable.other.object.property",
+        "source.objcpp variable.other.object.property",
+        "source.perl variable.other.object.property",
+        "source.powershell variable.other.object.property",
+        "source.r variable.other.object.property",
+        "source.ruby variable.other.object.property",
+        "source.swift variable.other.object.property",
+        "text.html.php variable.other.object.property",
+        "text.log variable.other.object.property"
+      ],
+      "settings": {
+        "fontStyle": "",
+        "foreground": "#080808"
+      }
+    },
+    {
+      "name": "TextMate variable.other.property",
+      "scope": [
+        "source.batchfile variable.other.property",
+        "source.clojure variable.other.property",
+        "source.dart variable.other.property",
+        "source.julia variable.other.property",
+        "source.lua variable.other.property",
+        "source.makefile variable.other.property",
+        "source.objc variable.other.property",
+        "source.objcpp variable.other.property",
+        "source.perl variable.other.property",
+        "source.powershell variable.other.property",
+        "source.r variable.other.property",
+        "source.ruby variable.other.property",
+        "source.swift variable.other.property",
+        "text.html.php variable.other.property",
+        "text.log variable.other.property"
+      ],
+      "settings": {
+        "fontStyle": "",
+        "foreground": "#080808"
       }
     }
   ],

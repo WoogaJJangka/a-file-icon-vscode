@@ -1,0 +1,15 @@
+{
+  "file": "log.log",
+  "scope": "text.log",
+  "tokens": [
+    { "line": 1, "text": "2026-11-21", "key": "DEFAULT_LINE_COMMENT" },
+    { "line": 1, "text": "INFO", "key": "DIFF_INSERTED" },
+    { "line": 1, "text": "8080", "key": "DEFAULT_CONSTANT" },
+    { "line": 2, "text": "WARN", "key": "DIFF_DELETED" },
+    { "line": 3, "text": "ERROR", "key": "DEFAULT_STRING" },
+    { "line": 3, "text": "java.lang.IllegalStateException", "key": "DEFAULT_STRING" },
+    { "line": 4, "text": "DEBUG", "key": "DIFF_MODIFIED" },
+    { "line": 4, "text": "\"world\"", "key": "DEFAULT_STRING" },
+    { "line": 4, "text": "0x1F", "key": "DEFAULT_CONSTANT" }
+  ]
+}

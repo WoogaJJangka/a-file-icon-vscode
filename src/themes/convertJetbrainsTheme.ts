@@ -4,12 +4,14 @@
 import { fallbackChain } from './jetbrainsFallbacks';
 import { SEMANTIC_RULES, TOKEN_RULES } from './jetbrainsTokenMap';
 import { UI_MAP } from './jetbrainsUiMap';
+import { selectorScore, TEXTMATE_LANGUAGES, textMateAttributes, textMateScopes } from './textMateTheme';
 
 import type { ResolvedScheme, ResolvedUiTheme, TextAttributes } from './jetbrainsTheme';
 import type { ColorSource } from './jetbrainsUiMap';
 import type { TokenRule } from './jetbrainsTokenMap';
 
-type Maps = { semantic?: Record<string, string[]>; tokens?: TokenRule[]; ui?: Record<string, ColorSource[]> };
+/** `textMateLanguages`: the languages drawn like the TextMate plugin of the IDE (default: TEXTMATE_LANGUAGES, none with own `tokens`) */
+type Maps = { semantic?: Record<string, string[]>; textMateLanguages?: string[]; tokens?: TokenRule[]; ui?: Record<string, ColorSource[]> };
 
 const ATTRIBUTE_FIELDS: Record<string, keyof TextAttributes> = {
   bg: 'background',
@@ -127,6 +129,44 @@ export const convertJetbrainsTheme = (
     const settings: TokenColor['settings'] = { fontStyle: fontStyle(style) };
     if (style.foreground) settings.foreground = style.foreground;
     tokenColors.push({ name: rule.name, scope: rule.scope, settings });
+  }
+
+  // Languages the IDE draws with TextMate grammars (textMateTheme.ts): one rule per scope, for every such language. A
+  // rule with parent scopes takes what it leaves unset from the rule of the same scope without them (vscode-textmate
+  // `ThemeTrieElement`), so the color is always written: the text color when no layer has one. A language gets the rule
+  // only when the other rules draw the scope differently there (the theme json is parsed by VS Code: keep it small)
+  const tokenRules = maps.tokens ?? TOKEN_RULES;
+  const languages = maps.textMateLanguages ?? (maps.tokens ? [] : TEXTMATE_LANGUAGES);
+  const text = scheme.lookup(['TEXT'])[0]?.foreground;
+  const resolveKey = (key: string) => scheme.lookup(fallbackChain(key))[0];
+  const ownRules = [...tokenColors];
+  /**
+   * The value the rules above give the last scope of a stack: the most specific rule that sets it, like vscode-textmate.
+   * Only rules that match that scope count: without one, the token takes the color of its parents (a variable in a string)
+   */
+  const ownValue = (scopes: string[], setting: 'fontStyle' | 'foreground') => {
+    let value: string | undefined;
+    let best = (scopes.length - 1) * 10_000 - 1;
+    for (const rule of ownRules) {
+      if (rule.settings[setting] === undefined) continue;
+      for (const selector of rule.scope) {
+        const score = selectorScore(selector, scopes);
+        if (score >= 0 && score >= best) [best, value] = [score, rule.settings[setting]];
+      }
+    }
+    return value;
+  };
+  for (const scope of languages.length > 0 ? textMateScopes(tokenRules.flatMap((rule) => rule.scope)) : []) {
+    const attributes = textMateAttributes(scope, resolveKey);
+    const foreground = attributes?.foreground ?? text;
+    if (!attributes || !foreground) continue;
+    const settings = { fontStyle: fontStyle(styleOf(attributes)), foreground };
+    const differs = (language: string) => {
+      const scopes = [language, ...scope.split(' ')];
+      return ownValue(scopes, 'fontStyle') !== settings.fontStyle || ownValue(scopes, 'foreground')?.toLowerCase() !== foreground.toLowerCase();
+    };
+    const where = languages.filter((language) => differs(language));
+    if (where.length > 0) tokenColors.push({ name: `TextMate ${scope}`, scope: where.map((language) => `${language} ${scope}`), settings });
   }
 
   const semanticTokenColors: Record<string, SemanticStyle> = {};

@@ -145,7 +145,7 @@ const main = async () => {
         const where = `${sample.file}:${expectation.line} "${expectation.text}"`;
         const line = lines[expectation.line - 1];
         const tokens = line ? tokensOf(line.line, line.tokens, expectation.text, expectation.nth) : undefined;
-        const expected = expectedStyle(scheme, expectation.key, expectation.under);
+        const expected = expectedStyle(scheme, expectation.key, expectation.under, undefined, expectation.layers);
         if (!tokens || tokens.length === 0) throw new Error(`${where}: not on that line`);
         if (!expected) throw new Error(`${where}: the scheme has neither ${expectation.key} nor a fallback of it (KEY_FALLBACKS)`);
         checked++;
@@ -181,7 +181,9 @@ const main = async () => {
   // Scopes: what the rules name and the grammars do not have, and what the grammars have and no rule colors
   const scopesByGrammar = new Map(contributions.map((grammar) => [grammar.scopeName, grammarScopes(readFileSync(grammar.path, 'utf8'))]));
   const rules = loadTheme(COLOR_THEMES[0].base).tokenColors;
-  const missing = missingRuleScopes(rules, [...new Set([...scopesByGrammar.values()].flat())], EXTERNAL_SCOPES);
+  // The TextMate rules (textMateTheme.ts) are written for every TextMate language, whether its grammar has the scope or not
+  const ownRules = rules.filter((rule) => !rule.name.startsWith('TextMate '));
+  const missing = missingRuleScopes(ownRules, [...new Set([...scopesByGrammar.values()].flat())], EXTERNAL_SCOPES);
   if (missing.length > 0) console.log(`\nRule scopes no grammar of VS Code ${version} has (typo, or another extension's grammar):\n  ${missing.join('\n  ')}`);
   if (report) {
     console.log('\nScopes no rule colors, by grammar:');

@@ -8,6 +8,7 @@ import { compareCodeUnits } from 'src/helpers/utils';
 
 import { fontStyle, styleOf } from './convertJetbrainsTheme';
 import { fallbackChain, KEY_FALLBACKS } from './jetbrainsFallbacks';
+import { mergeAttributes, selectorScore } from './textMateTheme';
 
 import type { ResolvedScheme, SchemeChainData } from './jetbrainsTheme';
 
@@ -49,6 +50,11 @@ export type SchemeChain = SchemeChainData;
  */
 export type Expectation = {
   key: string;
+  /**
+   * A language the IDE draws with a TextMate grammar (textMateTheme.ts): the keys of the other rules that match the
+   * scope, under `key`, the nearest first. Their font styles add up; the color is the top one that has one.
+   */
+  layers?: string[];
   /** 1-based line of the sample */
   line: number;
   /** Which occurrence of `text` on the line, 1-based (default 1) */
@@ -84,10 +90,13 @@ export const expectedStyle = (
   key: string,
   under?: string,
   fallbacks: Record<string, string> = KEY_FALLBACKS,
+  layers: string[] = [],
 ): TokenStyle | undefined => {
   // A key of the IDE code that no scheme defines (nor its fallbacks) is drawn with the default attributes: text
   const drawn = (name: string) => [...scheme.lookup(fallbackChain(name, fallbacks)), ...(name in fallbacks ? scheme.lookup(['TEXT']) : [])][0];
-  const attributes = drawn(key);
+  const stack = [...layers].reverse().flatMap((layer) => drawn(layer) ?? []);
+  const top = drawn(key);
+  const attributes = layers.length > 0 ? mergeAttributes([...stack, ...(top ? [top] : [])]) : top;
   const foreground = attributes?.foreground ?? (under ? drawn(under)?.foreground : undefined) ?? scheme.attributes('TEXT')?.foreground;
   if (!attributes || !foreground) return undefined;
   return { fontStyle: fontStyle(styleOf(attributes)), foreground: foreground.toLowerCase().slice(0, 7) };
@@ -129,28 +138,6 @@ export const compareStyles = (expected: TokenStyle, actual: TokenStyle[]): strin
   if (actual.every((style) => sameStyle(style, expected))) return undefined;
   const got = [...new Set(actual.map((style) => describeStyle(style)))].join(' + ');
   return `expected ${describeStyle(expected)}, got ${got}`;
-};
-
-/**
- * How specifically a selector (`meta.function-call entity.name.function`) matches a scope stack, or -1 when it does not:
- * the depth of the scope its last part matches first, then the length of that part, then the number of parts.
- * An approximation of the TextMate rules, for the report only: the colors come from vscode-textmate.
- */
-export const selectorScore = (selector: string, scopes: string[]): number => {
-  const parts = selectorParts(selector);
-  const last = parts.at(-1)!;
-  for (let depth = scopes.length - 1; depth >= 0; depth--) {
-    if (!partMatches(last, scopes[depth])) continue;
-    let next = depth - 1;
-    let matched = true;
-    for (let index = parts.length - 2; index >= 0 && matched; index--) {
-      while (next >= 0 && !partMatches(parts[index], scopes[next])) next--;
-      matched = next >= 0;
-      next--;
-    }
-    if (matched) return depth * 10_000 + last.split('.').length * 100 + parts.length;
-  }
-  return -1;
 };
 
 /** The name of the token rule that colors a scope stack (the most specific, the later one on a tie), for the report */
