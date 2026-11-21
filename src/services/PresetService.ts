@@ -1,4 +1,5 @@
 import i18next from 'i18next';
+import { isCancellation } from 'src/helpers/utils';
 import { PRESET_GROUPS, PRESET_SETTING_IDS, PRESETS } from 'src/presets/presets';
 import { accentPreviewService } from 'src/services/AccentPreviewService';
 import { logger } from 'src/services/LoggingService';
@@ -169,7 +170,10 @@ export class PresetService {
     window.showInformationMessage(i18next.t('preset.applied', { name: presetName(preset) }), reload, undo).then(async (action) => {
       if (action === reload) await commands.executeCommand('workbench.action.reloadWindow');
       if (action === undo) await this.undo();
-    }, (error: unknown) => logger.error(String(error)));
+    }, (error: unknown) => {
+      // the notice is still open when the window closes or reloads
+      if (!isCancellation(error)) logger.error(String(error));
+    });
     return true;
   }
 
