@@ -2,7 +2,11 @@
 
 All notable changes to this project will be documented in this file. Dates are displayed in UTC.
 
-#### Unreleased
+#### 0.2.0 (2026-11-21)
+
+Syntax colors of the JetBrains IDE for many more languages, checked token by token against the IDE; named accent
+colors with a live preview and more places to paint them; ready-made theme combinations. Nothing is applied by
+installing: the accent and the combinations are chosen with their commands.
 
 - feat: **Choose a Theme Combination (with Preview)** applies one of eight ready-made combinations (JetBrains Dark and
   Light, Material green, One Dark Pro / Dracula / Catppuccin Mocha syntax on the Islands frame, the GitHub Dark frame
