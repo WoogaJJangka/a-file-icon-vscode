@@ -308,7 +308,7 @@
       "italic": false,
       "strikethrough": false,
       "underline": false,
-      "foreground": "#080808"
+      "foreground": "#000000"
     },
     "class.builtin": {
       "bold": false,
@@ -378,7 +378,7 @@
       "italic": false,
       "strikethrough": false,
       "underline": false,
-      "foreground": "#080808"
+      "foreground": "#000000"
     },
     "lifetime:rust": {
       "bold": false,
@@ -441,14 +441,14 @@
       "italic": false,
       "strikethrough": false,
       "underline": false,
-      "foreground": "#00627a"
+      "foreground": "#914c07"
     },
     "method:javascriptreact": {
       "bold": false,
       "italic": false,
       "strikethrough": false,
       "underline": false,
-      "foreground": "#00627a"
+      "foreground": "#914c07"
     },
     "method:python": {
       "bold": false,
@@ -469,28 +469,28 @@
       "italic": false,
       "strikethrough": false,
       "underline": false,
-      "foreground": "#00627a"
+      "foreground": "#914c07"
     },
     "method:typescriptreact": {
       "bold": false,
       "italic": false,
       "strikethrough": false,
       "underline": false,
-      "foreground": "#00627a"
+      "foreground": "#914c07"
     },
     "namespace": {
       "bold": false,
       "italic": false,
       "strikethrough": false,
       "underline": false,
-      "foreground": "#080808"
+      "foreground": "#000000"
     },
     "parameter": {
       "bold": false,
       "italic": false,
       "strikethrough": false,
       "underline": false,
-      "foreground": "#080808"
+      "foreground": "#000000"
     },
     "property": {
       "bold": false,
@@ -518,7 +518,7 @@
       "italic": false,
       "strikethrough": false,
       "underline": false,
-      "foreground": "#080808"
+      "foreground": "#000000"
     },
     "selfKeyword:rust": {
       "bold": false,
@@ -569,12 +569,180 @@
       "underline": false,
       "foreground": "#830091"
     },
-    "variable:python": {
+    "parameter:javascript": {
       "bold": false,
       "italic": false,
       "strikethrough": false,
       "underline": false,
       "foreground": "#080808"
+    },
+    "property:javascript": {
+      "bold": false,
+      "italic": false,
+      "strikethrough": false,
+      "underline": false,
+      "foreground": "#080808"
+    },
+    "property.declaration:javascript": {
+      "bold": false,
+      "italic": false,
+      "strikethrough": false,
+      "underline": false,
+      "foreground": "#871094"
+    },
+    "property.declaration.static:javascript": {
+      "bold": false,
+      "italic": true,
+      "strikethrough": false,
+      "underline": false,
+      "foreground": "#871094"
+    },
+    "typeParameter:javascript": {
+      "bold": false,
+      "italic": false,
+      "strikethrough": false,
+      "underline": false,
+      "foreground": "#20999d"
+    },
+    "variable.local:javascript": {
+      "bold": false,
+      "italic": false,
+      "strikethrough": false,
+      "underline": false,
+      "foreground": "#2a8c7c"
+    },
+    "parameter:javascriptreact": {
+      "bold": false,
+      "italic": false,
+      "strikethrough": false,
+      "underline": false,
+      "foreground": "#080808"
+    },
+    "property:javascriptreact": {
+      "bold": false,
+      "italic": false,
+      "strikethrough": false,
+      "underline": false,
+      "foreground": "#080808"
+    },
+    "property.declaration:javascriptreact": {
+      "bold": false,
+      "italic": false,
+      "strikethrough": false,
+      "underline": false,
+      "foreground": "#871094"
+    },
+    "property.declaration.static:javascriptreact": {
+      "bold": false,
+      "italic": true,
+      "strikethrough": false,
+      "underline": false,
+      "foreground": "#871094"
+    },
+    "typeParameter:javascriptreact": {
+      "bold": false,
+      "italic": false,
+      "strikethrough": false,
+      "underline": false,
+      "foreground": "#20999d"
+    },
+    "variable.local:javascriptreact": {
+      "bold": false,
+      "italic": false,
+      "strikethrough": false,
+      "underline": false,
+      "foreground": "#2a8c7c"
+    },
+    "parameter:typescript": {
+      "bold": false,
+      "italic": false,
+      "strikethrough": false,
+      "underline": false,
+      "foreground": "#080808"
+    },
+    "property:typescript": {
+      "bold": false,
+      "italic": false,
+      "strikethrough": false,
+      "underline": false,
+      "foreground": "#080808"
+    },
+    "property.declaration:typescript": {
+      "bold": false,
+      "italic": false,
+      "strikethrough": false,
+      "underline": false,
+      "foreground": "#871094"
+    },
+    "property.declaration.static:typescript": {
+      "bold": false,
+      "italic": true,
+      "strikethrough": false,
+      "underline": false,
+      "foreground": "#871094"
+    },
+    "typeParameter:typescript": {
+      "bold": false,
+      "italic": false,
+      "strikethrough": false,
+      "underline": false,
+      "foreground": "#20999d"
+    },
+    "variable.local:typescript": {
+      "bold": false,
+      "italic": false,
+      "strikethrough": false,
+      "underline": false,
+      "foreground": "#2a8c7c"
+    },
+    "parameter:typescriptreact": {
+      "bold": false,
+      "italic": false,
+      "strikethrough": false,
+      "underline": false,
+      "foreground": "#080808"
+    },
+    "property:typescriptreact": {
+      "bold": false,
+      "italic": false,
+      "strikethrough": false,
+      "underline": false,
+      "foreground": "#080808"
+    },
+    "property.declaration:typescriptreact": {
+      "bold": false,
+      "italic": false,
+      "strikethrough": false,
+      "underline": false,
+      "foreground": "#871094"
+    },
+    "property.declaration.static:typescriptreact": {
+      "bold": false,
+      "italic": true,
+      "strikethrough": false,
+      "underline": false,
+      "foreground": "#871094"
+    },
+    "typeParameter:typescriptreact": {
+      "bold": false,
+      "italic": false,
+      "strikethrough": false,
+      "underline": false,
+      "foreground": "#20999d"
+    },
+    "variable.local:typescriptreact": {
+      "bold": false,
+      "italic": false,
+      "strikethrough": false,
+      "underline": false,
+      "foreground": "#2a8c7c"
+    },
+    "variable:python": {
+      "bold": false,
+      "italic": false,
+      "strikethrough": false,
+      "underline": false,
+      "foreground": "#000000"
     }
   },
   "tokenColors": [
@@ -785,7 +953,7 @@
       ],
       "settings": {
         "fontStyle": "",
-        "foreground": "#080808"
+        "foreground": "#000000"
       }
     },
     {
@@ -797,7 +965,7 @@
       ],
       "settings": {
         "fontStyle": "",
-        "foreground": "#080808"
+        "foreground": "#000000"
       }
     },
     {
@@ -807,7 +975,7 @@
       ],
       "settings": {
         "fontStyle": "",
-        "foreground": "#080808"
+        "foreground": "#000000"
       }
     },
     {
@@ -828,7 +996,7 @@
       ],
       "settings": {
         "fontStyle": "",
-        "foreground": "#080808"
+        "foreground": "#000000"
       }
     },
     {
@@ -852,7 +1020,7 @@
       ],
       "settings": {
         "fontStyle": "underline",
-        "foreground": "#080808"
+        "foreground": "#000000"
       }
     },
     {
@@ -890,11 +1058,22 @@
       "name": "Attribute value",
       "scope": [
         "meta.attribute-with-value string",
-        "meta.tag string"
+        "meta.tag string",
+        "meta.attribute punctuation.separator.key-value.html"
       ],
       "settings": {
         "fontStyle": "",
         "foreground": "#067d17"
+      }
+    },
+    {
+      "name": "HTML doctype",
+      "scope": [
+        "meta.tag.metadata.doctype.html entity.name.tag"
+      ],
+      "settings": {
+        "fontStyle": "",
+        "foreground": "#080808"
       }
     },
     {
@@ -934,7 +1113,7 @@
       ],
       "settings": {
         "fontStyle": "",
-        "foreground": "#080808"
+        "foreground": "#000000"
       }
     },
     {
@@ -1075,7 +1254,7 @@
       ],
       "settings": {
         "fontStyle": "",
-        "foreground": "#080808"
+        "foreground": "#000000"
       }
     },
     {
@@ -1087,7 +1266,7 @@
       ],
       "settings": {
         "fontStyle": "",
-        "foreground": "#080808"
+        "foreground": "#000000"
       }
     },
     {
@@ -1098,7 +1277,7 @@
       ],
       "settings": {
         "fontStyle": "",
-        "foreground": "#080808"
+        "foreground": "#000000"
       }
     },
     {
@@ -1141,7 +1320,7 @@
       ],
       "settings": {
         "fontStyle": "",
-        "foreground": "#080808"
+        "foreground": "#000000"
       }
     },
     {
@@ -1269,6 +1448,241 @@
       "settings": {
         "fontStyle": "",
         "foreground": "#0033b3"
+      }
+    },
+    {
+      "name": "Ruby comment",
+      "scope": [
+        "comment.line.number-sign.ruby",
+        "comment.block.documentation.ruby",
+        "comment.line.number-sign.ruby punctuation.definition.comment"
+      ],
+      "settings": {
+        "fontStyle": "italic",
+        "foreground": "#8c8c8c"
+      }
+    },
+    {
+      "name": "Ruby specific call",
+      "scope": [
+        "keyword.other.special-method.ruby"
+      ],
+      "settings": {
+        "fontStyle": "italic",
+        "foreground": "#00627a"
+      }
+    },
+    {
+      "name": "Ruby literal",
+      "scope": [
+        "constant.language.nil.ruby",
+        "constant.language.boolean.ruby",
+        "variable.language.self.ruby"
+      ],
+      "settings": {
+        "fontStyle": "",
+        "foreground": "#0033b3"
+      }
+    },
+    {
+      "name": "Ruby constant declaration",
+      "scope": [
+        "entity.name.type.module.ruby",
+        "entity.name.type.class.ruby",
+        "variable.other.constant.ruby"
+      ],
+      "settings": {
+        "fontStyle": "italic",
+        "foreground": "#871094"
+      }
+    },
+    {
+      "name": "Ruby constant",
+      "scope": [
+        "support.class.ruby",
+        "variable.other.constant.ruby support.class.ruby",
+        "entity.other.inherited-class.ruby"
+      ],
+      "settings": {
+        "fontStyle": "italic",
+        "foreground": "#871094"
+      }
+    },
+    {
+      "name": "Ruby number",
+      "scope": [
+        "constant.numeric.ruby"
+      ],
+      "settings": {
+        "fontStyle": "",
+        "foreground": "#1750eb"
+      }
+    },
+    {
+      "name": "Ruby symbol",
+      "scope": [
+        "constant.language.symbol.ruby",
+        "constant.language.symbol.ruby punctuation.definition.constant.ruby",
+        "constant.other.symbol.hashkey.ruby"
+      ],
+      "settings": {
+        "fontStyle": "",
+        "foreground": "#871094"
+      }
+    },
+    {
+      "name": "Ruby method declaration",
+      "scope": [
+        "entity.name.function.ruby"
+      ],
+      "settings": {
+        "fontStyle": "italic",
+        "foreground": "#0000ff"
+      }
+    },
+    {
+      "name": "Ruby call",
+      "scope": [
+        "meta.function-call.ruby entity.name.function.ruby",
+        "support.function.kernel.ruby"
+      ],
+      "settings": {
+        "fontStyle": "",
+        "foreground": "#000000"
+      }
+    },
+    {
+      "name": "Ruby parameter",
+      "scope": [
+        "variable.parameter.function.ruby",
+        "variable.other.block.ruby"
+      ],
+      "settings": {
+        "fontStyle": "italic",
+        "foreground": "#c37522"
+      }
+    },
+    {
+      "name": "Ruby local variable",
+      "scope": [
+        "variable.ruby"
+      ],
+      "settings": {
+        "fontStyle": "italic",
+        "foreground": "#003c5a"
+      }
+    },
+    {
+      "name": "Ruby instance variable",
+      "scope": [
+        "variable.other.readwrite.instance.ruby",
+        "variable.other.readwrite.instance.ruby punctuation.definition.variable.ruby"
+      ],
+      "settings": {
+        "fontStyle": "",
+        "foreground": "#871094"
+      }
+    },
+    {
+      "name": "Ruby escape",
+      "scope": [
+        "constant.character.escape.ruby"
+      ],
+      "settings": {
+        "fontStyle": "",
+        "foreground": "#0037a6"
+      }
+    },
+    {
+      "name": "Ruby interpolation",
+      "scope": [
+        "string meta.embedded.line.ruby",
+        "string meta.embedded.line.ruby punctuation.section.embedded"
+      ],
+      "settings": {
+        "fontStyle": "",
+        "foreground": "#080808"
+      }
+    },
+    {
+      "name": "PHP keyword",
+      "scope": [
+        "punctuation.section.embedded.begin.php",
+        "punctuation.section.embedded.end.php",
+        "support.function.construct.output.php",
+        "constant.language.php",
+        "storage.type.php"
+      ],
+      "settings": {
+        "fontStyle": "",
+        "foreground": "#0033b3"
+      }
+    },
+    {
+      "name": "PHP variable",
+      "scope": [
+        "variable.other.php",
+        "variable.language.this.php",
+        "variable.other.php punctuation.definition.variable.php",
+        "variable.language.this.php punctuation.definition.variable.php"
+      ],
+      "settings": {
+        "fontStyle": "",
+        "foreground": "#660000"
+      }
+    },
+    {
+      "name": "PHP property",
+      "scope": [
+        "variable.other.property.php"
+      ],
+      "settings": {
+        "fontStyle": "",
+        "foreground": "#871094"
+      }
+    },
+    {
+      "name": "PHP constant",
+      "scope": [
+        "constant.other.php",
+        "constant.other.class.php"
+      ],
+      "settings": {
+        "fontStyle": "italic",
+        "foreground": "#871094"
+      }
+    },
+    {
+      "name": "PHP call",
+      "scope": [
+        "meta.function-call.php support.function",
+        "meta.function-call.php entity.name.function",
+        "meta.method-call.php entity.name.function"
+      ],
+      "settings": {
+        "fontStyle": "",
+        "foreground": "#00627a"
+      }
+    },
+    {
+      "name": "PHP string braces",
+      "scope": [
+        "string.quoted.double.php punctuation.definition.variable.php"
+      ],
+      "settings": {
+        "fontStyle": "",
+        "foreground": "#808080"
+      }
+    },
+    {
+      "name": "PHP class",
+      "scope": [
+        "entity.name.type.namespace.php",
+        "support.class.builtin.php"
+      ],
+      "settings": {
+        "fontStyle": "",
+        "foreground": "#000000"
       }
     },
     {
@@ -1423,6 +1837,7 @@
     {
       "name": "CSS property",
       "scope": [
+        "variable.css",
         "support.type.property-name.css",
         "support.type.vendored.property-name.css",
         "support.type.property-name.scss",
@@ -1431,7 +1846,7 @@
       ],
       "settings": {
         "fontStyle": "",
-        "foreground": "#080808"
+        "foreground": "#174ad4"
       }
     },
     {
@@ -1462,7 +1877,7 @@
       ],
       "settings": {
         "fontStyle": "",
-        "foreground": "#1750eb"
+        "foreground": "#067d17"
       }
     },
     {
@@ -1481,6 +1896,30 @@
       }
     },
     {
+      "name": "CSS selector punctuation",
+      "scope": [
+        "entity.other.attribute-name.class.css punctuation.definition.entity.css",
+        "entity.other.attribute-name.pseudo-class.css punctuation.definition.entity.css",
+        "entity.other.attribute-name.pseudo-element.css punctuation.definition.entity.css"
+      ],
+      "settings": {
+        "fontStyle": "",
+        "foreground": "#080808"
+      }
+    },
+    {
+      "name": "CSS function",
+      "scope": [
+        "meta.property-value.css support.function",
+        "support.function.url.css",
+        "variable.argument.css"
+      ],
+      "settings": {
+        "fontStyle": "",
+        "foreground": "#0033b3"
+      }
+    },
+    {
       "name": "CSS color",
       "scope": [
         "constant.other.color.rgb-value.hex.css",
@@ -1488,7 +1927,7 @@
       ],
       "settings": {
         "fontStyle": "",
-        "foreground": "#1750eb"
+        "foreground": "#0033b3"
       }
     },
     {
@@ -1779,6 +2218,16 @@
       ],
       "settings": {
         "fontStyle": "",
+        "foreground": "#871094"
+      }
+    },
+    {
+      "name": "XML namespace separator",
+      "scope": [
+        "entity.name.tag.xml punctuation.separator.namespace.xml"
+      ],
+      "settings": {
+        "fontStyle": "",
         "foreground": "#0033b3"
       }
     },
@@ -1794,18 +2243,20 @@
       }
     },
     {
-      "name": "XML CDATA",
+      "name": "XML attribute equals",
       "scope": [
-        "string.unquoted.cdata.xml"
+        "meta.tag.xml",
+        "meta.tag.preprocessor.xml"
       ],
       "settings": {
         "fontStyle": "",
-        "foreground": "#080808"
+        "foreground": "#067d17"
       }
     },
     {
-      "name": "XML CDATA marker",
+      "name": "XML CDATA",
       "scope": [
+        "string.unquoted.cdata.xml",
         "string.unquoted.cdata.xml punctuation.definition.string"
       ],
       "settings": {
@@ -1816,12 +2267,21 @@
     {
       "name": "XML prologue",
       "scope": [
-        "meta.tag.preprocessor.xml punctuation.definition.tag.xml",
+        "meta.tag.preprocessor.xml punctuation.definition.tag.xml"
+      ],
+      "settings": {
+        "fontStyle": "italic",
+        "foreground": "#080808"
+      }
+    },
+    {
+      "name": "XML prologue name",
+      "scope": [
         "meta.tag.preprocessor.xml entity.name.tag.xml"
       ],
       "settings": {
         "fontStyle": "",
-        "foreground": "#080808"
+        "foreground": "#174ad4"
       }
     },
     {
@@ -1939,7 +2399,7 @@
       ],
       "settings": {
         "fontStyle": "",
-        "foreground": "#080808"
+        "foreground": "#000000"
       }
     },
     {
@@ -1948,8 +2408,7 @@
         "storage.modifier.flag.regexp"
       ],
       "settings": {
-        "fontStyle": "",
-        "foreground": "#080808"
+        "fontStyle": "italic"
       }
     },
     {
@@ -1958,22 +2417,324 @@
         "string.regexp.ts",
         "string.regexp.ts punctuation.definition.string",
         "string.regexp.ts keyword.other.ts",
-        "string.regexp.ts constant.other.character-class.set.regexp",
+        "string.regexp.ts constant.character.control.regexp",
+        "string.regexp.ts constant.character.escape.backslash.regexp",
+        "string.regexp.ts constant.character.numeric.regexp",
+        "string.regexp.ts constant.other.character-class.regexp",
         "string.regexp.ts constant.other.character-class.range.regexp",
+        "string.regexp.ts constant.other.character-class.set.regexp",
+        "string.regexp.ts keyword.control.anchor.regexp",
+        "string.regexp.ts keyword.operator.negation.regexp",
+        "string.regexp.ts keyword.operator.or.regexp",
+        "string.regexp.ts keyword.operator.quantifier.regexp",
+        "string.regexp.ts keyword.other.back-reference.regexp",
+        "string.regexp.ts punctuation.definition.character-class.regexp",
+        "string.regexp.ts punctuation.definition.group.assertion.regexp",
+        "string.regexp.ts punctuation.definition.group.no-capture.regexp",
+        "string.regexp.ts punctuation.definition.group.regexp",
+        "string.regexp.ts variable.other.regexp",
         "string.regexp.tsx",
         "string.regexp.tsx punctuation.definition.string",
         "string.regexp.tsx keyword.other.tsx",
-        "string.regexp.tsx constant.other.character-class.set.regexp",
+        "string.regexp.tsx constant.character.control.regexp",
+        "string.regexp.tsx constant.character.escape.backslash.regexp",
+        "string.regexp.tsx constant.character.numeric.regexp",
+        "string.regexp.tsx constant.other.character-class.regexp",
         "string.regexp.tsx constant.other.character-class.range.regexp",
+        "string.regexp.tsx constant.other.character-class.set.regexp",
+        "string.regexp.tsx keyword.control.anchor.regexp",
+        "string.regexp.tsx keyword.operator.negation.regexp",
+        "string.regexp.tsx keyword.operator.or.regexp",
+        "string.regexp.tsx keyword.operator.quantifier.regexp",
+        "string.regexp.tsx keyword.other.back-reference.regexp",
+        "string.regexp.tsx punctuation.definition.character-class.regexp",
+        "string.regexp.tsx punctuation.definition.group.assertion.regexp",
+        "string.regexp.tsx punctuation.definition.group.no-capture.regexp",
+        "string.regexp.tsx punctuation.definition.group.regexp",
+        "string.regexp.tsx variable.other.regexp",
         "string.regexp.js",
         "string.regexp.js punctuation.definition.string",
         "string.regexp.js keyword.other.js",
+        "string.regexp.js constant.character.control.regexp",
+        "string.regexp.js constant.character.escape.backslash.regexp",
+        "string.regexp.js constant.character.numeric.regexp",
+        "string.regexp.js constant.other.character-class.regexp",
+        "string.regexp.js constant.other.character-class.range.regexp",
         "string.regexp.js constant.other.character-class.set.regexp",
-        "string.regexp.js constant.other.character-class.range.regexp"
+        "string.regexp.js keyword.control.anchor.regexp",
+        "string.regexp.js keyword.operator.negation.regexp",
+        "string.regexp.js keyword.operator.or.regexp",
+        "string.regexp.js keyword.operator.quantifier.regexp",
+        "string.regexp.js keyword.other.back-reference.regexp",
+        "string.regexp.js punctuation.definition.character-class.regexp",
+        "string.regexp.js punctuation.definition.group.assertion.regexp",
+        "string.regexp.js punctuation.definition.group.no-capture.regexp",
+        "string.regexp.js punctuation.definition.group.regexp",
+        "string.regexp.js variable.other.regexp"
       ],
       "settings": {
         "fontStyle": "",
         "foreground": "#264eff"
+      }
+    },
+    {
+      "name": "JavaScript field ts",
+      "scope": [
+        "meta.definition.property.ts variable.object.property.ts"
+      ],
+      "settings": {
+        "fontStyle": "",
+        "foreground": "#871094"
+      }
+    },
+    {
+      "name": "JavaScript property access ts",
+      "scope": [
+        "variable.other.property.ts",
+        "variable.other.object.property.ts",
+        "variable.parameter.ts"
+      ],
+      "settings": {
+        "fontStyle": "",
+        "foreground": "#080808"
+      }
+    },
+    {
+      "name": "JavaScript local variable ts",
+      "scope": [
+        "meta.block.ts meta.definition.variable.ts variable.other.constant.ts",
+        "meta.block.ts meta.definition.variable.ts variable.other.readwrite.ts"
+      ],
+      "settings": {
+        "fontStyle": "",
+        "foreground": "#2a8c7c"
+      }
+    },
+    {
+      "name": "JavaScript template expression ts",
+      "scope": [
+        "meta.template.expression.ts",
+        "punctuation.definition.template-expression.begin.ts",
+        "punctuation.definition.template-expression.end.ts"
+      ],
+      "settings": {
+        "fontStyle": "",
+        "foreground": "#080808"
+      }
+    },
+    {
+      "name": "JavaScript method ts",
+      "scope": [
+        "meta.definition.method.ts entity.name.function.ts"
+      ],
+      "settings": {
+        "fontStyle": "",
+        "foreground": "#914c07"
+      }
+    },
+    {
+      "name": "TypeScript type parameter ts",
+      "scope": [
+        "meta.type.parameters.ts entity.name.type.ts"
+      ],
+      "settings": {
+        "fontStyle": "",
+        "foreground": "#20999d"
+      }
+    },
+    {
+      "name": "JavaScript field tsx",
+      "scope": [
+        "meta.definition.property.tsx variable.object.property.tsx"
+      ],
+      "settings": {
+        "fontStyle": "",
+        "foreground": "#871094"
+      }
+    },
+    {
+      "name": "JavaScript property access tsx",
+      "scope": [
+        "variable.other.property.tsx",
+        "variable.other.object.property.tsx",
+        "variable.parameter.tsx"
+      ],
+      "settings": {
+        "fontStyle": "",
+        "foreground": "#080808"
+      }
+    },
+    {
+      "name": "JavaScript local variable tsx",
+      "scope": [
+        "meta.block.tsx meta.definition.variable.tsx variable.other.constant.tsx",
+        "meta.block.tsx meta.definition.variable.tsx variable.other.readwrite.tsx"
+      ],
+      "settings": {
+        "fontStyle": "",
+        "foreground": "#2a8c7c"
+      }
+    },
+    {
+      "name": "JavaScript template expression tsx",
+      "scope": [
+        "meta.template.expression.tsx",
+        "punctuation.definition.template-expression.begin.tsx",
+        "punctuation.definition.template-expression.end.tsx"
+      ],
+      "settings": {
+        "fontStyle": "",
+        "foreground": "#080808"
+      }
+    },
+    {
+      "name": "JavaScript method tsx",
+      "scope": [
+        "meta.definition.method.tsx entity.name.function.tsx"
+      ],
+      "settings": {
+        "fontStyle": "",
+        "foreground": "#914c07"
+      }
+    },
+    {
+      "name": "TypeScript type parameter tsx",
+      "scope": [
+        "meta.type.parameters.tsx entity.name.type.tsx"
+      ],
+      "settings": {
+        "fontStyle": "",
+        "foreground": "#20999d"
+      }
+    },
+    {
+      "name": "JavaScript field js",
+      "scope": [
+        "meta.definition.property.js variable.object.property.js"
+      ],
+      "settings": {
+        "fontStyle": "",
+        "foreground": "#871094"
+      }
+    },
+    {
+      "name": "JavaScript property access js",
+      "scope": [
+        "variable.other.property.js",
+        "variable.other.object.property.js",
+        "variable.parameter.js"
+      ],
+      "settings": {
+        "fontStyle": "",
+        "foreground": "#080808"
+      }
+    },
+    {
+      "name": "JavaScript local variable js",
+      "scope": [
+        "meta.block.js meta.definition.variable.js variable.other.constant.js",
+        "meta.block.js meta.definition.variable.js variable.other.readwrite.js"
+      ],
+      "settings": {
+        "fontStyle": "",
+        "foreground": "#2a8c7c"
+      }
+    },
+    {
+      "name": "JavaScript template expression js",
+      "scope": [
+        "meta.template.expression.js",
+        "punctuation.definition.template-expression.begin.js",
+        "punctuation.definition.template-expression.end.js"
+      ],
+      "settings": {
+        "fontStyle": "",
+        "foreground": "#080808"
+      }
+    },
+    {
+      "name": "JavaScript method js",
+      "scope": [
+        "meta.definition.method.js entity.name.function.js"
+      ],
+      "settings": {
+        "fontStyle": "",
+        "foreground": "#914c07"
+      }
+    },
+    {
+      "name": "TypeScript type parameter js",
+      "scope": [
+        "meta.type.parameters.js entity.name.type.js"
+      ],
+      "settings": {
+        "fontStyle": "",
+        "foreground": "#20999d"
+      }
+    },
+    {
+      "name": "JavaScript field jsx",
+      "scope": [
+        "meta.definition.property.jsx variable.object.property.jsx"
+      ],
+      "settings": {
+        "fontStyle": "",
+        "foreground": "#871094"
+      }
+    },
+    {
+      "name": "JavaScript property access jsx",
+      "scope": [
+        "variable.other.property.jsx",
+        "variable.other.object.property.jsx",
+        "variable.parameter.jsx"
+      ],
+      "settings": {
+        "fontStyle": "",
+        "foreground": "#080808"
+      }
+    },
+    {
+      "name": "JavaScript local variable jsx",
+      "scope": [
+        "meta.block.jsx meta.definition.variable.jsx variable.other.constant.jsx",
+        "meta.block.jsx meta.definition.variable.jsx variable.other.readwrite.jsx"
+      ],
+      "settings": {
+        "fontStyle": "",
+        "foreground": "#2a8c7c"
+      }
+    },
+    {
+      "name": "JavaScript template expression jsx",
+      "scope": [
+        "meta.template.expression.jsx",
+        "punctuation.definition.template-expression.begin.jsx",
+        "punctuation.definition.template-expression.end.jsx"
+      ],
+      "settings": {
+        "fontStyle": "",
+        "foreground": "#080808"
+      }
+    },
+    {
+      "name": "JavaScript method jsx",
+      "scope": [
+        "meta.definition.method.jsx entity.name.function.jsx"
+      ],
+      "settings": {
+        "fontStyle": "",
+        "foreground": "#914c07"
+      }
+    },
+    {
+      "name": "TypeScript type parameter jsx",
+      "scope": [
+        "meta.type.parameters.jsx entity.name.type.jsx"
+      ],
+      "settings": {
+        "fontStyle": "",
+        "foreground": "#20999d"
       }
     },
     {
@@ -2017,7 +2778,7 @@
       ],
       "settings": {
         "fontStyle": "",
-        "foreground": "#080808"
+        "foreground": "#000000"
       }
     },
     {
@@ -2027,7 +2788,7 @@
       ],
       "settings": {
         "fontStyle": "",
-        "foreground": "#080808"
+        "foreground": "#000000"
       }
     },
     {
@@ -2072,7 +2833,7 @@
       ],
       "settings": {
         "fontStyle": "",
-        "foreground": "#080808"
+        "foreground": "#000000"
       }
     },
     {
@@ -2083,7 +2844,7 @@
       ],
       "settings": {
         "fontStyle": "",
-        "foreground": "#080808"
+        "foreground": "#000000"
       }
     },
     {
@@ -2190,9 +2951,7 @@
         "source.perl comment.block.documentation keyword",
         "source.powershell comment.block.documentation keyword",
         "source.r comment.block.documentation keyword",
-        "source.ruby comment.block.documentation keyword",
         "source.swift comment.block.documentation keyword",
-        "text.html.php comment.block.documentation keyword",
         "text.log comment.block.documentation keyword"
       ],
       "settings": {
@@ -2214,9 +2973,7 @@
         "source.perl comment.block.documentation storage.type",
         "source.powershell comment.block.documentation storage.type",
         "source.r comment.block.documentation storage.type",
-        "source.ruby comment.block.documentation storage.type",
         "source.swift comment.block.documentation storage.type",
-        "text.html.php comment.block.documentation storage.type",
         "text.log comment.block.documentation storage.type"
       ],
       "settings": {
@@ -2238,9 +2995,7 @@
         "source.perl constant",
         "source.powershell constant",
         "source.r constant",
-        "source.ruby constant",
         "source.swift constant",
-        "text.html.php constant",
         "text.log constant"
       ],
       "settings": {
@@ -2262,9 +3017,7 @@
         "source.perl constant.character.entity",
         "source.powershell constant.character.entity",
         "source.r constant.character.entity",
-        "source.ruby constant.character.entity",
         "source.swift constant.character.entity",
-        "text.html.php constant.character.entity",
         "text.log constant.character.entity"
       ],
       "settings": {
@@ -2286,9 +3039,7 @@
         "source.perl constant.character.escape",
         "source.powershell constant.character.escape",
         "source.r constant.character.escape",
-        "source.ruby constant.character.escape",
         "source.swift constant.character.escape",
-        "text.html.php constant.character.escape",
         "text.log constant.character.escape"
       ],
       "settings": {
@@ -2310,9 +3061,7 @@
         "source.perl constant.character.format.placeholder",
         "source.powershell constant.character.format.placeholder",
         "source.r constant.character.format.placeholder",
-        "source.ruby constant.character.format.placeholder",
         "source.swift constant.character.format.placeholder",
-        "text.html.php constant.character.format.placeholder",
         "text.log constant.character.format.placeholder"
       ],
       "settings": {
@@ -2334,9 +3083,7 @@
         "source.perl constant.language",
         "source.powershell constant.language",
         "source.r constant.language",
-        "source.ruby constant.language",
         "source.swift constant.language",
-        "text.html.php constant.language",
         "text.log constant.language"
       ],
       "settings": {
@@ -2358,9 +3105,7 @@
         "source.perl constant.number",
         "source.powershell constant.number",
         "source.r constant.number",
-        "source.ruby constant.number",
         "source.swift constant.number",
-        "text.html.php constant.number",
         "text.log constant.number"
       ],
       "settings": {
@@ -2382,9 +3127,7 @@
         "source.perl constant.numeric",
         "source.powershell constant.numeric",
         "source.r constant.numeric",
-        "source.ruby constant.numeric",
         "source.swift constant.numeric",
-        "text.html.php constant.numeric",
         "text.log constant.numeric"
       ],
       "settings": {
@@ -2406,9 +3149,7 @@
         "source.perl constant.other.placeholder",
         "source.powershell constant.other.placeholder",
         "source.r constant.other.placeholder",
-        "source.ruby constant.other.placeholder",
         "source.swift constant.other.placeholder",
-        "text.html.php constant.other.placeholder",
         "text.log constant.other.placeholder"
       ],
       "settings": {
@@ -2430,14 +3171,12 @@
         "source.perl entity",
         "source.powershell entity",
         "source.r entity",
-        "source.ruby entity",
         "source.swift entity",
-        "text.html.php entity",
         "text.log entity"
       ],
       "settings": {
         "fontStyle": "",
-        "foreground": "#080808"
+        "foreground": "#000000"
       }
     },
     {
@@ -2454,14 +3193,12 @@
         "source.perl entity.name",
         "source.powershell entity.name",
         "source.r entity.name",
-        "source.ruby entity.name",
         "source.swift entity.name",
-        "text.html.php entity.name",
         "text.log entity.name"
       ],
       "settings": {
         "fontStyle": "",
-        "foreground": "#080808"
+        "foreground": "#000000"
       }
     },
     {
@@ -2478,14 +3215,12 @@
         "source.perl entity.name.constant",
         "source.powershell entity.name.constant",
         "source.r entity.name.constant",
-        "source.ruby entity.name.constant",
         "source.swift entity.name.constant",
-        "text.html.php entity.name.constant",
         "text.log entity.name.constant"
       ],
       "settings": {
         "fontStyle": "",
-        "foreground": "#080808"
+        "foreground": "#000000"
       }
     },
     {
@@ -2502,14 +3237,12 @@
         "source.perl entity.name.label",
         "source.powershell entity.name.label",
         "source.r entity.name.label",
-        "source.ruby entity.name.label",
         "source.swift entity.name.label",
-        "text.html.php entity.name.label",
         "text.log entity.name.label"
       ],
       "settings": {
         "fontStyle": "",
-        "foreground": "#080808"
+        "foreground": "#000000"
       }
     },
     {
@@ -2526,14 +3259,12 @@
         "source.perl entity.name.type.parameter",
         "source.powershell entity.name.type.parameter",
         "source.r entity.name.type.parameter",
-        "source.ruby entity.name.type.parameter",
         "source.swift entity.name.type.parameter",
-        "text.html.php entity.name.type.parameter",
         "text.log entity.name.type.parameter"
       ],
       "settings": {
         "fontStyle": "",
-        "foreground": "#080808"
+        "foreground": "#000000"
       }
     },
     {
@@ -2550,14 +3281,12 @@
         "source.perl entity.name.variable.field",
         "source.powershell entity.name.variable.field",
         "source.r entity.name.variable.field",
-        "source.ruby entity.name.variable.field",
         "source.swift entity.name.variable.field",
-        "text.html.php entity.name.variable.field",
         "text.log entity.name.variable.field"
       ],
       "settings": {
         "fontStyle": "",
-        "foreground": "#080808"
+        "foreground": "#000000"
       }
     },
     {
@@ -2574,9 +3303,7 @@
         "source.perl invalid",
         "source.powershell invalid",
         "source.r invalid",
-        "source.ruby invalid",
         "source.swift invalid",
-        "text.html.php invalid",
         "text.log invalid"
       ],
       "settings": {
@@ -2598,9 +3325,7 @@
         "source.perl invalid.deprecated",
         "source.powershell invalid.deprecated",
         "source.r invalid.deprecated",
-        "source.ruby invalid.deprecated",
         "source.swift invalid.deprecated",
-        "text.html.php invalid.deprecated",
         "text.log invalid.deprecated"
       ],
       "settings": {
@@ -2622,9 +3347,7 @@
         "source.perl invalid.illegal",
         "source.powershell invalid.illegal",
         "source.r invalid.illegal",
-        "source.ruby invalid.illegal",
         "source.swift invalid.illegal",
-        "text.html.php invalid.illegal",
         "text.log invalid.illegal"
       ],
       "settings": {
@@ -2646,9 +3369,7 @@
         "source.perl invalid.illegal.character.escape",
         "source.powershell invalid.illegal.character.escape",
         "source.r invalid.illegal.character.escape",
-        "source.ruby invalid.illegal.character.escape",
         "source.swift invalid.illegal.character.escape",
-        "text.html.php invalid.illegal.character.escape",
         "text.log invalid.illegal.character.escape"
       ],
       "settings": {
@@ -2670,9 +3391,7 @@
         "source.perl invalid.illegal.unrecognized-string-escape",
         "source.powershell invalid.illegal.unrecognized-string-escape",
         "source.r invalid.illegal.unrecognized-string-escape",
-        "source.ruby invalid.illegal.unrecognized-string-escape",
         "source.swift invalid.illegal.unrecognized-string-escape",
-        "text.html.php invalid.illegal.unrecognized-string-escape",
         "text.log invalid.illegal.unrecognized-string-escape"
       ],
       "settings": {
@@ -2694,9 +3413,7 @@
         "source.perl keyword.operator.expression",
         "source.powershell keyword.operator.expression",
         "source.r keyword.operator.expression",
-        "source.ruby keyword.operator.expression",
         "source.swift keyword.operator.expression",
-        "text.html.php keyword.operator.expression",
         "text.log keyword.operator.expression"
       ],
       "settings": {
@@ -2718,9 +3435,7 @@
         "source.perl keyword.operator.instanceof",
         "source.powershell keyword.operator.instanceof",
         "source.r keyword.operator.instanceof",
-        "source.ruby keyword.operator.instanceof",
         "source.swift keyword.operator.instanceof",
-        "text.html.php keyword.operator.instanceof",
         "text.log keyword.operator.instanceof"
       ],
       "settings": {
@@ -2742,9 +3457,7 @@
         "source.perl keyword.operator.new",
         "source.powershell keyword.operator.new",
         "source.r keyword.operator.new",
-        "source.ruby keyword.operator.new",
         "source.swift keyword.operator.new",
-        "text.html.php keyword.operator.new",
         "text.log keyword.operator.new"
       ],
       "settings": {
@@ -2766,9 +3479,7 @@
         "source.perl keyword.operator.typeof",
         "source.powershell keyword.operator.typeof",
         "source.r keyword.operator.typeof",
-        "source.ruby keyword.operator.typeof",
         "source.swift keyword.operator.typeof",
-        "text.html.php keyword.operator.typeof",
         "text.log keyword.operator.typeof"
       ],
       "settings": {
@@ -2790,9 +3501,7 @@
         "source.perl keyword.operator.word",
         "source.powershell keyword.operator.word",
         "source.r keyword.operator.word",
-        "source.ruby keyword.operator.word",
         "source.swift keyword.operator.word",
-        "text.html.php keyword.operator.word",
         "text.log keyword.operator.word"
       ],
       "settings": {
@@ -2814,9 +3523,7 @@
         "source.perl keyword.other.unit",
         "source.powershell keyword.other.unit",
         "source.r keyword.other.unit",
-        "source.ruby keyword.other.unit",
         "source.swift keyword.other.unit",
-        "text.html.php keyword.other.unit",
         "text.log keyword.other.unit"
       ],
       "settings": {
@@ -2838,9 +3545,7 @@
         "source.perl markup.bold",
         "source.powershell markup.bold",
         "source.r markup.bold",
-        "source.ruby markup.bold",
         "source.swift markup.bold",
-        "text.html.php markup.bold",
         "text.log markup.bold"
       ],
       "settings": {
@@ -2862,9 +3567,7 @@
         "source.perl markup.changed",
         "source.powershell markup.changed",
         "source.r markup.changed",
-        "source.ruby markup.changed",
         "source.swift markup.changed",
-        "text.html.php markup.changed",
         "text.log markup.changed"
       ],
       "settings": {
@@ -2886,9 +3589,7 @@
         "source.perl markup.deleted",
         "source.powershell markup.deleted",
         "source.r markup.deleted",
-        "source.ruby markup.deleted",
         "source.swift markup.deleted",
-        "text.html.php markup.deleted",
         "text.log markup.deleted"
       ],
       "settings": {
@@ -2910,9 +3611,7 @@
         "source.perl markup.inserted",
         "source.powershell markup.inserted",
         "source.r markup.inserted",
-        "source.ruby markup.inserted",
         "source.swift markup.inserted",
-        "text.html.php markup.inserted",
         "text.log markup.inserted"
       ],
       "settings": {
@@ -2934,9 +3633,7 @@
         "source.perl markup.italic",
         "source.powershell markup.italic",
         "source.r markup.italic",
-        "source.ruby markup.italic",
         "source.swift markup.italic",
-        "text.html.php markup.italic",
         "text.log markup.italic"
       ],
       "settings": {
@@ -2958,9 +3655,7 @@
         "source.perl meta.function-call entity.name.function",
         "source.powershell meta.function-call entity.name.function",
         "source.r meta.function-call entity.name.function",
-        "source.ruby meta.function-call entity.name.function",
         "source.swift meta.function-call entity.name.function",
-        "text.html.php meta.function-call entity.name.function",
         "text.log meta.function-call entity.name.function"
       ],
       "settings": {
@@ -2982,9 +3677,7 @@
         "source.perl meta.tag",
         "source.powershell meta.tag",
         "source.r meta.tag",
-        "source.ruby meta.tag",
         "source.swift meta.tag",
-        "text.html.php meta.tag",
         "text.log meta.tag"
       ],
       "settings": {
@@ -3006,14 +3699,34 @@
         "source.perl meta.tag punctuation",
         "source.powershell meta.tag punctuation",
         "source.r meta.tag punctuation",
-        "source.ruby meta.tag punctuation",
         "source.swift meta.tag punctuation",
-        "text.html.php meta.tag punctuation",
         "text.log meta.tag punctuation"
       ],
       "settings": {
         "fontStyle": "",
         "foreground": "#9e880d"
+      }
+    },
+    {
+      "name": "TextMate meta.tag.metadata.doctype.html entity.name.tag",
+      "scope": [
+        "source.batchfile meta.tag.metadata.doctype.html entity.name.tag",
+        "source.clojure meta.tag.metadata.doctype.html entity.name.tag",
+        "source.dart meta.tag.metadata.doctype.html entity.name.tag",
+        "source.julia meta.tag.metadata.doctype.html entity.name.tag",
+        "source.lua meta.tag.metadata.doctype.html entity.name.tag",
+        "source.makefile meta.tag.metadata.doctype.html entity.name.tag",
+        "source.objc meta.tag.metadata.doctype.html entity.name.tag",
+        "source.objcpp meta.tag.metadata.doctype.html entity.name.tag",
+        "source.perl meta.tag.metadata.doctype.html entity.name.tag",
+        "source.powershell meta.tag.metadata.doctype.html entity.name.tag",
+        "source.r meta.tag.metadata.doctype.html entity.name.tag",
+        "source.swift meta.tag.metadata.doctype.html entity.name.tag",
+        "text.log meta.tag.metadata.doctype.html entity.name.tag"
+      ],
+      "settings": {
+        "fontStyle": "",
+        "foreground": "#0033b3"
       }
     },
     {
@@ -3030,14 +3743,12 @@
         "source.perl meta.type.parameters entity.name.type",
         "source.powershell meta.type.parameters entity.name.type",
         "source.r meta.type.parameters entity.name.type",
-        "source.ruby meta.type.parameters entity.name.type",
         "source.swift meta.type.parameters entity.name.type",
-        "text.html.php meta.type.parameters entity.name.type",
         "text.log meta.type.parameters entity.name.type"
       ],
       "settings": {
         "fontStyle": "",
-        "foreground": "#080808"
+        "foreground": "#000000"
       }
     },
     {
@@ -3054,9 +3765,7 @@
         "source.perl storage",
         "source.powershell storage",
         "source.r storage",
-        "source.ruby storage",
         "source.swift storage",
-        "text.html.php storage",
         "text.log storage"
       ],
       "settings": {
@@ -3078,9 +3787,7 @@
         "source.perl storage.type.annotation",
         "source.powershell storage.type.annotation",
         "source.r storage.type.annotation",
-        "source.ruby storage.type.annotation",
         "source.swift storage.type.annotation",
-        "text.html.php storage.type.annotation",
         "text.log storage.type.annotation"
       ],
       "settings": {
@@ -3102,9 +3809,7 @@
         "source.perl string.quoted.docstring",
         "source.powershell string.quoted.docstring",
         "source.r string.quoted.docstring",
-        "source.ruby string.quoted.docstring",
         "source.swift string.quoted.docstring",
-        "text.html.php string.quoted.docstring",
         "text.log string.quoted.docstring"
       ],
       "settings": {
@@ -3126,9 +3831,7 @@
         "source.perl string.quoted.docstring punctuation.definition.string",
         "source.powershell string.quoted.docstring punctuation.definition.string",
         "source.r string.quoted.docstring punctuation.definition.string",
-        "source.ruby string.quoted.docstring punctuation.definition.string",
         "source.swift string.quoted.docstring punctuation.definition.string",
-        "text.html.php string.quoted.docstring punctuation.definition.string",
         "text.log string.quoted.docstring punctuation.definition.string"
       ],
       "settings": {
@@ -3150,9 +3853,7 @@
         "source.perl string.regexp",
         "source.powershell string.regexp",
         "source.r string.regexp",
-        "source.ruby string.regexp",
         "source.swift string.regexp",
-        "text.html.php string.regexp",
         "text.log string.regexp"
       ],
       "settings": {
@@ -3174,13 +3875,33 @@
         "source.perl support.function.builtin",
         "source.powershell support.function.builtin",
         "source.r support.function.builtin",
-        "source.ruby support.function.builtin",
         "source.swift support.function.builtin",
-        "text.html.php support.function.builtin",
         "text.log support.function.builtin"
       ],
       "settings": {
         "fontStyle": "",
+        "foreground": "#080808"
+      }
+    },
+    {
+      "name": "TextMate support.type",
+      "scope": [
+        "source.batchfile support.type",
+        "source.clojure support.type",
+        "source.dart support.type",
+        "source.julia support.type",
+        "source.lua support.type",
+        "source.makefile support.type",
+        "source.objc support.type",
+        "source.objcpp support.type",
+        "source.perl support.type",
+        "source.powershell support.type",
+        "source.r support.type",
+        "source.swift support.type",
+        "text.log support.type"
+      ],
+      "settings": {
+        "fontStyle": "italic",
         "foreground": "#080808"
       }
     },
@@ -3198,13 +3919,11 @@
         "source.perl support.type.primitive",
         "source.powershell support.type.primitive",
         "source.r support.type.primitive",
-        "source.ruby support.type.primitive",
         "source.swift support.type.primitive",
-        "text.html.php support.type.primitive",
         "text.log support.type.primitive"
       ],
       "settings": {
-        "fontStyle": "",
+        "fontStyle": "italic",
         "foreground": "#080808"
       }
     },
@@ -3222,14 +3941,12 @@
         "source.perl variable",
         "source.powershell variable",
         "source.r variable",
-        "source.ruby variable",
         "source.swift variable",
-        "text.html.php variable",
         "text.log variable"
       ],
       "settings": {
         "fontStyle": "",
-        "foreground": "#080808"
+        "foreground": "#000000"
       }
     },
     {
@@ -3246,14 +3963,12 @@
         "source.perl variable.language.super",
         "source.powershell variable.language.super",
         "source.r variable.language.super",
-        "source.ruby variable.language.super",
         "source.swift variable.language.super",
-        "text.html.php variable.language.super",
         "text.log variable.language.super"
       ],
       "settings": {
         "fontStyle": "",
-        "foreground": "#080808"
+        "foreground": "#000000"
       }
     },
     {
@@ -3270,14 +3985,12 @@
         "source.perl variable.language.this",
         "source.powershell variable.language.this",
         "source.r variable.language.this",
-        "source.ruby variable.language.this",
         "source.swift variable.language.this",
-        "text.html.php variable.language.this",
         "text.log variable.language.this"
       ],
       "settings": {
         "fontStyle": "",
-        "foreground": "#080808"
+        "foreground": "#000000"
       }
     },
     {
@@ -3294,14 +4007,12 @@
         "source.perl variable.other.constant",
         "source.powershell variable.other.constant",
         "source.r variable.other.constant",
-        "source.ruby variable.other.constant",
         "source.swift variable.other.constant",
-        "text.html.php variable.other.constant",
         "text.log variable.other.constant"
       ],
       "settings": {
         "fontStyle": "",
-        "foreground": "#080808"
+        "foreground": "#000000"
       }
     },
     {
@@ -3318,14 +4029,12 @@
         "source.perl variable.other.enummember",
         "source.powershell variable.other.enummember",
         "source.r variable.other.enummember",
-        "source.ruby variable.other.enummember",
         "source.swift variable.other.enummember",
-        "text.html.php variable.other.enummember",
         "text.log variable.other.enummember"
       ],
       "settings": {
         "fontStyle": "",
-        "foreground": "#080808"
+        "foreground": "#000000"
       }
     },
     {
@@ -3342,14 +4051,12 @@
         "source.perl variable.other.member",
         "source.powershell variable.other.member",
         "source.r variable.other.member",
-        "source.ruby variable.other.member",
         "source.swift variable.other.member",
-        "text.html.php variable.other.member",
         "text.log variable.other.member"
       ],
       "settings": {
         "fontStyle": "",
-        "foreground": "#080808"
+        "foreground": "#000000"
       }
     },
     {
@@ -3366,14 +4073,12 @@
         "source.perl variable.other.object.property",
         "source.powershell variable.other.object.property",
         "source.r variable.other.object.property",
-        "source.ruby variable.other.object.property",
         "source.swift variable.other.object.property",
-        "text.html.php variable.other.object.property",
         "text.log variable.other.object.property"
       ],
       "settings": {
         "fontStyle": "",
-        "foreground": "#080808"
+        "foreground": "#000000"
       }
     },
     {
@@ -3390,14 +4095,12 @@
         "source.perl variable.other.property",
         "source.powershell variable.other.property",
         "source.r variable.other.property",
-        "source.ruby variable.other.property",
         "source.swift variable.other.property",
-        "text.html.php variable.other.property",
         "text.log variable.other.property"
       ],
       "settings": {
         "fontStyle": "",
-        "foreground": "#080808"
+        "foreground": "#000000"
       }
     }
   ],

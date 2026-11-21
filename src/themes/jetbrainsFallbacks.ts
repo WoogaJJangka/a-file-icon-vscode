@@ -1,3 +1,5 @@
+import { CAPTURED_FALLBACKS } from './capturedAttributes';
+
 /**
  * platform/core-api/src/com/intellij/openapi/editor/DefaultLanguageHighlighterColors.java. The punctuation keys have no
  * fallback in code: a scheme without them draws them with the default attributes, written here as TEXT.
@@ -372,6 +374,7 @@ export const KEY_FALLBACKS: Record<string, string> = {
   ...TOML_KEYS,
   ...DOTENV_KEYS,
   ...XML_KEYS,
+  ...CAPTURED_FALLBACKS,
 };
 
 /** A key and its fallbacks, in the order the IDE tries them (stops on a loop) */

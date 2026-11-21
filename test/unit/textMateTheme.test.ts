@@ -67,6 +67,6 @@ describe('TextMate languages', () => {
     assert.deepEqual(same.tokenColors.find((token) => token.name === 'TextMate constant')?.scope, ['source.lua constant']);
     // own token rules without languages: none
     assert.ok(!convertJetbrainsTheme('Test', ui, scheme, { tokens: [] }).theme.tokenColors.some((token) => token.name.startsWith('TextMate')));
-    assert.ok(TEXTMATE_LANGUAGES.includes('source.ruby'));
+    assert.ok(TEXTMATE_LANGUAGES.includes('source.lua') && !TEXTMATE_LANGUAGES.includes('source.ruby'));
   });
 });

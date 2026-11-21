@@ -1,0 +1,168 @@
+{\rtf1\ansi\deff0{\colortbl;\red8\green8\blue8;\red255\green255\blue255;\red140\green140\blue140;\red0\green51\blue179;\red6\green125\blue23;\red0\green0\blue0;\red135\green16\blue148;\red32\green153\blue157;\red23\green80\blue235;\red145\green76\blue7;\red42\green140\blue124;\red38\green78\blue255;}
+{\fonttbl{\f1\fmodern JetBrains Mono;}{\f2\fmodern Courier New;}}
+
+\s0\box\cbpat2\cb2\cf1\fs20
+\cf3
+\f1
+\i\b0
+
+// \f2
+
+\u54620?\u44544? \u51452?\u49437?\line
+\cf4
+\f1
+\i0\b0
+
+import \cf1
+
+\{ join \} \cf4
+
+from \cf5
+
+'node:path'\cf1
+
+;\line
+
+\line
+\cf4
+
+export interface \cf6
+
+Options \cf1
+
+\{\line
+
+  \cf7
+
+name\cf1
+
+: \cf4
+
+string\cf1
+
+;\line
+
+  \cf7
+
+retries\cf1
+
+?: \cf4
+
+number\cf1
+
+;\line
+
+\}\line
+
+\line
+\cf3
+\i\b0
+
+/** Doc comment */\line
+\cf4
+\i0\b0
+
+export class \cf6
+
+Runner\cf1
+
+<\cf8
+
+T\cf1
+
+> \cf4
+
+implements \cf1
+
+Disposable \{\line
+
+  \cf4
+
+private static readonly \cf7
+\i\b0
+
+LIMIT \cf1
+\i0\b0
+
+= \cf9
+
+3\cf1
+
+;\line
+
+\line
+
+  \cf4
+
+constructor\cf1
+
+(\cf4
+
+private readonly \cf7
+
+options\cf1
+
+: \cf6
+
+Options\cf1
+
+) \{\}\line
+
+\line
+
+  \cf4
+
+async \cf10
+
+run\cf1
+
+(input: \cf8
+
+T\cf1
+
+): \cf6
+
+Promise\cf1
+
+<\cf4
+
+string\cf1
+
+> \{\line
+
+    \cf4
+
+const \cf11
+
+pattern \cf1
+
+= \cf12
+
+/a+b/g\cf1
+
+;\line
+
+    \cf4
+
+return \cf5
+
+`\cf1
+
+$\{\cf4
+
+this\cf1
+
+.options.name\}\cf5
+
+: \cf1
+
+$\{input\}\cf5
+
+`\cf1
+
+;\line
+
+  \}\line
+
+\}\line
+\par}

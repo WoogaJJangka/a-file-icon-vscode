@@ -13,6 +13,7 @@ import { join } from 'node:path';
 import { checkedCommit, checkedDate } from 'src/scripts/jetbrainsSource';
 import { ATTRIBUTES_FILE } from 'src/themes/colorCheck';
 import { COLOR_THEMES, extensionRoot, THEMES_FOLDER } from 'src/themes/colorThemes';
+import { CAPTURED_ATTRIBUTES } from 'src/themes/capturedAttributes';
 import { convertJetbrainsTheme } from 'src/themes/convertJetbrainsTheme';
 import { parseAdditionalAttributes, parseSchemes, resolveScheme, resolveUiTheme, schemeChainData } from 'src/themes/jetbrainsTheme';
 
@@ -87,6 +88,8 @@ const generate = async (commit: string) => {
   for (const { path, scheme } of ADDITIONAL_FILES) {
     (additional[scheme] ??= []).push(parseAdditionalAttributes(await download(commit, path)));
   }
+  // The closed plugins, as their IDEs draw them (src/themes/capturedAttributes.ts)
+  for (const [scheme, sources] of Object.entries(CAPTURED_ATTRIBUTES)) (additional[scheme] ??= []).push(...sources);
 
   /** Path from the extension root -> content */
   const outputs = new Map<string, string>();

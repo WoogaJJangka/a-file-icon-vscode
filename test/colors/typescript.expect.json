@@ -7,11 +7,32 @@
     { "line": 2, "text": "'node:path'", "key": "DEFAULT_STRING" },
     { "line": 4, "text": "interface", "key": "DEFAULT_KEYWORD" },
     { "line": 5, "text": "string", "key": "DEFAULT_KEYWORD" },
+    { "line": 5, "text": "name", "key": "DEFAULT_INSTANCE_FIELD" },
     { "line": 9, "text": "/** Doc comment */", "key": "DEFAULT_DOC_COMMENT" },
     { "line": 10, "text": "class", "key": "DEFAULT_KEYWORD" },
+    { "line": 10, "text": "Runner", "key": "DEFAULT_CLASS_NAME" },
+    { "line": 10, "text": "T", "key": "IDE.TS.TYPE_PARAMETER" },
     { "line": 11, "text": "3", "key": "DEFAULT_NUMBER" },
+    {
+      "line": 11,
+      "text": "LIMIT",
+      "key": "DEFAULT_STATIC_FIELD",
+      "todo": "only semantic tokens (the TypeScript server) know a static field"
+    },
+    {
+      "line": 13,
+      "text": "options",
+      "key": "DEFAULT_INSTANCE_FIELD",
+      "todo": "a parameter property is a parameter to the grammar"
+    },
+    { "line": 15, "text": "run", "key": "JS.INSTANCE_MEMBER_FUNCTION" },
+    { "line": 15, "text": "input", "key": "TEXT" },
     { "line": 16, "text": "const", "key": "DEFAULT_KEYWORD" },
     { "line": 16, "text": "/", "key": "JS.REGEXP" },
-    { "line": 17, "text": "this", "key": "DEFAULT_KEYWORD" }
+    { "line": 16, "text": "pattern", "key": "JS.LOCAL_VARIABLE" },
+    { "line": 16, "text": "+", "key": "JS.REGEXP" },
+    { "line": 17, "text": "this", "key": "DEFAULT_KEYWORD" },
+    { "line": 17, "text": "${", "key": "TEXT" },
+    { "line": 17, "text": "options", "key": "TEXT" }
   ]
 }

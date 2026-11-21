@@ -47,6 +47,7 @@
 | JetBrains 연결 규칙 동기화 | `bun run sync:upstream` |
 | JetBrains 색 테마 동기화 (고정 커밋 / 최신) | `bun run sync:colors` / `bun run sync:colors -- --latest` |
 | 문법 색을 JetBrains 와 비교 (실제 VS Code 문법으로 `test/colors` 샘플을 토큰으로 나눔, `.vscode-test` 에 받음) | `bun run check:colors` (`-- --report` 토큰마다 scope·색·규칙, 색 없는 scope) |
+| IDE 서식 복사(`test/colors/ide/*.rtf`)와 글자 단위 비교 (다른 곳만 출력, 실패하지 않음) | `bun run compare:ide` (`-- ruby php` 이름 일부로 고름) |
 | New UI 제품 아이콘 글꼴 만들기 (확인용 그림 포함) | `bun run build:product-icons` (`-- --sheet <png>`) |
 | VSIX 만들기 | `npx --yes @vscode/vsce@3.6.0 package --no-dependencies --allow-missing-repository --skip-license -o <경로>.vsix` |
 
@@ -121,9 +122,11 @@
 - 문법 색 검사(`bun run check:colors`, `src/themes/colorCheck.ts` 순수 함수 + `src/scripts/themes/checkColors.ts`): `test/colors/<이름>.<확장자>` 샘플을
   VS Code(`VSCODE_VERSION`, `.vscode-test` 에 받음) 내장 문법 + `vscode-textmate` 로 나누고, `<이름>.expect.json` 의 토큰마다(`key` = IDE 하이라이터가 주는 키 하나)
   `themes/*.base.json` 의 색이 IDE 의 색과 같은지 두 테마 다 본다. IDE 색은 `sync:colors` 가 함께 쓰는 `test/colors/jetbrains-attributes.json`(scheme 체인)과
-  `jetbrainsFallbacks.ts`(코드의 대체 키, 출처 파일별)로 `ResolvedScheme.lookup` 이 IDE 순서(`EditorColorsSchemeImpl.getAttributes`: 한 scheme 에서
-  키와 그 대체 키 전부 → 그다음 부모)로 찾는다. 단 플러그인이 Darcula/Default 에 붙이는 속성은 그 scheme 을 부모로 둔 scheme(Islands)의 자기 값으로
-  친다(2026-11-21 PyCharm 화면: Islands Dark 의 `self` 는 Darcula 에 붙은 PY.SELF_PARAMETER 보라, Islands 의 DEFAULT_IDENTIFIER 아님). 생성기도 같은 순서다:
+  `jetbrainsFallbacks.ts`(코드의 대체 키, 출처 파일별)로 `ResolvedScheme.lookup` 이 IDE 순서(`EditorColorsSchemeImpl.getAttributes` 소스 그대로: 키 하나를
+  scheme 과 그 부모에서 찾고(`getDirectlyDefinedAttributes`) 없으면 다음 대체 키를 같은 식으로. 부모는 첫 기본 scheme(Darcula·Default, 실행 때 부모가 없는
+  `DefaultColorsScheme`)에서 끝나고 그 위(Islands Dark 의 Default)는 맨 마지막 key defaults)로 찾는다. 플러그인이 붙이는 속성은 그 기본 scheme 의 것.
+  2026-11-22 IDE 서식 복사로 확인: Islands Dark 의 HTML 속성 이름 = Darcula 의 HTML_ATTRIBUTE_NAME(#bababa, Islands 의 대체 키 XML_ATTRIBUTE_NAME 아님),
+  Light 의 클래스 이름 = Default 의 DEFAULT_IDENTIFIER(#000000, Light 의 TEXT 아님), properties `=` = Darcula 값(#808080). 생성기도 같은 순서다:
   `TOKEN_RULES` 의 `from` 은 키마다 대체 키까지 IDE 처럼 찾고(첫 속성), 뒤 키는 그 속성에 색이 없을 때 밑에 깔리는 층(Markdown 인용 = 글자색).
   주석(annotator)이 위에 덧칠하는 것(Markdown 링크 주소 = HYPERLINK_ATTRIBUTES)은 그 키를 `from` 에 바로 쓴다. 아직 다른 것은 기대값에 `todo`(이유 적음,
   실패 아님)로 두고, 두 테마에서 다 맞게 되면 `FIXED` 로 실패해 todo 를 지우게 한다. 새 언어는 샘플 + 기대값 + 그 언어 키의 대체 키(`jetbrainsFallbacks.ts`)를 같이 넣는다.
@@ -133,14 +136,25 @@
   공개 키에 없으면 가장 가까운 공개 키를 주석과 함께 쓴다(Rust 수명 = 타입 매개변수 청록). Rust 키는 intellij-rust(MIT) `RsColors.kt`, 단 그 RustDarcula 색은
   2024년 옛 색이라 쓰지 않는다. Rider 는 C# 를 자체 팔레트로 그려서 따르지 않는다(C# 은 Islands 기본 키). 다른 규칙을 덮는 규칙은 색이 없을 때
   밑 규칙 색이 비치므로 `from` 끝에 'TEXT' 층을 둔다(밝은 테마 C++ 호출이 선언 색으로 남던 것).
-  PyCharm 에 플러그인이 없는 언어(Ruby·PHP·Lua·Swift·PowerShell·Dart·Makefile·log 등, `textMateTheme.ts` `TEXTMATE_LANGUAGES`)는 IDE 가 VS Code 와 같은
+  닫힌 플러그인 중 RubyMine(Ruby)·PhpStorm(PHP)·WebStorm(JS/TS·CSS)이 그리는 색은 IDE 서식 복사에서 읽어 `src/themes/capturedAttributes.ts` 에 적는다
+  (`CAPTURED_ATTRIBUTES` = Darcula/Default 에 붙는 추가 속성, 키 이름 `IDE.*` 은 우리 것, 다른 테마 쪽 공개 키는 `CAPTURED_FALLBACKS`). RubyMine·PhpStorm 의
+  Islands Dark 는 플러그인이 Darcula 에 준 옛 Darcula 색(Ruby 상수 #ffc66d 등)이다.
+  PyCharm 에 플러그인이 없는 언어(Lua·Swift·PowerShell·Dart·Makefile·log 등, `textMateTheme.ts` `TEXTMATE_LANGUAGES`)는 IDE 가 VS Code 와 같은
   TextMate 문법으로 칠한다: `TEXTMATE_RULES` = intellij-community `TextMateDefaultColorsProvider` + `TextMateTheme`(선택자 → 키). 맞는 선택자가 전부 층이 되고
   (구체적인 것이 위) 색은 위 층, 글꼴 모양은 모두 합친다(`TextAttributes.merge`: Ruby 숫자 = 상수 기울임 + 숫자 청록). 생성기는 언어 루트마다
   `source.ruby constant.numeric` 처럼 합친 스타일을 쓰고, 색이 없으면 글자색을 명시한다(부모 scope 규칙은 같은 scope 일반 규칙의 빈 값을 물려받음).
   기대값은 `layers`(밑 층 키, 가까운 것부터). 구두점 층(DEFAULT_DOT)은 따라 하지 않는다: 화면에서 문자열 따옴표는 문자열 색인데 `/**`·Makefile `$(` 는
   글자색이라 공개 소스의 가중치로 설명되지 않음(todo). .env 는 intellij-community `env-files-support`(키 = 키워드, 값 = 문자열, `export` = 주석),
-  CSS·SQL(닫힌 플러그인)은 PyCharm 화면 색에 가장 가까운 공개 키(선택자 = HTML 태그 이름, 속성 이름 = 글자, 값 키워드 = 문자열, SQL 함수 = 정적 메서드).
-  화면 확인: 사용자 PyCharm 을 데스크톱에서 띄운다(Bash·PowerShell 로 띄우면 창이 안 뜬다). 마지막 프로젝트가 열리니 그 폴더에 샘플을 복사해 트리에서 연다.
+  CSS·SQL(닫힌 플러그인)은 WebStorm 서식 복사 색의 공개 키(선택자·함수 = HTML 태그 이름, 속성 이름 = HTML 속성 이름, 값 키워드·단위 = 문자열, SQL 함수 = 정적 메서드).
+  **IDE 와 비교는 서식 복사로**(`bun run compare:ide`, `test/colors/ide/<샘플>.<IDE>.<dark|light>.rtf`): IDE 에서 샘플을 열고 Edit > Select All → Edit > Copy
+  (서식 있는 복사가 기본) → STA PowerShell 로 클립보드의 'Rich Text Format' 을 저장. 글자마다 정확한 색이 나온다(화면 픽셀은 ClearType 때문에 못 씀,
+  검사(inspection) 색은 안 들어감). 사용자 PyCharm 에는 **무지개 괄호 플러그인**이 있어 괄호·`<>`·CDATA 표시가 깊이별 색이다(예전 화면 판단 "CDATA = 태그 색,
+  네임스페이스 접두사 = 이름 색"은 이것 때문에 틀렸다) → 기준 캡처는 플러그인 없는 WebStorm·PhpStorm·RubyMine 에서. 이 IDE 들은 계속 설치해 둔다(2026-11-22).
+  IDE 띄우기: computer-use `open_application`(클릭 권한만: 메뉴는 햄버거 → Edit 위에 마우스 → 항목 클릭, 선택이 없으면 Select All 위치가 한 칸 위,
+  항목 위치는 매번 스크린샷으로 확인). 열 프로젝트는 IDE 설정 `options/recentProjects.xml`(마지막 열린 것)·`trusted-paths.xml` 을 백업 후 고쳐서
+  `D:\dev\sandbox\jetbrains-colors` 를 열고, 끝나면 백업으로 되돌린다. 밝은 테마는 Settings > Appearance > Theme = Islands Light(편집기 scheme 이름은 "Light"),
+  끝나면 `laf.xml` 을 지우고 `colors.scheme.xml` 을 되돌린다. 창 닫기는 File > Exit → Exit 확인(창 X 는 스냅 레이아웃에 걸림).
+  PyCharm 은 pycharm MCP `open_file_in_editor` 로 연다(열린 프로젝트 폴더에 샘플 복사).
 - 색 테마 섞기(`src/themes/colorLayers.ts` 순수 엔진, `readColorTheme.ts` JSONC·`include`·`tokenColors` 경로 읽기,
   `services/ColorThemeService.ts` 설치된 테마 목록·섞기·다시 로드 알림): `colorThemeLayers`(테마 id 또는 `{theme, ui, syntax, applyTo}`,
   `fill`/`override`/`off`, 같은 종류의 Islands 에만 — `applyTo` 로 바꿈)·`colorThemeByKey`(색 id glob, `scope:`, `semantic:`).

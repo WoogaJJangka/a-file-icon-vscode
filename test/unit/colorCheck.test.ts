@@ -63,17 +63,23 @@ describe('Color check', () => {
     }
   });
 
-  it('looks keys up in the order of the IDE: the scheme with all its fallbacks, then its parent', () => {
+  it('looks keys up in the order of the IDE: each key in the scheme and its parents up to a base scheme, then the next', () => {
     const scheme = resolveScheme(schemes, 'Islands Dark', additional);
     const darcula = resolveScheme(schemes, 'Darcula', additional);
-    // Darcula has a fallback of the key: the value Default gives the key itself is not used
+    // Darcula is a base scheme: what Default gives the key itself is not used, Darcula's fallback is
     assert.deepEqual(darcula.lookup(fallbackChain('STATIC_FINAL_FIELD_ATTRIBUTES'))[0], { fontType: 2, foreground: '#9876aa' });
-    // Islands has a fallback further down the chain (DEFAULT_IDENTIFIER): it comes before everything of Darcula
-    assert.deepEqual(scheme.lookup(fallbackChain('STATIC_FINAL_FIELD_ATTRIBUTES'))[0], { foreground: '#bcbec4' });
+    // a fallback Darcula defines comes before a later fallback Islands defines (DEFAULT_IDENTIFIER)
+    assert.deepEqual(scheme.lookup(fallbackChain('STATIC_FINAL_FIELD_ATTRIBUTES'))[0], { fontType: 2, foreground: '#9876aa' });
+    // what Default defines comes only after everything of Islands and Darcula (the key defaults): Darcula has no parent at
+    // run time
+    assert.deepEqual(scheme.lookup(['STATIC_FINAL_FIELD_ATTRIBUTES', 'DEFAULT_IDENTIFIER']), [{ foreground: '#bcbec4' }, { fontType: 3, foreground: '#660e7a' }, { foreground: '#000000' }]);
     // the key alone, looked up in the whole chain: Default has it
     assert.deepEqual(scheme.attributes('STATIC_FINAL_FIELD_ATTRIBUTES'), { fontType: 3, foreground: '#660e7a' });
-    // what a plugin adds to Darcula counts as Islands' own: it comes before the fallback Islands defines (DEFAULT_IDENTIFIER)
+    // what a plugin adds to Darcula is part of Darcula: it comes before the fallback Islands defines (DEFAULT_IDENTIFIER)
     assert.deepEqual(scheme.lookup(fallbackChain('PY.SELF_PARAMETER'))[0], { foreground: '#94558d' });
+    // a scheme based on Default: the identifier of Default comes before the text of the scheme (its fallback)
+    const light = resolveScheme([...schemes, { attributes: { TEXT: { foreground: '#080808' } }, colors: {}, name: 'Light', parent: 'Default' }], 'Light');
+    assert.deepEqual(light.lookup(fallbackChain('DEFAULT_CLASS_NAME'))[0], { foreground: '#000000' });
     // the scheme's own value wins over the added one
     const own = resolveScheme(schemes, 'Islands Dark', { Darcula: [{ DEFAULT_KEYWORD: { foreground: '#000002' } }] });
     assert.deepEqual(own.lookup(['DEFAULT_KEYWORD'])[0], { foreground: '#cf8e6d' });

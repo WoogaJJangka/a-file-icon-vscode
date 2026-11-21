@@ -1,0 +1,102 @@
+{\rtf1\ansi\deff0{\colortbl;\red188\green190\blue196;\red25\green26\blue28;\red122\green126\blue133;\red207\green142\blue109;\red199\green125\blue187;\red42\green172\blue184;\red106\green171\blue115;\red87\green170\blue247;\red255\green198\blue109;}
+{\fonttbl{\f1\fmodern JetBrains Mono;}{\f2\fmodern Courier New;}}
+
+\s0\box\cbpat2\cb2\cf1\fs20
+\cf3
+\f1
+\i0\b0
+
+-- \f2
+
+\u54620?\u44544? \u51452?\u49437?\line
+\cf4
+\f1
+
+CREATE TABLE \cf1
+
+greeter (\line
+
+    \cf5
+
+id \cf4
+
+INTEGER PRIMARY KEY\cf1
+
+,\line
+
+    \cf5
+
+name \cf4
+
+VARCHAR\cf1
+
+(\cf6
+
+100\cf1
+
+) \cf4
+
+NOT NULL DEFAULT \cf7
+
+'world'\line
+\cf1
+
+);\line
+
+\line
+\cf4
+
+SELECT \cf1
+
+g.\cf5
+
+name\cf1
+
+, \cf8
+\i\b0
+
+COUNT\cf1
+\i0\b0
+
+(\cf9
+
+*\cf1
+
+) \cf4
+
+AS \cf1
+
+total\line
+\cf4
+
+FROM \cf1
+
+greeter g\line
+\cf4
+
+WHERE \cf1
+
+g.\cf5
+
+id \cf1
+
+> \cf6
+
+10 \cf4
+
+AND \cf1
+
+g.\cf5
+
+name \cf4
+
+IS NOT NULL\line
+
+GROUP BY \cf1
+
+g.\cf5
+
+name\cf1
+
+;\line
+\par}

@@ -2,8 +2,10 @@
   "file": "html.html",
   "scope": "text.html.derivative",
   "tokens": [
+    { "line": 1, "text": "DOCTYPE", "key": "HTML_TAG" },
     { "line": 2, "text": "html", "key": "HTML_TAG_NAME" },
     { "line": 2, "text": "lang", "key": "HTML_ATTRIBUTE_NAME" },
+    { "line": 2, "text": "=", "key": "HTML_ATTRIBUTE_VALUE" },
     { "line": 2, "text": "\"ko\"", "key": "HTML_ATTRIBUTE_VALUE" },
     { "line": 5, "text": "&amp;", "key": "HTML_ENTITY_REFERENCE" },
     { "line": 8, "text": "<!-- 한글 주석 -->", "key": "HTML_COMMENT" },

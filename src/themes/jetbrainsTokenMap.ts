@@ -11,6 +11,27 @@
 /** Semantic keys of the JavaScript plugin (its fallbacks are not in this repository: the default ones are written) */
 const JS_MEMBER_FUNCTION = ['JS.INSTANCE_MEMBER_FUNCTION', 'DEFAULT_INSTANCE_METHOD', 'DEFAULT_FUNCTION_CALL', 'TEXT'];
 const JS_GLOBAL_VARIABLE = ['JS.GLOBAL_VARIABLE', 'DEFAULT_GLOBAL_VARIABLE'];
+const JS_LANGUAGES = ['javascript', 'javascriptreact', 'typescript', 'typescriptreact'];
+const JS_TYPE_PARAMETER = ['IDE.TS.TYPE_PARAMETER', 'TYPE_PARAMETER_NAME_ATTRIBUTES'];
+/** The regexp scopes of the TypeScript and JavaScript grammars inside a regex literal */
+const JS_REGEXP_PARTS = [
+  'constant.character.control.regexp',
+  'constant.character.escape.backslash.regexp',
+  'constant.character.numeric.regexp',
+  'constant.other.character-class.regexp',
+  'constant.other.character-class.range.regexp',
+  'constant.other.character-class.set.regexp',
+  'keyword.control.anchor.regexp',
+  'keyword.operator.negation.regexp',
+  'keyword.operator.or.regexp',
+  'keyword.operator.quantifier.regexp',
+  'keyword.other.back-reference.regexp',
+  'punctuation.definition.character-class.regexp',
+  'punctuation.definition.group.assertion.regexp',
+  'punctuation.definition.group.no-capture.regexp',
+  'punctuation.definition.group.regexp',
+  'variable.other.regexp',
+];
 
 export type TokenRule = { from: string[]; name: string; scope: string[] };
 
@@ -56,7 +77,10 @@ export const TOKEN_RULES: TokenRule[] = [
   { from: ['HTML_TAG', 'DEFAULT_TAG', 'TEXT'], name: 'Tag punctuation', scope: ['punctuation.definition.tag', 'meta.tag punctuation'] },
   { from: ['HTML_TAG_NAME', 'XML_TAG_NAME', 'DEFAULT_KEYWORD'], name: 'Tag name', scope: ['entity.name.tag'] },
   { from: ['HTML_ATTRIBUTE_NAME', 'XML_ATTRIBUTE_NAME', 'DEFAULT_INSTANCE_FIELD'], name: 'Attribute name', scope: ['entity.other.attribute-name'] },
-  { from: ['HTML_ATTRIBUTE_VALUE', 'XML_ATTRIBUTE_VALUE', 'DEFAULT_STRING'], name: 'Attribute value', scope: ['meta.attribute-with-value string', 'meta.tag string'] },
+  // The `=` of an attribute is part of its value (captured in WebStorm 2026-11-22)
+  { from: ['HTML_ATTRIBUTE_VALUE', 'XML_ATTRIBUTE_VALUE', 'DEFAULT_STRING'], name: 'Attribute value', scope: ['meta.attribute-with-value string', 'meta.tag string', 'meta.attribute punctuation.separator.key-value.html'] },
+  // The name of a doctype is the tag, not a tag name: text in Islands Light
+  { from: ['HTML_TAG', 'DEFAULT_TAG', 'TEXT'], name: 'HTML doctype', scope: ['meta.tag.metadata.doctype.html entity.name.tag'] },
   { from: ['HTML_ENTITY_REFERENCE', 'XML_ENTITY_REFERENCE', 'DEFAULT_VALID_STRING_ESCAPE'], name: 'Entity', scope: ['constant.character.entity'] },
   { from: ['ERRORS_ATTRIBUTES'], name: 'Invalid', scope: ['invalid', 'invalid.illegal'] },
   { from: ['DEPRECATED_ATTRIBUTES'], name: 'Deprecated', scope: ['invalid.deprecated'] },
@@ -112,6 +136,38 @@ export const TOKEN_RULES: TokenRule[] = [
   { from: ['GO_BUILTIN_TYPE_REFERENCE'], name: 'Go builtin type', scope: ['storage.type.numeric.go', 'storage.type.string.go', 'storage.type.boolean.go', 'storage.type.byte.go', 'storage.type.rune.go', 'storage.type.error.go', 'storage.type.uintptr.go'] },
   { from: ['GO_BUILTIN_CONSTANT'], name: 'Go builtin constant', scope: ['constant.language.null.go', 'constant.language.boolean.go', 'constant.language.iota.go'] },
 
+  // Ruby, as RubyMine draws it (its Ruby plugin is closed: the colors are captured, src/themes/capturedAttributes.ts).
+  // Words like require, attr_reader, include are calls of their own color (`new`, which the grammar names the same, is a
+  // plain call in RubyMine); a class, a module and an assigned constant are constant declarations, a use of them a
+  // constant; a call is text, a symbol and an instance variable have their keys. A parameter or a local variable is
+  // colored where the grammar names it (its uses need the IDE's resolution).
+  { from: ['IDE.RUBY.COMMENT'], name: 'Ruby comment', scope: ['comment.line.number-sign.ruby', 'comment.block.documentation.ruby', 'comment.line.number-sign.ruby punctuation.definition.comment'] },
+  { from: ['IDE.RUBY.SPECIFIC_CALL'], name: 'Ruby specific call', scope: ['keyword.other.special-method.ruby'] },
+  { from: ['DEFAULT_KEYWORD'], name: 'Ruby literal', scope: ['constant.language.nil.ruby', 'constant.language.boolean.ruby', 'variable.language.self.ruby'] },
+  { from: ['IDE.RUBY.CONSTANT_DECLARATION'], name: 'Ruby constant declaration', scope: ['entity.name.type.module.ruby', 'entity.name.type.class.ruby', 'variable.other.constant.ruby'] },
+  { from: ['IDE.RUBY.CONSTANT'], name: 'Ruby constant', scope: ['support.class.ruby', 'variable.other.constant.ruby support.class.ruby', 'entity.other.inherited-class.ruby'] },
+  { from: ['IDE.RUBY.NUMBER'], name: 'Ruby number', scope: ['constant.numeric.ruby'] },
+  { from: ['IDE.RUBY.SYMBOL'], name: 'Ruby symbol', scope: ['constant.language.symbol.ruby', 'constant.language.symbol.ruby punctuation.definition.constant.ruby', 'constant.other.symbol.hashkey.ruby'] },
+  { from: ['IDE.RUBY.METHOD_DECLARATION'], name: 'Ruby method declaration', scope: ['entity.name.function.ruby'] },
+  { from: ['DEFAULT_IDENTIFIER', 'TEXT'], name: 'Ruby call', scope: ['meta.function-call.ruby entity.name.function.ruby', 'support.function.kernel.ruby'] },
+  { from: ['IDE.RUBY.PARAMETER'], name: 'Ruby parameter', scope: ['variable.parameter.function.ruby', 'variable.other.block.ruby'] },
+  { from: ['IDE.RUBY.LOCAL_VARIABLE'], name: 'Ruby local variable', scope: ['variable.ruby'] },
+  { from: ['DEFAULT_INSTANCE_FIELD'], name: 'Ruby instance variable', scope: ['variable.other.readwrite.instance.ruby', 'variable.other.readwrite.instance.ruby punctuation.definition.variable.ruby'] },
+  { from: ['IDE.RUBY.ESCAPE'], name: 'Ruby escape', scope: ['constant.character.escape.ruby'] },
+  // the code of `#{…}` is code, its braces text
+  { from: ['TEXT'], name: 'Ruby interpolation', scope: ['string meta.embedded.line.ruby', 'string meta.embedded.line.ruby punctuation.section.embedded'] },
+
+  // PHP, as PhpStorm draws it (closed plugin, captured): a variable, a parameter and $this one color, a property access
+  // a field, a constant its own color, a function or method call one color, the braces of `{$…}` in a string grey,
+  // `<?php`, `echo`, `null` and `true` keywords. A property declaration is a variable to the grammar.
+  { from: ['DEFAULT_KEYWORD'], name: 'PHP keyword', scope: ['punctuation.section.embedded.begin.php', 'punctuation.section.embedded.end.php', 'support.function.construct.output.php', 'constant.language.php', 'storage.type.php'] },
+  { from: ['IDE.PHP.VARIABLE'], name: 'PHP variable', scope: ['variable.other.php', 'variable.language.this.php', 'variable.other.php punctuation.definition.variable.php', 'variable.language.this.php punctuation.definition.variable.php'] },
+  { from: ['DEFAULT_INSTANCE_FIELD'], name: 'PHP property', scope: ['variable.other.property.php'] },
+  { from: ['IDE.PHP.CONSTANT'], name: 'PHP constant', scope: ['constant.other.php', 'constant.other.class.php'] },
+  { from: ['IDE.PHP.FUNCTION_CALL'], name: 'PHP call', scope: ['meta.function-call.php support.function', 'meta.function-call.php entity.name.function', 'meta.method-call.php entity.name.function'] },
+  { from: ['IDE.PHP.STRING_BRACES'], name: 'PHP string braces', scope: ['string.quoted.double.php punctuation.definition.variable.php'] },
+  { from: ['DEFAULT_CLASS_REFERENCE', 'DEFAULT_IDENTIFIER', 'TEXT'], name: 'PHP class', scope: ['entity.name.type.namespace.php', 'support.class.builtin.php'] },
+
   // Data and markup
   { from: ['JSON.PROPERTY_KEY', 'DEFAULT_INSTANCE_FIELD'], name: 'JSON key', scope: ['support.type.property-name.json', 'meta.object-literal.key'] },
   // TOML (TomlColors.kt; the grammar of the Even Better TOML extension): a key is a keyword, not a field like in JSON
@@ -133,15 +189,16 @@ export const TOKEN_RULES: TokenRule[] = [
   { from: ['DOTENV_COMMENT'], name: '.env export', scope: ['keyword.key.export.dotenv'] },
   // SQL (Database Tools, closed). Seen in PyCharm 2026-11-21: the table of a CREATE, an alias and the column after it are
   // text (a column the IDE resolves can be purple: semantic), a built-in function italic like a static method
-  { from: ['DEFAULT_IDENTIFIER'], name: 'SQL name', scope: ['entity.name.function.sql', 'constant.other.database-name.sql', 'constant.other.table-name.sql'] },
+  { from: ['TEXT'], name: 'SQL name', scope: ['entity.name.function.sql', 'constant.other.database-name.sql', 'constant.other.table-name.sql'] },
   { from: ['DEFAULT_STATIC_METHOD'], name: 'SQL function', scope: ['source.sql support.function'] },
-  // CSS (the CSS plugin is closed: its keys fall back in code we cannot read). Seen in PyCharm 2026-11-21: a property name
-  // is text, a keyword value (`auto`, `none`, a font name) a string, a unit a number, a whole selector the color of an HTML
-  // tag name (its `.` `#` `:` too)
-  { from: ['CSS.PROPERTY_NAME', 'DEFAULT_IDENTIFIER'], name: 'CSS property', scope: ['support.type.property-name.css', 'support.type.vendored.property-name.css', 'support.type.property-name.scss', 'support.type.property-name.less', 'support.type.property-name.media.css'] },
-  { from: ['CSS.PROPERTY_VALUE', 'DEFAULT_IDENTIFIER', 'TEXT'], name: 'CSS value', scope: ['meta.property-value.css'] },
+  // CSS (the CSS plugin is closed: its keys fall back in code we cannot read). Captured in WebStorm 2026-11-22: a property
+  // name (a custom property too) has the color of an HTML attribute name, a keyword value (`auto`, `none`, a font name)
+  // and a unit are strings, a selector and a function (`url`, `var` and its argument) the color of an HTML tag name; the
+  // `.` of a class and the `:` of a pseudo-class are text, the `#` of an id is not
+  { from: ['CSS.PROPERTY_NAME', 'HTML_ATTRIBUTE_NAME'], name: 'CSS property', scope: ['variable.css', 'support.type.property-name.css', 'support.type.vendored.property-name.css', 'support.type.property-name.scss', 'support.type.property-name.less', 'support.type.property-name.media.css'] },
+  { from: ['CSS.PROPERTY_VALUE', 'TEXT'], name: 'CSS value', scope: ['meta.property-value.css'] },
   { from: ['CSS.PROPERTY_VALUE', 'DEFAULT_STRING'], name: 'CSS value keyword', scope: ['support.constant.property-value.css', 'support.constant.font-name.css'] },
-  { from: ['CSS.NUMBER', 'DEFAULT_NUMBER'], name: 'CSS unit', scope: ['keyword.other.unit'] },
+  { from: ['CSS.PROPERTY_VALUE', 'DEFAULT_STRING'], name: 'CSS unit', scope: ['keyword.other.unit'] },
   {
     from: ['CSS.TAG_NAME', 'HTML_TAG_NAME'],
     name: 'CSS selector',
@@ -154,6 +211,12 @@ export const TOKEN_RULES: TokenRule[] = [
       'meta.attribute-selector.css entity.other.attribute-name',
     ],
   },
+  {
+    from: ['TEXT'],
+    name: 'CSS selector punctuation',
+    scope: ['entity.other.attribute-name.class.css punctuation.definition.entity.css', 'entity.other.attribute-name.pseudo-class.css punctuation.definition.entity.css', 'entity.other.attribute-name.pseudo-element.css punctuation.definition.entity.css'],
+  },
+  { from: ['CSS.FUNCTION', 'HTML_TAG_NAME'], name: 'CSS function', scope: ['meta.property-value.css support.function', 'support.function.url.css', 'variable.argument.css'] },
   { from: ['CSS.COLOR', 'DEFAULT_NUMBER'], name: 'CSS color', scope: ['constant.other.color.rgb-value.hex.css', 'support.constant.color'] },
   { from: ['CSS.URL', 'DEFAULT_STRING'], name: 'CSS url', scope: ['variable.parameter.url.css'] },
   { from: ['CSS.IMPORTANT', 'DEFAULT_KEYWORD'], name: 'CSS important', scope: ['keyword.other.important.css'] },
@@ -184,13 +247,17 @@ export const TOKEN_RULES: TokenRule[] = [
   { from: ['XML_TAG', 'DEFAULT_TAG', 'TEXT'], name: 'XML tag', scope: ['punctuation.definition.tag.xml'] },
   { from: ['XML_TAG_NAME', 'DEFAULT_KEYWORD'], name: 'XML tag name', scope: ['entity.name.tag.xml', 'entity.name.tag.localname.xml'] },
   { from: ['XML_ATTRIBUTE_NAME', 'DEFAULT_ATTRIBUTE', 'DEFAULT_INSTANCE_FIELD'], name: 'XML attribute name', scope: ['entity.other.attribute-name.xml', 'entity.other.attribute-name.localname.xml'] },
-  // A namespace prefix has the color of its name: PyCharm (2026-11-21) does not draw XML_NS_PREFIX on `xmlns:demo` or `demo:greeter`
-  { from: ['XML_TAG_NAME'], name: 'XML namespace prefix', scope: ['entity.name.tag.namespace.xml'] },
+  // Captured in WebStorm and PyCharm 2026-11-22 (the rainbow brackets of the user's PyCharm had hidden it on screen): a
+  // namespace prefix is XML_NS_PREFIX, its `:` part of the tag name (the prefix an `xmlns:` declares is an attribute name
+  // to the grammar); the `=` of an attribute is the value, the only text of a tag with no scope of its own; the name in
+  // `<?xml` is an attribute name; the CDATA markers are text
+  { from: ['XML_NS_PREFIX', 'DEFAULT_INSTANCE_FIELD'], name: 'XML namespace prefix', scope: ['entity.name.tag.namespace.xml'] },
+  { from: ['XML_TAG_NAME', 'DEFAULT_KEYWORD'], name: 'XML namespace separator', scope: ['entity.name.tag.xml punctuation.separator.namespace.xml'] },
   { from: ['XML_ATTRIBUTE_NAME'], name: 'XML attribute prefix', scope: ['entity.other.attribute-name.namespace.xml', 'entity.other.attribute-name.xml punctuation.separator.namespace.xml'] },
-  // CDATA: the markers like a tag, the text like tag data (PyCharm 2026-11-21)
-  { from: ['XML_TAG_DATA', 'TEXT'], name: 'XML CDATA', scope: ['string.unquoted.cdata.xml'] },
-  { from: ['XML_TAG', 'TEXT'], name: 'XML CDATA marker', scope: ['string.unquoted.cdata.xml punctuation.definition.string'] },
-  { from: ['XML_PROLOGUE', 'TEXT'], name: 'XML prologue', scope: ['meta.tag.preprocessor.xml punctuation.definition.tag.xml', 'meta.tag.preprocessor.xml entity.name.tag.xml'] },
+  { from: ['XML_ATTRIBUTE_VALUE', 'DEFAULT_STRING'], name: 'XML attribute equals', scope: ['meta.tag.xml', 'meta.tag.preprocessor.xml'] },
+  { from: ['XML_TAG_DATA', 'TEXT'], name: 'XML CDATA', scope: ['string.unquoted.cdata.xml', 'string.unquoted.cdata.xml punctuation.definition.string'] },
+  { from: ['XML_PROLOGUE', 'TEXT'], name: 'XML prologue', scope: ['meta.tag.preprocessor.xml punctuation.definition.tag.xml'] },
+  { from: ['XML_ATTRIBUTE_NAME', 'DEFAULT_ATTRIBUTE'], name: 'XML prologue name', scope: ['meta.tag.preprocessor.xml entity.name.tag.xml'] },
   { from: ['HTML_CUSTOM_TAG_NAME', 'HTML_TAG_NAME', 'DEFAULT_KEYWORD'], name: 'HTML custom element', scope: ['meta.tag.custom entity.name.tag'] },
 
   // Regular expressions (keys and fallbacks of RegExpHighlighter.java), for the regex scopes of the TypeScript,
@@ -215,14 +282,30 @@ export const TOKEN_RULES: TokenRule[] = [
   {
     from: ['JS.REGEXP', 'DEFAULT_VALID_STRING_ESCAPE'],
     name: 'JavaScript regex',
+    // one color for the whole literal, its quantifiers, groups and classes too (captured in WebStorm 2026-11-22)
     scope: ['ts', 'tsx', 'js'].flatMap((suffix) => [
       `string.regexp.${suffix}`,
       `string.regexp.${suffix} punctuation.definition.string`,
       `string.regexp.${suffix} keyword.other.${suffix}`,
-      `string.regexp.${suffix} constant.other.character-class.set.regexp`,
-      `string.regexp.${suffix} constant.other.character-class.range.regexp`,
+      ...JS_REGEXP_PARTS.map((part) => `string.regexp.${suffix} ${part}`),
     ]),
   },
+
+  // JavaScript and TypeScript, captured in WebStorm 2026-11-22: a property declaration is a field, a property access and
+  // a parameter text, a local variable (declared in a block) its own color, the code of `${…}` code (its braces text), a
+  // method declaration the member function color, a type parameter TypeScript's own color
+  ...['ts', 'tsx', 'js', 'jsx'].flatMap((suffix) => [
+    { from: ['DEFAULT_INSTANCE_FIELD'], name: `JavaScript field ${suffix}`, scope: [`meta.definition.property.${suffix} variable.object.property.${suffix}`] },
+    { from: ['TEXT'], name: `JavaScript property access ${suffix}`, scope: [`variable.other.property.${suffix}`, `variable.other.object.property.${suffix}`, `variable.parameter.${suffix}`] },
+    {
+      from: ['JS.LOCAL_VARIABLE', 'DEFAULT_LOCAL_VARIABLE'],
+      name: `JavaScript local variable ${suffix}`,
+      scope: [`meta.block.${suffix} meta.definition.variable.${suffix} variable.other.constant.${suffix}`, `meta.block.${suffix} meta.definition.variable.${suffix} variable.other.readwrite.${suffix}`],
+    },
+    { from: ['TEXT'], name: `JavaScript template expression ${suffix}`, scope: [`meta.template.expression.${suffix}`, `punctuation.definition.template-expression.begin.${suffix}`, `punctuation.definition.template-expression.end.${suffix}`] },
+    { from: JS_MEMBER_FUNCTION, name: `JavaScript method ${suffix}`, scope: [`meta.definition.method.${suffix} entity.name.function.${suffix}`] },
+    { from: JS_TYPE_PARAMETER, name: `TypeScript type parameter ${suffix}`, scope: [`meta.type.parameters.${suffix} entity.name.type.${suffix}`] },
+  ]),
 
   // Shell
   // Shell (ShHighlighterColors.java): an unquoted word (an argument, an option) is text, only quoted strings are strings
@@ -246,7 +329,7 @@ export const TOKEN_RULES: TokenRule[] = [
 
   // Groovy (GroovySyntaxHighlighter.java, keys named like their settings): like Java, class names are not keywords and the
   // package paths are identifiers; a map key is a string
-  { from: ['Class'], name: 'Groovy class name', scope: ['storage.type.groovy'] },
+  { from: ['Class', 'TEXT'], name: 'Groovy class name', scope: ['storage.type.groovy'] },
   { from: ['DEFAULT_IDENTIFIER'], name: 'Groovy package', scope: ['storage.modifier.package.groovy', 'storage.modifier.import.groovy'] },
   { from: ['Map key'], name: 'Groovy map key', scope: ['constant.other.key.groovy'] },
   // GroovyDarcula sets the method declaration to nothing: text (the grammar names it like Java's)
@@ -314,5 +397,17 @@ export const SEMANTIC_RULES: Record<string, string[]> = {
   'variable.defaultLibrary:javascriptreact': JS_GLOBAL_VARIABLE,
   'variable.defaultLibrary:typescript': JS_GLOBAL_VARIABLE,
   'variable.defaultLibrary:typescriptreact': JS_GLOBAL_VARIABLE,
+  ...Object.fromEntries(
+    JS_LANGUAGES.flatMap((language) => [
+      // WebStorm (captured 2026-11-22): a parameter and a property access are text, a declaration a field; locals and type
+      // parameters have their keys
+      [`parameter:${language}`, ['TEXT']],
+      [`property:${language}`, ['TEXT']],
+      [`property.declaration:${language}`, ['DEFAULT_INSTANCE_FIELD']],
+      [`property.declaration.static:${language}`, ['DEFAULT_STATIC_FIELD', 'DEFAULT_INSTANCE_FIELD']],
+      [`typeParameter:${language}`, JS_TYPE_PARAMETER],
+      [`variable.local:${language}`, ['JS.LOCAL_VARIABLE', 'DEFAULT_LOCAL_VARIABLE']],
+    ]),
+  ),
   'variable:python': ['PY.LOCAL_VARIABLE', 'DEFAULT_LOCAL_VARIABLE', 'DEFAULT_IDENTIFIER', 'TEXT'],
 };

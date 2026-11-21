@@ -1,16 +1,16 @@
 /**
  * Languages the JetBrains IDE draws with TextMate grammars, and the colors it gives their scopes.
  *
- * PyCharm has no plugin for Ruby, PHP, Lua, Swift… and opens them with the TextMate bundles of VS Code that
+ * PyCharm has no plugin for Lua, Swift, Dart… and opens them with the TextMate bundles of VS Code that
  * intellij-community ships (plugins/textmate/lib/bundles: the same grammars as VS Code). Its TextMate plugin colors a
  * scope with `TextMateDefaultColorsProvider` + `TextMateTheme` (plugins/textmate/src/.../highlighting): every rule whose
  * selector matches the scope of a token gives a layer (`TextMateHighlighter.getTokenHighlights`, sorted by
  * `TextMateSelectorWeigherImpl`: the more specific selector on top), and the editor merges the layers like
- * `TextAttributes.merge`: the color of the top layer that has one, the font styles of all of them. A Ruby number is
- * CONSTANT (purple italic) + NUMBER (teal) = teal italic, a symbol CONSTANT: purple italic (PyCharm 2026.3, 2026-11-21).
+ * `TextAttributes.merge`: the color of the top layer that has one, the font styles of all of them. A Lua number is
+ * CONSTANT (purple italic) + NUMBER (teal) = teal italic (PyCharm 2026.3, 2026-11-21).
  *
  * VS Code takes a style from the deepest scope a rule matches, so the rules here are written for each language root
- * (`source.ruby constant.numeric`) with the merged style, which wins over the rules of every language at that depth.
+ * (`source.lua constant.numeric`) with the merged style, which wins over the rules of every language at that depth.
  */
 import { compareCodeUnits } from 'src/helpers/utils';
 
@@ -18,7 +18,8 @@ import type { TextAttributes } from './jetbrainsTheme';
 
 /**
  * Root scopes of the languages the IDE (PyCharm, the reference) draws with TextMate: VS Code grammars of languages
- * with no plugin in PyCharm (Go, Rust, C/C++, C# and Java follow their own IDE instead).
+ * with no plugin in PyCharm (Go, Rust, C/C++, C#, Java, Ruby and PHP follow their own IDE instead: Ruby and PHP as
+ * RubyMine and PhpStorm draw them, captured 2026-11-22).
  */
 const TEXTMATE_LANGUAGES = [
   'source.batchfile',
@@ -32,9 +33,7 @@ const TEXTMATE_LANGUAGES = [
   'source.perl',
   'source.powershell',
   'source.r',
-  'source.ruby',
   'source.swift',
-  'text.html.php',
   'text.log',
 ];
 
@@ -135,7 +134,7 @@ const textMateAttributes = (scope: string, resolve: (key: string) => TextAttribu
 };
 
 /** The last segment of the scopes of grammars the IDE does not draw with TextMate: their rules never reach these languages */
-const OTHER_LANGUAGE = /\.(c|cpp|cs|css|dotenv|go|groovy|ini|java|jsdoc|js|json|less|markdown|properties|python|regexp|rst|rust|scss|shell|sql|toml|ts|tsx|xml|yaml)$/;
+const OTHER_LANGUAGE = /\.(c|cpp|cs|css|dotenv|go|groovy|ini|java|jsdoc|js|json|jsx|less|markdown|php|properties|python|regexp|rst|ruby|rust|scss|shell|sql|toml|ts|tsx|xml|yaml)$/;
 
 /**
  * The scopes to write a rule for in each TextMate language: the selectors above, and the scopes of other rules of the
