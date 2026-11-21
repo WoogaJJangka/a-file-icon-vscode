@@ -1,6 +1,9 @@
 /**
  * Captures the screenshots of the README in a real VS Code: `bun run build`, then
- * `bun run screenshots [version] [--vsix <file>]` (default `stable`). The images go to `docs/screenshots/`.
+ * `bun run screenshots [version] [--vsix <file>] [--preset <id>|all]` (default `stable`). The images go to `docs/screenshots/`.
+ * With `--preset`, only the theme combinations of `src/presets/presets.ts` are captured, to
+ * `docs/screenshots/presets/<id>.png` (docs/THEME_COMBINATIONS.md): the extensions they need are installed into the
+ * temporary profile only.
  * With `--vsix` (from `vsce package`), the extension is installed as users get it; without it, it runs in development
  * mode and the title bar says so.
  *
@@ -22,7 +25,35 @@ const output = join(root, 'docs', 'screenshots');
 const args = process.argv.slice(2);
 const vsixIndex = args.indexOf('--vsix');
 const vsix = vsixIndex === -1 ? undefined : resolve(args[vsixIndex + 1]);
-const version = args.find((argument, index) => !argument.startsWith('--') && index !== vsixIndex + 1) ?? 'stable';
+const presetIndex = args.indexOf('--preset');
+const presetArgument = presetIndex === -1 ? undefined : args[presetIndex + 1];
+const version =
+  args.find((argument, index) => !argument.startsWith('--') && index !== vsixIndex + 1 && index !== presetIndex + 1) ?? 'stable';
+
+/** The presets of `--preset` (`all`: every one), read from the TypeScript source through esbuild */
+const loadPresets = () => {
+  if (!presetArgument) return [];
+  // the esbuild package, not the esbuild.js of the root (CLAUDE.md)
+  const { buildSync } = require(join(root, 'node_modules', 'esbuild'));
+  const folder = mkdtempSync(join(tmpdir(), 'cool-presets-'));
+  const outfile = join(folder, 'presets.js');
+  buildSync({ bundle: true, entryPoints: [join(root, 'src', 'presets', 'presets.ts')], format: 'cjs', logLevel: 'warning', outfile, platform: 'node', tsconfig: join(root, 'tsconfig.json') });
+  const { PRESETS } = require(outfile);
+  rmSync(folder, { force: true, recursive: true });
+  const chosen = presetArgument === 'all' ? PRESETS : PRESETS.filter((preset) => preset.id === presetArgument);
+  if (chosen.length === 0) throw new Error(`No preset ${presetArgument}: ${PRESETS.map((preset) => preset.id).join(', ')}`);
+  return chosen;
+};
+
+/** The settings of the profile with the ones of a preset (`null` removes one) */
+const presetSettings = (preset) => {
+  const result = settings(preset.settings['workbench.colorTheme'] ?? 'Cool Islands Dark');
+  for (const [id, value] of Object.entries(preset.settings)) {
+    if (value === null) delete result[id];
+    else result[id] = value;
+  }
+  return result;
+};
 const PORT = 9339;
 const WIDTH = 1440;
 const HEIGHT = 900;
@@ -181,6 +212,7 @@ const COMMANDS = {
   mixColors: { args: 'colors', command: 'a-file-icon-vscode.openThemeMixer' },
   mixIcons: { args: 'icons', command: 'a-file-icon-vscode.openThemeMixer' },
   mixProduct: { args: 'product', command: 'a-file-icon-vscode.openThemeMixer' },
+  reload: { command: 'workbench.action.reloadWindow' },
   walkthrough: { args: `${EXTENSION_ID}#coolThemeKit`, command: 'workbench.action.openWalkthrough' },
 };
 /** F13 to F24: keys no other binding uses */
@@ -188,6 +220,7 @@ const commandKey = (index) => ({ code: `F${13 + index}`, key: `F${13 + index}`, 
 const keybindings = () => Object.values(COMMANDS).map((binding, index) => ({ ...binding, key: `f${13 + index}` }));
 
 const capture = async () => {
+  const presets = loadPresets();
   const executable = await downloadAndUnzipVSCode(version);
   const temporary = mkdtempSync(join(tmpdir(), 'cool-screenshots-'));
   const folders = Object.fromEntries(['user', 'extensions', 'shared', 'sample'].map((name) => [name, join(temporary, name)]));
@@ -197,7 +230,7 @@ const capture = async () => {
     'User/keybindings.json': JSON.stringify(keybindings(), null, 2),
     'User/settings.json': JSON.stringify(settings('Cool Islands Dark'), null, 2),
   });
-  mkdirSync(output, { recursive: true });
+  mkdirSync(join(output, 'presets'), { recursive: true });
 
   const profile = [
     `--user-data-dir=${folders.user}`,
@@ -209,7 +242,8 @@ const capture = async () => {
   // VSIX, as users get the extension (without one, it runs from this folder in development mode, and the title bar
   // says "[Extension Development Host]")
   const [cli] = resolveCliArgsFromVSCodeExecutablePath(executable);
-  for (const extension of ['PKief.material-icon-theme', ...(vsix ? [vsix] : [])]) {
+  const presetExtensions = presets.flatMap((preset) => preset.extensions);
+  for (const extension of [...new Set(['PKief.material-icon-theme', ...presetExtensions, ...(vsix ? [vsix] : [])])]) {
     const installed = spawnSync(cli, [...profile, '--install-extension', extension], {
       encoding: 'utf8',
       shell: process.platform === 'win32',
@@ -234,7 +268,7 @@ const capture = async () => {
     { stdio: 'ignore' },
   );
 
-  const page = await connect();
+  let page = await connect();
   const run = async (expression) => (await page.send('Runtime.evaluate', { awaitPromise: true, expression, returnByValue: true })).result?.result?.value;
   /** Run a command of COMMANDS by its key, with the focus moved from a webview (it would get the key) to the explorer */
   const command = async (name, wait = 2500) => {
@@ -264,6 +298,23 @@ const capture = async () => {
     // the extension generates its theme files on the first start
     await sleep(6000);
     await command('clearNotifications', 800);
+
+    if (presets.length > 0) {
+      for (const preset of presets) {
+        // the mixed themes are generated, then read by VS Code after a reload
+        writeFileSync(settingsFile, JSON.stringify(presetSettings(preset), null, 2));
+        await sleep(10_000);
+        await command('reload', 0);
+        page.close();
+        await sleep(3000);
+        page = await connect();
+        await page.send('Emulation.setDeviceMetricsOverride', { deviceScaleFactor: 1, height: HEIGHT, mobile: false, width: WIDTH });
+        await sleep(9000);
+        await command('clearNotifications', 800);
+        await shot(`presets/${preset.id}.png`);
+      }
+      return;
+    }
 
     await shot('cool-islands-dark.png');
     await useSettings('Cool Islands Light');

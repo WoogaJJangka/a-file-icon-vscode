@@ -7,6 +7,8 @@
   "command.changeMonochromeColor": "Change Monochrome Color",
   "command.openColorMixer": "Mix Color Themes (with Preview)",
   "command.chooseAccentColor": "Choose the Accent Color (with Preview)",
+  "command.choosePreset": "Choose a Theme Combination (with Preview)",
+  "command.undoPreset": "Undo the Last Theme Combination",
   "command.openThemeMixer": "Mix Themes (with Preview)",
   "command.changeOpacity": "Change Opacity",
   "command.changeSaturation": "Change Saturation",
@@ -98,6 +100,8 @@
   "walkthrough.icons.title": "File icons: Cool Icons",
   "walkthrough.mix.description": "VS Code uses one theme of each kind. Mix other installed themes into the kit by priority, with a preview, without editing JSON.\n[Mix Themes](command:a-file-icon-vscode.openThemeMixer)",
   "walkthrough.mix.title": "Mix in other themes",
+  "walkthrough.presets.description": "Ready-made combinations: the JetBrains look as it is, with a Material green accent, or with the syntax colors, frame or icons of a popular theme. Each one is shown as you move to it; the extensions a combination needs are installed only when you choose it.\n[Choose a Theme Combination](command:a-file-icon-vscode.choosePreset)",
+  "walkthrough.presets.title": "Quick start: a theme combination",
   "walkthrough.product.description": "The icons of the JetBrains New UI for the activity bar, the views and the editor actions.\n[Use Cool Islands Icons](command:a-file-icon-vscode.useTheme?%5B%22product%22%5D)",
   "walkthrough.product.title": "Product icons: Cool Islands Icons",
   "walkthrough.title": "Get Started with Cool Theme Kit"

@@ -130,6 +130,9 @@ Cool Theme Kit 을 고칠 때 지키는 규칙과, 그 규칙을 지키는지 �
    따라 바뀜) 미리보기 값은 다음 활성화까지 둔 뒤, 다음 활성화 때 **아직 우리 값인 키만** 지우거나 원래 값으로 되돌린다.
    사용자가 그 사이 바꾼 키, 다른 칸, 워크스페이스 값은 건드리지 않는다(`test/unit/accentPreview.test.ts`). 이 밖의 목적으로
    `colorCustomizations` 에 쓰지 않는다.
+   `workbench.colorTheme`·`iconTheme`·`productIconTheme` 은 사용자가 고를 때만 쓴다: walkthrough 버튼(`useTheme`)과 테마 조합
+   (`choosePreset`, 미리보기 동안 쓰고 Esc 면 열 때의 값으로 되돌림, 고른 뒤의 되돌리기는 `undoPreset`). 조합이 다른 확장을 쓰면
+   모달로 물은 뒤에만 설치한다.
 3. **남의 파일은 읽기만**: 다른 확장의 폴더에 쓰지 않는다. 필요한 것은 `dist/layers/` 로 복사한다.
 4. **섞기가 실패해도 기본 테마는 남는다**: 테마 하나를 못 읽으면 그 테마만 빠지고 출력 채널에 한 줄 남는다
    (`ColorThemeService`·`ProductIconService` 의 테마별 `try`). 사용자에게는 `reportThemeFailure` 로만 알린다.

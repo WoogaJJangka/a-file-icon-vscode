@@ -38,6 +38,18 @@ section {
   gap: 8px;
 }
 
+.presets {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 12px;
+  margin-bottom: 12px;
+}
+
+.presets .hint {
+  margin: 0;
+}
+
 .accent-hex {
   width: 6.5em;
   font-family: var(--vscode-editor-font-family, monospace);

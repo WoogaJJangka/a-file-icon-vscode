@@ -189,6 +189,24 @@ exports.run = async () => {
     await waitFor('the Islands blue in Cool Islands Dark', () => darkTheme().colors?.['button.background']?.toLowerCase() === '#3871e1');
   });
 
+  await step('applies the first theme combination, and undoes it', async () => {
+    const ids = ['colorTheme', 'iconTheme', 'productIconTheme'];
+    const before = ids.map((id) => workbench().inspect(id)?.globalValue);
+    const choosing = vscode.commands.executeCommand(`${KEY}.choosePreset`);
+    await sleep(1500);
+    // down and back up to the first item, JetBrains Dark: the preview follows the active item
+    await vscode.commands.executeCommand('workbench.action.quickOpenSelectNext');
+    await sleep(400);
+    await vscode.commands.executeCommand('workbench.action.quickOpenSelectPrevious');
+    await waitFor('the preview of JetBrains Dark', () => workbench().get('colorTheme') === 'Cool Islands Dark');
+    await vscode.commands.executeCommand('workbench.action.acceptSelectedQuickOpenItem');
+    await choosing;
+    assert.equal(workbench().inspect('productIconTheme')?.globalValue, 'cool-islands-product-icons');
+    assert.equal(workbench().inspect('iconTheme')?.globalValue, KEY);
+    await vscode.commands.executeCommand(`${KEY}.undoPreset`);
+    await waitFor('the settings before the combination', () => ids.every((id, index) => workbench().inspect(id)?.globalValue === before[index]));
+  });
+
   const others = (process.env.SMOKE_EXTENSIONS ?? '').split(',').filter(Boolean);
   if (others.length > 0) await compatibility(others, { darkTheme, iconTheme, productTheme, report, settings });
 

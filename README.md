@@ -28,6 +28,22 @@
 
 ![The Get Started walkthrough of Cool Theme Kit](docs/screenshots/walkthrough.png)
 
+Or start from a ready-made combination: **Choose a Theme Combination (with Preview)** (also the first step of the
+walkthrough and a button of the Mix Themes page) lists eight of them, chosen in
+[docs/THEME_COMBINATIONS.md](docs/THEME_COMBINATIONS.md):
+
+| Group | Combinations |
+|---|---|
+| JetBrains look | JetBrains Dark, JetBrains Light, Material green (the `#79cb60` accent on the controls, tab lines and folders) |
+| JetBrains frame, other syntax colors | One Dark Pro, Dracula, Catppuccin Mocha (with the Catppuccin folder icons) |
+| Another frame, JetBrains syntax | GitHub Dark |
+| File icons only | vscode-icons for the names Cool Icons has no icon for |
+
+Each one is shown as you move to it (the themes of other extensions are mixed in once you choose it). A combination
+that uses the themes of other extensions says so, and asks before installing them. It writes only its own settings to
+your user settings; **Undo the Last Theme Combination** (or the Undo button of its notification) puts back the values
+they had. Installing Cool Theme Kit applies no combination.
+
 You can also select the themes with **Preferences: File Icon Theme**, **Preferences: Color Theme** and **Preferences:
 Product Icon Theme**, and the fonts with the **Use the JetBrains Fonts** command. Everything is undone the same way:
 select another theme, or run **Stop Using the JetBrains Fonts**.
@@ -635,6 +651,8 @@ Here's a list of the available commands:
 | **Change Monochrome Color**       | Pick the color of the monochrome icons (and enable them).                          |
 | **Change Opacity**                | Change the opacity of the icons.                                                   |
 | **Change Saturation**             | Change the saturation value of the icons.                                          |
+| **Choose the Accent Color (with Preview)** | Pick a named accent or a `#rrggbb` for Cool Islands, shown at once. See [Accent color](#accent-color). |
+| **Choose a Theme Combination (with Preview)** / **Undo the Last Theme Combination** | Apply a ready-made combination of themes and settings, or put the settings back. See [Getting started](#getting-started). |
 | **Icon Packs**                    | Select icon packs that enable additional icons (e.g. for Angular, React, Ngrx...). |
 | **Mix Themes (with Preview)**      | Mix other installed icon and color themes, with a preview of the result.           |
 | **Mix Color Themes (with Preview)** | The same page, on its Colors tab.                                                 |

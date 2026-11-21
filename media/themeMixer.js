@@ -668,6 +668,13 @@
       }),
     ));
 
+  /** The built-in combinations of themes: the command `choosePreset`, with its own preview */
+  const presetBar = () =>
+    h('div', { className: 'presets' }, [
+      button(t('presets'), () => vscode.postMessage({ type: 'choosePreset' })),
+      h('span', { className: 'hint', text: t('presetsHint') }),
+    ]);
+
   const render = () => {
     const open = app.querySelector('details')?.open;
     const title = h('h1', {}, [t('title'), h('span', { className: 'applying', text: t('applying') })]);
@@ -687,9 +694,10 @@
       ],
     };
     const children = tab === 'colors' || tab === 'product'
-      ? [title, tabs(), ...pages[tab]()]
+      ? [title, presetBar(), tabs(), ...pages[tab]()]
       : [
-        h('h1', {}, [t('title'), h('span', { className: 'applying', text: t('applying') })]),
+        title,
+        presetBar(),
         tabs(),
         state.active ? undefined : h('p', { className: 'warning', text: t('inactive') }),
         layersSection(),

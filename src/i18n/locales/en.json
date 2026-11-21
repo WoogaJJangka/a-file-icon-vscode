@@ -45,6 +45,10 @@
   "customOpacity": "Enter a custom opacity value",
   "customSaturation": "Enter a custom saturation value",
   "desaturated": "Desaturated",
+  "diagnostics": {
+    "copied": "The diagnostics of Cool Theme Kit are in the clipboard: paste them into the bug report. Read them first: the settings can contain file and folder names.",
+    "openIssue": "Open a Bug Report"
+  },
   "explorerArrows": {
     "disable": "Hide folder arrows",
     "enable": "Show folder arrows",
@@ -64,10 +68,6 @@
     },
     "toggleIcons": "Pick a folder theme",
     "wrongHexCode": "Invalid HEX color code!"
-  },
-  "diagnostics": {
-    "copied": "The diagnostics of Cool Theme Kit are in the clipboard: paste them into the bug report. Read them first: the settings can contain file and folder names.",
-    "openIssue": "Open a Bug Report"
   },
   "fonts": {
     "get": "Get {{font}}",
@@ -110,6 +110,55 @@
   "opaque": "Opaque",
   "outdatedVersion": "You have to update VS Code to use this command.",
   "plusMinus": "Plus-Minus",
+  "preset": {
+    "applied": "The theme combination {{name}} is applied. The mixed colors and icons are seen after a reload of the window.",
+    "catppuccinMocha": {
+      "description": "Cool Islands with the syntax colors of Catppuccin Mocha and the folder icons of Catppuccin Icons",
+      "name": "Catppuccin Mocha syntax"
+    },
+    "draculaSyntax": {
+      "description": "The Cool Islands frame with the syntax colors of Dracula",
+      "name": "Dracula syntax"
+    },
+    "githubDarkFrame": {
+      "description": "The workbench colors of GitHub Dark Default with the JetBrains syntax colors",
+      "name": "GitHub Dark frame"
+    },
+    "group": {
+      "frame": "Another frame, JetBrains syntax",
+      "icons": "File icons only",
+      "jetbrains": "JetBrains look",
+      "syntax": "JetBrains frame, other syntax colors"
+    },
+    "install": "Install and Apply",
+    "installQuestion": "{{name}} uses themes of other extensions: {{extensions}}. Install them from the Marketplace and apply the combination?",
+    "jetbrainsDark": {
+      "description": "Cool Islands Dark, Cool Icons and Cool Islands Icons, with the Islands blue",
+      "name": "JetBrains Dark"
+    },
+    "jetbrainsLight": {
+      "description": "Cool Islands Light, Cool Icons and Cool Islands Icons, with the Islands blue",
+      "name": "JetBrains Light"
+    },
+    "materialGreen": {
+      "description": "Cool Islands Dark with the green accent of Material Theme UI on the controls, tab lines and folder icons",
+      "name": "Material green"
+    },
+    "needsInstall": "needs {{extensions}}",
+    "nothingToUndo": "No theme combination to undo.",
+    "oneDarkSyntax": {
+      "description": "The Cool Islands frame with the syntax colors of One Dark Pro",
+      "name": "One Dark Pro syntax"
+    },
+    "placeholder": "Each combination is shown as you move to it (mixed themes after it is chosen). Enter keeps it, Escape goes back.",
+    "title": "Theme combinations",
+    "undo": "Undo",
+    "undone": "The settings before {{name}} are back.",
+    "vscodeIconsFill": {
+      "description": "The names Cool Icons has no icon for get the icon of vscode-icons instead of the Material Icon Theme; the colors stay",
+      "name": "vscode-icons for the other files"
+    }
+  },
   "productIcons": {
     "reload": "Cool Islands Icons changed with the product icon themes mixed in. Reload the window to see them."
   },
@@ -129,6 +178,7 @@
   "selectSaturation": "Select a saturation option",
   "semiTransparent": "Semi-Transparent",
   "specific": "Specific",
+  "themeInstalled": "Cool Theme Kit has been installed.",
   "themeMixer": {
     "accent": "Accent color",
     "accentHex": "#rrggbb",
@@ -183,6 +233,8 @@
     "noThemes": "No other file icon theme is installed.",
     "notInstalled": "not installed",
     "pin": "Use this icon",
+    "presets": "Theme combinations…",
+    "presetsHint": "Ready-made combinations of the settings below, with a preview.",
     "preview": "Preview",
     "previewHint": "Result: the icon shown in the explorer. The other columns: the icon of each installed theme. Click one to use it for that name, click it again to stop.",
     "productByName": "By icon",
@@ -208,7 +260,6 @@
     "vscodeIcon": "VS Code icon",
     "workspaceSamples": "Names of this workspace"
   },
-  "themeInstalled": "Cool Theme Kit has been installed.",
   "themeUpdated": "Cool Theme Kit has been updated.",
   "toggleSwitch": {
     "off": "OFF",
