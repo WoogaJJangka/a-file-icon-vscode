@@ -83,6 +83,16 @@ scheme for HTML and XML tags, regular expressions, properties files and JavaScri
 and the globals of the standard library). Other languages get the default colors of the scheme (keywords, strings,
 functions…), which is also what the JetBrains IDEs fall back to.
 
+The syntax colors are checked token by token against the IDE (`bun run check:colors`, with the grammars of a real VS
+Code), and compared with the IDE on screen:
+
+| Languages | Compared with |
+|---|---|
+| Python, JavaScript/TypeScript, JSON, YAML, TOML, Markdown, reStructuredText, shell, properties, Groovy, Java, HTML, XML, CSS, SQL, `.env` | PyCharm, IntelliJ IDEA |
+| C/C++, Go, Rust | CLion, GoLand, RustRover |
+| C# | the Islands defaults (Rider draws C# with its own palette) |
+| Ruby, PHP, Lua, Swift, PowerShell, Dart, Perl, R, Julia, Clojure, Objective-C, batch files, Makefiles, log files | PyCharm, which draws them with the same TextMate grammars as VS Code |
+
 They are generated from the theme files of [JetBrains/intellij-community](https://github.com/JetBrains/intellij-community)
 the way the IDE reads them (parent themes, named colors, `*` keys, parent schemes, inherited attributes), with a map of
 which JetBrains color each VS Code color takes:
