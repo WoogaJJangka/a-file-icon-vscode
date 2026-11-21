@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. Dates are displayed in UTC.
 
+#### 0.1.1 (2026-11-21)
+
+No change in the extension: the same as 0.1.0.
+
+- ci: the release is published to the Marketplace with trusted publishing (GitHub OIDC), without a stored token
+- fix: the open CodeQL alerts in the build scripts
+
 #### 0.1.0 (2026-11-21)
 
 The first version of `woogajjangka.cool-theme-kit`. The versions below it (1.0.0 to 1.3.0) were released as
