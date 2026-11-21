@@ -155,7 +155,10 @@ exports.run = async () => {
   const workbench = () => vscode.workspace.getConfiguration('workbench');
   const customizations = () => workbench().inspect('colorCustomizations')?.globalValue;
   const userCustomizations = { '[Cool Islands Dark]': { 'editor.background': '#101010' }, 'statusBar.background': '#202020' };
-  /** Open the accent picker and move from the current accent (the Islands blue) to the next one (Green) */
+  /**
+   * Open the accent picker and move from the current accent (the Islands blue) to the next one (Green).
+   * The command ends when the picker closes: it is given back in an object, which `await` does not wait for.
+   */
   const pickNextAccent = async () => {
     const picking = vscode.commands.executeCommand(`${KEY}.chooseAccentColor`);
     await sleep(1500);
@@ -163,12 +166,12 @@ exports.run = async () => {
     await waitFor('the preview of Green', () => customizations()?.['[Cool Islands Dark]']?.['button.background'] === '#79cb60');
     assert.equal(customizations()?.['[Cool Islands Dark]']?.['editor.background'], '#101010');
     assert.equal(customizations()?.['[Cool Islands Light]']?.focusBorder, '#79cb60');
-    return picking;
+    return { picking };
   };
 
   await step('previews an accent in the picker, and Escape puts the user settings back', async () => {
     await workbench().update('colorCustomizations', userCustomizations, vscode.ConfigurationTarget.Global);
-    const picking = await pickNextAccent();
+    const { picking } = await pickNextAccent();
     await vscode.commands.executeCommand('workbench.action.closeQuickOpen');
     await picking;
     await waitFor('the user settings as they were', () => JSON.stringify(customizations()) === JSON.stringify(userCustomizations));
@@ -176,7 +179,7 @@ exports.run = async () => {
   });
 
   await step('keeps the accent chosen in the picker in the theme files', async () => {
-    const picking = await pickNextAccent();
+    const { picking } = await pickNextAccent();
     await vscode.commands.executeCommand('workbench.action.acceptSelectedQuickOpenItem');
     await picking;
     await waitFor('the accent setting', () => settings().get('accentColor') === '#79cb60');
