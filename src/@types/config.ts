@@ -1,5 +1,6 @@
 import type { IconAssociations } from './associations';
 import type { ProductIconLayer } from 'src/productIcons/productIconLayers';
+import type { AccentTarget } from 'src/themes/accent';
 import type { ColorThemeLayer } from 'src/themes/colorLayers';
 
 export enum IconPack {
@@ -45,6 +46,8 @@ export enum PredefinedSaturation {
 export type AtomConfig = {
   /** `#rrggbb` replacing the blue of Cool Islands (not an icon setting); empty for the Islands blue */
   accentColor?: string,
+  /** what else takes the accent: `controls`, `tabs` (workbench colors) and `folders` (the folder icons, through `folderColor`) */
+  accentTargets: AccentTarget[],
   activeIconPacks: IconPack[],
   arrowTheme: ArrowTheme,
   /** color id glob, `scope:<TextMate scope>` or `semantic:<selector>` -> id of the installed color theme giving it */

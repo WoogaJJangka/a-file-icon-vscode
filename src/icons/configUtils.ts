@@ -15,9 +15,12 @@ import type { AtomConfig } from 'src/@types/config';
  */
 export const getDefaultConfig = (): AtomConfig => {
   return {
+
+
+    accentTargets: [],
     // the packs the JetBrains plugin enables by default, plus pycharm, without css: its css2 icon loses against
-    // the css icon in the JetBrains plugin anyway (priority). Keep in sync with package.json
-    activeIconPacks: [
+// the css icon in the JetBrains plugin anyway (priority). Keep in sync with package.json
+activeIconPacks: [
       IconPack.Angular2,
       IconPack.Nest,
       IconPack.Next,

@@ -5,6 +5,7 @@ import { writeFileAtomic } from 'src/helpers/fsUtils';
 import { mixColorTheme } from './colorLayers';
 import { COLOR_THEMES, extensionRoot, THEMES_FOLDER } from './colorThemes';
 
+import type { AccentTarget } from './accent';
 import type { MixedKey, MixedTheme, ThemeKind } from './colorLayers';
 import type { ColorThemeInfo } from './colorThemes';
 import type { VsCodeColorTheme } from './convertJetbrainsTheme';
@@ -12,7 +13,7 @@ import type { VsCodeColorTheme } from './convertJetbrainsTheme';
 export type ColorThemePaths = { dist: string; themes: string };
 
 /** The other color themes mixed in (`colorThemeLayers`, `colorThemeByKey`), already read */
-export type ColorMix = { accent?: string; byKey: MixedKey[]; layers: MixedTheme[] };
+export type ColorMix = { accent?: string; accentTargets?: AccentTarget[]; byKey: MixedKey[]; layers: MixedTheme[] };
 
 export const kindOf = (info: ColorThemeInfo): ThemeKind => (info.uiTheme === 'vs' ? 'light' : 'dark');
 
@@ -34,7 +35,7 @@ export class ColorThemeGenerator {
   /** The theme of `contributes.themes` as it would be written */
   createTheme(info: ColorThemeInfo, mix?: ColorMix): VsCodeColorTheme {
     const base = JSON.parse(readFileSync(join(this.paths.themes, info.base), 'utf8')) as VsCodeColorTheme;
-    return mixColorTheme({ ...base, name: info.label }, kindOf(info), mix?.layers ?? [], mix?.byKey ?? [], mix?.accent);
+    return mixColorTheme({ ...base, name: info.label }, kindOf(info), mix?.layers ?? [], mix?.byKey ?? [], mix?.accent, mix?.accentTargets);
   }
 
   /**

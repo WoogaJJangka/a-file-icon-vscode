@@ -123,6 +123,7 @@ export class ColorThemeService {
 
     return {
       accent,
+      accentTargets: configService.accentTargets,
       byKey: normalizeColorByKey(configService.colorThemeByKey).flatMap(({ target, theme }) => {
         const data = read(theme);
         return data ? [{ data, target }] : [];

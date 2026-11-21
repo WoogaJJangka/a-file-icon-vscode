@@ -2,6 +2,7 @@ import i18next from 'i18next';
 import { EXTENSION_KEY } from 'src/helpers/constants';
 import { isValidHexColorCode } from 'src/helpers/utils';
 import { iconPackPicker } from 'src/pickers';
+import { accentColorPicker } from 'src/pickers/AccentColorPicker';
 import { arrowThemePicker } from 'src/pickers/ArrowThemePicker';
 import { folderColorPicker } from 'src/pickers/FolderColorPicker';
 import { folderThemePicker } from 'src/pickers/FolderThemePicker';
@@ -80,6 +81,11 @@ const openColorMixer = async () => {
   if (extensionContext) ThemeMixerPanel.show(extensionContext, 'colors');
 };
 
+const chooseAccentColor = async () => {
+  logger.info('Open the accent color picker');
+  await accentColorPicker.open();
+};
+
 const useJetBrainsFonts = async () => {
   logger.info('Use the JetBrains fonts');
   await fontCheckService.use();
@@ -118,6 +124,7 @@ const extensionCommands: Record<string, (...parameters: unknown[]) => Promise<vo
   changeMonochromeColor,
   changeOpacity,
   changeSaturation,
+  chooseAccentColor,
   copyDiagnostics,
   openColorMixer,
   openThemeMixer,

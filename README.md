@@ -137,9 +137,32 @@ the text on a button or badge turns black or white when the accent would make it
 to be blue but mean something else (git decorations, the terminal's blue, the debugger's stack frame, find matches)
 are not touched.
 
-The accent wins over the `colorThemeLayers` and loses to `colorThemeByKey`. The Colors tab of the
-[Mix Themes page](#mix-themes-page) has a color picker with a few swatches. Like the rest of the color mixing, it
-needs a window reload, and it works in the desktop app only (VS Code for the Web has the built-in colors).
+The accent wins over the `colorThemeLayers` and loses to `colorThemeByKey`. It works in the desktop app only (VS Code
+for the Web has the built-in colors).
+
+The **Choose the Accent Color (with Preview)** command lists named accents: the Islands blue and one accent per hue
+from the Material themes (Green `#79cb60`, Teal, Cyan, Aqua, Blue, Violet, Purple, Magenta, Pink, Coral, Orange,
+Yellow), a custom `#rrggbb`, and the way back to the Islands blue. Each accent is shown at once while you move through
+the list (or type a color); Enter keeps it and Escape goes back. The Colors tab of the
+[Mix Themes page](#mix-themes-page) does the same with named swatches, a color picker and a `#rrggbb` field.
+VS Code reads a color theme only when the window reloads, so the preview writes the colors that change, for the
+moment, into the `"[Cool Islands Dark]"` and `"[Cool Islands Light]"` blocks of your `workbench.colorCustomizations`.
+Escape takes them away; a chosen accent goes into the theme files and its colors leave the setting on the next start.
+Your own values in those blocks are kept and put back.
+
+`accentTargets` paints more parts with the accent (the Islands blue when there is none). Each one can be turned on
+alone, here or with the checkboxes of the Colors tab:
+
+```json
+{
+  "a-file-icon-vscode.accentTargets": ["controls", "tabs", "folders"]
+}
+```
+
+- `controls`: the scrollbars, checkbox borders, badges and the active options of the search fields.
+- `tabs`: the line under the active tab, under the active panel title and beside the active activity bar item.
+  VS Code has no setting for the thickness of these lines: only their color changes.
+- `folders`: the folder icons of Cool Icons (instead of `folderColor`).
 
 VS Code reads a color theme again only when the window reloads: when the mixed colors of the selected Cool Islands
 theme change, a notification offers to reload the window. The **Mix Color Themes (with Preview)** command opens the

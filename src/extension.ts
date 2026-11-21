@@ -5,6 +5,7 @@ import { EXTENSION_KEY, VERSION_KEY } from 'src/helpers/constants';
 import { isCancellation } from 'src/helpers/utils';
 import { findLayerThemes } from 'src/helpers/vscodeUtils';
 import { initI18next } from 'src/i18n/i18next';
+import { accentPreviewService } from 'src/services/AccentPreviewService';
 import { configChangeDetector } from 'src/services/ConfigChangeDetector';
 import { colorThemeService, forgetInstalledColorThemes } from 'src/services/ColorThemeService';
 import { configService } from 'src/services/ConfigService';
@@ -130,6 +131,11 @@ export const activate = async (context: ExtensionContext) => {
     offerToUninstallOldExtension().catch((error: unknown) => {
       if (!isCancellation(error)) logger.error(String(error));
     });
+
+    // An accent shown in a preview of the last session is in the theme files now (or was cancelled): its colors leave
+    // the user settings
+    accentPreviewService.init(context.globalState);
+    accentPreviewService.cleanUp().catch((error: unknown) => logger.error(String(error)));
 
     // Subscribe to the extension commands
     context.subscriptions.push(...registerCommands(context));
