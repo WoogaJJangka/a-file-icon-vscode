@@ -1,0 +1,17 @@
+{
+  "file": "rust.rs",
+  "scope": "source.rust",
+  "tokens": [
+    { "line": 1, "text": "use", "key": "org.rust.KEYWORD" },
+    { "line": 3, "text": "/// Doc comment", "key": "org.rust.DOC_COMMENT" },
+    { "line": 4, "text": "MAX_SIZE", "key": "org.rust.CONSTANT" },
+    { "line": 4, "text": "usize", "key": "org.rust.PRIMITIVE_TYPE" },
+    { "line": 6, "text": "#[derive(Debug, Clone)]", "key": "org.rust.ATTRIBUTE" },
+    { "line": 12, "text": "greet", "key": "org.rust.METHOD", "todo": "the grammar cannot tell a method (INSTANCE_METHOD) from a function: one shade of blue apart" },
+    { "line": 13, "text": "// 한글 주석", "key": "org.rust.EOL_COMMENT" },
+    { "line": 14, "text": "\"Hello {}", "key": "org.rust.STRING" },
+    { "line": 15, "text": "push", "key": "org.rust.METHOD_CALL" },
+    { "line": 16, "text": "repeat", "key": "org.rust.METHOD_CALL" },
+    { "line": 21, "text": "new", "key": "org.rust.FUNCTION_CALL" }
+  ]
+}

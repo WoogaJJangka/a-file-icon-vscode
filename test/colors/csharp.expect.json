@@ -1,0 +1,20 @@
+{
+  "file": "csharp.cs",
+  "scope": "source.cs",
+  "tokens": [
+    { "line": 1, "text": "using", "key": "DEFAULT_KEYWORD" },
+    { "line": 4, "text": "namespace", "key": "DEFAULT_KEYWORD" },
+    { "line": 6, "text": "Doc comment", "key": "DEFAULT_DOC_COMMENT" },
+    { "line": 6, "text": "<summary>", "key": "DEFAULT_DOC_MARKUP", "under": "DEFAULT_DOC_COMMENT" },
+    { "line": 7, "text": "Serializable", "key": "DEFAULT_METADATA", "todo": "the grammar gives an attribute no scope (a language server marks it)" },
+    { "line": 10, "text": "const", "key": "DEFAULT_KEYWORD" },
+    { "line": 10, "text": "int", "key": "DEFAULT_KEYWORD" },
+    { "line": 10, "text": "10", "key": "DEFAULT_NUMBER" },
+    { "line": 11, "text": "string", "key": "DEFAULT_KEYWORD" },
+    { "line": 11, "text": "\"world\"", "key": "DEFAULT_STRING" },
+    { "line": 13, "text": "Greet", "key": "DEFAULT_FUNCTION_DECLARATION" },
+    { "line": 15, "text": "// 한글 주석", "key": "DEFAULT_LINE_COMMENT" },
+    { "line": 16, "text": "var", "key": "DEFAULT_KEYWORD" },
+    { "line": 18, "text": "Join", "key": "DEFAULT_FUNCTION_CALL", "todo": "the grammar gives a method call the scope of a declaration" }
+  ]
+}

@@ -282,6 +282,27 @@
       "strikethrough": true,
       "underline": false
     },
+    "attribute:rust": {
+      "bold": false,
+      "italic": false,
+      "strikethrough": false,
+      "underline": false,
+      "foreground": "#b3ae60"
+    },
+    "attributeBracket:rust": {
+      "bold": false,
+      "italic": false,
+      "strikethrough": false,
+      "underline": false,
+      "foreground": "#b3ae60"
+    },
+    "builtinType:rust": {
+      "bold": false,
+      "italic": false,
+      "strikethrough": false,
+      "underline": false,
+      "foreground": "#cf8e6d"
+    },
     "class": {
       "bold": false,
       "italic": false,
@@ -338,6 +359,20 @@
       "underline": false,
       "foreground": "#56a8f5"
     },
+    "function.declaration:rust": {
+      "bold": false,
+      "italic": false,
+      "strikethrough": false,
+      "underline": false,
+      "foreground": "#56a8f5"
+    },
+    "function:rust": {
+      "bold": false,
+      "italic": false,
+      "strikethrough": false,
+      "underline": false,
+      "foreground": "#bcbec4"
+    },
     "interface": {
       "bold": false,
       "italic": false,
@@ -345,12 +380,26 @@
       "underline": false,
       "foreground": "#bcbec4"
     },
+    "lifetime:rust": {
+      "bold": false,
+      "italic": false,
+      "strikethrough": false,
+      "underline": false,
+      "foreground": "#16baac"
+    },
     "macro": {
       "bold": false,
       "italic": false,
       "strikethrough": false,
       "underline": false,
       "foreground": "#b3ae60"
+    },
+    "macro:rust": {
+      "bold": false,
+      "italic": false,
+      "strikethrough": false,
+      "underline": false,
+      "foreground": "#56a8f5"
     },
     "method": {
       "bold": false,
@@ -372,6 +421,13 @@
       "strikethrough": false,
       "underline": false,
       "foreground": "#56a8f5"
+    },
+    "method.declaration:rust": {
+      "bold": false,
+      "italic": false,
+      "strikethrough": false,
+      "underline": false,
+      "foreground": "#57aaf7"
     },
     "method.static": {
       "bold": false,
@@ -395,6 +451,13 @@
       "foreground": "#56a8f5"
     },
     "method:python": {
+      "bold": false,
+      "italic": false,
+      "strikethrough": false,
+      "underline": false,
+      "foreground": "#bcbec4"
+    },
+    "method:rust": {
       "bold": false,
       "italic": false,
       "strikethrough": false,
@@ -456,6 +519,13 @@
       "strikethrough": false,
       "underline": false,
       "foreground": "#bcbec4"
+    },
+    "selfKeyword:rust": {
+      "bold": false,
+      "italic": false,
+      "strikethrough": false,
+      "underline": false,
+      "foreground": "#cf8e6d"
     },
     "selfParameter": {
       "bold": false,
@@ -1030,6 +1100,176 @@
       "settings": {
         "fontStyle": "",
         "foreground": "#bcbec4"
+      }
+    },
+    {
+      "name": "C++ call",
+      "scope": [
+        "entity.name.function.call.cpp",
+        "entity.name.function.member.cpp",
+        "entity.name.function.member.c"
+      ],
+      "settings": {
+        "fontStyle": "",
+        "foreground": "#bcbec4"
+      }
+    },
+    {
+      "name": "C++ member initializer",
+      "scope": [
+        "entity.name.function.call.initializer.cpp"
+      ],
+      "settings": {
+        "fontStyle": "",
+        "foreground": "#c77dbb"
+      }
+    },
+    {
+      "name": "C++ macro",
+      "scope": [
+        "entity.name.function.preprocessor.cpp",
+        "entity.name.function.preprocessor.c"
+      ],
+      "settings": {
+        "fontStyle": "",
+        "foreground": "#b3ae60"
+      }
+    },
+    {
+      "name": "C++ parameter type",
+      "scope": [
+        "entity.name.type.parameter.cpp"
+      ],
+      "settings": {
+        "fontStyle": "",
+        "foreground": "#bcbec4"
+      }
+    },
+    {
+      "name": "Rust doc comment",
+      "scope": [
+        "comment.line.documentation.rust",
+        "comment.block.documentation.rust",
+        "comment.line.documentation.rust punctuation.definition.comment",
+        "comment.block.documentation.rust punctuation.definition.comment"
+      ],
+      "settings": {
+        "fontStyle": "italic",
+        "foreground": "#5f826b"
+      }
+    },
+    {
+      "name": "Rust primitive type",
+      "scope": [
+        "entity.name.type.numeric.rust",
+        "entity.name.type.primitive.rust"
+      ],
+      "settings": {
+        "fontStyle": "",
+        "foreground": "#cf8e6d"
+      }
+    },
+    {
+      "name": "Rust self",
+      "scope": [
+        "variable.language.self.rust"
+      ],
+      "settings": {
+        "fontStyle": "",
+        "foreground": "#cf8e6d"
+      }
+    },
+    {
+      "name": "Rust attribute",
+      "scope": [
+        "meta.attribute.rust",
+        "meta.attribute.rust entity.name.type.rust",
+        "meta.attribute.rust punctuation"
+      ],
+      "settings": {
+        "fontStyle": "",
+        "foreground": "#b3ae60"
+      }
+    },
+    {
+      "name": "Rust call",
+      "scope": [
+        "meta.function.call.rust entity.name.function.rust"
+      ],
+      "settings": {
+        "fontStyle": "",
+        "foreground": "#bcbec4"
+      }
+    },
+    {
+      "name": "Rust lifetime",
+      "scope": [
+        "entity.name.type.lifetime.rust",
+        "punctuation.definition.lifetime.rust"
+      ],
+      "settings": {
+        "fontStyle": "",
+        "foreground": "#16baac"
+      }
+    },
+    {
+      "name": "C# doc comment tag",
+      "scope": [
+        "comment.block.documentation.cs meta.tag",
+        "comment.block.documentation.cs punctuation.definition.tag",
+        "comment.block.documentation.cs entity.name.tag"
+      ],
+      "settings": {
+        "fontStyle": "",
+        "foreground": "#68a67e"
+      }
+    },
+    {
+      "name": "Go call",
+      "scope": [
+        "entity.name.function.support.go"
+      ],
+      "settings": {
+        "fontStyle": "",
+        "foreground": "#bcbec4"
+      }
+    },
+    {
+      "name": "Go builtin call",
+      "scope": [
+        "entity.name.function.support.builtin.go"
+      ],
+      "settings": {
+        "fontStyle": "",
+        "foreground": "#bcbec4"
+      }
+    },
+    {
+      "name": "Go builtin type",
+      "scope": [
+        "storage.type.numeric.go",
+        "storage.type.string.go",
+        "storage.type.boolean.go",
+        "storage.type.byte.go",
+        "storage.type.rune.go",
+        "storage.type.error.go",
+        "storage.type.uintptr.go"
+      ],
+      "settings": {
+        "fontStyle": "",
+        "foreground": "#cf8e6d"
+      }
+    },
+    {
+      "name": "Go builtin constant",
+      "scope": [
+        "constant.language.null.go",
+        "constant.language.boolean.go",
+        "constant.language.iota.go"
+      ],
+      "settings": {
+        "fontStyle": "",
+        "foreground": "#cf8e6d"
       }
     },
     {
